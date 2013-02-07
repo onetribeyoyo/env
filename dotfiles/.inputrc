@@ -1,0 +1,5 @@
+# Filename completion is case insensitive...
+set completion-ignore-case On
+
+# Filename completion ignores files whose names begin with a `.' (hidden files)
+set match-hidden-files off

@@ -1,0 +1,572 @@
+#
+# !!! The geometry for these terminals is not automagically tied to the display size !!!
+#
+#alias  greenterm='rxvt -bg DarkSlateGray -fg wheat   -geometry 164x71+0+0 -tn xterm -e /usr/bin/bash --login -i'
+alias  greenterm='rxvt -bg DarkSlateGray -fg lavender -geometry 164x71+0+0 -tn xterm -e /usr/bin/bash --login -i'
+alias orangeterm='rxvt -bg black         -fg orange   -geometry 164x71+245+0 -tn xterm -e /usr/bin/bash --login -i'
+
+#alias  greenterm='rxvt -bg DarkSlateGray -fg lavender -geometry 164x71+0+0 -tn xterm -e /usr/bin/bash --login -i'
+#alias orangeterm='rxvt -bg black -fg orange -geometry 164x71+245+0 -tn xterm -e /usr/bin/bash --login -i'
+#alias gnometerm='rxvt -bg DarkSlateGray -fg wheat -geometry 120x52+495+390 -tn xterm -e /usr/bin/bash --login -i'
+
+alias rehash='. ~/.profile'
+
+alias h='history 30'
+alias hh='history 5000 | grep'
+
+if [ `uname` = "SunOS" ]
+then
+    alias ls="ls -p"
+fi
+
+if $cygwin ; then
+    #alias xargs='xargs -0'
+    eval `dircolors -b ~/.ls_colors`
+    alias ls="ls --color=auto -Fh"
+    #alias ls='ls -Fh'
+
+    # This is not necessary when using rxvt.
+    #alias clear='cmd /c cls'
+elif $darwin ; then
+    alias ls="ls -FG"
+    alias terminator='/Applications/Terminator.app/Contents/Resources/terminator/bin/terminator'
+fi
+
+alias ll='ls -lFh'
+alias la='ls -aFh'
+alias l='ls -1F'
+
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+
+alias xrm="xargs rm"
+alias XRM="xargs rm -rf"
+
+alias t='less'
+
+alias c='clear'
+
+# how can this automagically pic up term-width?
+alias sdiff='sdiff -w 190'
+
+alias anf='ant -find build.xml'
+alias ivy='ant -find ivy-build.xml'
+alias aanf='ant -find abuild.xml'
+
+# filters out anything with /CVS in it.
+alias cvsfilter='grep -v \/CVS'
+alias gitfilter='grep -v \/.git'
+alias hgfilter='grep -v \/.hg'
+alias svnfilter='grep -v \/.svn'
+alias vsfilters="cvsfilter | gitfilter | hgfilter | svnfilter"
+
+# quotes spaces in pathnames so other shell commands and scripts don't puke.
+# alias quotespaces="sed \'s/ /\\ /g\'"
+# don't know why this doesn't work as an alias but works just fine as a script?
+
+alias emacsclean='find . -name \*~ -print | vsfilters | quotespaces | xargs \rm'
+alias dsstoreclean='find . -name .DS_Store -print | vsfilters | quotespaces | xargs \rm'
+alias vssclean='find . -name vssver.scc -print | vsfilters | quotespaces | xargs \rm'
+alias javaclean='find . -name \*.class -print | vsfilters | quotespaces | xargs \rm'
+alias srcclean='find ./src ./test/dat/src -name \*.class -print | vsfilters | quotespaces | xargs \rm'
+#alias scrub='find . \( -name \*~ -o -name vssver.scc \) -print | vsfilters | quotespaces | xargs \rm'
+alias scrub=emacsclean
+
+function scrub-idea() {
+    rm -rvf ~/Library/Caches/IntelliJIdea90/caches
+    rm -vrf ~/Library/Caches/IntelliJIdea10/caches
+    rm -vrf ~/Library/Caches/IntelliJIdea11/caches
+}
+
+#alias findw='find . -type f ! \( -perm a=r -o -perm a=rx \) | vsfilters'
+#alias findro='find . -type f \( -perm a=r -o -perm a=rx \) | vsfilters'
+alias findw='find . -type f -perm +222 | quotespaces'
+alias findro='find . -type f ! -perm +222 | quotespaces'
+alias purge='findro | vsfilters | xargs rm ; scrub ; rmempty'
+
+alias pme='ps -h -u `id -u`'
+alias pthis='pme | grep'
+
+alias files="awk -F: '{print \$1}' | sort | uniq"
+alias f="files"
+alias packages="awk -F: '{print \$1}'        \
+                | xargs grep package\ com\.  \
+                | awk -F: '{print \$2}'      \
+                | awk '{print \$2}'          \
+                | sed 's/\//\./g'            \
+                | sed 's/\;//g'              \
+                | uniq -c"
+
+if $cygwin ; then
+    export EDITOR='gnuclientw.exe -M'
+    alias emacs='gnuclientw -M'
+    alias edit='xargs gnuclientw -M'
+elif $darwin ; then
+    alias emacs='open -a $EMACS_APP'
+    alias edit='xargs open -a $EMACS_APP'
+    alias fedit='files | edit'
+    alias fe='fedit'
+    alias browse='open -a Firefox'
+    alias ff='open -a Firefox'
+    alias gk='open -a GraphicConverter-6'
+fi
+
+#
+# grep (and recursively grep) for <arg> in files
+#
+
+alias gf="find . -maxdepth 1 -type f | grep"
+alias ggf="find . -type f ! -name \*class | grep"
+function ggfe() {
+    ggf $@ | fe
+}
+
+alias findsrc="find . \( -name \*.java -o -name \*.properties -o -name \*.xml -o -name \*.html -o -name \*.htm -o -name \*.js -o -name \*.jsp -o -name \*.ddl -o -name \*.sql \) -print"
+alias ggsrc="findsrc | quotespaces | xargs grep"
+
+# .c and .h files
+alias gc='grep \!* *.[Cch] *.cc *.cpp'
+alias ggc='find \( -name \*.\[Cch\] -o -name \*.cc -o -name \*.cpp \) -print | quotespaces | xargs grep \!*'
+
+# .java files
+alias gj="find . -maxdepth 1 \( -name \*.java -o -name \*.jsp -o -name \*.properties \) -print | xargs grep"
+alias findjava="find . \( -name \*.java \) -print"
+alias findjsp="find . \( -name \*.jsp \) -print"
+alias findclasses="find . -name \*.class -print"
+alias ggj="findjava | quotespaces | xargs grep"
+alias gjimport="gj import | awk '{print \$2}' | sort | uniq"
+alias ggjimport="ggj import | awk '{print \$2}' | sort | uniq"
+
+alias findpom="find . -name pom.xml -print"
+alias ggpom="findpom | xargs grep"
+
+alias gjsp="find . -maxdepth -name \*.jsp | xargs grep"
+alias ggjsp="find . -name \*.jsp | xargs grep"
+
+alias gjs="find . -maxdepth -name \*.js | xargs grep"
+alias ggjs="find . -name \*.js | xargs grep"
+
+# web ui files
+alias gw="find . -maxdepth 1 \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js \) -print | xargs grep"
+alias ggw="find . \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js \) -print | quotespaces | xargs grep"
+
+# xml files
+alias gxml="find . -maxdepth 1 -name xml -print | xargs grep"
+alias findxml="find . -name \*.xml -print"
+alias ggxml="findxml | quotespaces | xargs grep"
+
+# .pl files
+alias gpl="ls -1 *.pl | xargs grep"
+alias ggpl="find . \( -name \*.pl \) -print | quotespaces | xargs grep"
+
+# .sql and .ddl files
+#  -i case Insensitive!
+alias gsql="ls -1 *.sql *.ddl | xargs grep"
+alias ggsql="find . \( -name \*.sql -o -name \*.ddl \) -print | quotespaces | xargs grep -i"
+
+# HTML (.html, .htm, and .css) files
+alias ghtml="find . -maxdepth 1 \( -name \*.html -o -name \*.htm -o -name \*.css \) -print | xargs grep"
+alias gghtml="find . \( -name \*.html -o -name \*.htm -o -name \*.css \) -print | quotespaces | xargs grep"
+
+# CSS files
+alias gcss="find . -maxdepth 1 -name \*.css -print | xargs grep"
+alias ggcss="find . -name \*.css -print | quotespaces | xargs grep"
+
+# Lisp (.lisp) files
+#  -i case Insensitive!
+#alias gl  'grep -i \!* *.lisp'
+#alias ggl 'find -name \*.lisp -print | xargs grep -i \!*'
+
+# Emacs lisp (.el) files
+#  -i case Insensitive!
+alias gel="find . -maxdepth 1 -name \*.el -print | xargs grep -i"
+alias findel="find . -name \*.el -print"
+alias ggel="findel | xargs grep -i"
+
+# text files (.txt) files
+alias gtxt="find . -maxdepth 1 -name \*.txt -print | xargs grep"
+alias findtxt="find . -name \*.txt -print"
+alias ggtxt="findtxt | xargs grep"
+
+
+
+alias tomcat-start='${TOMCAT_HOME}/bin/startup.sh start'
+alias tomcat-stop='${TOMCAT_HOME}/bin/shutdown.sh stop'
+alias tomcat-bounce='tomcat-stop ; tomcat-start'
+alias tomcat-log='tail -3000lf ${TOMCAT_HOME}/logs/catalina.out'
+alias tomcat-clear-logs='rm -rvf ${TOMCAT_HOME}/logs/*'
+function tomcat-deploy() {
+    cp -v target/*.war ${TOMCAT_HOME}/webapps/
+    cp -v */target/*.war ${TOMCAT_HOME}/webapps/
+}
+function tomcat-undeploy() {
+    #cp -v target/*.war ${TOMCAT_HOME}/webapps/
+    #cp -v */target/*.war ${TOMCAT_HOME}/webapps/
+    echo "NOT IMPLEMENTED"
+}
+
+alias jboss-start='${JBOSS_HOME}/bin/run.sh'
+alias jboss-stop='${JBOSS_HOME}/bin/shutdown.sh -S'
+alias jboss-clean='rm -rf ${JBOSS_HOME}/server/default/tmp/deploy ${JBOSS_HOME}/server/default/work/jboss.web  ${JBOSS_HOME}/server/default/log/*'
+alias jboss-log='tail -3000lf ${JBOSS_HOME}/server/default/log/server.log'
+alias jboss-roll='jboss-start ; bg ; jboss-stop'
+
+alias winternet='telnet winternet.com'
+alias devserver='ssh 192.168.162.5 -l amiller'
+
+
+#
+# grails development...
+#
+alias g="grails"
+function g+() {
+    for target in "$@" ; do
+        echo
+        echo
+        echo "grails $target"
+        grails $target
+    done
+}
+
+# from http://naleid.com/blog/2011/09/26/smart-bash-zsh-aliases-to-run-appropriate-grails-version/
+#alias grails="execute_grails_version grails"
+#alias grails-debug="execute_grails_version grails-debug"
+#function execute_grails_version() {
+#    GRAILS_CMD=$1
+#    shift
+#    if [ -f application.properties ]; then
+#        export GRAILS_VERSION=`grep app.grails.version application.properties | sed -E 's/.*=(.*)/\1/'`
+#        export GRAILS_HOME="/usr/local/grails-$GRAILS_VERSION"
+#        echo "application.properties found, using \$GRAILS_HOME of $GRAILS_HOME"
+#    else
+#        echo "application.properties NOT found, leaving \$GRAILS_HOME as $GRAILS_HOME"
+#    fi
+#
+#    if [ ! -d $GRAILS_HOME ]; then
+#        echo "ERROR: Unable to find \$GRAILS_HOME directory at $GRAILS_HOME"
+#        exit 1
+#    fi
+#
+#    echo $GRAILS_HOME/bin/$GRAILS_CMD $*
+#    $GRAILS_HOME/bin/$GRAILS_CMD $*
+#}
+
+alias gra="grails run-app"
+alias gca="grails clean"
+
+alias gra-utc="grails -Duser.timezone=UTC run-app"
+alias gra-prod="grails -Duser.timezone=UTC prod run-app"
+
+# and don't forget about the bin/gba (browse app) script
+
+alias gta="grails test-app"
+alias gta-utc="grails -Duser.timezone=UTC test-app"
+alias gtf="gta-utc fitnesse:"
+alias gti="gta-utc integration:"
+alias gtu="gta-utc unit:"
+alias rgta="gta-utc -rerun"
+alias rgti="gta-utc -rerun integration:"
+alias rgtu="gta-utc -rerun unit:"
+
+# These all caps alias start by doing a clean and package.
+alias GRA="g+ clean package ; gra"
+alias GTA="g+ clean package ; gta"
+alias GTF="g+ clean package ; gtf"
+alias GTI="g+ clean package ; gti"
+alias GTU="g+ clean package ; gtu"
+alias GCN="g+ clean package ; gcn"
+
+alias GRA-UTC="g+ clean package ; gra-utc"
+alias GTA-UTC="g+ clean package ; gta-utc"
+
+alias GQA="grails clean ; grails package ; grails -Dgrails.env=qa war"
+
+alias gtr='open target/test-reports/html/index.html'
+
+alias gs="grails -Dgrails.env=server"
+alias gprimed="grails -Dgrails.env=primeForDesktop"
+alias gprimem="grails -Dgrails.env=primeForMySql"
+
+alias gdeploy="grails maven-deploy --repository=pluginSnapshots"
+alias ginstall="grails maven-install"
+alias guninstall="grails maven-uninstall"
+
+alias gcn="grails codenarc"
+alias gdr="grails dependency-report"
+alias gmetrics="grails gmetrics"
+alias gcoverage="grails test-app -coverage"
+alias greports="time ( gca && gcn && gdr && gmetrics && gcoverage )"
+
+alias gg="find . -maxdepth 1 -name \*.goovy -print | xargs grep"
+alias findg="find . -name \*.groovy -print"
+alias ggg="findg | xargs grep"
+
+alias findgsp="find . -name \*.gsp -print"
+alias ggsp="find . -maxdepth -name \*.gsp | xargs grep"
+alias gggsp="findgsp | xargs grep"
+
+function ggg-nt() { # just like ggg, but filters out classes test classes
+    ggg $@ \
+        | grep -v \/test\/unit\/ \
+        | grep -v \/test\/integration\/ \
+        | grep -v \/test\/functional\/ \
+        | grep -v \/test\/slow\/ \
+        | grep -v \/grails-app\/fitnesse\/ \
+        | grep -v \/target\/plugins\/
+}
+
+function split-tests() {
+    #cd $BLOOMHEALTH_DEV
+    echo "removing old test report artifacts..."
+    rm -rf test-unit/test-reports
+    rm -rf test-integration/test-reports
+    startTime=`date '+%I:%M:%S'`
+    echo "starting tests at $startTime"
+    time bin/splitTests.groovy $@
+    endTime=`date '+%I:%M:%S'`
+    echo "started at  $startTime"
+    echo "finished at $endTime"
+}
+
+function gta-progress() {
+    (
+        echo "gta progress..."
+        #if [ -d $BLOOMHEALTH_DEV/target/test-reports ] ; then
+        if [ -d target/test-reports ] ; then
+            #cd $BLOOMHEALTH_DEV/target/test-reports
+            cd target/test-reports
+            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
+            totalTestClasses=`find ../../test -name \*Tests.groovy | wc -l | sed 's/ //g'`
+            executedTests=`ggxml testcase | wc -l`
+            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
+            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
+        fi
+    )
+}
+
+function gti-progress() {
+    (
+        echo "gti progress..."
+        #if [ -d $BLOOMHEALTH_DEV/target/test-reports ] ; then
+        if [ -d target/test-reports ] ; then
+            #cd $BLOOMHEALTH_DEV/target/test-reports
+            cd target/test-reports
+            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
+            totalTestClasses=`find ../../test/integration -name \*Tests.groovy | wc -l | sed 's/ //g'`
+            executedTests=`ggxml testcase | wc -l`
+            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
+            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
+        fi
+    )
+}
+
+function gtu-progress() {
+    (
+        echo "gtu progress..."
+        #if [ -d $BLOOMHEALTH_DEV/target/test-reports ] ; then
+        if [ -d target/test-reports ] ; then
+            #cd $BLOOMHEALTH_DEV/target/test-reports
+            cd target/test-reports
+            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
+            totalTestClasses=`find ../../test/unit -name \*Tests.groovy | wc -l | sed 's/ //g'`
+            executedTests=`ggxml testcase | wc -l`
+            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
+            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
+        fi
+    )
+}
+
+function split-progress() {
+    echo "splitTests progress..."
+    if [ -d test-unit/test-reports ] ; then
+        (
+            cd test-unit/test-reports
+            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
+            totalTestClasses=`find ../../test/unit/ -name \*Tests.groovy | wc -l | sed 's/ //g'`
+            executedTests=`ggxml testcase | wc -l`
+            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
+            echo "  unit"
+            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
+        )
+    fi
+    if [ -d test-integration/test-reports ] ; then
+        (
+            cd test-integration/test-reports/
+            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
+            totalTestClasses=`find ../../test/integration/ -name \*Tests.groovy | wc -l | sed 's/ //g'`
+            executedTests=`ggxml testcase | wc -l`
+            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
+            echo "  integration"
+            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
+        )
+    fi
+}
+
+
+#
+# for looking into and purging the maven, ivy, and grails repos...
+#
+function inspect-grails-cache() {
+    ( cd ~ ; find .grails/ivy-cache -type d | grep -i $1 )
+}
+function inspect-ivy-cache() {
+    ( cd ~ ; find .ivy2 -type d | grep -i $1 )
+}
+function inspect-m2-cache() {
+    ( cd ~ ; find .m2 -type d | grep -i $1 )
+}
+function inspect-caches() {
+    echo
+    echo grails cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    inspect-grails-cache $1
+
+    echo
+    echo ivy cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    inspect-ivy-cache $1
+
+    echo
+    echo mvn cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    inspect-m2-cache $1
+}
+
+function purge-grails-cache() {
+    ( cd ~ ; find .grails/ivy-cache -name \*$1\* | xargs rm -rvf )
+    if [ -d ./target/plugin-classes ] ; then
+        ( find ./target/plugin-classes -type d -name \*$1\* | xargs rm -rvf )
+    fi
+    if [ -d ./target/plugins ] ; then
+        ( find ./target/plugins -type d -name \*$1\* | xargs rm -rvf )
+    fi
+}
+function purge-ivy-cache() {
+    ( cd ~ ; find .ivy2 -name \*$1\* | xargs rm -rvf )
+}
+function purge-m2-cache() {
+    ( cd ~ ; find .m2 -name \*$1\* | xargs rm -rvf )
+}
+function purge-caches() {
+    echo purging grails cache
+    purge-grails-cache $1
+    echo
+    echo purging ivy cache
+    purge-ivy-cache $1
+    echo
+    echo purging mvn cache
+    purge-m2-cache $1
+}
+
+
+alias jarzilla='open -a jarzilla-0.1.5.app'
+
+
+#
+# for running the same command in many directories...
+#
+function all() {
+    command=$1 ; shift # the command to execute
+    flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
+    time ( \
+        if [ -e "$flag" ] ; then
+            # just run the comman once in the current dir
+            echo "`pwd` `parse_vc_branch`"
+            echo $command $@
+            $command $@
+            echo
+        else
+            find . -type d -maxdepth 1 | while read directory ; do
+                if [ -e "$directory/$flag" ] ; then
+                    (
+                        cd $directory
+                        echo "`pwd` `parse_vc_branch`"
+                        echo $command $@
+                        $command $@
+                        echo
+                    )
+                fi
+            done # end while \
+        fi
+    )
+}
+
+function antall() { # run maven in the directories that have build.xml
+    all ant build.xml $@
+}
+
+function grailsall() { # run grails in the directories that have grails-app
+    all grails grails-app $@
+}
+
+function mvnall() { # run maven in the directories that have pom.xml
+    all mvn pom.xml $@
+}
+
+function gitall() { # run git in the directories that have .git
+    all git .git $@
+}
+
+function hgall() { # run hg in the directories that have .hg
+    all hg .hg $@
+}
+
+
+#
+# for bulk processing markdown files into html
+#
+function md2htmlall() {
+    find . -type f -name \*.md -maxdepth 1 | while read mdfile ; do
+        target=$mdfile.html
+        echo "$mdfile --> $target"
+        md2html $mdfile > $target
+    done # end while
+}
+
+
+#
+# local install...
+#
+alias jmeter="c:/app/jmeter-1.8.1/bin/jmeter"
+
+
+if $darwin ; then
+    alias dashboard-stop="defaults write com.apple.dashboard mcx-disabled -boolean YES ; killall Dock"
+    alias dashboard-start="defaults write com.apple.dashboard mcx-disabled -boolean NO ; killall Dock"
+
+    alias dock-2d="defaults write com.apple.Dock no-glass -boolean YES ; killall Dock"
+    alias dock-3d="defaults write com.apple.Dock no-glass -boolean NO ; killall Dock"
+
+    alias spotlight-stop="sudo mdutil -a -i off"
+    alias spotlight-start="sudo mdutil -a -i on"
+
+    alias clearrecents="defaults delete -g AppleRecentFolders"
+
+    # Show Full Directory Path in Mac OS X Finder Window Title Bars
+    #defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES ; killall Finder
+    #defaults write com.apple.finder _FXShowPosixPathInTitle -bool NO ; killall Finder
+fi
+
+# will prompt you for sudo password
+alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
+
+# will prompt you for sudo password and then root mysql password (by default it"s blank)
+alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
+
+alias mysql-bounce="mysql-stop ; mysql-start"
+
+
+alias rabbit-start="( sudo rabbitmq-server )"
+alias rabbit-stop="rabbitmqctl stop"
+
+
+alias st='open -a SourceTree.app'
+
+
+# hg aliases (originally borrowed from Ted Naleid)...
+alias hs="hg status"
+alias hgh="hg heads -t"
+function lf() {
+   grep files | awk '{for (i=2; i<=NF; i++)  print $i }' | sort | uniq
+}
+alias ic="hg incoming -v -S | lf"
+alias og="hg outgoing -v -S | lf"
+alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3

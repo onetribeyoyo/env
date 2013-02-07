@@ -1,0 +1,676 @@
+;;(setq debug-on-error t)
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Initial configuration...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp"))
+
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/ecb-2.32"))
+
+(setq favorite-jde-version '2.3.5.1)
+(cond ((eq '2.3.3 favorite-jde-version)
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/eieio-0.17"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/elib-1.0"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/semantic-1.4.4"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/speedbar-0.14beta4"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jde-2.3.3/lisp"))
+       )
+      ((eq '2.3.5.1 favorite-jde-version)
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jde/lisp"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre3/common"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre3"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/elib-1.0"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jde-2.3.5.1/lisp"))
+       (load-file (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre3/common/cedet.el"))
+       )
+      ((eq 'test favorite-jde-version)
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jde/lisp"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre6/common"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre6"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/elib-1.0"))
+       ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jde-2.3.5.1/lisp"))
+       (load-file (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre6/common/cedet.el"))
+       )
+      )
+
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/emacs-goodies-el-13"))
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/html-helper-mode-2.19.1.1"))
+
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/pmd-emacs-0.5"))
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/psgml-1.3.1/"))
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/xae-1.0beta8/lisp"))
+
+;;(autoload 'js2-mode "js2" nil t)
+;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+(setq semanticdb-default-save-directory "~/.semantic.cache")
+
+;;(require 'printing)
+;;(pr-update-menus t)
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Custom variables -- EDIT AT YOUR OWN RISK...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(auto-revert-verbose nil)
+ '(case-fold-search t)
+ '(current-language-environment "Latin-1")
+ '(default-input-method "latin-1-prefix")
+ '(ecb-before-activate-hook (quote (amiller-ecb-before-activate-hook)))
+ '(ecb-deactivate-hook (quote (amiller-ecb-deactivate-hook)))
+ '(ecb-kill-buffer-clears-history (quote auto))
+ '(ecb-layout-name "amiller-left-analysis")
+ '(ecb-layout-window-sizes (quote (("amiller-left-analysis" (0.26 . 0.3) (0.26 . 0.5) (0.26 . 0.2)) ("amiller-left-text-edit" (0.26 . 0.7) (0.26 . 0.3)) ("amiller-left-right-analysis" (0.21 . 0.8) (0.21 . 0.2) (0.24 . 0.7) (0.24 . 0.3)) ("amiller-left-right" (0.21 . 0.8) (0.21 . 0.2) (0.24 . 1.0)) ("amiller-left" (0.26 . 0.3) (0.26 . 0.5) (0.26 . 0.2)) ("amiller-right" (0.36 . 0.3) (0.36 . 0.2) (0.36 . 0.5)) ("amiller-left-long-dir" (0.36 . 0.15) (0.36 . 0.15) (0.36 . 0.7)) ("amiller-right-long-dir" (0.36 . 0.15) (0.36 . 0.15) (0.36 . 0.7)))))
+ '(ecb-options-version "2.32")
+ '(ecb-run-ediff-in-ecb-frame t)
+ '(ecb-show-sources-in-directories-buffer (quote always))
+ '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|png\\|gif\\|DS_Store\\|jpg\\|psp\\|Icon\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\|ruler\\|aliases\\|profile\\|inputrc\\|Xdefaults\\|classpath\\|project\\|.*\\.el\\)$")))))
+ '(ecb-source-path (quote (("~/opi/clients/mdh/iaap/grails-app/controllers/us/mn/state/health/iaap/" "iaap/grails-app/controllers") ("~/opi/clients/mdh/iaap/grails-app/domain/us/mn/state/health/iaap/" "iaap/grails-app/domain") ("~/opi/clients/mdh/iaap/grails-app/jobs/us/mn/state/health/iaap/" "iaap/grails-app/jobs") ("~/opi/clients/mdh/iaap/grails-app/services/us/mn/state/health/iaap/" "iaap/grails-app/services") ("~/opi/clients/mdh/iaap/grails-app/views/" "iaap/grails-app/views") ("~/opi/clients/mdh/iaap/grails-app/" "iaap/grails-app") ("~/opi/clients/mdh/iaap/src/" "iaap/src") ("~/opi/clients/mdh/iaap/web-app/" "iaap/web-app") ("~/opi/clients/mdh/iaap-data-extractor/src/us/mn/state/health/iaap/extractor/" "iaap-data-extractor/src") ("~/opi/clients/" "opi/clients") ("~/dev/opi/" "~/dev/opi") ("~/dev/scratch/" "~/dev/scratch") ("~/dev/" "~/dev") ("~" "~"))))
+ '(ecb-tip-of-the-day nil)
+ '(ecb-tree-buffer-style (quote ascii-no-guides))
+ '(ecb-tree-indent 2)
+ '(ecb-vc-enable-support nil)
+ '(ecb-wget-setup (quote cons))
+ '(font-lock-support-mode (quote jit-lock-mode))
+ '(indent-tabs-mode nil)
+ '(ispell-program-name "aspell" t)
+ '(jde-ant-home "$ANT_HOME")
+ '(jde-build-function (quote (jde-ant-build)))
+ '(jde-checkstyle-style "~/opi/clients/mnscu/hr/code/devtools/checkstyle/checkstyle.xml")
+ '(jde-compile-option-debug (quote ("all" (t nil nil))))
+ '(jde-compile-option-deprecation t)
+ '(jde-compile-option-hide-classpath t)
+ '(jde-compiler (quote ("javac" "")))
+ '(jde-db-active-breakpoint-face-colors (quote ("black" . "red")))
+ '(jde-db-requested-breakpoint-face-colors (quote ("black" . "tomato")))
+ '(jde-db-spec-breakpoint-face-colors (quote ("black" . "orange red")))
+ '(jde-debugger (quote ("JDEbug")))
+ '(jde-jdk (quote ("1.6.0")))
+ '(jde-jdk-doc-url "/app/jdk-1.5.0_09/docs")
+ '(jde-jdk-registry (quote (("1.5.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0") ("1.4.2" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2") ("1.6.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0"))))
+ '(jde-project-context-switching-enabled-p t)
+ '(paren-glint-timeout 10)
+ '(paren-match-face (quote paren-face-match-light))
+ '(paren-sexp-mode t)
+ '(pmd-home "/app/pmd-2.3")
+ '(pmd-java-home "/app/jdk-1.5.0_09/bin/java")
+ '(pmd-ruleset-list (quote ("rulesets/basic.xml" "rulesets/braces.xml" "rulesets/codesize.xml" "rulesets/coupling.xml" "rulesets/design.xml" "rulesets/imports.xml" "rulesets/strings.xml" "rulesets/unusedcode.xml")))
+ '(show-paren-mode t nil (paren))
+ '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
+ '(truncate-partial-width-windows nil))
+
+;; '(printer-name "pap://*/HP%20LaserJet%202100%20Series/LaserWriter")
+;; '(printer-name "pap://*/OPI:%20Dell%20510cn")
+;; '(ps-bottom-margin 25)
+;; '(ps-inter-column 35)
+;; '(ps-landscape-mode nil)
+;; '(ps-left-margin 35)
+;; '(ps-line-number t)
+;; '(ps-number-of-columns 1)
+;; '(ps-print-color-p t)
+;; '(ps-right-margin 25)
+;; '(ps-top-margin 25)
+;; '(ps-zebra-stripe-height 3)
+;; '(ps-zebra-stripes t)
+
+;; mnscu ecb project defns....
+;;     ("~/opi/clients/mnscu/base/code/base-core/src/main/java/edu/mnscu/base/" "MnSCU / base .. java")
+;;     ("~/opi/clients/mnscu/base/code/base-core/src/main/resources/" "MnSCU / base .. rsrc")
+;;     ("~/opi/clients/mnscu/base/code/base-core/src/test/java/edu/mnscu/base/" "MnSCU / base .. test .. java")
+;;     ("~/opi/clients/mnscu/base/code/base-core/src/test/resources/ddl/" "MnSCU / base .. test .. rsrc / ddl")
+;;     ("~/opi/clients/mnscu/base/code/base-core/src/test/resources/data/" "MnSCU / base .. test .. rsrc / data")
+;;     ("~/opi/clients/mnscu/base/code/base-core/src/test/resources/" "MnSCU / base .. test .. rsrc")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-core/src/main/java/edu/mnscu/acct/" "MnSCU / acct .. core .. java")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-core/src/main/resources/" "MnSCU / acct .. core .. rsrc")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-core/src/test/java/edu/mnscu/acct/" "MnSCU / acct .. core .. test .. java")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-core/src/test/resources/ddl/" "MnSCU / acct .. core .. test .. rsrc / ddl")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-core/src/test/resources/data/" "MnSCU / acct .. core .. test .. rsrc / data")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-webapp/src/main/java/edu/mnscu/acct/" "MnSCU / acct .. webapp .. java")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-webapp/src/main/resources/" "MnSCU / acct .. webapp .. rsrc")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-webapp/src/test/java/edu/mnscu/acct/" "MnSCU / acct .. webapp .. test .. java")
+;;     ("~/opi/clients/mnscu/accounting/code/acct-webapp/src/main/webapp/" "MnSCU / acct .. webapp .. webapp")
+;;     ("~/opi/clients/mnscu/" "MnSCU")
+
+
+(require 'paren-glint)
+(paren-glint-mode 1)
+
+;; '(jde-checkstyle-style "~/etc/checkstyle.xml")
+;;'(jde-checkstyle-style "/app/devAPM-r20/util/checkstyle/conf/checkstyle.xml")
+
+;; '(jde-debugger (quote ("JDEbug")))
+
+;;
+;;  About IP printers...
+;;
+;; The printer-name variable must be set to a valid UNC.  You can't use a
+;; port.  So to use an IP printer you'll have to share it first and give it a
+;; name.
+;;
+;; '(printer-name "//badger/opi-printer" t)
+;; '(printer-name "//stpprn02/GDT843709P")
+;; '(printer-name "//stpprn02/GDT844020P")
+;; '(ps-line-number-step (quote zebra))
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Cygwin setup...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+;;(setq exec-path (cons "C:/cygwin/bin" exec-path))
+;;(setenv "PATH" (concat "C:\\cygwin\\bin;" (getenv "PATH")))
+
+;; nt-emacs assumes a windows command shell, which is changed to bash here.
+;;(setq process-coding-system-alist '(("bash" . undecided-unix)))
+;;(setq shell-file-name "bash")
+;;(setenv "SHELL" shell-file-name)
+;;(setq explicit-shell-file-name shell-file-name)
+
+;; This removes unsightly ^M characters that would otherwise appear in
+;; the output of java applications.
+(add-hook 'comint-output-filter-functions
+          'comint-strip-ctrl-m)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Buffer and frame setup, etc...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+
+;;(standard-display-european t)         ; Allow extended character set
+(setq frame-title-format            (concat "Emacs [" emacs-version "] - %b - %f")
+      scroll-step                   1
+      backup-by-copying-when-linked t
+      require-final-newline         t
+      mail-self-blind               t
+      inhibit-startup-message       t
+      blink-matching-paren          t
+      line-number-mode              t
+      column-number-mode            t
+      )
+
+(put 'eval-expression 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
+(global-set-key "" nil)
+
+(load "completion.elc")
+(add-to-list 'completion-ignored-extensions ".DS_Store")
+(initialize-completions)
+(setq *print-next-completion-does-cdabbrev-search-p* t)
+
+;;(global-set-key "." 'tags-search)
+;;(global-set-key "," 'tags-loop-continue)
+
+(global-set-key "t" 'transpose-windows)
+(fset 'transpose-windows
+      "b
+ob
+ob
+")
+
+(global-set-key "p" 'reposition-window)
+
+
+;; file encoding conversion
+(defun set2mac ()
+  (set-buffer-file-coding-system 'undecided-mac)
+  (save-buffer))
+(defun set2unix ()
+  (set-buffer-file-coding-system 'undecided-unix)
+  (save-buffer))
+(defun set2dos ()
+  (set-buffer-file-coding-system 'undecided-dos)
+  (save-buffer))
+
+;;(require 'highlight-completion)
+;;(highlight-completion-mode 1)
+
+(require 'browse-kill-ring)
+(global-set-key (kbd "C-c k") 'browse-kill-ring)
+
+(autoload 'nuke-trailing-whitespace "whitespace" nil t)
+(add-hook 'write-file-hooks 'nuke-trailing-whitespace)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Win32 details...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(cond ((equal (getenv "OS") "Windows_NT") (load-file "~/.emacs.win32.el"))
+      )
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; MacOSX details...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(cond ((equal (getenv "OS") "Darwin") (load-file "~/.emacs.darwin.el"))
+      )
+(load-file "~/.emacs.darwin.el")
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Column width...
+;;; ----10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130--
+
+(setq-default fill-column 72)
+;;(setq-default fill-column 77)
+;;(setq-default fill-column 80)
+;;(setq-default fill-column 90)
+
+;; Wide column mode changes the cursor colour when it gets past the fill-column.
+;; There's some bug in this that can get the curson colour out of wack.
+;;(require 'wide-column)
+;;(global-wide-column-mode)
+
+;;(require 'margin)
+;;(margin-mode)
+
+(require 'vvb-mode)
+;; My personal preference is 85, but I change it from time to time to help satisfy client coding conventions.
+(setq-default vvb-column         112
+              vvb-sticky-p       nil
+              vvb-permanent-p    t
+              vvb-horizontal-p   nil
+              vvb-right-on-eol-p t
+              )
+;; face colour is set in colors section below.
+
+(defun turn-on-vvb-mode ()
+  "Unconditionally turn on Visible Vertical Bar mode."
+  (vvb-mode nil))
+(defun turn-off-vvb-mode ()
+  "Unconditionally turn off Visible Vertical Bar mode."
+  (vvb-mode -1))
+
+;;(setq-default vvb-mode 1)
+(add-hook 'html-helper-mode-hook   'turn-on-vvb-mode)
+(add-hook 'emacs-lisp-mode-hook    'turn-on-vvb-mode)
+(add-hook 'jde-mode-hook           'turn-on-vvb-mode)
+(add-hook 'sgml-mode-hook          'turn-on-vvb-mode)
+(add-hook 'sql-mode-hook           'turn-on-vvb-mode)
+;;(add-hook 'text-mode-hook          'turn-on-vvb-mode)
+(add-hook 'xml-mode-hook           'turn-on-vvb-mode)
+(add-hook 'shell-script-mode-hook  'turn-on-vvb-mode)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Colors and font lock...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+;;; font-lock is empirically fastest when I just leave all this alone!
+(global-font-lock-mode 1)
+;;(setq font-lock-support-mode 'jit-lock-mode)
+;;(setq font-lock-support-mode fast-lock-mode)
+;;setq font-lock-support-mode 'lazy-lock-mode)
+;;setq font-lock-maximum-decoration t)
+
+;;(list-colors-display)
+;;(set-background-color "beige")
+;;(set-face-background vvb-face "linen")
+;;(set-face-background vvb-face "misty rose")
+;;(set-face-background vvb-face "cornsilk")
+
+(cond (nil (load-file "~/.emacs.theme.amiller-1.el"))
+      (nil (load-file "~/.emacs.theme.amiller-2.el"))
+      (t   (load-file "~/.emacs.theme.nightvision.el"))
+      )
+
+(require 'color-theme)
+;;(color-theme-gnome2)
+
+;;(color-theme-retro-orange)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Misc...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+(setq paren-face 'bold)
+(setq paren-highlight-offscreen t)
+
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Modes...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+(autoload 'csv-mode "csv-mode" "Major mode for editing comma-separated value files." t)
+
+
+(add-to-list 'auto-mode-alist '("\\.rrp" . perl-mode))
+(add-to-list 'auto-mode-alist '("\\.shlib" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("\\.ddl" . sql-mode))
+
+;;(load-file "~/devtools/emacs/site-lisp/vc-svn.el")
+;;(require 'vc-hooks)
+
+;; Text mode
+(setq initial-major-mode 'text-mode)    ; start out in text mode
+(setq default-major-mode 'text-mode)    ; default to text mode
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; HTML mode
+(autoload 'html-helper-mode "html-helper-mode" "HTML Helper Mode" t)
+
+(add-to-list 'auto-mode-alist '("\\.html" . html-helper-mode))
+(add-to-list 'auto-mode-alist '("\\.htm" . html-helper-mode))
+(add-to-list 'auto-mode-alist '("\\.jsp"  . html-helper-mode))
+(add-to-list 'auto-mode-alist '("\\.gsp"  . html-helper-mode))
+
+(defun amiller-html-mode-hook ()
+  (setq html-helper-use-expert-menu     t
+        ;;html-helper-dtd-version         "<!DOCTYPE html public \"-//W3C//DTD HTML 4.0 Transistional//EN\">\n"
+        html-helper-do-write-file-hooks t
+        html-helper-build-new-buffer    t
+        html-helper-address-string      "<a href=\"http://www.objectpartners.com/\">Andrew R. Miller &lt;amiller@objectpartners.com&gt;</a>"
+        indent-tabs-mode              nil ; Use spaces instead of tabs.
+        )
+  (setq tab-width 2)
+  (setq fill-column 121)
+  ;;(load "amiller-html-helper-mode-ext")
+  ;;(define-key html-helper-mode-map "\^c?" 'tempo-complete-tag)
+  (turn-on-auto-fill)
+  )
+(add-hook 'html-helper-mode-hook 'amiller-html-mode-hook)
+(add-hook 'html-helper-mode-hook 'turn-on-vvb-mode)
+;;(add-hook 'html-helper-mode-hook '(lambda () (font-lock-mode 1)))
+
+;; CSS mode
+(add-to-list 'auto-mode-alist '("\\.css" . css-mode))
+(autoload 'css-mode "css-mode" nil t)
+
+
+;; SQL mode
+(defun amiller-sql-mode-hook ()
+  (setq tab-width 2)
+  )
+(add-hook 'sql-mode-hook 'amiller-sql-mode-hook)
+(add-hook 'sql-mode-hook 'turn-on-vvb-mode)
+
+;; Shell scripts
+(add-to-list 'auto-mode-alist '("\\.profile" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("\\.aliases" . shell-script-mode))
+
+;; COBOL mode
+(require 'cobol-mode)
+(add-to-list 'auto-mode-alist '("\\.cob" . cobol-mode))
+(add-to-list 'auto-mode-alist '("\\.cob0l" . cobol-mode))
+
+;;;
+;;; SGML and XML
+;;;
+
+;;(require 'xae)
+
+;(autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
+;(autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
+;(add-to-list 'auto-mode-alist '("\\.dtd" . sgml-mode))
+;(add-to-list 'auto-mode-alist '("\\.xml" . xml-mode))
+
+(defun amiller-psgml-mode-hook ()
+  (setq indent-tabs-mode   nil          ; Use spaces instead of tabs.
+        tab-width          3
+
+        sgml-set-face      t
+        sgml-markup-faces  '((start-tag . font-lock-function-name-face)
+                             (end-tag . font-lock-function-name-face)
+                             (comment . font-lock-comment-face)
+                             (pi . font-lock-type-face)
+                             (sgml . font-lock-type-face)
+                             (doctype . font-lock-keyword-face)
+                             (entity . font-lock-string-face)
+                             (shortref . font-lock-string-face)
+                             (ignored . font-lock-constant-face)
+                             (ms-start . font-lock-constant-face)
+                             (ms-end . font-lock-constant-face))
+
+        sgml-auto-activate-dtd  t
+        )
+  ;;(turn-on-auto-fill)
+  )
+(add-hook 'sgml-mode-hook 'amiller-psgml-mode-hook)
+(add-hook 'xml-mode-hook 'amiller-psgml-mode-hook)
+(add-hook 'xae-mode-hook 'turn-on-vvb-mode)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Groovy Development...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs.groovy/groovy-mode-by-jeremy-rayner"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs.groovy/groovy-mode-by-russel-winder"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs.groovy"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs.groovy/wolfmanjm-grails-mode-eee23a6"))
+
+;;; groovy-mode when file ends in .groovy or has #!/bin/groovy at start
+(autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
+(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
+(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+
+(defun amiller-groovy-mode-hook ()
+  (setq indent-tabs-mode   nil          ; Use spaces instead of tabs.
+        tab-width          4
+        )
+  ;;(turn-on-auto-fill)
+  )
+(add-hook 'groovy-mode-hook 'amiller-groovy-mode-hook)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Java Development...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+;;(add-hook 'javascript-mode-hook '(lambda () (font-lock-mode -1)))
+
+(require 'ecb-autoloads)
+
+(defun amiller-ecb-before-activate-hook ()
+  "Enlarges the frame size while preserving the size of the edit pane."
+  (set-frame-position (selected-frame) amiller-ecb-frame-left amiller-frame-top)
+  (set-frame-width    (selected-frame) amiller-ecb-frame-width)
+  t
+  )
+(defun amiller-ecb-deactivate-hook ()
+  "Resets the frame size."
+  (set-frame-width    (selected-frame) amiller-frame-width)
+  (set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
+  t
+  )
+
+(defun ecb-reactivate ()
+  (interactive)
+  (ecb-deactivate)
+  (ecb-activate) )
+
+(add-to-list 'completion-ignored-extensions ".class") ; Ignore compiled java class files.
+(add-to-list 'completion-ignored-extensions "vssver.scc") ; Ignore VSS turds.
+
+;; Ignore TCC diagram stuff.
+(add-to-list 'completion-ignored-extensions ".dfPackage")
+(add-to-list 'completion-ignored-extensions ".dfSequence")
+
+(global-set-key "c" 'insert-java-class-template)
+
+(setq amiller-java-template-choice 'opi)
+(defun insert-java-class-template ()
+  "Insert the java class template at point."
+  (interactive)
+  (push-mark)
+  (cond
+   ((eq amiller-java-template-choice 'amiller)    (insert-file "~/etc/class-template.amiller.java"))
+   ((eq amiller-java-template-choice 'bi)         (insert-file "~/etc/class-template.bi.java"))
+   ((eq amiller-java-template-choice 'bloodhound) (insert-file "~/etc/class-template.bloodhound.java"))
+   ((eq amiller-java-template-choice 'bsci)       (insert-file "~/etc/class-template.bsci.java"))
+   ((eq amiller-java-template-choice 'cwt)        (insert-file "~/etc/class-template.cwt.java"))
+   ((eq amiller-java-template-choice 'fgi)        (insert-file "~/etc/class-template.fgi.java"))
+   ((eq amiller-java-template-choice 'guidant)    (insert-file "~/etc/class-template.guidant.java"))
+   ((eq amiller-java-template-choice 'mnscu)      (insert-file "~/etc/class-template.mnscu.java"))
+   ((eq amiller-java-template-choice 'opi)        (insert-file "~/etc/class-template.opi.java"))
+   (t                                             (insert-file "~/etc/class-template.java"))
+   )
+  )
+
+(require 'jde)
+(require 'jde-bug)
+(defun amiller-jde-mode-hook ()
+  ;; Intendation is based on the GNU style (differences are noted.)
+  (setq c-basic-offset                  4)
+  (setq c-comment-only-line-offset      '(0 . 0))
+  (c-set-offset 'statement-block-intro  '+)
+  (c-set-offset 'knr-argdecl-intro      5)
+  (c-set-offset 'substatement-open      0) ; gnu specifies '+
+  (c-set-offset 'label                  0)
+  (c-set-offset 'statement-case-open    '+)
+  (c-set-offset 'statement-cont         '+)
+  (c-set-offset 'arglist-intro          'c-lineup-arglist-intro-after-paren)
+  (c-set-offset 'arglist-close          'c-lineup-arglist)
+  (c-set-offset 'inline-open            0)
+  (c-set-offset 'brace-list-open        '+)
+  (setq c-block-comment-prefix          "")
+
+  ;;(setq compile-command "javac ")
+  ;;(setq compile-command (concat "jikes " buffer-file-name))
+  (setq case-fold-search    t
+        comment-column     44
+        indent-tabs-mode  nil           ; Use spaces instead of tabs.
+        c-auto-newline    nil
+        )
+
+  (setq fill-column 100)
+
+  (show-paren-mode)
+
+  ;;(local-set-key "\^c\^v\^p"    'jde-run-set-app-args) ;app parameters
+  ;;(local-set-key "\^c\^v\^v"    'jde-run-set-args) ;vm parameters
+  ;;(local-set-key "\^c\^v\^o"    'jde-set-compile-options) ;compiler arguments
+  )
+(add-hook 'jde-mode-hook 'amiller-jde-mode-hook)
+(add-hook 'jde-mode-hook 'turn-on-vvb-mode)
+
+(defun amiller-compilation-mode-hook ()
+  ;; Number of lines in a compilation window.  If nil, use Emacs default.
+  (setq compilation-window-height 17)
+  )
+(add-hook 'compilation-mode-hook 'amiller-compilation-mode-hook)
+
+(autoload 'pmd-current-buffer "pmd" "PMD Mode" t)
+(autoload 'pmd-current-dir "pmd" "PMD Mode" t)
+(require 'pmd)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Signatures...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(global-set-key "z" 'insert-long-signature)
+(defun insert-long-signature ()
+  "Inserts the contents of ~/etc/signature into the current buffer."
+  (interactive)
+  (push-mark)
+  (insert-file "~/etc/signature")
+  )
+
+
+(global-set-key "=" 'insert-short-signature)
+(defun insert-short-signature ()
+  "Insert username, date and time at point."
+  (interactive)
+  (push-mark)
+  ;;(insert (concat "[" (user-login-name) " - " (current-time-string) "]"))
+  (insert (concat "[amiller - " (current-time-string) "]"))
+  (newline)
+  )
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Startup...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(ecb-activate)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; End of safe emacs init file.
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Expirimental section...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+;;(load-file "~/.emacs.win32.el")
+
+;(defun indent-or-complete ()
+;  "Complete if point is at end of a word, otherwise indent line."
+;  (interactive)
+;  (if (looking-at "\\>")
+;      (dabbrev-expand nil)
+;    (indent-for-tab-command)
+;    )
+;  )
+;(add-hook 'html-helper-mode-hook
+;          (function (lambda ()
+;                      (local-set-key (kbd "<tab>") 'indent-or-complete)
+;                      )
+;                    )
+;          )
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Frame size manipulation.
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+;;; start emacs maximized put this line at the end of your .emacs file:
+;;(w32-send-sys-command 61488)
+
+;;; Frame size manipulation.
+(defun maximize-frame ()
+  (interactive)
+  (set-frame-parameter nil 'fullscreen
+                       (if (frame-parameter nil 'fullscreen) nil
+                         'fullboth)))
+;;(maximize-frame)
+(global-set-key [(meta return)] 'maximize-frame)
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; END OF FILE
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-default-general-face ((((class color) (background dark)) (:height 0.95 :bold nil))))
+ '(font-lock-builtin-face ((t (:foreground "gray94" :bold nil :italic nil))))
+ '(font-lock-comment-face ((t (:foreground "PaleGreen3" :bold nil :italic t))))
+ '(font-lock-doc-face ((t (:foreground "PaleGreen3" :bold nil :italic t))))
+ '(font-lock-function-name-face ((t (:foreground "LightGoldenrod1" :bold nil :italic nil))))
+ '(font-lock-keyword-face ((t (:foreground "gray94" :bold nil :italic nil))))
+ '(font-lock-reference-face ((t (:foreground "yellow" :bold nil :italic nil))))
+ '(font-lock-string-face ((t (:foreground "yellow" :bold nil :italic nil))))
+ '(font-lock-type-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
+ '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
+ '(jde-java-font-lock-code-face ((t (:bold nil))))
+ '(jde-java-font-lock-constant-face ((t (:foreground "yellow" :bold nil :italic nil))))
+ '(jde-java-font-lock-doc-tag-face ((t (:foreground "PaleGreen2" :bold nil :italic t :underline nil))))
+ '(jde-java-font-lock-link-face ((t (:foreground "PaleGreen2" :bold nil :italic t :underline t))))
+ '(jde-java-font-lock-modifier-face ((t (:foreground "gray94" :bold nil :italic nil))))
+ '(jde-java-font-lock-number-face ((t (:foreground "yellow" :bold t :italic nil))))
+ '(jde-java-font-lock-package-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
+ '(jde-java-font-lock-pre-face ((t (:foreground "PaleGreen4" :bold t :italic nil :underline nil))))
+ '(jde-java-font-lock-private-face ((t (:foreground "khaki" :bold nil :italic nil))))
+ '(jde-java-font-lock-protected-face ((t (:foreground "khaki" :bold nil :italic nil))))
+ '(jde-java-font-lock-public-face ((t (:foreground "khaki" :bold nil :italic nil)))))

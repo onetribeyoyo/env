@@ -1,0 +1,23 @@
+#
+# dev projects...
+#
+
+alias doit="use grails 1.2.0 ; cd ~/dev/doit"
+alias mtm="cd ~/dev/mtm/src ; . ./init.sh"
+
+alias buyer="cd ~/opi/clients/dealcurious/buyer-curious ; . ./init.sh"
+
+alias bloom="cd ~/opi/clients/bloom ; . ./init-bloom.sh"
+
+alias bloomhealth="cd ~/opi/clients/bloom  ; . ./init-bloomhealth.sh"
+alias bhbo="cd ~/opi/clients/bloom         ; . ./init-bhbo.sh"
+alias bloom-domain="cd ~/opi/clients/bloom ; . ./init-bloom-domain.sh"
+alias bloom-common="cd ~/opi/clients/bloom ; . ./init-bloom-common.sh"
+
+alias grailstraining="cd ~/opi/grailsclass/cvsdude/grailstraining/bufferoverflow ; . ./init.sh"
+
+alias drc="cd ~/opi/clients/drc ; . ./init.sh"
+
+# default project, new shells start with this environment...
+#bloomhealth
+
