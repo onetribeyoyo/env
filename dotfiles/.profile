@@ -21,7 +21,7 @@ export EMAIL_USER=andy.miller
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 function parse_vc_branch() {
-    git branch 2> /dev/null | awk '{ printf "{git:%s}", $2 }'
+    git branch 2> /dev/null | grep \* | awk '{ printf "{git:%s}", $2 }'
     hg branch 2> /dev/null | awk '{ printf "{hg:%s}", $1 }'
 }
 

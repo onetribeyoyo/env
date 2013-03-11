@@ -91,91 +91,6 @@
  '(ecb-source-path
    (quote
     (
-     ;; bloom bloomhealth
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/grails-app/controllers/com/bloomhealthco/controller/" "bloomhealth/../controllers")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/grails-app/domain/com/bloomhealthco/domain/" "bloomhealth/../domain")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/grails-app/jobs/com/bloomhealthco/job/" "bloomhealth/../jobs")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/grails-app/services/com/bloomhealthco/security/" "bloomhealth/../security")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/grails-app/services/com/bloomhealthco/service/" "bloomhealth/../services")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/grails-app/views/" "bloomhealth/grails-app/views")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/grails-app/" "bloomhealth/grails-app")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/src/" "bloomhealth/src")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/web-app/" "bloomhealth/web-app")
-     ;;("~/opi/clients/bloom/src/bloomhealth/bloomhealth/" "bloomhealth")
-
-     ;; bloom bloom-common
-     ;;("~/opi/clients/bloom/src/bloom-common/grails-app/controllers/com/bloomhealthco/" "bloom-common/../controllers")
-     ;;("~/opi/clients/bloom/src/bloom-common/grails-app/domain/com/bloomhealthco/" "bloom-common/../domain")
-     ;;("~/opi/clients/bloom/src/bloom-common/grails-app/jobs/com/bloomhealthco/" "bloom-common/../jobs")
-     ;;("~/opi/clients/bloom/src/bloom-common/grails-app/services/com/bloomhealthco/" "bloom-common/../services")
-     ;;("~/opi/clients/bloom/src/bloom-common/grails-app/views/" "bloom-common/grails-app/views")
-     ;;("~/opi/clients/bloom/src/bloom-common/grails-app/" "bloom-common/grails-app")
-     ;;("~/opi/clients/bloom/src/bloom-common/src/" "bloom-common/src")
-     ;;("~/opi/clients/bloom/src/bloom-common/web-app/" "bloom-common/web-app")
-     ;;("~/opi/clients/bloom/src/bloom-common/" "bloom-common")
-
-     ;; bloom bloom-domain
-     ;;("~/opi/clients/bloom/src/bloom-domain/grails-app/controllers/com/bloomhealthco/" "bloom-domain/../controllers")
-     ;;("~/opi/clients/bloom/src/bloom-domain/grails-app/domain/com/bloomhealthco/" "bloom-domain/../domain")
-     ;;("~/opi/clients/bloom/src/bloom-domain/grails-app/jobs/com/bloomhealthco/" "bloom-domain/../jobs")
-     ;;("~/opi/clients/bloom/src/bloom-domain/grails-app/services/com/bloomhealthco/" "bloom-domain/../services")
-     ;;("~/opi/clients/bloom/src/bloom-domain/grails-app/views/" "bloom-domain/grails-app/views")
-     ;;("~/opi/clients/bloom/src/bloom-domain/grails-app/" "bloom-domain/grails-app")
-     ;;("~/opi/clients/bloom/src/bloom-domain/src/" "bloom-domain/src")
-     ;;("~/opi/clients/bloom/src/bloom-domain/web-app/" "bloom-domain/web-app")
-     ;;("~/opi/clients/bloom/src/bloom-domain/" "bloom-domain")
-
-     ;; bloom bhbo
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/grails-app/controllers/com/bloomhealthco/bhbo/controller/" "bhbo/../controllers")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/grails-app/domain/com/bloomhealthco/bhbo/domain/" "bhbo/../domain")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/grails-app/jobs/com/bloomhealthco/bhbo/job/" "bhbo/../jobs")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/grails-app/services/com/bloomhealthco/bhbo/security/" "bhbo/../security")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/grails-app/services/com/bloomhealthco/bhbo/service/" "bhbo/../services")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/grails-app/views/" "bhbo/grails-app/views")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/grails-app/" "bhbo/grails-app")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/src/" "bhbo/src")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/web-app/" "bhbo/web-app")
-     ;;("~/opi/clients/bloom/src/bhbo/bhbo/" "bhbo")
-
-
-     ;; drc sb11-dev-utils
-     ("~/opi/clients/drc/github/sb11-dev-utils/" "drc/../dev-utils")
-     ("~/opi/clients/drc/github/sb11-dev-utils.wiki/" "drc/../dev-utils.wiki")
-
-     ;; drc sb11-adaptive-simulator
-     ("~/opi/clients/drc/github/sb11-adaptive-simulator/domain/src/"      "drc/../adaptive-simulator/domain")
-     ("~/opi/clients/drc/github/sb11-adaptive-simulator/persistence/src/" "drc/../adaptive-simulator/persistence")
-     ("~/opi/clients/drc/github/sb11-adaptive-simulator/rest/src/"        "drc/../adaptive-simulator/rest")
-     ("~/opi/clients/drc/github/sb11-adaptive-simulator/"                 "drc/../adaptive-simulator")
-
-     ;; drc sb11-item-response
-     ("~/opi/clients/drc/github/sb11-item-response/domain/src/"      "drc/../item-response/domain")
-     ("~/opi/clients/drc/github/sb11-item-response/persistence/src/" "drc/../item-response/persistence")
-     ("~/opi/clients/drc/github/sb11-item-response/rest/src/"        "drc/../item-response/rest")
-     ("~/opi/clients/drc/github/sb11-item-response/"                 "drc/../item-response")
-
-     ;; drc sb11-item-selection
-     ("~/opi/clients/drc/github/sb11-item-selection/domain/src/"      "drc/../item-selection/domain")
-     ("~/opi/clients/drc/github/sb11-item-selection/persistence/src/" "drc/../item-selection/persistence")
-     ("~/opi/clients/drc/github/sb11-item-selection/rest/src/"        "drc/../item-selection/rest")
-     ("~/opi/clients/drc/github/sb11-item-selection/"                 "drc/../item-selection")
-
-     ;; drc sb11-registration
-     ("~/opi/clients/drc/github/sb11-registration/domain/src/"      "drc/../registration/domain")
-     ("~/opi/clients/drc/github/sb11-registration/persistence/src/" "drc/../registration/persistence")
-     ("~/opi/clients/drc/github/sb11-registration/rest/src/"        "drc/../registration/rest")
-     ("~/opi/clients/drc/github/sb11-registration/"                 "drc/../registration")
-
-     ;; drc sb11-test-packages
-     ("~/opi/clients/drc/github/sb11-test-packages/domain/src/"      "drc/../test-packages/domain")
-     ("~/opi/clients/drc/github/sb11-test-packages/persistence/src/" "drc/../test-packages/persistence")
-     ("~/opi/clients/drc/github/sb11-test-packages/rest/src/"        "drc/../test-packages/rest")
-     ("~/opi/clients/drc/github/sb11-test-packages/"                 "drc/../test-packages")
-
-     ;; drc
-     ("~/opi/clients/drc/github/" "drc/github")
-     ("~/opi/clients/drc/" "drc")
-
      ("~/opi/clients/" "opi/clients")
      ("~/dev/opi/" "~/dev/opi")
      ("~/dev/mtm/" "~/dev/mtm")
@@ -542,7 +457,7 @@
         indent-tabs-mode              nil ; Use spaces instead of tabs.
         )
   (setq tab-width 2)
-  (setq fill-column 100)
+  (setq fill-column 120)
   ;;(load "amiller-html-helper-mode-ext")
   ;;(define-key html-helper-mode-map "\^c?" 'tempo-complete-tag)
   (turn-on-auto-fill)
