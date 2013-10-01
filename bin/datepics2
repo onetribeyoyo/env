@@ -1,0 +1,10 @@
+#!/bin/sh
+
+find . -name \????-??-??\* | while read pic ; do
+    filename=`basename $pic`
+    dir=`dirname $pic`
+
+    newname=`echo $filename | sed 's/-/./g'`
+
+    echo "mv $pic	${dir}/${newname}"
+done

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+for file in `find . -type f \( -name \*.jpg -o -name \*.jpeg -o -name \*.gif -o -name \*.png -o -name \*.jfif \) ! -name \*.tn.jpg`
+do
+  dir=`dirname $file`
+  base=`basename $file | sed 's/.jpg$//' | sed 's/.jpeg$//' | sed 's/.gif$//' | sed 's/.png$//' | sed 's/.jfif$//'`
+  tnfile=$dir/thumbnail_dir/$base.tn.jpg
+  #echo "                 $tnfile"
+  if [ ! -e $tnfile ]
+  then
+    echo -n "missing --> "
+  else
+    echo -n "            "
+  fi
+  echo $file
+done
+# End of file

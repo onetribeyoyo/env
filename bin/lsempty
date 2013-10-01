@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Lists empty directories.
+#
+
+[ $# -eq 0 ] && set "$PWD"
+
+for directory in "$@"
+  do
+  find "$directory" -depth -type d | while read d
+    do
+    # If the directory is empty, list it.
+    count=`ls -1 $d | wc -l`
+    if [ "$count" = "0" ]
+	then
+	echo "$d"
+    fi
+  done # end for
+done # end for

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+JAR=~/devtools/jdbc-drivers/hsqldb-1.8.0.7.jar
+MAIN=org.hsqldb.util.DatabaseManagerSwing
+#MEM_OPTS=-Xmx512m
+
+java $MEM_OPTS -cp $JAR $MAIN $@

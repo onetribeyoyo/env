@@ -1,0 +1,69 @@
+#!/bin/sh
+
+# default LSCOLORS = exfxcxdxbxegedabagacad
+
+# color designators...
+black=a
+red=b
+green=c
+brown=d
+blue=e
+magenta=f
+cyan=g
+light_grey=h
+bold_black=a
+bold_red=b
+bold_green=c
+bold_brown=d
+bold_blue=e
+bold_magenta=f
+bold_cyan=g
+bold_light_grey=h
+default=x
+
+# 1. directory
+# default = $blue $default
+colours=$bold_green$default
+
+# 2. symbolic link
+# default = $magenta $default
+colours=$colours$bold_cyan$default
+
+# 3. socket
+# default = $green $default
+colours=$colours$green$default
+
+# 4. pipe
+# default = $brown $default
+colours=$colours$brown$default
+
+# 5. executable
+# default = $red $default
+colours=$colours$brown$default
+
+# 6. block special
+# default = $blue $cyan
+colours=$colours$blue$cyan
+
+# 7. character special
+# default = $blue $brown
+colours=$colours$blue$brown
+
+# 8. executable with setuid bit set
+# default = $black $red
+colours=$colours$black$red
+
+# 9. executable with setgid bit set
+# default = $black $cyan
+colours=$colours$black$cyan
+
+# 10. directory writable to others, with sticky bit
+# default = $black $green
+colours=$colours$black$green
+
+# 11. directory writable to others, without sticky bit
+# default = $black $brown
+colours=$colours$bold_magenta$default
+
+#export lscolors=$colours
+echo $colours

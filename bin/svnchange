@@ -1,0 +1,30 @@
+#!/bin/sh
+
+#
+# Summarizes differences between two dirs.
+#
+
+DIFF_OUT=$TMP/$$.diff.out
+
+dirone=$1
+dirtwo=$2
+
+diff -rqs $@ \
+    | grep -v CVS \
+    | grep -v .svn \
+    | grep -v .cvsignore \
+    > $DIFF_OUT
+
+# only in dirone ; cp to dirtwo ; svn add in dirtwo
+cat $DIFF_OUT | grep -i only\ in\ $dirone
+
+# only in dirtwo ; svn delete from dirtwo
+cat $DIFF_OUT | grep -i only\ in\ $dirone
+
+# identical      ; no-op
+
+
+# changed        ; cp to dirtwo ; svn add in dirtwo
+
+
+rm $DIFF_OUT

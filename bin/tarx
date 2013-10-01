@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# expands all tarballs
+#
+
+#[ $# -eq 0 ] && set "$PWD"
+[ $# -eq 0 ] && set "."
+
+for directory in "$@"
+do
+    find "$directory" -maxdepth 1 -name \*.tar | \
+    while read tarball
+    do
+        echo "tar xf $tarball"
+        tar xf $tarball
+    done # end while
+
+    find "$directory" -maxdepth 1 -name \*.tar.gz | \
+    while read tarball
+    do
+        echo "tar xfz $tarball"
+        tar xfz $tarball
+    done # end while
+done # end for

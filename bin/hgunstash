@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# copies stashed files back into the src dir
+#
+# WARNING: with -f option files are copied, not merged!
+# WARNING: this is a blind script... it will copy everything in the stashDir!
+#
+
+stashDir=$TMP/hgstash
+
+# where is the .hg dir?
+while [ ! -d "$PWD/.hg" ] ; do
+    if [ "$PWD" = "/" ] ; then
+        echo "abort: There is no Mercurial repository here (.hg not found)!"
+        exit -1
+    fi
+    # walk up the dir tree until we find it...
+    cd ..
+done
+
+targetDir=`pwd`
+
+echo "un-stashing (copying) from $stashDir to $targetDir"
+
+if [ "$1" != "-f" -a "$1" != "-s" ]; then
+    echo "ERROR: must specify either -s or -f."
+    echo "   -s copy with ssync"
+    echo "   -f forces overwrite without ssync"
+    exit -1
+fi
+
+cd $stashDir
+find . -type f ! -name .DS_Store | while read fname ; do
+    dname=`dirname $fname`
+    echo "    `basename $fname` --> $targetDir/$dname"
+
+    if [ "$1" = "-f" ]; then
+        mkdir -p $targetDir/$dname
+        cp -f $fname $targetDir/$dname
+    elif [ "$1" = "-s" ]; then
+        ssync $fname $targetDir/$fname
+    else
+        echo "   ERROR: must specify either -s or -f."
+    fi
+done # end while

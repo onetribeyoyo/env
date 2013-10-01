@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+# Summarizes differences between a lib dir .classpath and prj.el files.
+#
+#[ $# -eq 0 ] && set "$PWD"
+[ $# -eq 0 ] && set "."
+
+
+CLASSPATH_OUT=$TMP/$$.classpath.out
+LIB_OUT=$TMP/$$.lib.out
+PRJ_OUT=$TMP/$$.prj.out
+
+
+# .classpath is stripped of M2_REPO/ path variable references
+grep jar .classpath | awk -F\" '{ print $4 }' | sort | sed 's/M2_REPO\///g' > $CLASSPATH_OUT
+
+find "$@" -name \*.jar | sort > $LIB_OUT
+
+# prj.el is stripped of ~/.m2/repository/ references
+grep jar prj.el | awk -F\" '{ print $2 }' | sort | sed 's/~\/.m2\/repository\///g' > $PRJ_OUT
+
+
+#cat $CLASSPATH_OUT
+#cat $LIB_OUT
+#cat $PRJ_OUT
+
+
+echo ".classpath v. prj.el"
+echo "----------------------------------------------------------------"
+sdiff -w 190 $CLASSPATH_OUT $PRJ_OUT
+echo
+echo
+echo ".classpath v. $@"
+echo "----------------------------------------------------------------"
+sdiff -w 190 $CLASSPATH_OUT $LIB_OUT
+echo
+echo
+echo "prj.el v. $@"
+echo "----------------------------------------------------------------"
+sdiff -w 190 $PRJ_OUT $LIB_OUT
+
+
+
+rm $CLASSPATH_OUT
+rm $LIB_OUT
+rm $PRJ_OUT

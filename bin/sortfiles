@@ -1,0 +1,12 @@
+#!/bin/sh
+
+DEV_DIR=~/dev
+PROJECT_DIR=$DEV_DIR/sortfiles
+LIB_DIR=$PROJECT_DIR/build/lib
+JAR=$LIB_DIR/sortfiles.0.1.jar
+MAIN=amiller.sortfiles.Main
+
+echo jar file: $JAR
+echo class:    $MAIN
+
+java -Xmx256m -cp $JAR $MAIN $@

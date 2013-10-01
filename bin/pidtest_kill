@@ -1,0 +1,10 @@
+#!/bin/sh
+
+CHILD_PID=`cat child_pid`
+
+echo $CHILD_PID
+kill $CHILD_PID
+
+rm child_pid
+
+exit

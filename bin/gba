@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Browses to a grails app's default web page.
+#
+# Assumes that `browse url` will open a browser for the specified url.
+#
+
+FAVORITE_BROWSER=Firefox.app
+
+APP_NAME=`grep app.name application.properties | awk -F= '{ print $2 }'`
+APP_CONTEXT=`grep app.context application.properties | awk -F= '{ print $2 }'`
+
+echo APP_NAME = $APP_NAME
+echo APP_CONTEXT = $APP_CONTEXT
+
+if [ -z $APP.CONTEXT ] ; then
+    echo open http://localhost:8080$APP_CONTEXT
+    open -a $FAVORITE_BROWSER http://localhost:8080$APP_CONTEXT
+else
+    echo open http://localhost:8080/$APP_NAME
+    open -a $FAVORITE_BROWSER http://localhost:8080/$APP_NAME
+fi

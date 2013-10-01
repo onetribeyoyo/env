@@ -1,0 +1,22 @@
+#! /bin/sh
+
+#
+# Pass the args on to ant for each component.
+#
+find . -type f -name \*.java | while read javafile
+do
+    echo $javafile is used by
+    basename=`basename $javafile`
+    classname=`echo $basename | sed 's/\.java//'`
+    find . \( -name \*.java -o -name \*.jsp \) -print \
+	| xargs grep $classname \
+	| awk -F: '{print $1}' \
+	| sort \
+	| uniq\
+	| while read user
+    do
+        echo "    $user"
+    done # end while user
+
+    echo
+done # end while javafile

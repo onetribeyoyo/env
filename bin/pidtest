@@ -1,0 +1,12 @@
+#!/bin/sh
+
+java -classpath $HOME/dev/planview/distribution/lib/planview-DEV.jar amiller.mandleview.Main > /dev/null &
+
+echo $!
+jobs -l | awk '{ print $2 }'
+
+CHILD_PID=`jobs -l | awk '{ print $2 }'`
+
+echo $CHILD_PID > child_pid
+
+exit

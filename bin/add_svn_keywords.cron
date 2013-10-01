@@ -1,0 +1,2 @@
+MAILTO=""
+20 0 * * * ~/bin/checkout_and_add_svn_keywords.rb 2>&1 > ~/add_svn_keywords_cron.log

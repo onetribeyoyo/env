@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# copies all modified files (as per hg status) into a tmp dir
+#
+
+cmdName=`basename $0`
+stashDir=$TMP/hgstash
+
+if [ "$1" = "help" ]; then
+    echo
+    echo "$cmdName usage:"
+    echo "   '$cmdName'        copies all modified (uncommited) files to the stash dir"
+    echo "   '$cmdName -r'     copies and reverts all modified files"
+    echo "   '$cmdName status' lists stashed files"
+    echo "   '$cmdName clear'  remove stashed files"
+    echo
+    echo "   stashDir = $stashDir"
+    echo
+    exit 0
+fi
+
+if [ "$1" = "status" ]; then
+    find $stashDir -type f ! -name \*~ ! -name .DS_Store
+    exit 0
+fi
+
+if [ "$1" = "clear" ]; then
+    ( cd $stashDir ; find . -name \*~ -print | quotespaces | xargs rm )
+    ( cd $stashDir ; find . -name .DS_Store -print | quotespaces | xargs rm )
+    ( cd $stashDir ; find . -type f -print | quotespaces | xargs rm -v )
+    ( cd $stashDir ; rmempty )
+    exit 0
+fi
+
+
+echo "stashing in (copying to) $stashDir"
+echo "   use '$cmdName -r' to revert"
+
+# where is the .hg dir?
+while [ ! -d "$PWD/.hg" ] ; do
+    if [ "$PWD" = "/" ] ; then
+        echo "abort: There is no Mercurial repository here (.hg not found)!"
+        exit -1
+    fi
+    # walk up the dir tree until we find it...
+    cd ..
+done
+
+hg status -S | awk '{ print $2 }' | while read fname ; do
+#hg outgoing -v | grep files | awk '{for (i=2; i<=NF; i++)  print $i }' | sort | uniq | awk '{ print $2 }'
+#hg outgoing -v | grep files | awk '{for (i=2; i<=NF; i++)  print $i }' | sort | uniq | while read fname ; do
+    dname=$stashDir/`dirname $fname`
+    echo "    $fname --> $dname"
+    #echo "    $fname"
+    mkdir -p $dname
+    cp -f $fname $dname
+    if [ "$1" = "-r" ]; then
+        echo "        hg revert $fname"
+        hg revert $fname
+    fi
+done # end while

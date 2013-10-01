@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Makes a tarball for each dir
+#
+
+#[ $# -eq 0 ] && set "$PWD"
+[ $# -eq 0 ] && set "."
+
+for directory in "$@" ; do
+    find "$directory" -maxdepth 1 -type d | while read d ; do
+        # Don't process "."
+        if [ $d != "." -a $d != "./" ] ; then
+            echo "tar cf  $d.tar    $d"
+            #tar cf  $d.tar    $d
+            tar cvfz $d.tar.gz $d
+        fi
+    done # end while
+done # end for
