@@ -5,18 +5,37 @@
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp"))
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/lilypond"))
 
-(cond (
-       nil ;; this is a stable config that works with emacs 23.4.1
-       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/ecb-latest"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/ecb-2.32"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/ecb-latest"))
+
+;;(setq favorite-jde-version '2.3.5.1)
+;;(setq favorite-jde-version '2.4.0.1)
+(setq favorite-jde-version 'test)
+(cond ((eq '2.3.3 favorite-jde-version)
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/eieio-0.17"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/elib-1.0"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/semantic-1.4.4"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/speedbar-0.14beta4"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jde-2.3.3/lisp"))
+       )
+      ((eq '2.3.5.1 favorite-jde-version)
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jde/lisp"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre3/common"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre3"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/elib-1.0"))
+       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jde-2.3.5.1/lisp"))
+       (load-file (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0pre3/common/cedet.el"))
+       )
+      ((eq '2.4.0.1 favorite-jde-version) ;; this is a stable config that works with emacs 23.4.1
        (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0/common"))
        (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0"))
        (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/elib-1.0"))
        (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jdee-2.4.0.1/lisp"))
        (load-file (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0/common/cedet.el"))
        )
-      (
-       t ;; this is a stable config that works with emacs 24.3.1
+      ((eq 'test favorite-jde-version)
        (require 'semantic/analyze)
        (provide 'semantic-analyze)
        (provide 'semantic-ctxt)
@@ -55,10 +74,10 @@
 ;;; Custom variables -- EDIT AT YOUR OWN RISK...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(auto-revert-verbose nil)
  '(case-fold-search t)
  '(current-language-environment "Latin-1")
@@ -68,7 +87,15 @@
  '(ecb-history-make-buckets (quote directory))
  '(ecb-kill-buffer-clears-history (quote auto))
  '(ecb-layout-name "amiller-left-analysis")
- '(ecb-layout-window-sizes nil)
+ '(ecb-layout-window-sizes (quote (
+                                   ("amiller-left-analysis"
+                                    (ecb-methods-buffer-name 0.3 . 0.25)
+                                    (ecb-directories-buffer-name 0.3 . 0.5)
+                                    (ecb-history-buffer-name 0.3 . 0.25)
+                                    )
+                                   )
+                                  )
+                           )
  '(ecb-options-version "2.40")
  '(ecb-run-ediff-in-ecb-frame t)
  '(ecb-show-sources-in-directories-buffer (quote always))
@@ -736,8 +763,6 @@
 ;;; lilypond...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/lilypond"))
-
 (autoload 'LilyPond-mode "lilypond-mode")
 (setq auto-mode-alist
       (cons '("\\.ly$" . LilyPond-mode) auto-mode-alist))
@@ -851,12 +876,10 @@
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; END OF FILE
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(diff-added ((t (:foreground "orange" :bold nil :italic nil))))
- '(diff-removed ((t (:foreground "LavenderBlush4" :bold nil :italic t))))
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(ecb-default-general-face ((((class color) (background dark)) (:height 0.95 :bold nil))))
  '(ecb-default-highlight-face ((default nil) (nil (:foreground "plum2" :bold nil))))
  '(ecb-history-bucket-node-dir-soure-path-face ((t (:foreground "RosyBrown" :height 0.95 :bold nil))))
@@ -879,4 +902,8 @@
  '(jde-java-font-lock-pre-face ((t (:foreground "PaleGreen4" :bold t :italic nil :underline nil))))
  '(jde-java-font-lock-private-face ((t (:foreground "khaki" :bold nil :italic nil))))
  '(jde-java-font-lock-protected-face ((t (:foreground "khaki" :bold nil :italic nil))))
- '(jde-java-font-lock-public-face ((t (:foreground "khaki" :bold nil :italic nil)))))
+ '(jde-java-font-lock-public-face ((t (:foreground "khaki" :bold nil :italic nil))))
+
+ '(diff-removed ((t (:foreground "LavenderBlush4" :bold nil :italic t))))
+ '(diff-added ((t (:foreground "orange" :bold nil :italic nil))))
+ )
