@@ -19,6 +19,8 @@ alias grailstraining="cd ~/opi/grailsclass/cvsdude/grailstraining/bufferoverflow
 
 alias drc="cd ~/opi/clients/drc ; . ./init.sh"
 
+alias target="cd ~/opi/clients/target/tgtrad/backtoschool ; . ./init.sh"
+
 # default project, new shells start with this environment...
 #bloomhealth
 #buyer
