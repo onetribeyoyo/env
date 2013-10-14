@@ -2,7 +2,9 @@
 # grails...
 
 _grailsscripts() {
-    SCRIPT_DIRS="$GRAILS_HOME/scripts ./scripts ~/.grails/scripts"
+    #SCRIPT_DIRS="$GRAILS_HOME/scripts ./scripts ~/.grails/scripts"
+    SCRIPT_DIRS="$HOME/.grails/scripts ./scripts ./plugins/*/scripts $GRAILS_HOME/scripts ./target/work/plugins/*/scripts"
+
     if [ -d plugins ]
     then for PLUGIN_DIR in $(ls -d plugins/*/scripts 2> /dev/null); do
             SCRIPT_DIRS="$SCRIPT_DIRS $PLUGIN_DIR"
