@@ -167,7 +167,7 @@ if $darwin ; then
     #export EMACS_VERSION=23.2
     #export EMACS_VERSION=23.3
     #export EMACS_VERSION=23.4.1
-    export EMACS_VERSION=24.3.1
+    export EMACS_VERSION=24.3
     export EMACS_HOME=~/devtools/emacs/emacs-${EMACS_VERSION}.app
     export EMACS_APP=emacs-${EMACS_VERSION}.app
 
