@@ -125,18 +125,20 @@ export GRAILS_HOME=~/devtools/grails/current
 
 export GROOVY_HOME=~/devtools/groovy/current
 
-export JAVA_HOME=~/devtools/jdk/current
 
-#JAVA6="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/"
-#JAVA7="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/"
-#export JAVA_HOME="${JAVA7}"
 
+#export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+
+# NOTE: Don't know if this will work for osx10.8? but... use the `use` script and add this into the path to switch to older jdk versions
+#export JAVA_HOME=~/devtools/jdk/current
+#$JAVA_HOME/bin:\
 
 # here are some JAVA_OPTS that optimize gc, but it is preferable to set
 # these on a project by project basis.
 #export JAVA_OPTS="-XX:PermSize=128m -XX:MaxPermSize=384m -XX:NewSize=256m -Xmx1024m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
 
-#export JBOSS_HOME=~/devtools/jboss/current
+export JBOSS_HOME=~/devtools/jboss/current
 
 export JMETER_HOME=~/devtools/jmeter/current
 
@@ -176,14 +178,11 @@ if $darwin ; then
     #export PATH=$SVN_HOME/bin:$PATH
 fi
 
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-
 # Setting the path for MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+#export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 # fink config...
-test -r /sw/bin/init.sh && . /sw/bin/init.sh
+#test -r /sw/bin/init.sh && . /sw/bin/init.sh
 
 export PATH=\
 .:\
@@ -192,13 +191,17 @@ $ANT_HOME/bin:\
 $EMACS_HOME/bin:\
 $GRAILS_HOME/bin:\
 $GROOVY_HOME/bin:\
-$JAVA_HOME/bin:\
 $JMETER_HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 $MYSQL_HOME/bin:\
 ~/devtools/git/scripts/ddollar-git-utils:\
 $LILYPOND_HOME/Contents/Resources/bin:\
+/Applications/Xcode.app/Contents/Developer/usr/bin:\
+/usr/local/bin:\
+/usr/local/sbin:\
+/opt/local/bin:\
+/opt/local/sbin:\
 $PATH
 
 # Note: CATALINA_HOME and TOMCAT_HOME will cause local standalone jira scripts to fail!

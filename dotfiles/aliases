@@ -138,6 +138,8 @@ alias ggj="findjava | quotespaces | xargs grep"
 alias gjimport="gj import | awk '{print \$2}' | sort | uniq"
 alias ggjimport="ggj import | awk '{print \$2}' | sort | uniq"
 
+alias ggjsp="findjsp | xargs grep"
+
 alias findpom="find . -name pom.xml -print"
 alias ggpom="findpom | xargs grep"
 
@@ -206,10 +208,10 @@ function tomcat-undeploy() {
     echo "NOT IMPLEMENTED"
 }
 
-alias jboss-start='${JBOSS_HOME}/bin/run.sh'
-alias jboss-stop='${JBOSS_HOME}/bin/shutdown.sh -S'
+alias jboss-start='${JBOSS_HOME}/bin/standalone.sh'
+alias jboss-stop='${JBOSS_HOME}/bin/jboss-cli.sh --connect command=:shutdown'
 alias jboss-clean='rm -rf ${JBOSS_HOME}/server/default/tmp/deploy ${JBOSS_HOME}/server/default/work/jboss.web  ${JBOSS_HOME}/server/default/log/*'
-alias jboss-log='tail -3000lf ${JBOSS_HOME}/server/default/log/server.log'
+alias jboss-log='tail -3000lf ${JBOSS_HOME}/standalone/log/server.log'
 alias jboss-roll='jboss-start ; bg ; jboss-stop'
 
 alias winternet='telnet winternet.com'
@@ -313,7 +315,8 @@ function ggg-nt() { # just like ggg, but filters out classes test classes
         | grep -v \/test\/functional\/ \
         | grep -v \/test\/slow\/ \
         | grep -v \/grails-app\/fitnesse\/ \
-        | grep -v \/target\/plugins\/
+        | grep -v \/target\/plugins\/ \
+        | grep -v \/target\/work\/plugins\/
 }
 
 function split-tests() {
