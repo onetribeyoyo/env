@@ -151,6 +151,8 @@ export MYSQL_HOME=/usr/local/mysql
 
 export MONGO_HOME=~/devtools/mongo/current
 
+export POSTGRESQL_HOME=~/devtools/postgresql/Postgres.app/Contents/MacOS
+
 export CATALINA_HOME=~/devtools/tomcat/current
 export TOMCAT_HOME=$CATALINA_HOME
 
@@ -195,6 +197,7 @@ $JMETER_HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 $MYSQL_HOME/bin:\
+$POSTGRESQL_HOME/bin:\
 ~/devtools/git/scripts/ddollar-git-utils:\
 $LILYPOND_HOME/Contents/Resources/bin:\
 /Applications/Xcode.app/Contents/Developer/usr/bin:\
