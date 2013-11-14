@@ -132,6 +132,7 @@
  '(ps-top-margin 25)
  '(ps-zebra-stripe-height 3)
  '(ps-zebra-stripes t)
+ '(search-whitespace-regexp nil) ;; I don't like the lax/fuzzy matching!
  '(show-paren-mode t nil (paren))
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(truncate-partial-width-windows nil)
@@ -163,8 +164,8 @@
 ;;; Buffer and frame setup, etc...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(menu-bar-mode 0)
-(tool-bar-mode 0)
+;;(menu-bar-mode -1) ;; leave the menu bar visible
+(tool-bar-mode -1) ;; hide the tool bar
 
 ;;(standard-display-european t)         ; Allow extended character set
 (setq frame-title-format
