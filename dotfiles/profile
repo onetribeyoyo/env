@@ -125,8 +125,6 @@ export GRAILS_HOME=~/devtools/grails/current
 
 export GROOVY_HOME=~/devtools/groovy/current
 
-
-
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
 export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 
@@ -159,6 +157,8 @@ alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
 export LILYPOND_HOME=/Applications/LilyPond.app
 alias ly=lilypond
+
+export BAMBOO_HOME=~/devtools/bamboo/installed
 
 if $darwin ; then
     # emacs...
@@ -197,11 +197,8 @@ $MONGO_HOME/bin:\
 $MYSQL_HOME/bin:\
 ~/devtools/git/scripts/ddollar-git-utils:\
 $LILYPOND_HOME/Contents/Resources/bin:\
-/Applications/Xcode.app/Contents/Developer/usr/bin:\
 /usr/local/bin:\
-/usr/local/sbin:\
-/opt/local/bin:\
-/opt/local/sbin:\
+/Applications/Xcode.app/Contents/Developer/usr/bin:\
 $PATH
 
 # Note: CATALINA_HOME and TOMCAT_HOME will cause local standalone jira scripts to fail!

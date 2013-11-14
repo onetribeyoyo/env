@@ -214,6 +214,9 @@ alias jboss-clean='rm -rf ${JBOSS_HOME}/server/default/tmp/deploy ${JBOSS_HOME}/
 alias jboss-log='tail -3000lf ${JBOSS_HOME}/standalone/log/server.log'
 alias jboss-roll='jboss-start ; bg ; jboss-stop'
 
+alias bamboo-start='${BAMBOO_HOME}/bamboo.sh start'
+alias bamboo-stop='${BAMBOO_HOME}/bamboo.sh stop'
+
 alias winternet='telnet winternet.com'
 alias devserver='ssh 192.168.162.5 -l amiller'
 
@@ -584,3 +587,5 @@ function lf() {
 alias ic="hg incoming -v -S | lf"
 alias og="hg outgoing -v -S | lf"
 alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
+
+alias truecrypt="open -a TrueCrypt.app"
