@@ -87,7 +87,8 @@ useComponentVersion()
     else
         echo "ERROR: missing directory for $@"
         echo "ERROR: available version are..."
-        find . -name $COMPONENT-\* -depth 1
+        sedcmd="s/.\/$COMPONENT-//g"
+        find . -name $COMPONENT-\* -depth 1 | sed $sedcmd
 
         if [ -h $LINK_NAME ]; then
             CURRENT=`ls -l $LINK_NAME | awk '{ print $11 }'`
