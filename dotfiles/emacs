@@ -204,12 +204,17 @@
 
 (global-set-key "p" 'reposition-window)
 
-
 (global-set-key "4" 'quarter-window-split)
 (defun quarter-window-split ()
   (interactive)
   (split-window-vertically -18)
   )
+
+(defun just-one-space-with-newline ()
+  "Call just-one-space with a negative argument"
+  (interactive)
+  (just-one-space -1))
+(global-set-key (kbd "M-1")     'just-one-space-with-newline)
 
 
 ;; file encoding conversion
@@ -443,7 +448,7 @@
         html-helper-address-string      "<a href=\"http://www.objectpartners.com/\">Andrew R. Miller &lt;amiller@objectpartners.com&gt;</a>"
         indent-tabs-mode              nil ; Use spaces instead of tabs.
         )
-  (setq tab-width 2)
+  (setq tab-width 4)
   (setq fill-column 120)
   ;;(load "amiller-html-helper-mode-ext")
   ;;(define-key html-helper-mode-map "\^c?" 'tempo-complete-tag)
