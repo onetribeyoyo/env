@@ -109,7 +109,7 @@ elif $darwin ; then
     alias fe='fedit'
     alias browse='open -a Firefox'
     alias ff='open -a Firefox'
-    alias gk='open -a GraphicConverter-6'
+    alias gk='open -a GraphicConverter'
 fi
 
 #
@@ -214,8 +214,8 @@ alias jboss-clean='rm -rf ${JBOSS_HOME}/server/default/tmp/deploy ${JBOSS_HOME}/
 alias jboss-log='tail -3000lf ${JBOSS_HOME}/standalone/log/server.log'
 alias jboss-roll='jboss-start ; bg ; jboss-stop'
 
-alias bamboo-start='${BAMBOO_HOME}/bamboo.sh start'
-alias bamboo-stop='${BAMBOO_HOME}/bamboo.sh stop'
+alias bamboo-start='${BAMBOO_HOME}/bin/start-bamboo.sh'
+alias bamboo-stop='${BAMBOO_HOME}/bin/stop-bamboo.sh'
 
 alias winternet='telnet winternet.com'
 alias devserver='ssh 192.168.162.5 -l amiller'
@@ -224,7 +224,8 @@ alias devserver='ssh 192.168.162.5 -l amiller'
 #
 # grails development...
 #
-alias g="grails"
+alias g="grailsw"
+alias gw="grailsw"
 function g+() {
     for target in "$@" ; do
         echo
@@ -257,16 +258,16 @@ function g+() {
 #    $GRAILS_HOME/bin/$GRAILS_CMD $*
 #}
 
-alias gra="grails run-app"
-alias gca="grails clean"
+alias gra="g run-app"
+alias gca="g clean"
 
-alias gra-utc="grails -Duser.timezone=UTC run-app"
-alias gra-prod="grails -Duser.timezone=UTC prod run-app"
+alias gra-utc="g -Duser.timezone=UTC run-app"
+alias gra-prod="g -Duser.timezone=UTC prod run-app"
 
 # and don't forget about the bin/gba (browse app) script
 
-alias gta="grails test-app"
-alias gta-utc="grails -Duser.timezone=UTC test-app"
+alias gta="g test-app"
+alias gta-utc="g -Duser.timezone=UTC test-app"
 alias gtf="gta-utc fitnesse:"
 alias gti="gta-utc integration:"
 alias gtu="gta-utc unit:"
@@ -285,23 +286,23 @@ alias GCN="g+ clean package ; gcn"
 alias GRA-UTC="g+ clean package ; gra-utc"
 alias GTA-UTC="g+ clean package ; gta-utc"
 
-alias GQA="grails clean ; grails package ; grails -Dgrails.env=qa war"
+alias GQA="g clean ; grails package ; grails -Dgrails.env=qa war"
 
 alias gtr='open target/test-reports/html/index.html'
 
-alias gs="grails -Dgrails.env=server"
-alias gprimed="grails -Dgrails.env=primeForDesktop"
-alias gprimem="grails -Dgrails.env=primeForMySql"
+alias gs="g -Dgrails.env=server"
+alias gprimed="g -Dgrails.env=primeForDesktop"
+alias gprimem="g -Dgrails.env=primeForMySql"
 
-alias gdeploy="grails maven-deploy --repository=pluginSnapshots"
-alias ginstall="grails maven-install"
-alias guninstall="grails maven-uninstall"
+alias gdeploy="g maven-deploy --repository=pluginSnapshots"
+alias ginstall="g maven-install"
+alias guninstall="g maven-uninstall"
 
-alias gcn="grails codenarc"
-alias gdr="grails dependency-report"
-alias gmetrics="grails gmetrics"
-alias gcoverage="grails test-app -coverage"
-alias greports="time ( g clean && g compile && gcoverage && gdr && gmetrics && gcn )"
+alias gcn="g codenarc"
+alias gdr="g dependency-report"
+alias gmetrics="g gmetrics"
+alias gcoverage="g test-app -coverage"
+alias greports="time ( g clean && g compile && gcoverage && gmetrics && gcn )"
 
 alias gg="find . -maxdepth 1 -name \*.goovy -print | xargs grep"
 alias findg="find . -name \*.groovy -print"
@@ -562,21 +563,14 @@ fi
 alias jenkins-start="sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist"
 alias jenkins-stop="sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist"
 
-# will prompt you for sudo password
-alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
-
-# will prompt you for sudo password and then root mysql password (by default it"s blank)
-alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
-
+alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.plist"
+alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql.plist"
 alias mysql-bounce="mysql-stop ; mysql-start"
-
 
 alias rabbit-start="( sudo rabbitmq-server )"
 alias rabbit-stop="rabbitmqctl stop"
 
-
 alias st='open -a SourceTree.app'
-
 
 # hg aliases (originally borrowed from Ted Naleid)...
 alias hs="hg status"
