@@ -5,25 +5,22 @@
 alias doit="use grails 1.2.0 ; cd ~/dev/doit"
 alias mtm="cd ~/github/onetribeyoyo/mtm/src ; . ./init.sh"
 alias music="cd ~/stacks_rec/music"
-
-alias buyer="cd ~/opi/clients/dealcurious/buyer-curious ; . ./init.sh"
-
-alias bloom="cd ~/opi/clients/bloom ; . ./init-bloom.sh"
-
-alias bloomhealth="cd ~/opi/clients/bloom  ; . ./init-bloomhealth.sh"
-alias bhbo="cd ~/opi/clients/bloom         ; . ./init-bhbo.sh"
-alias bloom-domain="cd ~/opi/clients/bloom ; . ./init-bloom-domain.sh"
-alias bloom-common="cd ~/opi/clients/bloom ; . ./init-bloom-common.sh"
-
-alias cap="cd ~/opi/clients/cap ; . ./init.sh"
-
-alias drc="cd ~/opi/clients/drc ; . ./init.sh"
-
 alias grailstraining="cd ~/opi/grailsclass/cvsdude/grailstraining/bufferoverflow ; . ./init.sh"
 
-alias target="cd ~/opi/clients/target/tgtrad/backtoschool ; . ./init.sh"
+alias bhbo="cd ~/opi/clients/bloom         ; . ./init-bhbo.sh"
+alias bloom-common="cd ~/opi/clients/bloom ; . ./init-bloom-common.sh"
+alias bloom-domain="cd ~/opi/clients/bloom ; . ./init-bloom-domain.sh"
+alias bloom="cd ~/opi/clients/bloom ; . ./init-bloom.sh"
+alias bloomhealth="cd ~/opi/clients/bloom  ; . ./init-bloomhealth.sh"
+alias buyer="cd ~/opi/clients/dealcurious/buyer-curious ; . ./init.sh"
+alias cap="cd ~/opi/clients/cap ; . ./init.sh"
+alias drc="cd ~/opi/clients/drc ; . ./init.sh"
+alias lemhi="cd ~/opi/clients/lemhi"
+alias mei="cd ~/opi/clients/mei ; . ./init.sh"
+alias target="cd ~/opi/clients/target-corp/tgtrad/backtoschool ; . ./init.sh"
 
 # default project, new shells start with this environment...
 #bloomhealth
 #buyer
 #drc
+#mei

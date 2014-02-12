@@ -21,8 +21,9 @@ export EMAIL_USER=andy.miller
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 function parse_vc_branch() {
+    svn info   2> /dev/null | grep Relative\ URL | awk '{ print $3 }' | awk -F/ '{ printf "(svn:%s/%s) ", $2, $3 }'
     git branch 2> /dev/null | grep \* | awk '{ printf "(git:%s) ", $2 }'
-    hg branch 2> /dev/null | awk '{ printf "(hg:%s) ", $1 }'
+    hg branch  2> /dev/null | awk '{ printf "(hg:%s) ", $1 }'
 }
 function prompt() {
     local NO_COLOUR="\[\033[0m\]"
@@ -149,16 +150,17 @@ export MYSQL_HOME=/usr/local/mysql
 
 export MONGO_HOME=~/devtools/mongo/current
 
-export CATALINA_HOME=~/devtools/tomcat/current
-export TOMCAT_HOME=$CATALINA_HOME
-
 export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
 alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
 export LILYPOND_HOME=/Applications/LilyPond.app
 alias ly=lilypond
 
-export BAMBOO_HOME=~/devtools/bamboo/installed
+export CATALINA_HOME=~/devtools/tomcat/current
+export TOMCAT_HOME=$CATALINA_HOME
+
+# Note: bamboo uses it's own tomcat installation; in order to get it to work we've got to leave CATALINA_HOME undefined.
+#export BAMBOO_HOME=~/devtools/bamboo/current
 
 if $darwin ; then
     # emacs...

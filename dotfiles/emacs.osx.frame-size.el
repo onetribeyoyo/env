@@ -61,7 +61,7 @@
   (setq amiller-frame-top           0 ;; pixels
         amiller-frame-left       1000 ;; pixels
         amiller-frame-width       132 ;; characters
-        amiller-frame-height       79 ;; rows
+        amiller-frame-height       76 ;; rows
         amiller-ecb-frame-left    347 ;; pixels
         amiller-ecb-browser-width  45 ;; characters
         amiller-ecb-frame-width   219 ;; ???
