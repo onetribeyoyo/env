@@ -141,7 +141,7 @@
 (require 'paren-glint)
 (paren-glint-mode 1)
 
-;; '(jde-checkstyle-style "~/etc/checkstyle.xml")
+;;'(jde-checkstyle-style "~/etc/checkstyle.xml")
 ;;'(jde-checkstyle-style "/app/devAPM-r20/util/checkstyle/conf/checkstyle.xml")
 
 ;; '(jde-debugger (quote ("JDEbug")))
@@ -297,13 +297,9 @@
   (vvb-mode -1))
 
 ;;(setq-default vvb-mode 1)
-(add-hook 'html-helper-mode-hook   'turn-on-vvb-mode)
 (add-hook 'emacs-lisp-mode-hook    'turn-on-vvb-mode)
 (add-hook 'jde-mode-hook           'turn-on-vvb-mode)
-(add-hook 'sgml-mode-hook          'turn-on-vvb-mode)
-(add-hook 'sql-mode-hook           'turn-on-vvb-mode)
 ;;(add-hook 'text-mode-hook          'turn-on-vvb-mode)
-(add-hook 'xml-mode-hook           'turn-on-vvb-mode)
 (add-hook 'shell-script-mode-hook  'turn-on-vvb-mode)
 
 
@@ -358,7 +354,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.rrp" . perl-mode))
 (add-to-list 'auto-mode-alist '("\\.shlib" . shell-script-mode))
-(add-to-list 'auto-mode-alist '("\\.ddl" . sql-mode))
 
 ;;(require 'vc-hooks)
 (require 'vc-hg)
@@ -432,38 +427,13 @@
 (setq default-major-mode 'text-mode)    ; default to text mode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; HTML mode
-(autoload 'html-helper-mode "html-helper-mode" "HTML Helper Mode" t)
-
-(add-to-list 'auto-mode-alist '("\\.html" . html-helper-mode))
-(add-to-list 'auto-mode-alist '("\\.htm" . html-helper-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp"  . html-helper-mode))
-(add-to-list 'auto-mode-alist '("\\.gsp"  . html-helper-mode))
-
-(defun amiller-html-mode-hook ()
-  (setq html-helper-use-expert-menu     t
-        ;;html-helper-dtd-version         "<!DOCTYPE html public \"-//W3C//DTD HTML 4.0 Transistional//EN\">\n"
-        html-helper-do-write-file-hooks t
-        html-helper-build-new-buffer    t
-        html-helper-address-string      "<a href=\"http://www.objectpartners.com/\">Andrew R. Miller &lt;amiller@objectpartners.com&gt;</a>"
-        indent-tabs-mode              nil ; Use spaces instead of tabs.
-        )
-  (setq tab-width 4)
-  (setq fill-column 120)
-  ;;(load "amiller-html-helper-mode-ext")
-  ;;(define-key html-helper-mode-map "\^c?" 'tempo-complete-tag)
-  (turn-on-auto-fill)
-  )
-(add-hook 'html-helper-mode-hook 'amiller-html-mode-hook)
-(add-hook 'html-helper-mode-hook 'turn-on-vvb-mode)
-;;(add-hook 'html-helper-mode-hook '(lambda () (font-lock-mode 1)))
-
 ;; CSS mode
 (add-to-list 'auto-mode-alist '("\\.css" . css-mode))
 (autoload 'css-mode "css-mode" nil t)
 
 
 ;; SQL mode
+(add-to-list 'auto-mode-alist '("\\.ddl" . sql-mode))
 (defun amiller-sql-mode-hook ()
   (setq tab-width 2)
   )
@@ -491,37 +461,20 @@
 ;;; SGML and XML
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-;;(require 'xae)
+;; nXml mode
+(add-to-list 'auto-mode-alist '("\\.jsp"  . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.gsp"  . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.html" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.htm"  . nxml-mode))
 
-;(autoload 'sgml-mode "psgml" "Major mode to edit SGML files." t)
-;(autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
-;(add-to-list 'auto-mode-alist '("\\.dtd" . sgml-mode))
-;(add-to-list 'auto-mode-alist '("\\.xml" . xml-mode))
-
-(defun amiller-psgml-mode-hook ()
-  (setq indent-tabs-mode   nil          ; Use spaces instead of tabs.
-        tab-width          4            ; I prefer 3 spaces for xml
-
-        sgml-set-face      t
-        sgml-markup-faces  '((start-tag . font-lock-function-name-face)
-                             (end-tag . font-lock-function-name-face)
-                             (comment . font-lock-comment-face)
-                             (pi . font-lock-type-face)
-                             (sgml . font-lock-type-face)
-                             (doctype . font-lock-keyword-face)
-                             (entity . font-lock-string-face)
-                             (shortref . font-lock-string-face)
-                             (ignored . font-lock-constant-face)
-                             (ms-start . font-lock-constant-face)
-                             (ms-end . font-lock-constant-face))
-
-        sgml-auto-activate-dtd  t
+(defun amiller-nxml-mode-hook ()
+  (setq nxml-child-indent   4
+        fill-column       120
         )
-  ;;(turn-on-auto-fill)
+  (turn-on-auto-fill)
   )
-(add-hook 'sgml-mode-hook 'amiller-psgml-mode-hook)
-(add-hook 'xml-mode-hook 'amiller-psgml-mode-hook)
-(add-hook 'xae-mode-hook 'turn-on-vvb-mode)
+(add-hook 'nxml-mode-hook 'amiller-nxml-mode-hook)
+(add-hook 'nxml-mode-hook 'turn-on-vvb-mode)
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -695,6 +648,7 @@
 (add-hook 'groovy-mode-hook       'hideshowvis-enable)
 (add-hook 'text-mode-hook         'hideshowvis-enable)
 (add-hook 'xml-mode-hook          'hideshowvis-enable)
+(add-hook 'nxml-mode-hook         'hideshowvis-enable)
 
 (setq hideshowvis-fancy-decorations-enable t)
 (cond (hideshowvis-fancy-decorations-enable
