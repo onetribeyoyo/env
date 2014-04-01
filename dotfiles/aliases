@@ -301,7 +301,7 @@ alias guninstall="g maven-uninstall"
 alias gcn="g codenarc"
 alias gdr="g dependency-report"
 alias gmetrics="g gmetrics"
-alias gcoverage="g test-app -coverage"
+alias gcoverage="( rm cobertura.ser ; g test-app -coverage )"
 alias greports="time ( g clean && g compile && gcoverage && gmetrics && gcn )"
 
 alias gg="find . -maxdepth 1 -name \*.goovy -print | xargs grep"
