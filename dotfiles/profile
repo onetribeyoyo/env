@@ -122,8 +122,8 @@ export ANT_HOME=~/devtools/ant/current
 export ANT_OPTS=-Xmx128m
 #export ANT_OPTS=-Xmx256m
 
+export GRADLE_HOME=~/devtools/gradle/current
 export GRAILS_HOME=~/devtools/grails/current
-
 export GROOVY_HOME=~/devtools/groovy/current
 
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
@@ -150,8 +150,12 @@ export MYSQL_HOME=/usr/local/mysql
 
 export MONGO_HOME=~/devtools/mongo/current
 
+export RABBITMQ_HOME=~/devtools/rabbitmq/current
+
 export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
 alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
+
+export SMARTSYNC_HOME=~/devtools/smartsync/current
 
 export LILYPOND_HOME=/Applications/LilyPond.app
 alias ly=lilypond
@@ -185,12 +189,14 @@ export PATH=\
 $HOME/bin:\
 $ANT_HOME/bin:\
 $EMACS_HOME/bin:\
+$GRADLE_HOME/bin:\
 $GRAILS_HOME/bin:\
 $GROOVY_HOME/bin:\
 $JMETER_HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 $MYSQL_HOME/bin:\
+$RABBITMQ_HOME/sbin:\
 ~/devtools/git/scripts/ddollar-git-utils:\
 $LILYPOND_HOME/Contents/Resources/bin:\
 /usr/local/bin:\
@@ -264,3 +270,6 @@ export GREP_OPTIONS='--color=auto'
 #use
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/amiller/.gvm/bin/gvm-init.sh" ]] && source "/Users/amiller/.gvm/bin/gvm-init.sh"

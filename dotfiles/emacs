@@ -69,23 +69,13 @@
  '(ecb-kill-buffer-clears-history (quote auto))
  '(ecb-layout-name "amiller-left-analysis")
  '(ecb-layout-window-sizes nil)
+ '(ecb-non-semantic-exclude-modes (quote (sh-mode fundamental-mode text-mode nxml-mode)))
  '(ecb-options-version "2.40")
  '(ecb-run-ediff-in-ecb-frame t)
  '(ecb-show-sources-in-directories-buffer (quote always))
  '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|png\\|gif\\|DS_Store\\|jpg\\|psp\\|Icon
 \\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\|ruler\\|aliases\\|profile\\|inputrc\\|Xdefaults\\|classpath\\|project\\|.*\\.el\\)$")))))
- '(ecb-source-path
-   (quote
-    (
-     ("~/opi/clients/" "opi/clients")
-     ("~/dev/opi/" "~/dev/opi")
-     ("~/github/onetribeyoyo/mtm/" "~/github/onetribeyoyo/mtm")
-     ("~/dev/scratch/" "~/dev/scratch")
-     ("~/dev/" "~/dev")
-     ("~" "~")
-     )
-    )
-   )
+ '(ecb-source-path (quote (("~/opi/clients/" "opi/clients") ("~/github/onetribeyoyo/mtm/" "~/github/onetribeyoyo/mtm") ("~/github/onetribeyoyo/" "~/github/onetribeyoyo/") ("~/dev/scratch/" "~/dev/scratch") ("~/dev/" "~/dev") ("~" "~"))))
  '(ecb-tip-of-the-day nil)
  '(ecb-tree-buffer-style (quote ascii-no-guides))
  '(ecb-tree-indent 2)
@@ -109,9 +99,7 @@
  '(jde-debugger (quote ("JDEbug")))
  '(jde-jdk (quote ("1.6.0")))
  '(jde-jdk-doc-url "/app/jdk-1.5.0_09/docs")
- '(jde-jdk-registry (quote (("1.5.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0")
-                            ("1.4.2" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2")
-                            ("1.6.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0"))))
+ '(jde-jdk-registry (quote (("1.5.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0") ("1.4.2" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2") ("1.6.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0"))))
  '(jde-project-context-switching-enabled-p t)
  '(paren-glint-timeout 10)
  '(paren-match-face (quote paren-face-match-light))
@@ -132,6 +120,7 @@
  '(ps-top-margin 25)
  '(ps-zebra-stripe-height 3)
  '(ps-zebra-stripes t)
+ '(safe-local-variable-values (quote ((nxml-child-indent . 2))))
  '(search-whitespace-regexp nil) ;; I don't like the lax/fuzzy matching!
  '(show-paren-mode t nil (paren))
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
@@ -349,8 +338,8 @@
 ;;; Modes...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-(autoload 'csv-mode "csv-mode" "Major mode for editing comma-separated value files." t)
+;;(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+;;(autoload 'csv-mode "csv-mode" "Major mode for editing comma-separated value files." t)
 
 (add-to-list 'auto-mode-alist '("\\.rrp" . perl-mode))
 (add-to-list 'auto-mode-alist '("\\.shlib" . shell-script-mode))
@@ -468,7 +457,7 @@
 (add-to-list 'auto-mode-alist '("\\.htm"  . nxml-mode))
 
 (defun amiller-nxml-mode-hook ()
-  (setq nxml-child-indent   4
+  (setq nxml-child-indent   2
         fill-column       120
         )
   (turn-on-auto-fill)
@@ -485,7 +474,8 @@
 ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy"))
 ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/wolfmanjm-grails-mode-eee23a6"))
 
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/groovy-mode-by-russel-winder"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/groovy-mode-by-russel-winder"))
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/emacs-groovy-mode_201311291207"))
 
 ;; make Groovy mode electric by default.
 ;;(add-hook 'groovy-mode-hook '(lambda () (require 'groovy-electric) (groovy-electric-mode)) )
@@ -494,6 +484,14 @@
 (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+
+;;; make Groovy mode electric by default.
+;;(add-hook 'groovy-mode-hook
+;;          '(lambda ()
+;;             (require 'groovy-electric)
+;;             (groovy-electric-mode)
+;;               )
+;;)
 
 (defun amiller-groovy-mode-hook ()
   (setq indent-tabs-mode nil          ; Use spaces instead of tabs.
@@ -709,8 +707,10 @@
 ;;; markdown...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
+;;(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-

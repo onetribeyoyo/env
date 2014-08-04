@@ -301,27 +301,32 @@ alias guninstall="g maven-uninstall"
 alias gcn="g codenarc"
 alias gdr="g dependency-report"
 alias gmetrics="g gmetrics"
-alias gcoverage="( rm cobertura.ser ; g test-app -coverage )"
+alias gcoverage="( rm -fv cobertura.ser ; g test-app -coverage )"
 alias greports="time ( g clean && g compile && gcoverage && gmetrics && gcn )"
 
 alias gg="find . -maxdepth 1 -name \*.goovy -print | xargs grep"
 alias findg="find . -name \*.groovy -print"
-alias ggg="findg | xargs grep"
 
-alias findgsp="find . -name \*.gsp -print"
-alias ggsp="find . -maxdepth -name \*.gsp | xargs grep"
-alias gggsp="findgsp | xargs grep"
-
-function ggg-nt() { # just like ggg, but filters out classes test classes
+function ggg() {
+    findg | xargs grep $@ \
+        | grep -v \/target\/plugins\/ \
+        | grep -v \/target\/work\/plugins\/
+}
+alias ggg-all="findg | xargs grep" # like ggg, but does not filter out target dir.
+function ggg-nt() { # like ggg, but filters out test classes
     ggg $@ \
         | grep -v \/test\/unit\/ \
         | grep -v \/test\/integration\/ \
         | grep -v \/test\/functional\/ \
         | grep -v \/test\/slow\/ \
-        | grep -v \/grails-app\/fitnesse\/ \
-        | grep -v \/target\/plugins\/ \
-        | grep -v \/target\/work\/plugins\/
+        | grep -v \/grails-app\/fitnesse\/
+        #| grep -v \/target\/plugins\/ \
+        #| grep -v \/target\/work\/plugins\/
 }
+
+alias findgsp="find . -name \*.gsp -print"
+alias ggsp="find . -maxdepth -name \*.gsp | xargs grep"
+alias gggsp="findgsp | xargs grep"
 
 function split-tests() {
     #cd $BLOOMHEALTH_DEV
@@ -567,7 +572,7 @@ alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql
 alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql.plist"
 alias mysql-bounce="mysql-stop ; mysql-start"
 
-alias rabbit-start="( sudo rabbitmq-server )"
+alias rabbit-start="rabbitmq-server"
 alias rabbit-stop="rabbitmqctl stop"
 
 alias st='open -a SourceTree.app'
@@ -583,3 +588,6 @@ alias og="hg outgoing -v -S | lf"
 alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 
 alias truecrypt="open -a TrueCrypt.app"
+
+
+alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"

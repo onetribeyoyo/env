@@ -6,7 +6,13 @@ DB_USER=$3
 DB_PASSWORD=$4
 
 echo "Dropping and recreating $DB_SCHEMA with user $DB_USER"
-mysql -u $DB_USER -p$DB_PASSWORD -h $DB_HOST << EOF
+if [ -z "$DB_PASSWORD" ] ; then
+    echo "no password"
+else
+    DB_PASSWORD=-p$DB_PASSWORD
+fi
+
+mysql -u $DB_USER $DB_PASSWORD -h $DB_HOST << EOF
 drop database if exists $DB_SCHEMA;
 create database $DB_SCHEMA;
 EOF
