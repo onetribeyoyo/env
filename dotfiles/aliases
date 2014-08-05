@@ -224,8 +224,13 @@ alias devserver='ssh 192.168.162.5 -l amiller'
 #
 # grails development...
 #
-alias g="grailsw"
-alias gw="grailsw"
+function g() {
+    if [ -e "./grailsw" ] ; then
+        ./grailsw $@
+    else
+        grails $@
+    fi
+}
 function g+() {
     for target in "$@" ; do
         echo
