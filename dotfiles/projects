@@ -19,7 +19,8 @@ alias lemhi="cd ~/opi/clients/lemhi"
 alias mei="cd ~/opi/clients/mei ; . ./init.sh"
 alias target="cd ~/opi/clients/target-corp/tgtrad/backtoschool ; . ./init.sh"
 
-alias taulia="cd ~/opi/clients/taulia ; . ./init.sh"
+#alias taulia="cd ~/opi/clients/taulia ; . ./init.sh"
+alias taulia=". ~/opi/clients/taulia/init.sh"
 
 # default project, new shells start with this environment...
 #bloomhealth
