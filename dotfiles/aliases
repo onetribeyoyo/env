@@ -222,46 +222,17 @@ alias devserver='ssh 192.168.162.5 -l amiller'
 
 
 #
-# grails development...
+# gr* development...
 #
 function g() {
     if [ -e "./grailsw" ] ; then
         ./grailsw $@
-    else
+    elif [ -d "./grails-app" ] ; then
         grails $@
+    elif [ -e "./build.gradle" ] ; then
+        gradle $@
     fi
 }
-function g+() {
-    for target in "$@" ; do
-        echo
-        echo
-        echo "grails $target"
-        grails $target
-    done
-}
-
-# from http://naleid.com/blog/2011/09/26/smart-bash-zsh-aliases-to-run-appropriate-grails-version/
-#alias grails="execute_grails_version grails"
-#alias grails-debug="execute_grails_version grails-debug"
-#function execute_grails_version() {
-#    GRAILS_CMD=$1
-#    shift
-#    if [ -f application.properties ]; then
-#        export GRAILS_VERSION=`grep app.grails.version application.properties | sed -E 's/.*=(.*)/\1/'`
-#        export GRAILS_HOME="/usr/local/grails-$GRAILS_VERSION"
-#        echo "application.properties found, using \$GRAILS_HOME of $GRAILS_HOME"
-#    else
-#        echo "application.properties NOT found, leaving \$GRAILS_HOME as $GRAILS_HOME"
-#    fi
-#
-#    if [ ! -d $GRAILS_HOME ]; then
-#        echo "ERROR: Unable to find \$GRAILS_HOME directory at $GRAILS_HOME"
-#        exit 1
-#    fi
-#
-#    echo $GRAILS_HOME/bin/$GRAILS_CMD $*
-#    $GRAILS_HOME/bin/$GRAILS_CMD $*
-#}
 
 alias gra="g run-app"
 alias gca="g clean"
@@ -424,6 +395,24 @@ function split-progress() {
 #
 # for looking into and purging the maven, ivy, and grails repos...
 #
+
+# makes tarballs of cache dirs so they can be recovered later
+function cache-caches() {
+    cacheDir=~/cached-caches
+    timestamp=`date '+%Y.%m.%d_%I.%M.%S'`
+
+    mkdir -p $cacheDir/dot-grails
+    ( cd ~/.grails ; tar cvfz $cacheDir/dot-grails/ivy-cache_$timestamp.tar.gz ./ivy-cache )
+
+    mkdir -p $cacheDir/dot-ivy2
+    ( cd ~/.ivy2 ; tar cvfz $cacheDir/dot-ivy2/cache_$timestamp.tar.gz ./cache )
+
+    mkdir -p $cacheDir/dot-m2
+    ( cd ~/.m2 ; tar cvfz $cacheDir/dot-m2/repository_$timestamp.tar.gz ./repository )
+}
+
+
+
 function inspect-grails-cache() {
     ( cd ~ ; find .grails/ivy-cache -type d | grep -i $1 )
 }
@@ -596,3 +585,9 @@ alias truecrypt="open -a TrueCrypt.app"
 
 
 alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
+
+# touch and edit a new file with emacs
+function temacs() {
+    touch $@
+    emacs $@
+}
