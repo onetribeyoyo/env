@@ -12,18 +12,21 @@ alias bloom-common="cd ~/opi/clients/bloom ; . ./init-bloom-common.sh"
 alias bloom-domain="cd ~/opi/clients/bloom ; . ./init-bloom-domain.sh"
 alias bloom="cd ~/opi/clients/bloom ; . ./init-bloom.sh"
 alias bloomhealth="cd ~/opi/clients/bloom  ; . ./init-bloomhealth.sh"
+
+alias bi="cd ~/opi/clients/bi ; . ./init.sh"
 alias buyer="cd ~/opi/clients/dealcurious/buyer-curious ; . ./init.sh"
 alias cap="cd ~/opi/clients/cap ; . ./init.sh"
 alias drc="cd ~/opi/clients/drc ; . ./init.sh"
+alias first-step="cd ~/opi/clients/first-step ; . ./init.sh"
 alias lemhi="cd ~/opi/clients/lemhi"
 alias mei="cd ~/opi/clients/mei ; . ./init.sh"
+
+alias nder="cd ~/opi/clients/nderground ; . ./init.sh"
+
 alias target="cd ~/opi/clients/target-corp/tgtrad/backtoschool ; . ./init.sh"
 
 #alias taulia="cd ~/opi/clients/taulia ; . ./init.sh"
 alias taulia=". ~/opi/clients/taulia/init.sh"
 
-# default project, new shells start with this environment...
-#bloomhealth
-#buyer
-#drc
-#mei
+alias tfly="cd ~/opi/clients/ticketfly ; . ./init.sh"
+. ~/opi/clients/ticketfly/init.sh

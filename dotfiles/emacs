@@ -349,6 +349,12 @@
   )
 (global-set-key (kbd "M-_") 'un-camelcase-word-at-point)
 
+(defun simplify-characters-in-buffer ()
+  "swaps extended characters for lower ascii alternatives."
+  (interactive)
+  ;; do replacements across the entire buffer of...
+  ;; @see char-list.el
+  )
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; Modes...
@@ -454,12 +460,15 @@
 (add-to-list 'auto-mode-alist '("\\.cob" . cobol-mode))
 (add-to-list 'auto-mode-alist '("\\.cob0l" . cobol-mode))
 
-
 ;; PowerBuilder mode
 (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/powerbuilder-mode"))
 (require 'powerbuilder-mode)
 (add-to-list 'auto-mode-alist '("\\.pbl" . powerbuilder-mode))
 
+;; YAML mode
+(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/yaml-mode"))
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-

@@ -110,6 +110,7 @@ elif $darwin ; then
     alias browse='open -a Firefox'
     alias ff='open -a Firefox'
     alias gk='open -a GraphicConverter'
+    alias sgit='open -a SmartGit'
 fi
 
 #
@@ -117,7 +118,7 @@ fi
 #
 
 alias gf="find . -maxdepth 1 -type f | grep"
-alias ggf="find . -type f ! -name \*class | grep"
+alias ggf="find . -type f ! -name \*class ! -name \*~ | grep"
 function ggfe() {
     ggf $@ | fe
 }
@@ -217,6 +218,8 @@ alias jboss-roll='jboss-start ; bg ; jboss-stop'
 alias bamboo-start='${BAMBOO_HOME}/bin/start-bamboo.sh'
 alias bamboo-stop='${BAMBOO_HOME}/bin/stop-bamboo.sh'
 
+alias artifactory-start='${ARTIFACTORY_HOME}/bin/artifactory.sh'
+
 alias winternet='telnet winternet.com'
 alias devserver='ssh 192.168.162.5 -l amiller'
 
@@ -231,6 +234,8 @@ function g() {
         grails $@
     elif [ -e "./build.gradle" ] ; then
         gradle $@
+    else
+        echo "WARNING: directory does not appear to be a grails nor gradle app."
     fi
 }
 
@@ -393,13 +398,16 @@ function split-progress() {
 
 
 #
-# for looking into and purging the maven, ivy, and grails repos...
+# for looking into and purging caches maintained by maven, ivy, and grails, gradle, ...
 #
 
 # makes tarballs of cache dirs so they can be recovered later
 function cache-caches() {
     cacheDir=~/cached-caches
     timestamp=`date '+%Y.%m.%d_%I.%M.%S'`
+
+    mkdir -p $cacheDir/dot-gradle
+    ( cd ~/.gradle ; tar cvfz $cacheDir/dot-gradle/gradle-caches_$timestamp.tar.gz ./caches )
 
     mkdir -p $cacheDir/dot-grails
     ( cd ~/.grails ; tar cvfz $cacheDir/dot-grails/ivy-cache_$timestamp.tar.gz ./ivy-cache )
@@ -416,6 +424,9 @@ function cache-caches() {
 function inspect-grails-cache() {
     ( cd ~ ; find .grails/ivy-cache -type d | grep -i $1 )
 }
+function inspect-gradle-cache() {
+    ( cd ~ ; find .gradle/caches -type d | grep -i $1 )
+}
 function inspect-ivy-cache() {
     ( cd ~ ; find .ivy2 -type d | grep -i $1 )
 }
@@ -424,7 +435,11 @@ function inspect-m2-cache() {
 }
 function inspect-caches() {
     echo
-    echo grails cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    echo gradle caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    inspect-gradle-cache $1
+
+    echo
+    echo grails caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     inspect-grails-cache $1
 
     echo
@@ -436,6 +451,9 @@ function inspect-caches() {
     inspect-m2-cache $1
 }
 
+function purge-gradle-cache() {
+    ( cd ~ ; find .gradle -name \*$1\* | xargs rm -rvf )
+}
 function purge-grails-cache() {
     ( cd ~ ; find .grails/ivy-cache -name \*$1\* | xargs rm -rvf )
     if [ -d ./target/plugin-classes ] ; then
@@ -452,13 +470,20 @@ function purge-m2-cache() {
     ( cd ~ ; find .m2 -name \*$1\* | xargs rm -rvf )
 }
 function purge-caches() {
-    echo purging grails cache
+    echo
+    echo purging gradle caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    purge-gradle-cache $1
+
+    echo
+    echo purging grails caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     purge-grails-cache $1
+
     echo
-    echo purging ivy cache
+    echo purging ivy cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     purge-ivy-cache $1
+
     echo
-    echo purging mvn cache
+    echo purging mvn cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     purge-m2-cache $1
 }
 
@@ -479,9 +504,11 @@ function gitmod() {
 #
 # for running the same command in many directories...
 #
-function all() {
-    command=$1 ; shift # the command to execute
+# example:  forall build.gradle gradle build
+#
+function forall() {
     flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
+    command=$1 ; shift # the command to execute
     time ( \
         if [ -e "$flag" ] ; then
             # just run the comman once in the current dir
@@ -506,23 +533,23 @@ function all() {
 }
 
 function antall() { # run maven in the directories that have build.xml
-    all ant build.xml $@
+    forall build.xml ant $@
 }
 
 function grailsall() { # run grails in the directories that have grails-app
-    all grails grails-app $@
+    forall grails-app grails $@
 }
 
 function mvnall() { # run maven in the directories that have pom.xml
-    all mvn pom.xml $@
+    forall pom.xml mvn $@
 }
 
 function gitall() { # run git in the directories that have .git
-    all git .git $@
+    forall .git git $@
 }
 
 function hgall() { # run hg in the directories that have .hg
-    all hg .hg $@
+    forall .hg hg $@
 }
 
 
@@ -562,8 +589,10 @@ fi
 alias jenkins-start="sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist"
 alias jenkins-stop="sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist"
 
-alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.plist"
-alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql.plist"
+#alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.plist"
+#alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql.plist"
+alias mysql-start="mysql.server start"
+alias mysql-stop="mysql.server stop"
 alias mysql-bounce="mysql-stop ; mysql-start"
 
 alias rabbit-start="rabbitmq-server"
@@ -584,7 +613,8 @@ alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 alias truecrypt="open -a TrueCrypt.app"
 
 
-alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
+#alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
+alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/Smartsynchronize"
 
 # touch and edit a new file with emacs
 function temacs() {
