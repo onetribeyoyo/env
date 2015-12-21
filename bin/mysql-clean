@@ -5,7 +5,7 @@ DB_SCHEMA=$2
 DB_USER=$3
 DB_PASSWORD=$4
 
-echo "Dropping and recreating $DB_SCHEMA with user $DB_USER"
+echo "Dropping and recreating $DB_SCHEMA with user:$DB_USER"
 if [ -z "$DB_PASSWORD" ] ; then
     echo "no password"
 else

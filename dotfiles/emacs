@@ -353,7 +353,7 @@
   "swaps extended characters for lower ascii alternatives."
   (interactive)
   ;; do replacements across the entire buffer of...
-  ;; @see char-list.el
+  ;; @see etc/char-list.el
   )
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -663,16 +663,14 @@
 (add-hook 'html-mode-hook         'hideshowvis-enable)
 (add-hook 'java-mode-hook         'hideshowvis-enable)
 (add-hook 'jde-mode-hook          'hideshowvis-enable)
+(add-hook 'markdown-mode-hook     'hideshowvis-enable)
+(add-hook 'nxml-mode-hook         'hideshowvis-enable)
 (add-hook 'perl-mode-hook         'hideshowvis-enable)
 (add-hook 'sgml-mode-hook         'hideshowvis-enable)
 (add-hook 'shell-script-mode-hook 'hideshowvis-enable)
 (add-hook 'sql-mode-hook          'hideshowvis-enable)
-(add-hook 'css-mode-hook          'hideshowvis-enable)
-(add-hook 'emacs-lisp-mode-hook   'hideshowvis-enable)
-(add-hook 'groovy-mode-hook       'hideshowvis-enable)
 (add-hook 'text-mode-hook         'hideshowvis-enable)
 (add-hook 'xml-mode-hook          'hideshowvis-enable)
-(add-hook 'nxml-mode-hook         'hideshowvis-enable)
 
 (setq hideshowvis-fancy-decorations-enable t)
 (cond (hideshowvis-fancy-decorations-enable
@@ -738,6 +736,10 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+(defun amiller-markdown-mode-hook ()
+  (setq fill-column 102)
+  )
+(add-hook 'markdown-mode-hook 'amiller-markdown-mode-hook)
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; Signatures...

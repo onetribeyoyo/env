@@ -192,6 +192,11 @@ alias gtxt="find . -maxdepth 1 -name \*.txt -print | xargs grep"
 alias findtxt="find . -name \*.txt -print"
 alias ggtxt="findtxt | xargs grep"
 
+# text files (.md) files
+alias gmd="find . -maxdepth 1 -name \*.md -print | xargs grep"
+alias findmd="find . -name \*.md -print"
+alias ggmd="findmd | xargs grep"
+
 
 
 alias tomcat-start='${TOMCAT_HOME}/bin/startup.sh start'
@@ -228,9 +233,10 @@ alias devserver='ssh 192.168.162.5 -l amiller'
 # gr* development...
 #
 function g() {
-    if [ -e "./grailsw" ] ; then
-        ./grailsw $@
-    elif [ -d "./grails-app" ] ; then
+    #if [ -e "./grailsw" ] ; then
+    #    ./grailsw $@
+    #elif [ -d "./grails-app" ] ; then
+    if [ -d "./grails-app" ] ; then
         grails $@
     elif [ -e "./build.gradle" ] ; then
         gradle $@
@@ -308,6 +314,20 @@ function ggg-nt() { # like ggg, but filters out test classes
 alias findgsp="find . -name \*.gsp -print"
 alias ggsp="find . -maxdepth -name \*.gsp | xargs grep"
 alias gggsp="findgsp | xargs grep"
+
+alias findprop="find . -name \*.properties -print"
+function ggprop() {
+    findprop | xargs grep $@ \
+        | grep -v \/target\/plugins\/ \
+        | grep -v \/target\/work\/plugins\/
+}
+
+alias findi18n="find . -name messages.properties -print"
+function ggi18n() {
+    findi18n | xargs grep $@ \
+        | grep -v \/target\/plugins\/ \
+        | grep -v \/target\/work\/plugins\/
+}
 
 function split-tests() {
     #cd $BLOOMHEALTH_DEV
@@ -509,7 +529,7 @@ function gitmod() {
 function forall() {
     flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
     command=$1 ; shift # the command to execute
-    time ( \
+    #time ( \
         if [ -e "$flag" ] ; then
             # just run the comman once in the current dir
             echo "`pwd` `parse_vc_branch`"
@@ -529,7 +549,7 @@ function forall() {
                 fi
             done # end while \
         fi
-    )
+    #)
 }
 
 function antall() { # run maven in the directories that have build.xml
@@ -551,6 +571,12 @@ function gitall() { # run git in the directories that have .git
 function hgall() { # run hg in the directories that have .hg
     forall .hg hg $@
 }
+
+function branches() { # show what branches we're on
+    gitall st | grep git:
+    hgall st | grep hg:
+}
+
 
 
 #
@@ -592,6 +618,7 @@ alias jenkins-stop="sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.
 #alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.plist"
 #alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql.plist"
 alias mysql-start="mysql.server start"
+alias mysql-status="mysql.server status"
 alias mysql-stop="mysql.server stop"
 alias mysql-bounce="mysql-stop ; mysql-start"
 

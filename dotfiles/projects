@@ -29,4 +29,4 @@ alias target="cd ~/opi/clients/target-corp/tgtrad/backtoschool ; . ./init.sh"
 alias taulia=". ~/opi/clients/taulia/init.sh"
 
 alias tfly="cd ~/opi/clients/ticketfly ; . ./init.sh"
-. ~/opi/clients/ticketfly/init.sh
+. ~/opi/clients/ticketfly/init-aliases.sh
