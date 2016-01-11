@@ -48,7 +48,7 @@ alias t='less'
 alias c='clear'
 
 # how can this automagically pic up term-width?
-alias sdiff='sdiff -w 190'
+alias sdiff='sdiff -w 262'
 
 alias anf='ant -find build.xml'
 alias ivy='ant -find ivy-build.xml'
