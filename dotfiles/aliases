@@ -295,18 +295,22 @@ alias gg="find . -maxdepth 1 -name \*.goovy -print | xargs grep"
 alias findg="find . -name \*.groovy -print"
 
 function ggg() {
+    # the final grep in the pipeline is to get the match highlighting!
     findg | xargs grep $@ \
         | grep -v \/target\/plugins\/ \
-        | grep -v \/target\/work\/plugins\/
+        | grep -v \/target\/work\/plugins\/ \
+        | grep $@
 }
 alias ggg-all="findg | xargs grep" # like ggg, but does not filter out target dir.
 function ggg-nt() { # like ggg, but filters out test classes
+    # the final grep in the pipeline is to get the match highlighting!
     ggg $@ \
         | grep -v \/test\/unit\/ \
         | grep -v \/test\/integration\/ \
         | grep -v \/test\/functional\/ \
         | grep -v \/test\/slow\/ \
-        | grep -v \/grails-app\/fitnesse\/
+        | grep -v \/grails-app\/fitnesse\/ \
+        | grep $@
         #| grep -v \/target\/plugins\/ \
         #| grep -v \/target\/work\/plugins\/
 }
@@ -317,6 +321,7 @@ alias gggsp="findgsp | xargs grep"
 
 alias findprop="find . -name \*.properties -print"
 function ggprop() {
+    # the final grep in the pipeline is to get the match highlighting!
     findprop | xargs grep $@ \
         | grep -v \/target\/plugins\/ \
         | grep -v \/target\/work\/plugins\/
@@ -326,7 +331,8 @@ alias findi18n="find . -name messages.properties -print"
 function ggi18n() {
     findi18n | xargs grep $@ \
         | grep -v \/target\/plugins\/ \
-        | grep -v \/target\/work\/plugins\/
+        | grep -v \/target\/work\/plugins\/ \
+        | grep $@
 }
 
 function split-tests() {
