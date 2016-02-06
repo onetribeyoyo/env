@@ -1,4 +1,0 @@
-#!/bin/sh
-
-find . -name \*.java | xargs grep -i copyright | files | sort | uniq > with
-find . -name \*.java | sort | > all

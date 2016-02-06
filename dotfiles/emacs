@@ -75,7 +75,7 @@
  '(ecb-show-sources-in-directories-buffer (quote always))
  '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|png\\|gif\\|DS_Store\\|jpg\\|psp\\|Icon
 \\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\|ruler\\|aliases\\|profile\\|inputrc\\|Xdefaults\\|classpath\\|project\\|.*\\.el\\)$")))))
- '(ecb-source-path (quote (("~/opi/clients/" "opi/clients") ("~/github/onetribeyoyo/mtm/" "~/github/onetribeyoyo/mtm") ("~/github/onetribeyoyo/" "~/github/onetribeyoyo/") ("~/dev/scratch/" "~/dev/scratch") ("~/dev/" "~/dev") ("~" "~"))))
+ '(ecb-source-path (quote (("~/github/onetribeyoyo/mtm/" "~/github/onetribeyoyo/mtm") ("~/github/onetribeyoyo/" "~/github/onetribeyoyo/") ("~/dev/scratch/" "~/dev/scratch") ("~/dev/" "~/dev") ("~" "~"))))
  '(ecb-tip-of-the-day nil)
  '(ecb-tree-buffer-style (quote ascii-no-guides))
  '(ecb-tree-indent 2)
@@ -88,7 +88,7 @@
  '(ispell-program-name "aspell" t)
  '(jde-ant-home "$ANT_HOME")
  '(jde-build-function (quote (jde-ant-build)))
- '(jde-checkstyle-style "~/opi/clients/mnscu/hr/code/devtools/checkstyle/checkstyle.xml")
+ '(jde-checkstyle-style "~/etc/checkstyle.xml")
  '(jde-compile-option-debug (quote ("all" (t nil nil))))
  '(jde-compile-option-deprecation t)
  '(jde-compile-option-hide-classpath t)
@@ -142,7 +142,6 @@
 ;; port.  So to use an IP printer you'll have to share it first and give it a
 ;; name.
 ;;
-;; '(printer-name "//badger/opi-printer" t)
 ;; '(printer-name "//stpprn02/GDT843709P")
 ;; '(printer-name "//stpprn02/GDT844020P")
 ;; '(ps-line-number-step (quote zebra))
@@ -574,15 +573,6 @@
   (push-mark)
   (cond
    ((eq amiller-java-template-choice 'amiller)    (insert-file "~/etc/class-template.amiller.java"))
-   ((eq amiller-java-template-choice 'bi)         (insert-file "~/etc/class-template.bi.java"))
-   ((eq amiller-java-template-choice 'bloodhound) (insert-file "~/etc/class-template.bloodhound.java"))
-   ((eq amiller-java-template-choice 'bsci)       (insert-file "~/etc/class-template.bsci.java"))
-   ((eq amiller-java-template-choice 'cwt)        (insert-file "~/etc/class-template.cwt.java"))
-   ((eq amiller-java-template-choice 'fgi)        (insert-file "~/etc/class-template.fgi.java"))
-   ((eq amiller-java-template-choice 'guidant)    (insert-file "~/etc/class-template.guidant.java"))
-   ((eq amiller-java-template-choice 'mnscu)      (insert-file "~/etc/class-template.mnscu.java"))
-   ((eq amiller-java-template-choice 'opi)        (insert-file "~/etc/class-template.opi.java"))
-   ((eq amiller-java-template-choice 'buyer)      (insert-file "~/etc/class-template.buyer.groovy"))
    (t                                             (insert-file "~/etc/class-template.java"))
    )
   )
