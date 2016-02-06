@@ -5,8 +5,8 @@
 
 
 ;;(set-frame-width    (selected-frame) 250)
-;;(set-frame-height   (selected-frame) 68)
-;;(set-frame-position (selected-frame) 619 22)
+;;(set-frame-height   (selected-frame) 92)
+;;(set-frame-position (selected-frame) 987 22)
 
 ;;(modify-frame-parameters (selected-frame) '((font . "-*-courier-medium-r-*--*-140-*-*-*-*-*-*")))
 ;;(modify-frame-parameters (selected-frame) '((font . "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1")))
@@ -55,14 +55,32 @@
         )
   )
 
- (t ;; on a bigger (27") monitor... for ecb layout: amiller-left
+ (nil ;; on a bigger (27") monitor... for ecb layout: amiller-left
   ;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
   (set-default-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1") ; default mac font!
   (setq amiller-frame-top           0 ;; 22 ;; pixels
         amiller-frame-left       1000 ;; pixels
         amiller-frame-width       132 ;; characters
         amiller-frame-height       76 ;; 68 ;; rows
-        amiller-ecb-frame-left    347 ;; pixels
+        amiller-ecb-frame-left    987 ;; pixels
+        amiller-ecb-browser-width  45 ;; characters
+        amiller-ecb-frame-width   219 ;; ???
+        )
+  ;; same size window for ecb or not
+  (setq amiller-frame-left        133 ;; pixels
+        amiller-frame-width       219 ;; characters
+        )
+  )
+
+
+ (t ;; on a retna 27" monitor... for ecb layout: amiller-left
+  ;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+  (set-default-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1") ; default mac font!
+  (setq amiller-frame-top           0 ;; 22 ;; pixels
+        amiller-frame-left       1000 ;; pixels
+        amiller-frame-width       132 ;; characters
+        amiller-frame-height       92 ;; rows
+        amiller-ecb-frame-left    987 ;; pixels
         amiller-ecb-browser-width  45 ;; characters
         amiller-ecb-frame-width   219 ;; ???
         )
