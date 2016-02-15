@@ -160,6 +160,8 @@ export GRADLE_HOME=~/devtools/gradle/current
 export GRAILS_HOME=~/devtools/grails/current
 export GROOVY_HOME=~/devtools/groovy/current
 
+export GOURCE_HOME=~/devtools/gource/current
+
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
@@ -236,6 +238,7 @@ export PATH=\
 $HOME/bin:\
 $ANT_HOME/bin:\
 $EMACS_HOME/bin:\
+$GOURCE_HOME/bin:\
 $GRADLE_HOME/bin:\
 $GRAILS_HOME/bin:\
 $GROOVY_HOME/bin:\
