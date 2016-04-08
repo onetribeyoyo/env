@@ -104,9 +104,6 @@
  '(paren-glint-timeout 10)
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
- '(pmd-home "/app/pmd-2.3")
- '(pmd-java-home "/app/jdk-1.5.0_09/bin/java")
- '(pmd-ruleset-list (quote ("rulesets/basic.xml" "rulesets/braces.xml" "rulesets/codesize.xml" "rulesets/coupling.xml" "rulesets/design.xml" "rulesets/imports.xml" "rulesets/strings.xml" "rulesets/unusedcode.xml")))
  '(printer-name nil)
  '(ps-bottom-margin 25)
  '(ps-inter-column 35)
@@ -619,11 +616,6 @@
   (setq compilation-window-height 17)
   )
 (add-hook 'compilation-mode-hook 'amiller-compilation-mode-hook)
-
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/pmd-emacs-0.5"))
-(autoload 'pmd-current-buffer "pmd" "PMD Mode" t)
-(autoload 'pmd-current-dir "pmd" "PMD Mode" t)
-(require 'pmd)
 
 ;; This removes unsightly ^M characters that would otherwise appear in
 ;; the output of java applications.
