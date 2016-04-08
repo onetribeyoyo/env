@@ -239,7 +239,11 @@ function g() {
     if [ -d "./grails-app" ] ; then
         grails $@
     elif [ -e "./build.gradle" ] ; then
-        gradle $@
+        if [ -e "./gradlew" ] ; then
+            ./gradlew $@
+        else
+            gradle $@
+        fi
     else
         echo "WARNING: directory does not appear to be a grails nor gradle app."
     fi
@@ -530,9 +534,27 @@ function gitmod() {
 #
 # for running the same command in many directories...
 #
-# example:  forall build.gradle gradle build
+# example:  forall gradle build
 #
 function forall() {
+    command=$1 ; shift # the command to execute
+    #time ( \
+        find . -type d -maxdepth 1 | while read directory ; do
+            cd $directory
+            echo "`pwd` `parse_vc_branch`"
+            echo $command $@
+            $command $@
+            echo
+        done # end while \
+    #)
+}
+
+#
+# for running the same command in many directories when the dir contains a file of a specific name...
+#
+# example:  forallwhen build.gradle gradle build
+#
+function forallwhen() {
     flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
     command=$1 ; shift # the command to execute
     #time ( \
@@ -559,23 +581,23 @@ function forall() {
 }
 
 function antall() { # run maven in the directories that have build.xml
-    forall build.xml ant $@
+    forallwhen build.xml ant $@
 }
 
 function grailsall() { # run grails in the directories that have grails-app
-    forall grails-app grails $@
+    forallwhen grails-app grails $@
 }
 
 function mvnall() { # run maven in the directories that have pom.xml
-    forall pom.xml mvn $@
+    forallwhen pom.xml mvn $@
 }
 
 function gitall() { # run git in the directories that have .git
-    forall .git git $@
+    forallwhen .git git $@
 }
 
 function hgall() { # run hg in the directories that have .hg
-    forall .hg hg $@
+    forallwhen .hg hg $@
 }
 
 function branches() { # show what branches we're on
@@ -646,11 +668,20 @@ alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 alias truecrypt="open -a TrueCrypt.app"
 
 
-#alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
-alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/Smartsynchronize"
+alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
+#alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/Smartsynchronize"
 
 # touch and edit a new file with emacs
 function temacs() {
     touch $@
     emacs $@
 }
+
+
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+# openstack...
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+alias openstack-activate=". ~/python_openstack/bin/activate"
+
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
