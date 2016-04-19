@@ -56,25 +56,26 @@ function parse_vc_branch() {
 
     # else no vc info will be displayed in the prompt
 }
+
 function prompt() {
     local NO_COLOUR="\[\033[0m\]"
 
     local BLACK="\[\033[0;30m\]"
-    local DARK_GRAY="\[\033[1;30m\]"
     local BLUE="\[\033[0;34m\]"
-    local LIGHT_BLUE="\[\033[1;34m\]"
-    local GREEN="\[\033[0;32m\]"
-    local LIGHT_GREEN="\[\033[1;32m\]"
+    local BROWN="\[\033[0;33m\]"
     local CYAN="\[\033[0;36m\]"
+    local DARK_GRAY="\[\033[1;30m\]"
+    local GREEN="\[\033[0;32m\]"
+    local LIGHT_BLUE="\[\033[1;34m\]"
     local LIGHT_CYAN="\[\033[1;36m\]"
-    local RED="\[\033[0;31m\]"
+    local LIGHT_GRAY="\[\033[0;37m\]"
+    local LIGHT_GREEN="\[\033[1;32m\]"
+    local LIGHT_PURPLE="\[\033[1;35m\]"
     local LIGHT_RED="\[\033[1;31m\]"
     local PURPLE="\[\033[0;35m\]"
-    local LIGHT_PURPLE="\[\033[1;35m\]"
-    local BROWN="\[\033[0;33m\]"
-    local YELLOW="\[\033[1;33m\]"
-    local LIGHT_GRAY="\[\033[0;37m\]"
+    local RED="\[\033[0;31m\]"
     local WHITE="\[\033[1;37m\]"
+    local YELLOW="\[\033[1;33m\]"
 
     if [ -n "$1" ] ; then
         # show all the colours...
@@ -156,11 +157,13 @@ export ANT_OPTS=-Xmx128m
 
 export ARTIFACTORY_HOME=~/devtools/artifactory/artifactory-powerpack-3.5.2.1
 
+export GOURCE_HOME=~/devtools/gource/current
+
 export GRADLE_HOME=~/devtools/gradle/current
 export GRAILS_HOME=~/devtools/grails/current
 export GROOVY_HOME=~/devtools/groovy/current
 
-export GOURCE_HOME=~/devtools/gource/current
+export IGNITE_HOME=~/devtools/gridgain/gridgain-community-fabric-1.5.6
 
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
@@ -202,47 +205,33 @@ export RABBITMQ_HOME=~/devtools/rabbitmq/current
 export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
 alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
-export SMARTSYNC_HOME=~/devtools/smartsync/current
+export SMARTSYNC_HOME=~/devtools/smartsync
 
 export TOMCAT_HOME=~/devtools/tomcat/current
 
 export LILYPOND_HOME=/Applications/LilyPond.app
 alias ly=lilypond
 
-if $darwin ; then
-    # emacs...
-    #export EMACS_HOME=~/devtools/emacs/carbon-emacs-22.3.1_2009.07.25.app
-    #export EMACS_APP='carbon-emacs-22.3.1_2009.07.25.app'
+# emacs...
+#export EMACS_HOME=~/devtools/emacs/carbon-emacs-22.3.1_2009.07.25.app
+#export EMACS_APP='carbon-emacs-22.3.1_2009.07.25.app'
 
-    #export EMACS_VERSION=23.1.90.1
-    #export EMACS_VERSION=23.2
-    #export EMACS_VERSION=23.3
-    #export EMACS_VERSION=23.4.1
-    export EMACS_VERSION=24.3
-    export EMACS_HOME=~/devtools/emacs/emacs-${EMACS_VERSION}.app
-    export EMACS_APP=emacs-${EMACS_VERSION}.app
+#export EMACS_VERSION=23.1.90.1
+#export EMACS_VERSION=23.2
+#export EMACS_VERSION=23.3
+#export EMACS_VERSION=23.4.1
+export EMACS_VERSION=24.3
+export EMACS_HOME=~/devtools/emacs/emacs-${EMACS_VERSION}.app
+export EMACS_APP=emacs-${EMACS_VERSION}.app
 
-    # subversion...
-    #export SVN_HOME=/opt/subversion
-    #export PATH=$SVN_HOME/bin:$PATH
-fi
 
-# Setting the path for MacPorts.
-#export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-
-# fink config...
-#test -r /sw/bin/init.sh && . /sw/bin/init.sh
-
+# path...
 export PATH=\
 .:\
 $HOME/bin:\
 $ANT_HOME/bin:\
 $EMACS_HOME/bin:\
 $GOURCE_HOME/bin:\
-$GRADLE_HOME/bin:\
-$GRAILS_HOME/bin:\
-$GROOVY_HOME/bin:\
-$JMETER_HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 $TOMCAT_HOME/bin:\
@@ -252,10 +241,6 @@ $LILYPOND_HOME/Contents/Resources/bin:\
 /usr/local/bin:\
 /Applications/Xcode.app/Contents/Developer/usr/bin:\
 $PATH
-
-# Note: CATALINA_HOME and TOMCAT_HOME will cause local standalone jira scripts to fail!
-#export JIRA_HOME=~/devtools/jira/current
-#export PATH=$PATH:$JIRA_HOME/bin
 
 function rehome() {
     COMPONENT=$1
@@ -305,14 +290,13 @@ export GREP_OPTIONS='--color=auto'
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 
-
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 #[[ -s "/Users/amiller/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/amiller/.sdkman/bin/sdkman-init.sh"
-export SDKMAN_DIR="/Users/amiller/.sdkman" && source "/Users/amiller/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman" && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 
 use-jdk 1.8
