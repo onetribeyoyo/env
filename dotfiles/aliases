@@ -47,6 +47,27 @@ alias t='less'
 
 alias c='clear'
 
+# colour defs for printf...
+export NO_COLOUR="\033[0m"
+
+export BLACK="\033[0;30m"
+export BLUE="\033[0;34m"
+export BROWN="\033[0;33m"
+export CYAN="\033[0;36m"
+export DARK_GRAY="\033[1;30m"
+export GREEN="\033[0;32m"
+export LIGHT_BLUE="\033[1;34m"
+export LIGHT_CYAN="\033[1;36m"
+export LIGHT_GRAY="\033[0;37m"
+export LIGHT_GREEN="\033[1;32m"
+export LIGHT_PURPLE="\033[1;35m"
+export LIGHT_RED="\033[1;31m"
+export PURPLE="\033[0;35m"
+export RED="\033[0;31m"
+export WHITE="\033[1;37m"
+export YELLOW="\033[1;33m"
+
+
 # how can this automagically pic up term-width?
 alias sdiff='sdiff -w 262'
 
@@ -530,7 +551,6 @@ function gitmod() {
 }
 
 
-
 #
 # for running the same command in many directories...
 #
@@ -541,10 +561,10 @@ function forall() {
     #time ( \
         find . -type d -maxdepth 1 | while read directory ; do
             cd $directory
-            echo "`pwd` `parse_vc_branch`"
-            echo $command $@
+            local PWD=`pwd`
+            local VC_INFO=`parse_vc_branch`
+            printf "\ngitall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
             $command $@
-            echo
         done # end while \
     #)
 }
@@ -560,19 +580,19 @@ function forallwhen() {
     #time ( \
         if [ -e "$flag" ] ; then
             # just run the comman once in the current dir
-            echo "`pwd` `parse_vc_branch`"
-            echo $command $@
+            local PWD=`pwd`
+            local VC_INFO=`parse_vc_branch`
+            printf "\ngitall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
             $command $@
-            echo
         else
             find . -type d -maxdepth 1 | while read directory ; do
                 if [ -e "$directory/$flag" ] ; then
                     (
                         cd $directory
-                        echo "`pwd` `parse_vc_branch`"
-                        echo $command $@
+                        local PWD=`pwd`
+                        local VC_INFO=`parse_vc_branch`
+                        printf "\ngitall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
                         $command $@
-                        echo
                     )
                 fi
             done # end while \
