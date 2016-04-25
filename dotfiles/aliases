@@ -165,10 +165,10 @@ alias ggjsp="findjsp | xargs grep"
 alias findpom="find . -name pom.xml -print"
 alias ggpom="findpom | xargs grep"
 
-alias gjsp="find . -maxdepth -name \*.jsp | xargs grep"
+alias gjsp="find . -maxdepth 1 -name \*.jsp | xargs grep"
 alias ggjsp="find . -name \*.jsp | xargs grep"
 
-alias gjs="find . -maxdepth -name \*.js | xargs grep"
+alias gjs="find . -maxdepth 1 -name \*.js | xargs grep"
 alias ggjs="find . -name \*.js | xargs grep"
 
 # web ui files
@@ -341,7 +341,7 @@ function ggg-nt() { # like ggg, but filters out test classes
 }
 
 alias findgsp="find . -name \*.gsp -print"
-alias ggsp="find . -maxdepth -name \*.gsp | xargs grep"
+alias ggsp="find . -maxdepth 1 -name \*.gsp | xargs grep"
 alias gggsp="findgsp | xargs grep"
 
 alias findprop="find . -name \*.properties -print"
@@ -559,11 +559,11 @@ function gitmod() {
 function forall() {
     command=$1 ; shift # the command to execute
     #time ( \
-        find . -type d -maxdepth 1 | while read directory ; do
+        find . -type d -depth 1 | while read directory ; do
             cd $directory
             local PWD=`pwd`
             local VC_INFO=`parse_vc_branch`
-            printf "\ngitall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+            printf "\nforall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
             $command $@
         done # end while \
     #)
@@ -582,16 +582,16 @@ function forallwhen() {
             # just run the comman once in the current dir
             local PWD=`pwd`
             local VC_INFO=`parse_vc_branch`
-            printf "\ngitall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+            printf "\nforallwhen $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
             $command $@
         else
-            find . -type d -maxdepth 1 | while read directory ; do
+            find . -type d -depth 1 | while read directory ; do
                 if [ -e "$directory/$flag" ] ; then
                     (
                         cd $directory
                         local PWD=`pwd`
                         local VC_INFO=`parse_vc_branch`
-                        printf "\ngitall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+                        printf "\nforallwhen $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
                         $command $@
                     )
                 fi
@@ -602,6 +602,10 @@ function forallwhen() {
 
 function antall() { # run maven in the directories that have build.xml
     forallwhen build.xml ant $@
+}
+
+function gradleall() { # run grails in the directories that have grails-app
+    forallwhen build.gradle g $@
 }
 
 function grailsall() { # run grails in the directories that have grails-app
