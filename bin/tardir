@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Makes a tarball of a dir
+#
+
+#[ $# -eq 0 ] && set "$PWD"
+[ $# -eq 0 ] && set "."
+
+TARFILE=`date +"%Y.%m.%d_%H.%M_tardir.tar.gz"`
+
+echo $TARFILE
+
+tar cvfz $TARFILE $@
