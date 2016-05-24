@@ -719,7 +719,7 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (defun amiller-markdown-mode-hook ()
-  (setq fill-column 132)
+  (setq fill-column 102)
   )
 (add-hook 'markdown-mode-hook 'amiller-markdown-mode-hook)
 
