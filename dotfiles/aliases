@@ -701,6 +701,19 @@ function temacs() {
     emacs $@
 }
 
+function jira() {
+    BLUE_JIRA=https://tgtesv.atlassian.net
+    RED_JIRA=https://jira.colab.target.com
+    JIRA_BASE=$RED_JIRA
+
+    ticket=$1
+    if [ -n "$ticket" ]; then
+        ff $JIRA_BASE/browse/$ticket
+    else
+        ff $JIRA_BASE
+    fi
+}
+
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 # openstack...
