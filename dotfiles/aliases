@@ -572,9 +572,9 @@ function forall() {
 #
 # for running the same command in many directories when the dir contains a file of a specific name...
 #
-# example:  forallwhen build.gradle gradle build
+# example:  forallwhere build.gradle gradle build
 #
-function forallwhen() {
+function forallwhere() {
     flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
     command=$1 ; shift # the command to execute
     #time ( \
@@ -582,7 +582,7 @@ function forallwhen() {
             # just run the comman once in the current dir
             local PWD=`pwd`
             local VC_INFO=`parse_vc_branch`
-            printf "\nforallwhen $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+            printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
             $command $@
         else
             find . -type d -depth 1 | while read directory ; do
@@ -591,7 +591,7 @@ function forallwhen() {
                         cd $directory
                         local PWD=`pwd`
                         local VC_INFO=`parse_vc_branch`
-                        printf "\nforallwhen $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+                        printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
                         $command $@
                     )
                 fi
@@ -601,27 +601,27 @@ function forallwhen() {
 }
 
 function antall() { # run maven in the directories that have build.xml
-    forallwhen build.xml ant $@
+    forallwhere build.xml ant $@
 }
 
 function gradleall() { # run grails in the directories that have grails-app
-    forallwhen build.gradle g $@
+    forallwhere build.gradle g $@
 }
 
 function grailsall() { # run grails in the directories that have grails-app
-    forallwhen grails-app grails $@
+    forallwhere grails-app grails $@
 }
 
 function mvnall() { # run maven in the directories that have pom.xml
-    forallwhen pom.xml mvn $@
+    forallwhere pom.xml mvn $@
 }
 
 function gitall() { # run git in the directories that have .git
-    forallwhen .git git $@
+    forallwhere .git git $@
 }
 
 function hgall() { # run hg in the directories that have .hg
-    forallwhen .hg hg $@
+    forallwhere .hg hg $@
 }
 
 function branches() { # show what branches we're on
