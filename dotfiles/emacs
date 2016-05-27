@@ -807,7 +807,7 @@
   )
 (defun font-medium ()
   (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-20-*-*-*-m-0-iso10646-1")
+  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1")
   )
 (defun font-normal ()
   (interactive)

@@ -360,93 +360,6 @@ function ggi18n() {
         | grep $@
 }
 
-function split-tests() {
-    #cd $BLOOMHEALTH_DEV
-    echo "removing old test report artifacts..."
-    rm -rf test-unit/test-reports
-    rm -rf test-integration/test-reports
-    startTime=`date '+%I:%M:%S'`
-    echo "starting tests at $startTime"
-    time bin/splitTests.groovy $@
-    endTime=`date '+%I:%M:%S'`
-    echo "started at  $startTime"
-    echo "finished at $endTime"
-}
-
-function gta-progress() {
-    (
-        echo "gta progress..."
-        #if [ -d $BLOOMHEALTH_DEV/target/test-reports ] ; then
-        if [ -d target/test-reports ] ; then
-            #cd $BLOOMHEALTH_DEV/target/test-reports
-            cd target/test-reports
-            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
-            totalTestClasses=`find ../../test -name \*Tests.groovy | wc -l | sed 's/ //g'`
-            executedTests=`ggxml testcase | wc -l`
-            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
-            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
-        fi
-    )
-}
-
-function gti-progress() {
-    (
-        echo "gti progress..."
-        #if [ -d $BLOOMHEALTH_DEV/target/test-reports ] ; then
-        if [ -d target/test-reports ] ; then
-            #cd $BLOOMHEALTH_DEV/target/test-reports
-            cd target/test-reports
-            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
-            totalTestClasses=`find ../../test/integration -name \*Tests.groovy | wc -l | sed 's/ //g'`
-            executedTests=`ggxml testcase | wc -l`
-            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
-            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
-        fi
-    )
-}
-
-function gtu-progress() {
-    (
-        echo "gtu progress..."
-        #if [ -d $BLOOMHEALTH_DEV/target/test-reports ] ; then
-        if [ -d target/test-reports ] ; then
-            #cd $BLOOMHEALTH_DEV/target/test-reports
-            cd target/test-reports
-            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
-            totalTestClasses=`find ../../test/unit -name \*Tests.groovy | wc -l | sed 's/ //g'`
-            executedTests=`ggxml testcase | wc -l`
-            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
-            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
-        fi
-    )
-}
-
-function split-progress() {
-    echo "splitTests progress..."
-    if [ -d test-unit/test-reports ] ; then
-        (
-            cd test-unit/test-reports
-            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
-            totalTestClasses=`find ../../test/unit/ -name \*Tests.groovy | wc -l | sed 's/ //g'`
-            executedTests=`ggxml testcase | wc -l`
-            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
-            echo "  unit"
-            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
-        )
-    fi
-    if [ -d test-integration/test-reports ] ; then
-        (
-            cd test-integration/test-reports/
-            executedTestClasses=`ggxml testcase | awk '{print $3}' | awk -F\\" '{print $2}' | sort | uniq  | wc -l`
-            totalTestClasses=`find ../../test/integration/ -name \*Tests.groovy | wc -l | sed 's/ //g'`
-            executedTests=`ggxml testcase | wc -l`
-            percentComplete=`echo "scale=2; ($executedTestClasses / $totalTestClasses) * 100" | bc`
-            echo "  integration"
-            echo "${executedTests} tests, ${executedTestClasses}/${totalTestClasses} classes  ~${percentComplete}% complete"
-        )
-    fi
-}
-
 
 #
 # for looking into and purging caches maintained by maven, ivy, and grails, gradle, ...
@@ -722,3 +635,11 @@ function jira() {
 alias openstack-activate=". ~/python_openstack/bin/activate"
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+
+function checkapikey() {
+    (
+        cd ~/github/enterprise-services/lookup_tables
+        grep $1 apikey.csv
+    )
+}
