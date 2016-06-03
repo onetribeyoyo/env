@@ -305,19 +305,9 @@
 ;;(set-face-background vvb-face "misty rose")
 ;;(set-face-background vvb-face "cornsilk")
 
-(cond (nil (load-file "~/.emacs.theme.amiller-1.el"))
-      (nil (load-file "~/.emacs.theme.amiller-2.el"))
-      (t   (load-file "~/.emacs.theme.nightvision.el"))
-      )
+(load-file "~/.emacs.theme.nightvision.el")
 
 (require 'color-theme)
-;;(color-theme-gnome2)
-;;(color-theme-high-contrast)
-;;(color-theme-retro-orange)
-
-
-;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/emacs-color-theme-solarized"))
-;;(require 'color-theme-solarized)
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -765,8 +755,6 @@
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; Expirimental section...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;;(load-file "~/.emacs.win32.el")
 
 ;(defun indent-or-complete ()
 ;  "Complete if point is at end of a word, otherwise indent line."
