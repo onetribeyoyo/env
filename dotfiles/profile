@@ -1,21 +1,4 @@
 
-cygwin=false;
-darwin=false;
-case "`uname`" in
-    CYGWIN*)
-        cygwin=true
-        echo cygwin=true
-        ;;
-
-    Darwin*)
-        darwin=true
-        echo darwin=true
-        ;;
-esac
-
-export EMAIL_USER=andy.miller
-
-
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 # Prompts and titles...
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -157,8 +140,6 @@ export ANT_OPTS=-Xmx128m
 
 export ARTIFACTORY_HOME=~/devtools/artifactory/artifactory-powerpack-3.5.2.1
 
-export GOURCE_HOME=~/devtools/gource/current
-
 export GRADLE_HOME=~/devtools/gradle/current
 export GRAILS_HOME=~/devtools/grails/current
 export GROOVY_HOME=~/devtools/groovy/current
@@ -188,10 +169,6 @@ function use-jdk() {
 # here are some JAVA_OPTS that optimize gc, but it is preferable to set
 # these on a project by project basis.
 #export JAVA_OPTS="-XX:PermSize=128m -XX:MaxPermSize=384m -XX:NewSize=256m -Xmx1024m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
-
-export JBOSS_HOME=~/devtools/jboss/current
-
-export JMETER_HOME=~/devtools/jmeter/current
 
 export MAVEN_HOME=~/devtools/maven/current
 export M2_HOME=~/devtools/maven/current
@@ -231,11 +208,9 @@ export PATH=\
 $HOME/bin:\
 $ANT_HOME/bin:\
 $EMACS_HOME/bin:\
-$GOURCE_HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 $TOMCAT_HOME/bin:\
-$RABBITMQ_HOME/sbin:\
 ~/devtools/git/scripts/ddollar-git-utils:\
 $LILYPOND_HOME/Contents/Resources/bin:\
 /usr/local/bin:\
@@ -290,20 +265,18 @@ export GREP_OPTIONS='--color=auto'
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 
-export PATH="$HOME/.jenv/bin:$PATH"
+#export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-#[[ -s "/Users/amiller/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/amiller/.sdkman/bin/sdkman-init.sh"
 export SDKMAN_DIR="$HOME/.sdkman" && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-
-use-jdk 1.8
+#use-jdk 1.8
 
 . .aliases
+. .target.aliases
 . .projects
-
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
