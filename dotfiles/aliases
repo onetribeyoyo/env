@@ -171,6 +171,9 @@ alias ggjsp="find . -name \*.jsp | xargs grep"
 alias gjs="find . -maxdepth 1 -name \*.js | xargs grep"
 alias ggjs="find . -name \*.js | xargs grep"
 
+alias gjson="find . -maxdepth 1 -name \*.json | xargs grep"
+alias ggjson="find . -name \*.json | xargs grep"
+
 # web ui files
 alias gw="find . -maxdepth 1 \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js \) -print | xargs grep"
 alias ggw="find . \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js \) -print | quotespaces | xargs grep"
@@ -612,34 +615,4 @@ alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
 function temacs() {
     touch $@
     emacs $@
-}
-
-function jira() {
-    BLUE_JIRA=https://tgtesv.atlassian.net
-    RED_JIRA=https://jira.colab.target.com
-    JIRA_BASE=$RED_JIRA
-
-    ticket=$1
-    if [ -n "$ticket" ]; then
-        ff $JIRA_BASE/browse/$ticket
-    else
-        ff $JIRA_BASE
-    fi
-}
-
-
-# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-# openstack...
-# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-alias openstack-activate=". ~/python_openstack/bin/activate"
-
-# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-
-function checkapikey() {
-    (
-        cd ~/github/enterprise-services/lookup_tables
-        grep $1 apikey.csv
-    )
 }
