@@ -634,6 +634,7 @@
 (add-hook 'html-helper-mode-hook  'hideshowvis-enable)
 (add-hook 'html-mode-hook         'hideshowvis-enable)
 (add-hook 'java-mode-hook         'hideshowvis-enable)
+(add-hook 'javascript-mode-hook   'hideshowvis-enable)
 (add-hook 'jde-mode-hook          'hideshowvis-enable)
 (add-hook 'markdown-mode-hook     'hideshowvis-enable)
 (add-hook 'nxml-mode-hook         'hideshowvis-enable)
