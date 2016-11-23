@@ -221,6 +221,10 @@ alias gmd="find . -maxdepth 1 -name \*.md -print | xargs grep"
 alias findmd="find . -name \*.md -print"
 alias ggmd="findmd | xargs grep"
 
+# python files
+alias gpy="find . -maxdepth 1 \( -name \*.py \) -print | xargs grep"
+alias findpy="find . \( -name \*.py \) -print"
+alias ggpy="findpy | quotespaces | xargs grep"
 
 
 alias tomcat-start='${TOMCAT_HOME}/bin/startup.sh start'
