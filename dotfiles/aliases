@@ -470,6 +470,13 @@ function gitmod() {
     git status -s | grep \?\?\  | awk '{ print $2 }'
 }
 
+function gitupstream () {
+    git fetch upstream
+    git checkout master
+    git merge upstream/master
+    #git push
+}
+
 
 #
 # for running the same command in many directories...
