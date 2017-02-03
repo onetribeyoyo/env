@@ -426,8 +426,11 @@
 
 ;; CSS mode
 (add-to-list 'auto-mode-alist '("\\.css" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.less" . css-mode))
 (autoload 'css-mode "css-mode" nil t)
 
+;; go mode
+(require 'go-mode-autoloads)1
 
 ;; SQL mode
 (add-to-list 'auto-mode-alist '("\\.ddl" . sql-mode))
