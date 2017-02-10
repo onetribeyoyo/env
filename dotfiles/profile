@@ -271,7 +271,11 @@ eval "$(jenv init -)"
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman" && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="/Users/z001v67/.sdkman"
+[[ -s "/Users/z001v67/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/z001v67/.sdkman/bin/sdkman-init.sh"
+
+export NVM_DIR="/Users/z001v67/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 #use-jdk 1.8
 
