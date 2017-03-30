@@ -3,3 +3,5 @@
 #
 
 alias mtm="cd ~/github/onetribeyoyo/mtm/src ; . ./init.sh"
+
+alias ole="~/github/ole/secrets/scripts/k8s/k8sLoadAndSetContext.sh ; cd ~/github/ole/warehouse-management"

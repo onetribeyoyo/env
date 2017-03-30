@@ -253,6 +253,8 @@ alias bamboo-stop='${BAMBOO_HOME}/bin/stop-bamboo.sh'
 
 alias artifactory-start='${ARTIFACTORY_HOME}/bin/artifactory.sh'
 
+alias docker-start='open -a docker.app'
+
 alias winternet='telnet winternet.com'
 alias devserver='ssh 192.168.162.5 -l amiller'
 
@@ -527,11 +529,11 @@ function forallwhere() {
     #)
 }
 
-function antall() { # run maven in the directories that have build.xml
+function antall() { # run ant in the directories that have build.xml
     forallwhere build.xml ant $@
 }
 
-function gradleall() { # run grails in the directories that have grails-app
+function gradleall() { # run gradle in the directories that have grails-app
     forallwhere build.gradle g $@
 }
 
@@ -544,11 +546,19 @@ function mvnall() { # run maven in the directories that have pom.xml
 }
 
 function gitall() { # run git in the directories that have .git
-    forallwhere .git git $@
+    if [ $# -eq 0 ]; then
+        echo "WARNING: No arguments supplied"
+    else
+        forallwhere .git git $@
+    fi
 }
 
 function hgall() { # run hg in the directories that have .hg
-    forallwhere .hg hg $@
+    if [ $# -eq 0 ]; then
+        echo "WARNING: No arguments supplied"
+    else
+        forallwhere .hg hg $@
+    fi
 }
 
 function branches() { # show what branches we're on

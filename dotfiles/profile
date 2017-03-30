@@ -147,7 +147,7 @@ export GROOVY_HOME=~/devtools/groovy/current
 export IGNITE_HOME=~/devtools/gridgain/gridgain-community-fabric-1.5.6
 
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
-#export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
 function use-jdk() {
     VERSION=$1
@@ -170,10 +170,17 @@ function use-jdk() {
 # these on a project by project basis.
 #export JAVA_OPTS="-XX:PermSize=128m -XX:MaxPermSize=384m -XX:NewSize=256m -Xmx1024m -server -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled"
 
-export MAVEN_HOME=~/devtools/maven/current
-export M2_HOME=~/devtools/maven/current
-export M2=$M2_HOME/bin
-export MAVEN_OPTS="-Xmx2100m -Xms512m"
+#export MAVEN_HOME=~/devtools/maven/current
+#export M2_HOME=~/devtools/maven/current
+#export M2=$M2_HOME/bin
+
+export M3_HOME=~/devtools/maven/current
+export M3=$M3_HOME/bin
+
+#export MAVEN_OPTS="-Xmx2100m -Xms512m"
+
+
+
 
 export MONGO_HOME=~/devtools/mongo/current
 
@@ -262,9 +269,12 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 export GREP_COLOR='1;31'
 export GREP_OPTIONS='--color=auto'
 
-
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
+export DRONE_SERVER=https://drone5.target.com
+export DRONE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoiQW5keU1pbGxlciIsInR5cGUiOiJ1c2VyIn0.J9XPQ-AFnWqi6shFtm8ATPoCcHwwJSFqwc8sd8BakPw
+
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 #export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
