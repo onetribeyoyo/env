@@ -189,7 +189,7 @@ export RABBITMQ_HOME=~/devtools/rabbitmq/current
 export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
 alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
-export SMARTSYNC_HOME=~/devtools/smartsync
+export SMARTSYNC_HOME=~/devtools/smartsync-3.4.10
 
 export TOMCAT_HOME=~/devtools/tomcat/current
 
@@ -292,6 +292,9 @@ export NVM_DIR="/Users/z001v67/.nvm"
 . .aliases
 . .target.aliases
 . .projects
+
+export DOCKER_IP="127.0.0.1"
+
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
