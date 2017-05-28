@@ -629,8 +629,8 @@ alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 alias truecrypt="open -a TrueCrypt.app"
 
 
-alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
-#alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/Smartsynchronize"
+#alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
+alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/Smartsynchronize"
 
 # touch and edit a new file with emacs
 function temacs() {
