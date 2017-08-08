@@ -31,6 +31,11 @@
 (set-face-font 'bold-italic "-outline-Lucida Console-bold-i-normal-normal-13-97-96-96-c-*-iso10646-1")
 
 
+;;(require 'carbon-font)
+;;(fixed-width-set-default-fontset "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+(set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+
+
 ;;"-raster-Oloron Program-normal-r-normal-normal-12-90-96-96-c-*-*-*"
 ;;"-raster-ProFontWindows-normal-r-normal-normal-16-120-96-96-c-*-iso10646-1"
 ;;"-outline-Comic Sans MS-bold-r-normal-normal-15-112-96-96-p-*-iso10646-1"

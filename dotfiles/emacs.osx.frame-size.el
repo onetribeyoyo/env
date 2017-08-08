@@ -35,8 +35,9 @@
 ;; -ns-*-*-*-*-*-10-*-*-*-*-*-fontset-standard
 ;; -apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-fontset-startup
 
-
-
+(defun laptop ()
+  (interactive)
+  (set-frame-position (selected-frame) 347 22) )
 
 (cond
 
@@ -74,7 +75,8 @@
 
  (t ;; on a retna 27" monitor... with or without ecb
   ;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-  (set-default-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1") ; default mac font!
+  (set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+  ;;(set-default-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1") ; default mac font!
   (setq amiller-frame-top           0 ;; 22 ;; pixels
         amiller-frame-left       1497 ;; pixels
         amiller-frame-width       132 ;; characters
