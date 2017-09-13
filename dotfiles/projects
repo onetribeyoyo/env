@@ -5,3 +5,4 @@
 alias mtm="cd ~/github/onetribeyoyo/mtm/src ; . ./init.sh"
 
 alias ole="cd ~/github/ole/warehouse-management"
+alias leatherman="cd ~/github/ole/leatherman"
