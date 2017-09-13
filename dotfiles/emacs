@@ -16,7 +16,7 @@
        (load-file (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0/common/cedet.el"))
        )
       (
-       t ;; this is a stable config that works with emacs 24.3.1
+      nil ;; this is a stable config that works with emacs 24.3.1
        (require 'semantic/analyze)
        (provide 'semantic-analyze)
        (provide 'semantic-ctxt)
@@ -28,9 +28,11 @@
        (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/ecb-2.40"))
        (setq stack-trace-on-error t)
        )
+      (
+       t ;; this is a stable config that works with emacs 25.2
+       ;(setq stack-trace-on-error t)
+       )
       )
-
-;;(load-file (expand-file-name "~/devtools/emacs/site-lisp/jdee-2.4.0.1/lisp/jde.el"))
 
 (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/emacs-goodies-el-13"))
 (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/html-helper-mode-2.19.1.1"))
@@ -63,44 +65,11 @@
  '(case-fold-search t)
  '(current-language-environment "Latin-1")
  '(default-input-method "latin-1-prefix")
- '(ecb-before-activate-hook (quote (amiller-ecb-before-activate-hook)))
- '(ecb-deactivate-hook (quote (amiller-ecb-deactivate-hook)))
- '(ecb-history-make-buckets (quote directory))
- '(ecb-kill-buffer-clears-history (quote auto))
- '(ecb-layout-name "amiller-left-analysis")
- '(ecb-layout-window-sizes nil)
- '(ecb-non-semantic-exclude-modes (quote (sh-mode fundamental-mode text-mode nxml-mode)))
- '(ecb-options-version "2.40")
- '(ecb-run-ediff-in-ecb-frame t)
- '(ecb-show-sources-in-directories-buffer (quote always))
- '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|png\\|gif\\|DS_Store\\|jpg\\|psp\\|Icon
-\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\|ruler\\|aliases\\|profile\\|inputrc\\|Xdefaults\\|classpath\\|project\\|.*\\.el\\)$")))))
- '(ecb-source-path (quote (("~/github/onetribeyoyo/mtm/" "~/github/onetribeyoyo/mtm") ("~/github/onetribeyoyo/" "~/github/onetribeyoyo/") ("~/dev/scratch/" "~/dev/scratch") ("~/dev/" "~/dev") ("~" "~"))))
- '(ecb-tip-of-the-day nil)
- '(ecb-tree-buffer-style (quote ascii-no-guides))
- '(ecb-tree-indent 2)
- '(ecb-vc-enable-support t)
- '(ecb-wget-setup (quote cons))
  '(font-lock-support-mode (quote jit-lock-mode))
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
  '(initial-scratch-message nil)
  '(ispell-program-name "aspell" t)
- '(jde-ant-home "$ANT_HOME")
- '(jde-build-function (quote (jde-ant-build)))
- '(jde-checkstyle-style "~/etc/checkstyle.xml")
- '(jde-compile-option-debug (quote ("all" (t nil nil))))
- '(jde-compile-option-deprecation t)
- '(jde-compile-option-hide-classpath t)
- '(jde-compiler (quote ("javac" "")))
- '(jde-db-active-breakpoint-face-colors (quote ("black" . "red")))
- '(jde-db-requested-breakpoint-face-colors (quote ("black" . "tomato")))
- '(jde-db-spec-breakpoint-face-colors (quote ("black" . "orange red")))
- '(jde-debugger (quote ("JDEbug")))
- '(jde-jdk (quote ("1.6.0")))
- '(jde-jdk-doc-url "/app/jdk-1.5.0_09/docs")
- '(jde-jdk-registry (quote (("1.5.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0") ("1.4.2" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2") ("1.6.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0"))))
- '(jde-project-context-switching-enabled-p t)
  '(paren-glint-timeout 10)
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
@@ -124,13 +93,8 @@
  '(truncate-partial-width-windows nil)
  )
 
-(require 'paren-glint)
-(paren-glint-mode 1)
-
-;;'(jde-checkstyle-style "~/etc/checkstyle.xml")
-;;'(jde-checkstyle-style "/app/devAPM-r20/util/checkstyle/conf/checkstyle.xml")
-
-;; '(jde-debugger (quote ("JDEbug")))
+;(require 'paren-glint)
+;(paren-glint-mode 1)
 
 ;;
 ;; About IP printers and cygwin/windows...
@@ -327,7 +291,6 @@
 
 ;;(setq-default vvb-mode 1)
 (add-hook 'emacs-lisp-mode-hook    'turn-on-vvb-mode)
-(add-hook 'jde-mode-hook           'turn-on-vvb-mode)
 ;;(add-hook 'text-mode-hook          'turn-on-vvb-mode)
 (add-hook 'shell-script-mode-hook  'turn-on-vvb-mode)
 
@@ -566,25 +529,25 @@
 ;;; ECB...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(require 'ecb-autoloads)
-
-(defun amiller-ecb-before-activate-hook ()
-  "Enlarges the frame size while preserving the size of the edit pane."
-  (set-frame-position (selected-frame) amiller-ecb-frame-left amiller-frame-top)
-  (set-frame-width    (selected-frame) amiller-ecb-frame-width)
-  t
-  )
-(defun amiller-ecb-deactivate-hook ()
-  "Resets the frame size."
-  (set-frame-width    (selected-frame) amiller-frame-width)
-  (set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
-  t
-  )
-
-(defun ecb-reactivate ()
-  (interactive)
-  (ecb-deactivate)
-  (ecb-activate) )
+;(require 'ecb-autoloads)
+;
+;(defun amiller-ecb-before-activate-hook ()
+;  "Enlarges the frame size while preserving the size of the edit pane."
+;  (set-frame-position (selected-frame) amiller-ecb-frame-left amiller-frame-top)
+;  (set-frame-width    (selected-frame) amiller-ecb-frame-width)
+;  t
+;  )
+;(defun amiller-ecb-deactivate-hook ()
+;  "Resets the frame size."
+;  (set-frame-width    (selected-frame) amiller-frame-width)
+;  (set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
+;  t
+;  )
+;
+;(defun ecb-reactivate ()
+;  (interactive)
+;  (ecb-deactivate)
+;  (ecb-activate) )
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -611,54 +574,6 @@
    )
   )
 
-(require 'jde)
-(require 'jde-bug)
-(defun amiller-jde-mode-hook ()
-  ;; Intendation is based on the GNU style (differences are noted.)
-  (setq c-basic-offset                  4)
-  (setq c-comment-only-line-offset      '(0 . 0))
-  (c-set-offset 'statement-block-intro  '+)
-  (c-set-offset 'knr-argdecl-intro      5)
-  (c-set-offset 'substatement-open      0) ; gnu specifies '+
-  (c-set-offset 'label                  0)
-  (c-set-offset 'statement-case-open    '+)
-  (c-set-offset 'statement-cont         '+)
-  (c-set-offset 'arglist-intro          'c-lineup-arglist-intro-after-paren)
-  (c-set-offset 'arglist-close          'c-lineup-arglist)
-  (c-set-offset 'inline-open            0)
-  (c-set-offset 'brace-list-open        '+)
-  (setq c-block-comment-prefix          "")
-
-  ;;(setq compile-command "javac ")
-  ;;(setq compile-command (concat "jikes " buffer-file-name))
-  (setq case-fold-search    t
-        comment-column     44
-        indent-tabs-mode  nil           ; Use spaces instead of tabs.
-        c-auto-newline    nil
-        )
-
-  (setq fill-column 110)
-
-  (show-paren-mode)
-
-  ;;(local-set-key "\^c\^v\^p"    'jde-run-set-app-args) ;app parameters
-  ;;(local-set-key "\^c\^v\^v"    'jde-run-set-args) ;vm parameters
-  ;;(local-set-key "\^c\^v\^o"    'jde-set-compile-options) ;compiler arguments
-  )
-(add-hook 'jde-mode-hook 'amiller-jde-mode-hook)
-(add-hook 'jde-mode-hook 'turn-on-vvb-mode)
-
-(defun amiller-compilation-mode-hook ()
-  ;; Number of lines in a compilation window.  If nil, use Emacs default.
-  (setq compilation-window-height 17)
-  )
-(add-hook 'compilation-mode-hook 'amiller-compilation-mode-hook)
-
-;; This removes unsightly ^M characters that would otherwise appear in
-;; the output of java applications.
-(add-hook 'comint-output-filter-functions
-          'comint-strip-ctrl-m)
-
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; Code folding...
@@ -682,7 +597,6 @@
 (add-hook 'html-mode-hook         'hideshowvis-enable)
 (add-hook 'java-mode-hook         'hideshowvis-enable)
 (add-hook 'javascript-mode-hook   'hideshowvis-enable)
-;;(add-hook 'jde-mode-hook          'hideshowvis-enable)
 (add-hook 'markdown-mode-hook     'hideshowvis-enable)
 (add-hook 'nxml-mode-hook         'hideshowvis-enable)
 (add-hook 'perl-mode-hook         'hideshowvis-enable)
@@ -798,10 +712,46 @@
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Frame and font manipulation.
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+;;; start emacs maximized put this line at the end of your .emacs file:
+;;(w32-send-sys-command 61488)
+
+;;; Frame size manipulation.
+(defun maximize-frame ()
+  (interactive)
+  (set-frame-parameter nil 'fullscreen
+                       (if (frame-parameter nil 'fullscreen) nil
+                         'fullboth)))
+;;(maximize-frame)
+(global-set-key [(meta return)] 'maximize-frame)
+
+(defun amiller-favorite-frame-size ()
+  "Enlarges the frame size while preserving the size of the edit pane."
+  (set-frame-width    (selected-frame) amiller-frame-width)
+  (set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
+  )
+
+(defun font-big ()
+  (interactive)
+  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-26-*-*-*-m-0-iso10646-1")
+  )
+(defun font-medium ()
+  (interactive)
+  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+  )
+(defun font-normal ()
+  (interactive)
+  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+  )
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; Startup...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(ecb-activate)
+;;(amiller-favorite-frame-size)
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -830,43 +780,14 @@
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Frame and font manipulation.
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;;; start emacs maximized put this line at the end of your .emacs file:
-;;(w32-send-sys-command 61488)
-
-;;; Frame size manipulation.
-(defun maximize-frame ()
-  (interactive)
-  (set-frame-parameter nil 'fullscreen
-                       (if (frame-parameter nil 'fullscreen) nil
-                         'fullboth)))
-;;(maximize-frame)
-(global-set-key [(meta return)] 'maximize-frame)
-
-
-(defun font-big ()
-  (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-26-*-*-*-m-0-iso10646-1")
-  )
-(defun font-medium ()
-  (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1")
-  )
-(defun font-normal ()
-  (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-  )
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 (setq default-directory "~/")
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; END OF FILE
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -886,14 +807,4 @@
  '(font-lock-string-face ((t (:foreground "yellow" :bold nil :italic nil))))
  '(font-lock-type-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
- '(jde-java-font-lock-code-face ((t (:bold nil))))
- '(jde-java-font-lock-constant-face ((t (:foreground "yellow" :bold nil :italic nil))))
- '(jde-java-font-lock-doc-tag-face ((t (:foreground "PaleGreen2" :bold nil :italic t :underline nil))))
- '(jde-java-font-lock-link-face ((t (:foreground "PaleGreen2" :bold nil :italic t :underline t))))
- '(jde-java-font-lock-modifier-face ((t (:foreground "gray94" :bold nil :italic nil))))
- '(jde-java-font-lock-number-face ((t (:foreground "yellow" :bold t :italic nil))))
- '(jde-java-font-lock-package-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
- '(jde-java-font-lock-pre-face ((t (:foreground "PaleGreen4" :bold t :italic nil :underline nil))))
- '(jde-java-font-lock-private-face ((t (:foreground "khaki" :bold nil :italic nil))))
- '(jde-java-font-lock-protected-face ((t (:foreground "khaki" :bold nil :italic nil))))
- '(jde-java-font-lock-public-face ((t (:foreground "khaki" :bold nil :italic nil)))))
+ )
