@@ -200,12 +200,8 @@ alias ly=lilypond
 #export EMACS_HOME=~/devtools/emacs/carbon-emacs-22.3.1_2009.07.25.app
 #export EMACS_APP='carbon-emacs-22.3.1_2009.07.25.app'
 
-#export EMACS_VERSION=23.1.90.1
-#export EMACS_VERSION=23.2
-#export EMACS_VERSION=23.3
-#export EMACS_VERSION=23.4.1
-export EMACS_VERSION=24.3
-#export EMACS_VERSION=25.1
+#export EMACS_VERSION=24.3
+export EMACS_VERSION=25.2
 export EMACS_HOME=~/devtools/emacs/emacs-${EMACS_VERSION}.app
 export EMACS_APP=emacs-${EMACS_VERSION}.app
 
