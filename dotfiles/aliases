@@ -146,7 +146,32 @@ function ggfe() {
     ggf $@ | fe
 }
 
-alias findsrc="find . \( -name \*.java -o -name \*.properties -o -name \*.xml -o -name \*.html -o -name \*.htm -o -name \*.js -o -name \*.jsp -o -name \*.ddl -o -name \*.sql \) -print"
+function findsrc() {
+    find . \( \
+         -name \*.\[Cch\] -o -name \*.cc -o -name \*.cpp -o \
+         -name \*.css -o \
+         -name \*.el -o \
+         -name \*.groovy -o \
+         -name \*.gsp -o \
+         -name \*.html -o -name \*.htm -o \
+         -name \*.java -o \
+         -name \*.js -o \
+         -name \*.json -o \
+         -name \*.jsp -o \
+         -name \*.kt -o \
+         -name \*.lisp -o \
+         -name \*.md -o \
+         -name \*.pl -o \
+         -name \*.properties -o \
+         -name \*.py -o \
+         -name \*.sql -o -name \*.ddl -o \
+         -name \*.txt -o \
+         -name \*.vm -o \
+         -name \*.xml -o \
+         -name \*.yml -o -name \*.yaml \
+         \) \
+         -print
+}
 alias ggsrc="findsrc | quotespaces | xargs grep"
 
 # .c and .h files
@@ -212,6 +237,11 @@ alias ggcss="find . -name \*.css -print | quotespaces | xargs grep"
 alias gel="find . -maxdepth 1 -name \*.el -print | xargs grep -i"
 alias findel="find . -name \*.el -print"
 alias ggel="findel | xargs grep -i"
+
+# kotlin (*.kt) files
+alias gkt="find . -maxdepth 1 -name \*.kt -print | xargs grep"
+alias findkt="find . -name \*.kt -print"i
+alias ggkt="findkt | xargs grep"
 
 # text files (.txt) files
 alias gtxt="find . -maxdepth 1 -name \*.txt -print | xargs grep"
@@ -371,6 +401,13 @@ function ggi18n() {
         | grep $@
 }
 
+alias findyml="find . \( -name \*.yml \) -o \( -name \*.yaml \) -print"
+function ggyml() {
+    # the final grep in the pipeline is to get the match highlighting!
+    findyml | xargs grep $@ \
+        | grep -v \/target\/plugins\/ \
+        | grep -v \/target\/work\/plugins\/
+}
 
 #
 # for looking into and purging caches maintained by maven, ivy, and grails, gradle, ...
