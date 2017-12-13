@@ -3,11 +3,9 @@
 # Makes a tarball of a dir
 #
 
-#[ $# -eq 0 ] && set "$PWD"
-[ $# -eq 0 ] && set "."
+TAR_ARGS=cvfz
+#TAR_FILE=`date +"%Y.%m.%d_%H.%M_tardir.tar.gz"`
+TAR_FILE=`echo "tardir-$@.tar.gz" | sed 's/.\///'`
 
-TARFILE=`date +"%Y.%m.%d_%H.%M_tardir.tar.gz"`
-
-echo $TARFILE
-
-tar cvfz $TARFILE $@
+echo $TAR_FILE
+tar cvfz $TAR_FILE $@

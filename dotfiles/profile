@@ -16,26 +16,26 @@ function parse_vc_branch() {
         exit 1
     fi
 
-    hg branch > /dev/null 2> /dev/null
-    if [ $? -eq 0 ]; then
-        hg branch  2> /dev/null | awk '{ printf "(hg:%s) ", $1 }'
-        exit 1
-    fi
+    #hg branch > /dev/null 2> /dev/null
+    #if [ $? -eq 0 ]; then
+    #    hg branch  2> /dev/null | awk '{ printf "(hg:%s) ", $1 }'
+    #    exit 1
+    #fi
 
-    svn info > /dev/null 2> /dev/null
-    if [ $? -eq 0 ]; then
-        svn info   2> /dev/null | grep Relative\ URL | awk '{ print $3 }' | awk -F/ '{ printf "(svn:%s/%s) ", $2, $3 }'
-        exit 1
-    fi
+    #svn info > /dev/null 2> /dev/null
+    #if [ $? -eq 0 ]; then
+    #    svn info   2> /dev/null | grep Relative\ URL | awk '{ print $3 }' | awk -F/ '{ printf "(svn:%s/%s) ", $2, $3 }'
+    #    exit 1
+    #fi
 
-    if [ -f CVS/Root ] ; then
-        if [ -f CVS/tag ] ; then
-            cat CVS/tag 2> /dev/null | awk '{ printf "(cvs:%s) ", $1 }'
-        else
-            echo -n "(cvs:--)"
-        fi
-        exit 1
-    fi
+    #if [ -f CVS/Root ] ; then
+    #    if [ -f CVS/tag ] ; then
+    #        cat CVS/tag 2> /dev/null | awk '{ printf "(cvs:%s) ", $1 }'
+    #    else
+    #        echo -n "(cvs:--)"
+    #    fi
+    #    exit 1
+    #fi
 
     # else no vc info will be displayed in the prompt
 }
@@ -134,17 +134,17 @@ prompt
 
 export TMP=~/tmp
 
-export ANT_HOME=~/devtools/ant/current
-export ANT_OPTS=-Xmx128m
+#export ANT_HOME=~/devtools/ant/current
+#export ANT_OPTS=-Xmx128m
 #export ANT_OPTS=-Xmx256m
 
-export ARTIFACTORY_HOME=~/devtools/artifactory/artifactory-powerpack-3.5.2.1
+#export ARTIFACTORY_HOME=~/devtools/artifactory/artifactory-powerpack-3.5.2.1
 
 export GRADLE_HOME=~/devtools/gradle/current
 export GRAILS_HOME=~/devtools/grails/current
 export GROOVY_HOME=~/devtools/groovy/current
 
-export IGNITE_HOME=~/devtools/gridgain/gridgain-community-fabric-1.5.6
+#export IGNITE_HOME=~/devtools/gridgain/gridgain-community-fabric-1.5.6
 
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
@@ -184,17 +184,17 @@ export M3=$M3_HOME/bin
 
 export MONGO_HOME=~/devtools/mongo/current
 
-export RABBITMQ_HOME=~/devtools/rabbitmq/current
+#export RABBITMQ_HOME=~/devtools/rabbitmq/current
 
-export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
-alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
+#export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
+#alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
 export SMARTSYNC_HOME=~/devtools/smartsync-3.4.10
 
-export TOMCAT_HOME=~/devtools/tomcat/current
+#export TOMCAT_HOME=~/devtools/tomcat/current
 
-export LILYPOND_HOME=/Applications/LilyPond.app
-alias ly=lilypond
+#export LILYPOND_HOME=/Applications/LilyPond.app
+#alias ly=lilypond
 
 # emacs...
 #export EMACS_HOME=~/devtools/emacs/carbon-emacs-22.3.1_2009.07.25.app
@@ -214,9 +214,6 @@ $ANT_HOME/bin:\
 $EMACS_HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
-$TOMCAT_HOME/bin:\
-~/devtools/git/scripts/ddollar-git-utils:\
-$LILYPOND_HOME/Contents/Resources/bin:\
 /usr/local/bin:\
 /Applications/Xcode.app/Contents/Developer/usr/bin:\
 $PATH
@@ -267,18 +264,19 @@ export GREP_OPTIONS='--color=auto'
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-export DRONE_SERVER=https://drone5.target.com
-export DRONE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoiQW5keU1pbGxlciIsInR5cGUiOiJ1c2VyIn0.J9XPQ-AFnWqi6shFtm8ATPoCcHwwJSFqwc8sd8BakPw
+#export DRONE_SERVER=https://drone5.target.com
+#export DRONE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoiQW5keU1pbGxlciIsInR5cGUiOiJ1c2VyIn0.J9XPQ-AFnWqi6shFtm8ATPoCcHwwJSFqwc8sd8BakPw
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 #export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+#eval "$(jenv init -)"
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/z001v67/.sdkman"
 [[ -s "/Users/z001v67/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/z001v67/.sdkman/bin/sdkman-init.sh"
+
 
 export NVM_DIR="/Users/z001v67/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

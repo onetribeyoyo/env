@@ -3,16 +3,35 @@
 # Makes a tarball for each dir
 #
 
-#[ $# -eq 0 ] && set "$PWD"
-[ $# -eq 0 ] && set "."
+##[ $# -eq 0 ] && set "$PWD"
+#[ $# -eq 0 ] && set "."
+#
+#for directory in "$@" ; do
+#    find "$directory" -maxdepth 1 -type d | while read d ; do
+#        # Don't process "."
+#        if [ $d != "." -a $d != "./" ] ; then
+#            TAR_FILE=`echo "tardir-$d.tar.gz" | sed 's/.\///'`
+#            echo $d
+#            #echo "tar $TAR_ARGS $TAR_FILE    $d"
+#            #tar $TAR_ARGS $TAR_FILE $d
+#        fi
+#    done # end while
+#done # end for
 
-for directory in "$@" ; do
-    find "$directory" -maxdepth 1 -type d | while read d ; do
-        # Don't process "."
-        if [ $d != "." -a $d != "./" ] ; then
-            echo "tar cf  $d.tar    $d"
-            #tar cf  $d.tar    $d
-            tar cvfz $d.tar.gz $d
-        fi
-    done # end while
-done # end for
+tardir .password-store
+tardir .squirrel-sql
+tardir .ssh
+tardir bin
+tardir Desktop
+tardir dev
+tardir devtools
+tardir Documents
+tardir Downloads
+tardir etc
+tardir github
+tardir images
+tardir install
+tardir ole
+tardir stacks
+tardir target_corp
+tardir tmp
