@@ -78,16 +78,16 @@
   (set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
   ;;(set-default-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1") ; default mac font!
   (setq amiller-frame-top           0 ;; 22 ;; pixels
-        amiller-frame-left       1497 ;; pixels
-        amiller-frame-width       132 ;; characters
+        amiller-frame-left       1097 ;; pixels
+        amiller-frame-width       204 ;; characters
         amiller-frame-height       92 ;; rows
         amiller-ecb-frame-left    987 ;; pixels
         amiller-ecb-browser-width  45 ;; characters
         amiller-ecb-frame-width   219 ;; ???
         )
   ;; same size window for ecb or not
-  (setq amiller-frame-left       1497 ;; pixels
-        amiller-frame-width       146 ;; characters
+  (setq amiller-frame-left       1097 ;; pixels
+        amiller-frame-width       204 ;; characters
         )
   )
 
@@ -174,6 +174,7 @@
   )
  )
 (set-frame-width    (selected-frame) amiller-frame-width)
+(set-frame-width    (selected-frame) 204)
 (set-frame-height   (selected-frame) amiller-frame-height)
 (set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
 

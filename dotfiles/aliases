@@ -130,6 +130,7 @@ elif $darwin ; then
     alias fe='fedit'
     alias browse='open -a Firefox'
     alias ff='open -a Firefox'
+    alias chrome='open -a Google\ Chrome'
     alias safari='open -a Safari'
     alias grab='open -a Grab'
     alias gk='open -a GraphicConverter'
