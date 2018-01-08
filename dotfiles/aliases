@@ -75,23 +75,24 @@ alias anf='ant -find build.xml'
 alias ivy='ant -find ivy-build.xml'
 alias aanf='ant -find abuild.xml'
 
-# filters out anything with /CVS in it.
-alias cvsfilter='grep -v \/CVS'
-alias gitfilter='grep -v \/.git'
-alias hgfilter='grep -v \/.hg'
-alias svnfilter='grep -v \/.svn'
-alias vsfilters="cvsfilter | gitfilter | hgfilter | svnfilter"
+# filters out anything with __?__ in it.
+alias cvs_filter='grep -v \/CVS'
+alias git_filter='grep -v \/.git'
+alias hg_filter='grep -v \/.hg'
+alias svn_filter='grep -v \/.svn'
+alias vs_filters="cvs_filter | git_filter | hg_filter | svn_filter"
+alias node_modules_filter='grep -v \/node_modules'
 
 # quotes spaces in pathnames so other shell commands and scripts don't puke.
 # alias quotespaces="sed \'s/ /\\ /g\'"
 # don't know why this doesn't work as an alias but works just fine as a script?
 
-alias emacsclean='find . -name \*~ -print | vsfilters | quotespaces | xargs \rm'
-alias dsstoreclean='find . -name .DS_Store -print | vsfilters | quotespaces | xargs \rm'
-alias vssclean='find . -name vssver.scc -print | vsfilters | quotespaces | xargs \rm'
-alias javaclean='find . -name \*.class -print | vsfilters | quotespaces | xargs \rm'
-alias srcclean='find ./src ./test/dat/src -name \*.class -print | vsfilters | quotespaces | xargs \rm'
-#alias scrub='find . \( -name \*~ -o -name vssver.scc \) -print | vsfilters | quotespaces | xargs \rm'
+alias emacsclean='find . -name \*~ -print | vs_filters | quotespaces | xargs \rm'
+alias dsstoreclean='find . -name .DS_Store -print | vs_filters | quotespaces | xargs \rm'
+alias vssclean='find . -name vssver.scc -print | vs_filters | quotespaces | xargs \rm'
+alias javaclean='find . -name \*.class -print | vs_filters | quotespaces | xargs \rm'
+alias srcclean='find ./src ./test/dat/src -name \*.class -print | vs_filters | quotespaces | xargs \rm'
+#alias scrub='find . \( -name \*~ -o -name vssver.scc \) -print | vs_filters | quotespaces | xargs \rm'
 alias scrub=emacsclean
 
 function scrub-idea() {
@@ -100,11 +101,11 @@ function scrub-idea() {
     rm -vrf ~/Library/Caches/IntelliJIdea11/caches
 }
 
-#alias findw='find . -type f ! \( -perm a=r -o -perm a=rx \) | vsfilters'
-#alias findro='find . -type f \( -perm a=r -o -perm a=rx \) | vsfilters'
+#alias findw='find . -type f ! \( -perm a=r -o -perm a=rx \) | vs_filters'
+#alias findro='find . -type f \( -perm a=r -o -perm a=rx \) | vs_filters'
 alias findw='find . -type f -perm +222 | quotespaces'
 alias findro='find . -type f ! -perm +222 | quotespaces'
-alias purge='findro | vsfilters | xargs rm ; scrub ; rmempty'
+alias purge='findro | vs_filters | xargs rm ; scrub ; rmempty'
 
 alias pme='ps -h -u `id -u`'
 alias pthis='pme | grep'
@@ -196,8 +197,9 @@ alias ggpom="findpom | xargs grep"
 alias gjsp="find . -maxdepth 1 -name \*.jsp | xargs grep"
 alias ggjsp="find . -name \*.jsp | xargs grep"
 
-alias gjs="find . -maxdepth 1 -name \*.js | xargs grep"
-alias ggjs="find . -name \*.js | xargs grep"
+alias gjs="find . -maxdepth 1 -type f -a \( -name \*.js -o -name \*.jsx \) | xargs grep"
+alias findjs="find . -type f -a \( -name \*.js -o -name \*.jsx \) | node_modules_filter"
+alias ggjs="findjs | xargs grep"
 
 alias gjson="find . -maxdepth 1 -name \*.json | xargs grep"
 alias ggjson="find . -name \*.json | xargs grep"
