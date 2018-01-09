@@ -1,21 +1,19 @@
-(set-cursor-color     "red")            ; 255   0   0
-;;(set-cursor-color     "firebrick")
 
-;; original night vision fg / bg
-;;(set-foreground-color "gray94")         ; 240 240 240
-;;(set-background-color "gray22")         ;  79  79  79
+;;; font-lock is empirically fastest when I just leave all this alone!
+(global-font-lock-mode 1)
+;;(setq font-lock-support-mode 'jit-lock-mode)
+;;(setq font-lock-support-mode fast-lock-mode)
+;;setq font-lock-support-mode 'lazy-lock-mode)
+;;setq font-lock-maximum-decoration t)
 
+;;(list-colors-display)
+;;(set-background-color "beige")
 
-;; for dev...
+(set-cursor-color "red")
 (set-foreground-color "grey64")
 (set-background-color "gray17")
 (set-face-background 'region "MidnightBlue")
-
-;; for display...
-;;(set-foreground-color "grey74")
-;;(set-background-color "gray12")
-
-(set-face-background vvb-face "gray22")
+(set-face-background vvb-face "HotPink4")
 (set-face-background 'show-paren-match-face "IndianRed")
 
 (custom-set-faces
