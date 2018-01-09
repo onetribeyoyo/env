@@ -1,4 +1,23 @@
 ;;(setq debug-on-error t)
+;;(setq stack-trace-on-error t)
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Package config...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+;;(require 'package)
+;;(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+;;                    (not (gnutls-available-p))))
+;;       (proto (if no-ssl "http" "https")))
+;;  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+;;  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+;;  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+;;  (when (< emacs-major-version 24)
+;;    ;; For important compatibility libraries like cl-lib
+;;    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+
+(package-initialize)
+
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; Initial configuration...
@@ -6,46 +25,17 @@
 
 (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp"))
 
-(cond (
-       nil ;; this is a stable config that works with emacs 23.4.1
-       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/ecb-latest"))
-       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0/common"))
-       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0"))
-       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/elib-1.0"))
-       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jdee-2.4.0.1/lisp"))
-       (load-file (expand-file-name "~/devtools/emacs/site-lisp/cedet-1.0/common/cedet.el"))
-       )
-      (
-      nil ;; this is a stable config that works with emacs 24.3.1
-       (require 'semantic/analyze)
-       (provide 'semantic-analyze)
-       (provide 'semantic-ctxt)
-       (provide 'semanticdb)
-       (provide 'semanticdb-find)
-       (provide 'semanticdb-mode)
-       (provide 'semantic-load)
-       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/jdee-2.4.1/lisp"))
-       (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/ecb-2.40"))
-       (setq stack-trace-on-error t)
-       )
-      (
-       t ;; this is a stable config that works with emacs 25.2
-       ;(setq stack-trace-on-error t)
-       )
-      )
-
 (add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/emacs-goodies-el-13"))
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/html-helper-mode-2.19.1.1"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/html-helper-mode-2.19.1.1"))
 
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/psgml-1.3.1/"))
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/xae-1.0beta8/lisp"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/psgml-1.3.1/"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/xae-1.0beta8/lisp"))
 
-(load-file (expand-file-name "~/devtools/emacs/site-lisp/revbufs.el"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/prettier/prettier-emacs"))
 
-;;(autoload 'js2-mode "js2" nil t)
-;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;;(load-file (expand-file-name "~/devtools/emacs/site-lisp/revbufs.el"))
 
-(setq semanticdb-default-save-directory "~/.semantic.cache")
+;;(setq semanticdb-default-save-directory "~/.semantic.cache")
 
 ;;(require 'printing)
 ;;(pr-update-menus t)
@@ -70,6 +60,7 @@
  '(indent-tabs-mode nil)
  '(initial-scratch-message nil)
  '(ispell-program-name "aspell" t)
+ '(package-selected-packages (quote (json-mode js2-mode)))
  '(paren-glint-timeout 10)
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
@@ -77,715 +68,41 @@
  '(ps-bottom-margin 25)
  '(ps-inter-column 35)
  '(ps-landscape-mode nil)
- '(ps-left-margin 35)
+ '(ps-left-margin 35 t)
  '(ps-line-number t)
  '(ps-number-of-columns 1)
  '(ps-print-color-p t)
  '(ps-printer-name nil)
- '(ps-right-margin 25)
+ '(ps-right-margin 25 t)
  '(ps-top-margin 25)
  '(ps-zebra-stripe-height 3)
  '(ps-zebra-stripes t)
  '(safe-local-variable-values (quote ((nxml-child-indent . 2))))
- '(search-whitespace-regexp nil) ;; I don't like the lax/fuzzy matching!
+ '(search-whitespace-regexp nil)
  '(show-paren-mode t nil (paren))
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
- '(truncate-partial-width-windows nil)
- )
+ '(truncate-partial-width-windows nil))
 
 ;(require 'paren-glint)
 ;(paren-glint-mode 1)
 
-;;
-;; About IP printers and cygwin/windows...
-;;
-;; The printer-name variable must be set to a valid UNC.  You can't use a
-;; port.  So to use an IP printer you'll have to share it first and give it a
-;; name.
-;;
-;; '(printer-name "//stpprn02/GDT843709P")
-;; '(printer-name "//stpprn02/GDT844020P")
-;; '(ps-line-number-step (quote zebra))
-
-
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;; Postscript printing
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;
-;; defaults
-(setq ps-font-size 9
-      ps-header-font-size 8
-      ps-header-title-font-size 8
-      ;;ps-header-lines 1 ;; only use the filename and page number
-      ps-header-offset 18 ;; margin between header and text in 72nds of an inch
-      ps-left-margin 36   ;; left margin in 72nds
-      ps-right-margin 36  ;; right margin in 72nds
-      )
-
-;; Simple print buffer command
-;;
-(defun sprint-buffer ()
-  "Output a postscript file using the defaults."
-  (interactive)
-  (ps-print-buffer "~/temp.ps")
-  (shell-command "open /Applications/Preview.app ~/temp.ps")
-  )
-
-;; Simple print region command
-;;
-(defun sprint-region ()
-  "Output a postscript file using the defaults."
-  (interactive)
-  (ps-print-region (mark) (point) "~/temp.ps")
-  (shell-command "open /Applications/Preview.app ~/temp.ps"))
-
-;; Setup the postscript settings
-;;
-(defun sprint-setup (use-headers use-line-numbers use-landscape)
-  (interactive
-   (list (y-or-n-p "Headers?")
-         (y-or-n-p "Line numbers?")
-         (y-or-n-p "Landscape?")))
-  (setq ps-print-headers use-headers)
-  (setq ps-line-number use-line-numbers)
-  (setq ps-landscape-mode use-landscape)
-  )
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Buffer and frame setup, etc...
+;;; Config details...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-;;(menu-bar-mode -1) ;; leave the menu bar visible
-(tool-bar-mode -1) ;; hide the tool bar
-
-;;(standard-display-european t)         ; Allow extended character set
-(setq frame-title-format
-      ;;(concat "Emacs [" emacs-version "] - %b - %f")
-      (concat "Emacs [" emacs-version "] - %f")
-      )
-(setq scroll-step                   1
-      backup-by-copying-when-linked t
-      require-final-newline         t
-      mail-self-blind               t
-      inhibit-startup-message       t
-      blink-matching-paren          t
-      line-number-mode              t
-      column-number-mode            t
-      )
-
-(put 'eval-expression 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-
-(global-set-key "" nil)
-
-(load "completion.elc")
-(add-to-list 'completion-ignored-extensions ".DS_Store")
-(initialize-completions)
-(setq *print-next-completion-does-cdabbrev-search-p* t)
-
-;;(global-set-key "." 'tags-search)
-;;(global-set-key "," 'tags-loop-continue)
-
-(global-set-key "t" 'transpose-windows)
-(fset 'transpose-windows
-      "b
-ob
-ob
-")
-
-(global-set-key "p" 'reposition-window)
-
-(global-set-key "4" 'quarter-window-split)
-(defun quarter-window-split ()
-  (interactive)
-  (split-window-vertically -18)
-  )
-
-(defun just-one-space-with-newline ()
-  "Call just-one-space with a negative argument"
-  (interactive)
-  (just-one-space -1))
-(global-set-key (kbd "M-1")     'just-one-space-with-newline)
-
-
-;; file encoding conversion
-(defun set2mac ()
-  (interactive)
-  (set-buffer-file-coding-system 'undecided-mac)
-  (save-buffer))
-(defun set2unix ()
-  (interactive)
-  (set-buffer-file-coding-system 'undecided-unix)
-  (save-buffer))
-(defun set2dos ()
-  (interactive)
-  (set-buffer-file-coding-system 'undecided-dos)
-  (save-buffer))
-
-;;(require 'highlight-completion)
-;;(highlight-completion-mode 1)
-
-(require 'browse-kill-ring)
-(global-set-key (kbd "C-c k") 'browse-kill-ring)
-
-(autoload 'nuke-trailing-whitespace "whitespace" nil t)
-(add-hook 'write-file-hooks 'nuke-trailing-whitespace)
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; MacOSX details...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-(load-file "~/.emacs.osx.frame-size.el")
-
-;; force Command to be the Meta key!
-(setq mac-option-key-is-meta    nil
-      mac-command-key-is-meta     t
-      mac-command-modifier    'meta
-      mac-option-modifier       nil
-      )
-
-;; set the Option key as Super
-(setq mac-option-modifier 'super)
-
-;; I like to use a single frame
-(setq ns-pop-up-frames nil)
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Column width...
-;;; ----10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130--
-
-(setq-default fill-column 72)
-;;(setq-default fill-column 77)
-;;(setq-default fill-column 80)
-;;(setq-default fill-column 90)
-;;(setq-default fill-column 132)
-
-;; Wide column mode changes the cursor colour when it gets past the fill-column.
-;; There's some bug in this that can get the curson colour out of wack.
-;;(require 'wide-column)
-;;(global-wide-column-mode)
-
-;;(require 'margin)
-;;(margin-mode)
-
-(require 'vvb-mode)
-;; My personal preference is 85, but I change it from time to time to help satisfy client coding conventions.
-(setq-default vvb-column         112
-              vvb-sticky-p       nil
-              vvb-permanent-p    t
-              vvb-horizontal-p   nil
-              vvb-right-on-eol-p t
-              )
-;; face colour is set in colors section below.
-
-(defun turn-on-vvb-mode ()
-  "Unconditionally turn on Visible Vertical Bar mode."
-  (vvb-mode nil))
-(defun turn-off-vvb-mode ()
-  "Unconditionally turn off Visible Vertical Bar mode."
-  (vvb-mode -1))
-
-;;(setq-default vvb-mode 1)
-(add-hook 'emacs-lisp-mode-hook    'turn-on-vvb-mode)
-;;(add-hook 'text-mode-hook          'turn-on-vvb-mode)
-(add-hook 'shell-script-mode-hook  'turn-on-vvb-mode)
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Colors and font lock...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;;; font-lock is empirically fastest when I just leave all this alone!
-(global-font-lock-mode 1)
-;;(setq font-lock-support-mode 'jit-lock-mode)
-;;(setq font-lock-support-mode fast-lock-mode)
-;;setq font-lock-support-mode 'lazy-lock-mode)
-;;setq font-lock-maximum-decoration t)
-
-;;(list-colors-display)
-;;(set-background-color "beige")
-;;(set-face-background vvb-face "linen")
-;;(set-face-background vvb-face "misty rose")
-;;(set-face-background vvb-face "cornsilk")
-
-(load-file "~/.emacs.theme.nightvision.el")
+(load-file "~/.emacs.modes.el")
+(load-file "~/.emacs.theme.el")
+(load-file "~/.emacs.frames.el")
+(load-file "~/.emacs.misc.el")
+(load-file "~/.emacs.printing.el")
 
 (require 'color-theme)
 
 
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Misc...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-(setq paren-face 'bold)
-(setq paren-highlight-offscreen t)
-
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-(defun un-camelcase-word-at-point ()
-  "un-camelcase the words in the region, replacing uppercase
-   chars with the lowercase version preceded by an underscore.
-   The first char, if capitalized (eg, PascalCase) is just
-   downcased, no preceding underscore."
-  (interactive)
-  (save-excursion
-    (let ((bounds (bounds-of-thing-at-point 'word)))
-      (replace-regexp "\\([A-Z]\\)" "_\\1" nil
-                      (1+ (car bounds)) (cdr bounds))
-      (downcase-region (car bounds) (cdr bounds))
-      )
-    )
-  )
-(global-set-key (kbd "M-_") 'un-camelcase-word-at-point)
-
-(defun simplify-characters-in-buffer ()
-  "swaps extended characters for lower ascii alternatives."
-  (interactive)
-  ;; do replacements across the entire buffer of...
-  ;; @see etc/char-list.el
-  )
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Modes...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;;(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-;;(autoload 'csv-mode "csv-mode" "Major mode for editing comma-separated value files." t)
-
-(add-to-list 'auto-mode-alist '("\\.rrp" . perl-mode))
-(add-to-list 'auto-mode-alist '("\\.shlib" . shell-script-mode))
-
-;;(require 'vc-hooks)
-(require 'vc-hg)
-(setq hg-with-rainbow-decoration nil)
-(defun vc-hg-annotate-command (file buffer &optional revision)
-  "Execute \"hg annotate\" on FILE, inserting the contents in BUFFER.  Optional arg REVISION is a revision to annotate from."
-  (if hg-with-rainbow-decoration
-      (vc-hg-command buffer 0 file "annotate"
-                     ;; default args were -d -n --follow
-                     "-d"
-                     "-n"
-                     ;;"--follow" ;; full pathname
-                     ;;"-l"       ;; show line number
-                     (when revision (concat "-r" revision))
-                     )
-    (vc-hg-command buffer 0 file "annotate"
-                   "-d"
-                   "-n"
-                   "-u" ;; list the author, THIS BREAKS THE RAINBOW COLORIZATION !
-                   "-q" ;; short date stamp, THIS BREAKS THE RAINBOW COLORIZATION !
-                   (when revision (concat "-r" revision))
-                   )
-    )
-  )
-(defun hg-toggle-rainbow ()
-  (interactive)
-  (setq hg-with-rainbow-decoration (not hg-with-rainbow-decoration))
-  ;; how do I force a re-render?
-  ;;(vc-annotate-prev-revision)
-  ;;(vc-annotate-next-revision)
-  )
-
-;(defconst vc-hg-annotate-re
-;  ;; original regex...
-;  "^[ \t]*\\([0-9]+\\) \\(.\\{30\\}\\)\\(?:\\(: \\)\\|\\(?: +\\(.+\\): \\)\\)"
-;  ;; a new RE that matches my annotate args...
-;  ;;"^.+[ ^t]*\\([0-9]+\\)[ ^t]*\\([0-9]{4}-[0-9]{2}-[0-9]{2}\\)\\(?:\\(: \\)\\|\\(?: +\\(.+\\): \\)\\)"
-;  )
-;
-;(defun vc-hg-annotate-time ()
-;  (when (looking-at vc-hg-annotate-re)
-;    (goto-char (match-end 0))
-;    (vc-annotate-convert-time
-;     (date-to-time (match-string-no-properties 2)))))
-;
-;(defun vc-hg-annotate-extract-revision-at-line ()
-;  (save-excursion
-;    (beginning-of-line)
-;    (when (looking-at vc-hg-annotate-re)
-;      (if (match-beginning 3)
-;	  (match-string-no-properties 1)
-;	(cons (match-string-no-properties 1)
-;	      (expand-file-name (match-string-no-properties 4)
-;				(vc-hg-root default-directory)))))))
-
-(require 'vc-git)
-(defun vc-git-annotate-command (file buf &optional rev)
-  (let ((name (file-relative-name file)))
-    (vc-git-command buf 'async nil "blame"
-                    ;; default args were "--date=iso" "-C" "-C" rev "--" name
-                    "--date=iso" "-C" "-C" rev "--" name
-                    ;;"--date=iso" rev "--" name
-                    ;;"--date=iso" rev "-c" "--" name
-                    )
-    )
-  )
-
-
-;; Text mode
-(setq initial-major-mode 'text-mode)    ; start out in text mode
-(setq default-major-mode 'text-mode)    ; default to text mode
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;; CSS mode
-(add-to-list 'auto-mode-alist '("\\.css" . css-mode))
-(add-to-list 'auto-mode-alist '("\\.less" . css-mode))
-(autoload 'css-mode "css-mode" nil t)
-
-;; go mode
-(require 'go-mode-autoloads)1
-
-;; SQL mode
-(add-to-list 'auto-mode-alist '("\\.ddl" . sql-mode))
-(defun amiller-sql-mode-hook ()
-  (setq tab-width 2)
-  )
-(add-hook 'sql-mode-hook 'amiller-sql-mode-hook)
-(add-hook 'sql-mode-hook 'turn-on-vvb-mode)
-
-;; Shell scripts
-(add-to-list 'auto-mode-alist '("\\.profile" . shell-script-mode))
-(add-to-list 'auto-mode-alist '("\\.aliases" . shell-script-mode))
-
-;; COBOL mode
-(require 'cobol-mode)
-(add-to-list 'auto-mode-alist '("\\.cob" . cobol-mode))
-(add-to-list 'auto-mode-alist '("\\.cob0l" . cobol-mode))
-
-;; PowerBuilder mode
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/powerbuilder-mode"))
-(require 'powerbuilder-mode)
-(add-to-list 'auto-mode-alist '("\\.pbl" . powerbuilder-mode))
-
-;; YAML mode
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/yaml-mode"))
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; SGML and XML
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;; nXml mode
-(add-to-list 'auto-mode-alist '("\\.jsp"  . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.gsp"  . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.html" . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.htm"  . nxml-mode))
-
-(defun amiller-nxml-mode-hook ()
-  (setq nxml-child-indent   2
-        fill-column       120
-        )
-  (turn-on-auto-fill)
-  )
-(add-hook 'nxml-mode-hook 'amiller-nxml-mode-hook)
-(add-hook 'nxml-mode-hook 'turn-on-vvb-mode)
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; javascript Development...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-(add-to-list 'auto-mode-alist '("\\.jsx" . javascript-mode))
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Groovy Development...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/groovy-mode-by-jeremy-rayner"))
-;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy"))
-;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/wolfmanjm-grails-mode-eee23a6"))
-
-;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/groovy-mode-by-russel-winder"))
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/emacs-groovy-mode_201311291207"))
-
-;; make Groovy mode electric by default.
-;;(add-hook 'groovy-mode-hook '(lambda () (require 'groovy-electric) (groovy-electric-mode)) )
-
-;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
-(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
-(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
-(add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
-(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
-
-;;; make Groovy mode electric by default.
-;;(add-hook 'groovy-mode-hook
-;;          '(lambda ()
-;;             (require 'groovy-electric)
-;;             (groovy-electric-mode)
-;;               )
-;;)
-
-(defun amiller-groovy-mode-hook ()
-  (setq indent-tabs-mode nil          ; Use spaces instead of tabs.
-        tab-width          4
-        c-basic-offset     4
-        fill-column      110
-        )
-  )
-(add-hook 'groovy-mode-hook 'amiller-groovy-mode-hook)
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; ECB...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;(require 'ecb-autoloads)
-;
-;(defun amiller-ecb-before-activate-hook ()
-;  "Enlarges the frame size while preserving the size of the edit pane."
-;  (set-frame-position (selected-frame) amiller-ecb-frame-left amiller-frame-top)
-;  (set-frame-width    (selected-frame) amiller-ecb-frame-width)
-;  t
-;  )
-;(defun amiller-ecb-deactivate-hook ()
-;  "Resets the frame size."
-;  (set-frame-width    (selected-frame) amiller-frame-width)
-;  (set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
-;  t
-;  )
-;
-;(defun ecb-reactivate ()
-;  (interactive)
-;  (ecb-deactivate)
-;  (ecb-activate) )
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Java Development...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-(add-to-list 'completion-ignored-extensions ".class") ; Ignore compiled java class files.
-(add-to-list 'completion-ignored-extensions "vssver.scc") ; Ignore VSS turds.
-
-;; Ignore TCC diagram stuff.
-(add-to-list 'completion-ignored-extensions ".dfPackage")
-(add-to-list 'completion-ignored-extensions ".dfSequence")
-
-(global-set-key "c" 'insert-java-class-template)
-
-(setq amiller-java-template-choice 'amiller)
-(defun insert-java-class-template ()
-  "Insert the java class template at point."
-  (interactive)
-  (push-mark)
-  (cond
-   ((eq amiller-java-template-choice 'amiller)    (insert-file "~/etc/class-template.amiller.java"))
-   (t                                             (insert-file "~/etc/class-template.java"))
-   )
-  )
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Code folding...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-(autoload 'hideshowvis-enable "hideshowvis" "Highlight foldable regions")
-
-(autoload 'hideshowvis-minor-mode
-  "hideshowvis"
-  "Will indicate regions foldable with hideshow in the fringe."
-  'interactive)
-
-;;(dolist (hook (list 'emacs-lisp-mode-hook
-;;                    'c++-mode-hook))
-;;  (add-hook hook 'hideshowvis-enable))
-
-(add-hook 'css-mode-hook          'hideshowvis-enable)
-(add-hook 'emacs-lisp-mode-hook   'hideshowvis-enable)
-(add-hook 'groovy-mode-hook       'hideshowvis-enable)
-(add-hook 'html-helper-mode-hook  'hideshowvis-enable)
-(add-hook 'html-mode-hook         'hideshowvis-enable)
-(add-hook 'java-mode-hook         'hideshowvis-enable)
-(add-hook 'javascript-mode-hook   'hideshowvis-enable)
-(add-hook 'markdown-mode-hook     'hideshowvis-enable)
-(add-hook 'nxml-mode-hook         'hideshowvis-enable)
-(add-hook 'perl-mode-hook         'hideshowvis-enable)
-(add-hook 'sgml-mode-hook         'hideshowvis-enable)
-(add-hook 'shell-script-mode-hook 'hideshowvis-enable)
-(add-hook 'sql-mode-hook          'hideshowvis-enable)
-(add-hook 'text-mode-hook         'hideshowvis-enable)
-(add-hook 'xml-mode-hook          'hideshowvis-enable)
-
-(setq hideshowvis-fancy-decorations-enable t)
-(cond (hideshowvis-fancy-decorations-enable
-       (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])
-
-       (defcustom hs-fringe-face 'hs-fringe-face
-         "*Specify face used to highlight the fringe on hidden regions."
-         :type 'face
-         :group 'hideshow)
-
-       (defface hs-fringe-face
-         '((t (:foreground "HotPink4" :background "HotPink4" :box (:line-width 2 :color "HotPink4" :style released-button))))
-         "Face used to highlight the fringe on folded regions"
-         :group 'hideshow)
-
-       (defcustom hs-face 'hs-face
-         "*Specify the face to to use for the hidden region indicator"
-         :type 'face
-         :group 'hideshow)
-
-       (defface hs-face
-         '((t (:background "#ff8" :foreground "black" :box t)))
-         "Face to hightlight the ... area of hidden regions"
-         :group 'hideshow)
-
-       (defun display-code-line-counts (ov)
-         (when (eq 'code (overlay-get ov 'hs))
-           (let* ((marker-string "*fringe-dummy*")
-                  (marker-length (length marker-string))
-                  (display-string (format "(%d)..." (count-lines (overlay-start ov) (overlay-end ov))))
-                  )
-             (overlay-put ov 'help-echo "Hiddent text. C-c,= to show")
-             (put-text-property 0 marker-length 'display (list 'left-fringe 'hs-marker 'hs-fringe-face) marker-string)
-             (overlay-put ov 'before-string marker-string)
-             (put-text-property 0 (length display-string) 'face 'hs-face display-string)
-             (overlay-put ov 'display display-string)
-             )))
-
-       (setq hs-set-up-overlay 'display-code-line-counts)
-       )
-      )
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; lilypond...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/lilypond"))
-
-(autoload 'LilyPond-mode "lilypond-mode")
-(setq auto-mode-alist
-      (cons '("\\.ly$" . LilyPond-mode) auto-mode-alist))
-
-(add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; markdown...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
-;;(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-(defun amiller-markdown-mode-hook ()
-  (setq fill-column 102)
-  )
-(add-hook 'markdown-mode-hook 'amiller-markdown-mode-hook)
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Signatures...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-(global-set-key "z" 'insert-long-signature)
-(defun insert-long-signature ()
-  "Inserts the contents of ~/etc/signature into the current buffer."
-  (interactive)
-  (push-mark)
-  (insert-file "~/etc/signature")
-  )
-
-
-(global-set-key "=" 'insert-short-signature)
-(defun insert-short-signature ()
-  "Insert username, date and time at point."
-  (interactive)
-  (push-mark)
-  ;;(insert (concat "[" (user-login-name) " - " (current-time-string) "]"))
-  ;;(insert (concat "[amiller - " (current-time-string) "]"))
-  ;;(insert (concat " // TODO: amiller " (format-time-string "%Y/%m/%d %H:%M") " - "))
-  (insert (concat " // TODO: amiller " (format-time-string "%Y/%m/%d") " - "))
-  ;;(insert " // TODO: amiller - ")
-  (newline)
-  )
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; editorconfig...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/editorconfig-emacs-master"))
-;(require 'editorconfig)
-;(editorconfig-mode 1)
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Frame and font manipulation.
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;;; start emacs maximized put this line at the end of your .emacs file:
-;;(w32-send-sys-command 61488)
-
-;;; Frame size manipulation.
-(defun maximize-frame ()
-  (interactive)
-  (set-frame-parameter nil 'fullscreen
-                       (if (frame-parameter nil 'fullscreen) nil
-                         'fullboth)))
-;;(maximize-frame)
-(global-set-key [(meta return)] 'maximize-frame)
-
-(defun amiller-favorite-frame-size ()
-  "Enlarges the frame size while preserving the size of the edit pane."
-  (set-frame-width    (selected-frame) amiller-frame-width)
-  (set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
-  )
-
-(defun font-big ()
-  (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-26-*-*-*-m-0-iso10646-1")
-  )
-(defun font-medium ()
-  (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1")
-  )
-(defun font-normal ()
-  (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-  )
-
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; Startup...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;;(amiller-favorite-frame-size)
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; End of safe emacs init file.
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-;;; Expirimental section...
-;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
-
-;(defun indent-or-complete ()
-;  "Complete if point is at end of a word, otherwise indent line."
-;  (interactive)
-;  (if (looking-at "\\>")
-;      (dabbrev-expand nil)
-;    (indent-for-tab-command)
-;    )
-;  )
-;(add-hook 'html-helper-mode-hook
-;          (function (lambda ()
-;                      (local-set-key (kbd "<tab>") 'indent-or-complete)
-;                      )
-;                    )
-;          )
-
-
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 (setq default-directory "~/")
@@ -814,4 +131,14 @@
  '(font-lock-string-face ((t (:foreground "yellow" :bold nil :italic nil))))
  '(font-lock-type-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
- )
+ '(jde-java-font-lock-code-face ((t (:bold nil))))
+ '(jde-java-font-lock-constant-face ((t (:foreground "yellow" :bold nil :italic nil))))
+ '(jde-java-font-lock-doc-tag-face ((t (:foreground "PaleGreen2" :bold nil :italic t :underline nil))))
+ '(jde-java-font-lock-link-face ((t (:foreground "PaleGreen2" :bold nil :italic t :underline t))))
+ '(jde-java-font-lock-modifier-face ((t (:foreground "gray94" :bold nil :italic nil))))
+ '(jde-java-font-lock-number-face ((t (:foreground "yellow" :bold t :italic nil))))
+ '(jde-java-font-lock-package-face ((t (:foreground "LightGoldenrod1" :bold t :italic nil))))
+ '(jde-java-font-lock-pre-face ((t (:foreground "PaleGreen4" :bold t :italic nil :underline nil))))
+ '(jde-java-font-lock-private-face ((t (:foreground "khaki" :bold nil :italic nil))))
+ '(jde-java-font-lock-protected-face ((t (:foreground "khaki" :bold nil :italic nil))))
+ '(jde-java-font-lock-public-face ((t (:foreground "khaki" :bold nil :italic nil)))))
