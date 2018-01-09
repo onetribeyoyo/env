@@ -1,3 +1,44 @@
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; Column width...
+;;; ----10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130--
+
+(setq-default fill-column 72)
+;;(setq-default fill-column 77)
+;;(setq-default fill-column 80)
+;;(setq-default fill-column 90)
+;;(setq-default fill-column 132)
+
+;; Wide column mode changes the cursor colour when it gets past the fill-column.
+;; There's some bug in this that can get the curson colour out of wack.
+;;(require 'wide-column)
+;;(global-wide-column-mode)
+
+;;(require 'margin)
+;;(margin-mode)
+
+(require 'vvb-mode)
+;; My personal preference is 85, but I change it from time to time to help satisfy coding conventions.
+(setq-default vvb-column         112
+              vvb-sticky-p       nil
+              vvb-permanent-p    t
+              vvb-horizontal-p   nil
+              vvb-right-on-eol-p t
+              )
+
+(defun turn-on-vvb-mode ()
+  "Unconditionally turn on Visible Vertical Bar mode."
+  (vvb-mode nil))
+(defun turn-off-vvb-mode ()
+  "Unconditionally turn off Visible Vertical Bar mode."
+  (vvb-mode -1))
+
+;;(setq-default vvb-mode 1)
+(add-hook 'emacs-lisp-mode-hook    'turn-on-vvb-mode)
+;;(add-hook 'text-mode-hook          'turn-on-vvb-mode)
+(add-hook 'shell-script-mode-hook  'turn-on-vvb-mode)
+
+
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 ;;; Modes...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
