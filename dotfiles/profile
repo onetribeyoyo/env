@@ -144,8 +144,6 @@ export GRADLE_HOME=~/devtools/gradle/current
 export GRAILS_HOME=~/devtools/grails/current
 export GROOVY_HOME=~/devtools/groovy/current
 
-#export IGNITE_HOME=~/devtools/gridgain/gridgain-community-fabric-1.5.6
-
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
@@ -179,9 +177,6 @@ export M3=$M3_HOME/bin
 
 #export MAVEN_OPTS="-Xmx2100m -Xms512m"
 
-
-
-
 export MONGO_HOME=~/devtools/mongo/current
 
 #export RABBITMQ_HOME=~/devtools/rabbitmq/current
@@ -210,7 +205,6 @@ export EMACS_APP=emacs-${EMACS_VERSION}.app
 export PATH=\
 .:\
 $HOME/bin:\
-$ANT_HOME/bin:\
 $EMACS_HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\

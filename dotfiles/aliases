@@ -1,37 +1,8 @@
-#
-# !!! The geometry for these terminals is not automagically tied to the display size !!!
-#
-#alias  greenterm='rxvt -bg DarkSlateGray -fg wheat   -geometry 164x71+0+0 -tn xterm -e /usr/bin/bash --login -i'
-alias  greenterm='rxvt -bg DarkSlateGray -fg lavender -geometry 164x71+0+0 -tn xterm -e /usr/bin/bash --login -i'
-alias orangeterm='rxvt -bg black         -fg orange   -geometry 164x71+245+0 -tn xterm -e /usr/bin/bash --login -i'
-
-#alias  greenterm='rxvt -bg DarkSlateGray -fg lavender -geometry 164x71+0+0 -tn xterm -e /usr/bin/bash --login -i'
-#alias orangeterm='rxvt -bg black -fg orange -geometry 164x71+245+0 -tn xterm -e /usr/bin/bash --login -i'
-#alias gnometerm='rxvt -bg DarkSlateGray -fg wheat -geometry 120x52+495+390 -tn xterm -e /usr/bin/bash --login -i'
-
-alias rehash='. ~/.profile'
 
 alias h='history 30'
 alias hh='history 5000 | grep'
 
-if [ `uname` = "SunOS" ]
-then
-    alias ls="ls -p"
-fi
-
-if $cygwin ; then
-    #alias xargs='xargs -0'
-    eval `dircolors -b ~/.ls_colors`
-    alias ls="ls --color=auto -Fh"
-    #alias ls='ls -Fh'
-
-    # This is not necessary when using rxvt.
-    #alias clear='cmd /c cls'
-elif $darwin ; then
-    alias ls="ls -FG"
-    alias terminator='/Applications/Terminator.app/Contents/Resources/terminator/bin/terminator'
-fi
-
+alias ls="ls -FG"
 alias ll='ls -lFh'
 alias la='ls -aFh'
 alias l='ls -1F'
@@ -46,6 +17,7 @@ alias XRM="xargs rm -rf"
 alias t='less'
 
 alias c='clear'
+
 
 # colour defs for printf...
 export NO_COLOUR="\033[0m"
@@ -71,9 +43,6 @@ export YELLOW="\033[1;33m"
 # how can this automagically pic up term-width?
 alias sdiff='sdiff -w 262'
 
-alias anf='ant -find build.xml'
-alias ivy='ant -find ivy-build.xml'
-alias aanf='ant -find abuild.xml'
 
 # filters out anything with __?__ in it.
 alias cvs_filter='grep -v \/CVS'
@@ -82,6 +51,7 @@ alias hg_filter='grep -v \/.hg'
 alias svn_filter='grep -v \/.svn'
 alias vs_filters="cvs_filter | git_filter | hg_filter | svn_filter"
 alias node_modules_filter='grep -v \/node_modules'
+
 
 # quotes spaces in pathnames so other shell commands and scripts don't puke.
 # alias quotespaces="sed \'s/ /\\ /g\'"
@@ -95,11 +65,6 @@ alias srcclean='find ./src ./test/dat/src -name \*.class -print | vs_filters | q
 #alias scrub='find . \( -name \*~ -o -name vssver.scc \) -print | vs_filters | quotespaces | xargs \rm'
 alias scrub=emacsclean
 
-function scrub-idea() {
-    rm -rvf ~/Library/Caches/IntelliJIdea90/caches
-    rm -vrf ~/Library/Caches/IntelliJIdea10/caches
-    rm -vrf ~/Library/Caches/IntelliJIdea11/caches
-}
 
 #alias findw='find . -type f ! \( -perm a=r -o -perm a=rx \) | vs_filters'
 #alias findro='find . -type f \( -perm a=r -o -perm a=rx \) | vs_filters'
@@ -120,28 +85,25 @@ alias packages="awk -F: '{print \$1}'        \
                 | sed 's/\;//g'              \
                 | uniq -c"
 
-if $cygwin ; then
-    export EDITOR='gnuclientw.exe -M'
-    alias emacs='gnuclientw -M'
-    alias edit='xargs gnuclientw -M'
-elif $darwin ; then
-    alias emacs='open -a $EMACS_APP'
-    alias edit='xargs open -a $EMACS_APP'
-    alias fedit='files | edit'
-    alias fe='fedit'
-    alias browse='open -a Firefox'
-    alias ff='open -a Firefox'
-    alias chrome='open -a Google\ Chrome'
-    alias safari='open -a Safari'
-    alias grab='open -a Grab'
-    alias gk='open -a GraphicConverter'
-    alias sgit='open -a SmartGit'
-fi
+
+alias emacs='open -a $EMACS_APP'
+alias edit='xargs open -a $EMACS_APP'
+alias fedit='files | edit'
+alias fe='fedit'
+
+alias ff='open -a Firefox'
+alias chrome='open -a Google\ Chrome'
+alias safari='open -a Safari'
+alias browse=chrome
+
+alias grab='open -a Grab'
+alias gk='open -a GraphicConverter'
+alias sgit='open -a SmartGit'
+
 
 #
 # grep (and recursively grep) for <arg> in files
 #
-
 alias gf="find . -maxdepth 1 -type f | grep"
 alias ggf="find . -type f ! -name \*class ! -name \*~ | grep"
 function ggfe() {
@@ -158,6 +120,7 @@ function findsrc() {
          -name \*.html -o -name \*.htm -o \
          -name \*.java -o \
          -name \*.js -o \
+         -name \*.jsx -o \
          -name \*.json -o \
          -name \*.jsp -o \
          -name \*.kt -o \
@@ -183,19 +146,17 @@ alias ggc='find \( -name \*.\[Cch\] -o -name \*.cc -o -name \*.cpp \) -print | q
 # .java files
 alias gj="find . -maxdepth 1 \( -name \*.java -o -name \*.jsp -o -name \*.properties \) -print | xargs grep"
 alias findjava="find . \( -name \*.java \) -print"
-alias findjsp="find . \( -name \*.jsp \) -print"
 alias findclasses="find . -name \*.class -print"
 alias ggj="findjava | quotespaces | xargs grep"
 alias gjimport="gj import | awk '{print \$2}' | sort | uniq"
 alias ggjimport="ggj import | awk '{print \$2}' | sort | uniq"
 
+alias findjsp="find . \( -name \*.jsp \) -print"
+alias gjsp="find . -maxdepth 1 -name \*.jsp | xargs grep"
 alias ggjsp="findjsp | xargs grep"
 
 alias findpom="find . -name pom.xml -print"
 alias ggpom="findpom | xargs grep"
-
-alias gjsp="find . -maxdepth 1 -name \*.jsp | xargs grep"
-alias ggjsp="find . -name \*.jsp | xargs grep"
 
 alias gjs="find . -maxdepth 1 -type f -a \( -name \*.js -o -name \*.jsx \) | xargs grep"
 alias findjs="find . -type f -a \( -name \*.js -o -name \*.jsx \) | node_modules_filter"
@@ -204,9 +165,17 @@ alias ggjs="findjs | xargs grep"
 alias gjson="find . -maxdepth 1 -name \*.json | xargs grep"
 alias ggjson="find . -name \*.json | xargs grep"
 
+# HTML (.html, .htm, and .css) files
+alias ghtml="find . -maxdepth 1 \( -name \*.html -o -name \*.htm -o -name \*.css \) -print | xargs grep"
+alias gghtml="find . \( -name \*.html -o -name \*.htm -o -name \*.css \) -print | quotespaces | xargs grep"
+
+# CSS files
+alias gcss="find . -maxdepth 1 -name \*.css -print | xargs grep"
+alias ggcss="find . -name \*.css -print | quotespaces | xargs grep"
+
 # web ui files
-alias gw="find . -maxdepth 1 \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js \) -print | xargs grep"
-alias ggw="find . \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js \) -print | quotespaces | xargs grep"
+alias gw="find . -maxdepth 1 \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js -o -name \*.jsx \) -print | xargs grep"
+alias ggw="find . \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js -o -name \*.jsx \) -print | quotespaces | xargs grep"
 
 # xml files
 alias gxml="find . -maxdepth 1 -name xml -print | xargs grep"
@@ -221,14 +190,6 @@ alias ggpl="find . \( -name \*.pl \) -print | quotespaces | xargs grep"
 #  -i case Insensitive!
 alias gsql="ls -1 *.sql *.ddl | xargs grep"
 alias ggsql="find . \( -name \*.sql -o -name \*.ddl \) -print | quotespaces | xargs grep -i"
-
-# HTML (.html, .htm, and .css) files
-alias ghtml="find . -maxdepth 1 \( -name \*.html -o -name \*.htm -o -name \*.css \) -print | xargs grep"
-alias gghtml="find . \( -name \*.html -o -name \*.htm -o -name \*.css \) -print | quotespaces | xargs grep"
-
-# CSS files
-alias gcss="find . -maxdepth 1 -name \*.css -print | xargs grep"
-alias ggcss="find . -name \*.css -print | quotespaces | xargs grep"
 
 # Lisp (.lisp) files
 #  -i case Insensitive!
@@ -251,7 +212,7 @@ alias gtxt="find . -maxdepth 1 -name \*.txt -print | xargs grep"
 alias findtxt="find . -name \*.txt -print"
 alias ggtxt="findtxt | xargs grep"
 
-# text files (.md) files
+# markdown files (.md) files
 alias gmd="find . -maxdepth 1 -name \*.md -print | xargs grep"
 alias findmd="find . -name \*.md -print"
 alias ggmd="findmd | xargs grep"
@@ -260,38 +221,6 @@ alias ggmd="findmd | xargs grep"
 alias gpy="find . -maxdepth 1 \( -name \*.py \) -print | xargs grep"
 alias findpy="find . \( -name \*.py \) -print"
 alias ggpy="findpy | quotespaces | xargs grep"
-
-
-alias tomcat-start='${TOMCAT_HOME}/bin/startup.sh start'
-alias tomcat-stop='${TOMCAT_HOME}/bin/shutdown.sh stop'
-alias tomcat-bounce='tomcat-stop ; tomcat-start'
-alias tomcat-log='tail -3000lf ${TOMCAT_HOME}/logs/catalina.out'
-alias tomcat-clear-logs='rm -rvf ${TOMCAT_HOME}/logs/*'
-function tomcat-deploy() {
-    cp -v target/*.war ${TOMCAT_HOME}/webapps/
-    cp -v */target/*.war ${TOMCAT_HOME}/webapps/
-}
-function tomcat-undeploy() {
-    #cp -v target/*.war ${TOMCAT_HOME}/webapps/
-    #cp -v */target/*.war ${TOMCAT_HOME}/webapps/
-    echo "NOT IMPLEMENTED"
-}
-
-alias jboss-start='${JBOSS_HOME}/bin/standalone.sh'
-alias jboss-stop='${JBOSS_HOME}/bin/jboss-cli.sh --connect command=:shutdown'
-alias jboss-clean='rm -rf ${JBOSS_HOME}/server/default/tmp/deploy ${JBOSS_HOME}/server/default/work/jboss.web  ${JBOSS_HOME}/server/default/log/*'
-alias jboss-log='tail -3000lf ${JBOSS_HOME}/standalone/log/server.log'
-alias jboss-roll='jboss-start ; bg ; jboss-stop'
-
-alias bamboo-start='${BAMBOO_HOME}/bin/start-bamboo.sh'
-alias bamboo-stop='${BAMBOO_HOME}/bin/stop-bamboo.sh'
-
-alias artifactory-start='${ARTIFACTORY_HOME}/bin/artifactory.sh'
-
-alias docker-start='open -a docker.app'
-
-alias winternet='telnet winternet.com'
-alias devserver='ssh 192.168.162.5 -l amiller'
 
 
 #
@@ -503,9 +432,6 @@ function purge-caches() {
 }
 
 
-alias jarzilla='open -a jarzilla-0.1.5.app'
-
-
 #
 # to checkout a PR into a local branch...
 #
@@ -516,7 +442,7 @@ function gitcopr() {
  }
 
 #
-# for finding all modified files...
+# for finding all modified files in a local git clone...
 #
 function gitmod() {
     git status -s | grep \ M\   | awk '{ print $2 }'
@@ -580,11 +506,7 @@ function forallwhere() {
     #)
 }
 
-function antall() { # run ant in the directories that have build.xml
-    forallwhere build.xml ant $@
-}
-
-function gradleall() { # run gradle in the directories that have grails-app
+function gradleall() { # run gradle in the directories that have build.gradle
     forallwhere build.gradle g $@
 }
 
@@ -614,9 +536,8 @@ function hgall() { # run hg in the directories that have .hg
 
 function branches() { # show what branches we're on
     gitall st | grep git:
-    hgall st | grep hg:
+    #hgall st | grep hg:
 }
-
 
 
 #
@@ -680,22 +601,20 @@ function gource2movie_small() {
 #
 # local install...
 #
-if $darwin ; then
-    alias dashboard-stop="defaults write com.apple.dashboard mcx-disabled -boolean YES ; killall Dock"
-    alias dashboard-start="defaults write com.apple.dashboard mcx-disabled -boolean NO ; killall Dock"
+alias dashboard-stop="defaults write com.apple.dashboard mcx-disabled -boolean YES ; killall Dock"
+alias dashboard-start="defaults write com.apple.dashboard mcx-disabled -boolean NO ; killall Dock"
 
-    alias dock-2d="defaults write com.apple.Dock no-glass -boolean YES ; killall Dock"
-    alias dock-3d="defaults write com.apple.Dock no-glass -boolean NO ; killall Dock"
+alias dock-2d="defaults write com.apple.Dock no-glass -boolean YES ; killall Dock"
+alias dock-3d="defaults write com.apple.Dock no-glass -boolean NO ; killall Dock"
 
-    alias spotlight-stop="sudo mdutil -a -i off"
-    alias spotlight-start="sudo mdutil -a -i on"
+alias spotlight-stop="sudo mdutil -a -i off"
+alias spotlight-start="sudo mdutil -a -i on"
 
-    alias clearrecents="defaults delete -g AppleRecentFolders"
+alias clearrecents="defaults delete -g AppleRecentFolders"
 
-    # Show Full Directory Path in Mac OS X Finder Window Title Bars
-    #defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES ; killall Finder
-    #defaults write com.apple.finder _FXShowPosixPathInTitle -bool NO ; killall Finder
-fi
+# Show Full Directory Path in Mac OS X Finder Window Title Bars
+#defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES ; killall Finder
+#defaults write com.apple.finder _FXShowPosixPathInTitle -bool NO ; killall Finder
 
 
 alias jenkins-start="sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist"
@@ -711,7 +630,6 @@ alias mysql-bounce="mysql-stop ; mysql-start"
 alias rabbit-start="rabbitmq-server"
 alias rabbit-stop="rabbitmqctl stop"
 
-alias st='open -a SourceTree.app'
 
 # hg aliases (originally borrowed from Ted Naleid)...
 alias hs="hg status"
@@ -722,8 +640,6 @@ function lf() {
 alias ic="hg incoming -v -S | lf"
 alias og="hg outgoing -v -S | lf"
 alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
-
-alias truecrypt="open -a TrueCrypt.app"
 
 
 #alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
