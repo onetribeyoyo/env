@@ -92,11 +92,27 @@
   )
 (global-set-key (kbd "M-_") 'un-camelcase-word-at-point)
 
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; But I really like lower ascii...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(defun simplify-string-in-buffer (oldString newString)
+  "replace string across the entire buffer"
+  ;;(push-mark)
+  (goto-char (point-min))
+  (while (re-search-forward oldString nil t)
+    (replace-match newString)
+    )
+  )
+
 (defun simplify-characters-in-buffer ()
   "swaps extended characters for lower ascii alternatives."
   (interactive)
-  ;; do replacements across the entire buffer of...
-  ;; @see etc/char-list.el
+  (simplify-string-in-buffer "’" "'")
+  (simplify-string-in-buffer "“" "\"")
+  (simplify-string-in-buffer "”" "\"")
+  (simplify-string-in-buffer "…" "...")
   )
 
 

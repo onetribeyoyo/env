@@ -3,8 +3,8 @@
 (global-font-lock-mode 1)
 ;;(setq font-lock-support-mode 'jit-lock-mode)
 ;;(setq font-lock-support-mode fast-lock-mode)
-;;setq font-lock-support-mode 'lazy-lock-mode)
-;;setq font-lock-maximum-decoration t)
+;;(setq font-lock-support-mode 'lazy-lock-mode)
+;;(setq font-lock-maximum-decoration t)
 
 ;;(list-colors-display)
 ;;(set-background-color "beige")
