@@ -61,7 +61,6 @@
  '(initial-scratch-message nil)
  '(ispell-program-name "aspell" t)
  '(package-selected-packages (quote (json-mode js2-mode)))
- '(paren-glint-timeout 10)
  '(paren-match-face (quote paren-face-match-light))
  '(paren-sexp-mode t)
  '(printer-name nil)
@@ -77,14 +76,12 @@
  '(ps-top-margin 25)
  '(ps-zebra-stripe-height 3)
  '(ps-zebra-stripes t)
+ '(read-buffer-completion-ignore-case t)
  '(safe-local-variable-values (quote ((nxml-child-indent . 2))))
  '(search-whitespace-regexp nil)
  '(show-paren-mode t nil (paren))
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(truncate-partial-width-windows nil))
-
-;(require 'paren-glint)
-;(paren-glint-mode 1)
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
