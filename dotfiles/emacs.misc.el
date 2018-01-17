@@ -113,6 +113,7 @@
   (simplify-string-in-buffer "“" "\"")
   (simplify-string-in-buffer "”" "\"")
   (simplify-string-in-buffer "…" "...")
+  (simplify-string-in-buffer "–" "-")
   )
 
 
