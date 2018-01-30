@@ -32,7 +32,7 @@ tardir github
 tardir images
 tardir install
 tardir ole
-tardir opc
+tardir sango
 tardir stacks
 tardir target_corp
 tardir tmp
