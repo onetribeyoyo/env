@@ -125,7 +125,8 @@
 ;; Better imenu
 ;;(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
-;;(require 'prettier-js)
+(require 'prettier-js)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
