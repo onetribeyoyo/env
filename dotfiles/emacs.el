@@ -93,11 +93,11 @@
 ;;; Config details...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(load-file "~/.emacs.modes.el")
-(load-file "~/.emacs.theme.el")
-(load-file "~/.emacs.frames.el")
-(load-file "~/.emacs.misc.el")
-(load-file "~/.emacs.printing.el")
+(load-file "~/emacs-config/modes.el")
+(load-file "~/emacs-config/theme.el")
+(load-file "~/emacs-config/fonts-and-frames.el")
+(load-file "~/emacs-config/misc.el")
+(load-file "~/emacs-config/printing.el")
 
 ;;(require 'color-theme)
 
