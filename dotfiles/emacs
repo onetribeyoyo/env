@@ -5,7 +5,11 @@
 ;;; Package config...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-;;(require 'package)
+(require 'package)
+
+;;(add-to-list 'package-archives
+;;             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
 ;;(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
 ;;                    (not (gnutls-available-p))))
 ;;       (proto (if no-ssl "http" "https")))
@@ -15,6 +19,7 @@
 ;;  (when (< emacs-major-version 24)
 ;;    ;; For important compatibility libraries like cl-lib
 ;;    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+
 
 (package-initialize)
 
@@ -94,7 +99,7 @@
 (load-file "~/.emacs.misc.el")
 (load-file "~/.emacs.printing.el")
 
-(require 'color-theme)
+;;(require 'color-theme)
 
 
 

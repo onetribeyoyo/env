@@ -15,31 +15,66 @@
 
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
 
-;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
-;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
-;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-15-*-*-*-m-0-iso10646-1")
-;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-20-*-*-*-m-0-iso10646-1")
-;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-26-*-*-*-m-0-iso10646-1")
-;;(set-default-font "-apple-andale mono-medium-r-normal--14-100-72-72-m-100-iso10646-1")
-;;(set-default-font "-apple-monaco-medium-r-normal--11-0-72-72-m-0-iso10646-1")
-;;(set-default-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1") ; default mac font!
-;;(set-default-font "-apple-monaco-medium-r-normal--14-0-72-72-m-0-iso10646-1")
 
+(when (window-system)
 
-;;(set-default-font "-apple-andale mono-medium-r-normal--14-100-72-72-m-100-iso10646-1")
-;;Inconsolata
-;; -apple-Andale_Mono-medium-normal-normal-*-14-*-*-*-m-0-fontset-auto1
-;; -*-*-*-*-*-*-*-*-*-*-*-*-fontset-default
-;; -ns-*-*-*-*-*-10-*-*-*-*-*-fontset-standard
-;; -apple-Monaco-medium-normal-normal-*-*-*-*-*-m-0-fontset-startup
+  ;;(set-default-font "inconsolata")
+  (set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
 
+  ;; NOTE: fira is (subjectively) a heavier font than inconsolata
+  ;;(set-default-font "Fira Code")
+  ;;(set-default-font "-*-Fira Code-normal-normal-normal-*-12-*-*-*-m-0-fontset-auto1")
+  ;;(set-default-font "-*-Fira Code-normal-normal-normal--13-*-*-*-*-*-iso10646-1")
 
-;; on a retna 27" monitor...
-;;(set-default-font "-apple-Inconsolata-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-(set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
-;;(set-default-font "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1") ; default mac font!
+  )
+;;(set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+;;(set-default-font "-*-Fira Code-medium-r-normal--15-*-*-*-*-*-iso10646-1")
+
+;;;
+;;;  0 1 2 3 4 5 6 7 8 9
+;;;
+;;;  ==  ===  !=  <=>  ()  {}  []  [:]
+;;;
+;;;  a b c d e f g h i j k l m n o p q r s t u v w x y z
+;;;
+;;;  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+;;;
+;;;  , . / < > ? ; ' : " [ ] \ { } | - = _ + ` ~ ! @ # $ % ^ & * ( )
+;;;
+
+;; for Fira Code font...
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+               )
+             ))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))
+    )
+  )
+
 (setq amiller-frame-top           0 ;; 22 ;; pixels
       amiller-frame-left       1097 ;; pixels
       amiller-frame-width       204 ;; characters

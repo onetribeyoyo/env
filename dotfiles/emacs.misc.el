@@ -62,8 +62,8 @@
 ;;(require 'highlight-completion)
 ;;(highlight-completion-mode 1)
 
-(require 'browse-kill-ring) ;; from emacs-goodies
-(global-set-key (kbd "C-c k") 'browse-kill-ring)
+;;(require 'browse-kill-ring) ;; from emacs-goodies
+;;(global-set-key (kbd "C-c k") 'browse-kill-ring)
 
 (autoload 'nuke-trailing-whitespace "whitespace" nil t)
 (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
@@ -103,6 +103,7 @@
   (goto-char (point-min))
   (while (re-search-forward oldString nil t)
     (replace-match newString)
+    (goto-char (point-min))
     )
   )
 
@@ -114,6 +115,8 @@
   (simplify-string-in-buffer "”" "\"")
   (simplify-string-in-buffer "…" "...")
   (simplify-string-in-buffer "–" "-")
+  (simplify-string-in-buffer "•" "-")
+  (simplify-string-in-buffer "" "(o)")
   )
 
 

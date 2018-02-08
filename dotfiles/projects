@@ -10,5 +10,5 @@ alias bartel="cd ~/github/ole/bartel-app"
 
 alias leatherman="cd ~/github/ole/leatherman"
 
-alias sango="cd ~/github/sango"
+alias sango="cd ~/github/sango/sangoui"
 alias opc=sango
