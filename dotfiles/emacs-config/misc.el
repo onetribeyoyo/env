@@ -110,6 +110,7 @@
 (defun simplify-characters-in-buffer ()
   "swaps extended characters for lower ascii alternatives."
   (interactive)
+  (simplify-string-in-buffer "‘" "'")
   (simplify-string-in-buffer "’" "'")
   (simplify-string-in-buffer "“" "\"")
   (simplify-string-in-buffer "”" "\"")
@@ -117,6 +118,7 @@
   (simplify-string-in-buffer "–" "-")
   (simplify-string-in-buffer "•" "-")
   (simplify-string-in-buffer "" "(o)")
+  (simplify-string-in-buffer " " " ")
   )
 
 

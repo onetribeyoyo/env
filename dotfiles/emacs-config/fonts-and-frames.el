@@ -15,17 +15,23 @@
 
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
 
+(setq
+
+ normal-font "-apple-Inconsolata-medium-r-normal-*-14-*-*-*-m-0-iso10646-1"
+ bigger-font "-apple-Inconsolata-medium-r-normal-*-15-*-*-*-m-0-iso10646-1"
+ medium-font "-apple-Inconsolata-medium-r-normal-*-18-*-*-*-m-0-iso10646-1"
+ big-font    "-apple-Inconsolata-medium-r-normal-*-26-*-*-*-m-0-iso10646-1"
+
+ inconsolata-font "inconsolata"
+
+ ;; NOTE: fira is (subjectively) a heavier font than inconsolata
+ fira-code-font "Fira Code"
+ ;;normal-font "-*-Fira Code-normal-normal-normal-*-12-*-*-*-m-0-fontset-auto1"
+ ;;normal-font "-*-Fira Code-normal-normal-normal--13-*-*-*-*-*-iso10646-1"
+ )
 
 (when (window-system)
-
-  ;;(set-default-font "inconsolata")
-  (set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
-
-  ;; NOTE: fira is (subjectively) a heavier font than inconsolata
-  ;;(set-default-font "Fira Code")
-  ;;(set-default-font "-*-Fira Code-normal-normal-normal-*-12-*-*-*-m-0-fontset-auto1")
-  ;;(set-default-font "-*-Fira Code-normal-normal-normal--13-*-*-*-*-*-iso10646-1")
-
+  (set-default-font normal-font)
   )
 ;;(set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
 ;;(set-default-font "-*-Fira Code-medium-r-normal--15-*-*-*-*-*-iso10646-1")
@@ -91,17 +97,31 @@
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
 
 
-(defun font-big ()
+(defun font-normal ()
   (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-26-*-*-*-m-0-iso10646-1")
+  (set-default-font normal-font)
+  )
+(defun font-bigger ()
+  (interactive)
+  (set-default-font bigger-font)
   )
 (defun font-medium ()
   (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+  (set-default-font medium-font)
   )
-(defun font-normal ()
+(defun font-big ()
   (interactive)
-  (set-default-font "-apple-Inconsolata-medium-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+  (set-default-font big-font)
+  )
+
+(defun font-fira ()
+  (interactive)
+  (set-default-font fira-code-font)
+  )
+
+(defun font-inconsolata ()
+  (interactive)
+  (set-default-font inconsolata-font)
   )
 
 
