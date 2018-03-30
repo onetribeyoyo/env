@@ -70,6 +70,13 @@
 (add-to-list 'auto-mode-alist '("\\.less" . css-mode))
 (autoload 'css-mode "css-mode" nil t)
 
+(defun amiller-css-mode-hook ()
+  (setq tab-width          4
+        //c-basic-offset     4
+        )
+  )
+(add-hook 'css-mode-hook 'amiller-css-mode-hook)
+
 ;; go mode
 (require 'go-mode-autoloads)
 

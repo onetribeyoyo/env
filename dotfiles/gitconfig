@@ -1,0 +1,36 @@
+[user]
+        email = andrew.r.miller@target.com
+        name = Andy Miller
+
+[core]
+        editor = emacs
+        excludesfile = /Users/z001v67/.gitignore_global
+
+[color]
+        ui = true
+
+[alias]
+        co = checkout
+        lg = log --graph --pretty=format:'%C(red)%h %C(yellow)-%d <%an - %cr>%C(reset) %s' --abbrev-commit --date=relative
+        pb = fetch --progress --prune origin
+        st = status -s
+        sync = pull --rebase upstream master
+
+        ic = fetch --all --dry-run -- verbose
+        og = log origin/master..HEAD
+        peek = fetch --all --dry-run -- verbose
+
+[credential]
+        helper = osxkeychain
+
+[branch]
+        autosetuprebase = never
+
+[gc]
+        autoDetach = false
+
+[push]
+        default = simple
+
+[pull]
+        rebase = true

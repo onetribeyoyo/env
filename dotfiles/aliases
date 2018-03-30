@@ -607,6 +607,9 @@ alias dashboard-start="defaults write com.apple.dashboard mcx-disabled -boolean 
 alias dock-2d="defaults write com.apple.Dock no-glass -boolean YES ; killall Dock"
 alias dock-3d="defaults write com.apple.Dock no-glass -boolean NO ; killall Dock"
 
+# an attempt to resolve the sopradically poor audio quality with the plantronics bluetooth headset
+alias a2dp='defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" 53'
+
 alias spotlight-stop="sudo mdutil -a -i off"
 alias spotlight-start="sudo mdutil -a -i on"
 
