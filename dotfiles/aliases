@@ -204,7 +204,7 @@ alias ggel="findel | xargs grep -i"
 
 # kotlin (*.kt) files
 alias gkt="find . -maxdepth 1 -name \*.kt -print | xargs grep"
-alias findkt="find . -name \*.kt -print"i
+alias findkt="find . -name \*.kt -print"
 alias ggkt="findkt | xargs grep"
 
 # text files (.txt) files
@@ -506,6 +506,33 @@ function forallwhere() {
     #)
 }
 
+function forallwhere2() {
+    flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
+    command=$1 ; shift # the command to execute
+    #time ( \
+        if [ -e "$flag" ] ; then
+            # just run the comman once in the current dir
+            local PWD=`pwd`
+            local VC_INFO=`parse_vc_branch`
+            printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+            $command $@
+        else
+            find . -type d | while read directory ; do
+                if [ -e "$directory/$flag" ] ; then
+                    (
+                        cd $directory
+                        local PWD=`pwd`
+                        local VC_INFO=`parse_vc_branch`
+                        printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+                        $command $@
+                    )
+                fi
+            done # end while \
+        fi
+    #)
+}
+
+
 function gradleall() { # run gradle in the directories that have build.gradle
     forallwhere build.gradle g $@
 }
@@ -535,7 +562,7 @@ function hgall() { # run hg in the directories that have .hg
 }
 
 function branches() { # show what branches we're on
-    gitall st | grep git:
+    gitall mod | grep git:
     #hgall st | grep hg:
 }
 
@@ -652,4 +679,15 @@ alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/Smartsynchroniz
 function temacs() {
     touch $@
     emacs $@
+}
+
+
+function fast-node() {
+    if [ ! -d "./node_modules" ] ; then
+        echo "fast-node: mkdir ./node_modules"
+        mkdir ./node_modules
+    fi
+    # this will keep spotlight from indexing node_modules
+    echo "fast-node: touch ./node_modules/.metadata_never_index"
+    touch ./node_modules/.metadata_never_index
 }
