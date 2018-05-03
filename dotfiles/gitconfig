@@ -12,9 +12,10 @@
 [alias]
         co = checkout
         lg = log --graph --pretty=format:'%C(red)%h %C(yellow)-%d <%an - %cr>%C(reset) %s' --abbrev-commit --date=relative
+        mod = status -s
         pb = fetch --progress --prune origin
-        st = status -s
         sync = pull --rebase upstream master
+        ssync = pull --rebase upstream master
 
         ic = fetch --all --dry-run -- verbose
         og = log origin/master..HEAD
