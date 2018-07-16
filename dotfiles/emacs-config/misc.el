@@ -121,6 +121,7 @@
   (simplify-string-in-buffer "" "(o)")
   (simplify-string-in-buffer " " " ")
   (simplify-string-in-buffer "​" " ")
+  (simplify-string-in-buffer" " " ")
   )
 
 
