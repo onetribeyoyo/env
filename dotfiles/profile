@@ -184,7 +184,8 @@ export MONGO_HOME=~/devtools/mongo/current
 #export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
 #alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
-export SMARTSYNC_HOME=~/devtools/smartsync-3.4.10
+#export SMARTSYNC_HOME=~/devtools/smartsync-3.4.10
+export SMARTSYNC_HOME=~/devtools/smartsync-3.5.0
 
 #export TOMCAT_HOME=~/devtools/tomcat/current
 
@@ -272,8 +273,11 @@ export SDKMAN_DIR="/Users/z001v67/.sdkman"
 [[ -s "/Users/z001v67/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/z001v67/.sdkman/bin/sdkman-init.sh"
 
 
-export NVM_DIR="/Users/z001v67/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#export NVM_DIR="/Users/z001v67/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 #use-jdk 1.8
 
