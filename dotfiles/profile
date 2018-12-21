@@ -211,6 +211,7 @@ $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 /usr/local/bin:\
 /Applications/Xcode.app/Contents/Developer/usr/bin:\
+$HOME/.config/composer/vendor/couscous/couscous/bin:\
 $PATH
 
 function rehome() {

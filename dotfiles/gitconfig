@@ -23,6 +23,8 @@
         og = log origin/master..HEAD
         peek = fetch --all --dry-run -- verbose
 
+        hard = reset --hard
+
 [credential]
         helper = osxkeychain
 

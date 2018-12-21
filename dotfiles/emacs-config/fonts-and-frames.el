@@ -83,6 +83,7 @@
 
 (setq amiller-frame-top           0 ;; 22 ;; pixels
       amiller-frame-left       1097 ;; pixels
+      amiller-frame-right        -1 ;; pixels
       amiller-frame-width       204 ;; characters
       amiller-frame-height       92 ;; rows
       )
@@ -90,6 +91,7 @@
 (set-frame-width    (selected-frame) amiller-frame-width)
 (set-frame-height   (selected-frame) amiller-frame-height)
 (set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
+;;(set-frame-position (selected-frame) (- (display-pixel-width) 100) amiller-frame-top)
 
 ;; (set-frame-parameter nil 'alpha '(<active> [<inactive>]))
 ;;(add-to-list 'default-frame-alist '(alpha . (100 95))) ;; 89

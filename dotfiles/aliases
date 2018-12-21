@@ -91,10 +91,12 @@ alias edit='xargs open -a $EMACS_APP'
 alias fedit='files | edit'
 alias fe='fedit'
 
-alias ff='open -a Firefox'
 alias chrome='open -a Google\ Chrome'
+alias ff='open -a Firefox'
 alias safari='open -a Safari'
 alias browse=chrome
+
+alias slack='open -a Slack'
 
 alias grab='open -a Grab'
 alias gk='open -a GraphicConverter'
@@ -231,7 +233,11 @@ function g() {
     #    ./grailsw $@
     #elif [ -d "./grails-app" ] ; then
     if [ -d "./grails-app" ] ; then
-        grails $@
+        if [ -e "./grailsw" ] ; then
+            grailsw $@
+        else
+            grails $@
+        fi
     elif [ -e "./build.gradle" ] ; then
         if [ -e "./gradlew" ] ; then
             ./gradlew $@
@@ -562,7 +568,8 @@ function hgall() { # run hg in the directories that have .hg
 }
 
 function branches() { # show what branches we're on
-    gitall mod | grep git:
+    # this depends on the format of the prompt as emitted by the *all commands
+    gitall mod | grep git: | awk '{ print $3 $4 }'
     #hgall st | grep hg:
 }
 
@@ -675,6 +682,9 @@ alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 #alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
 alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/Smartsynchronize"
 
+alias squirrel="open -a SquirrelSQL"
+alias robo="open -a Robo\ 3T"
+
 # touch and edit a new file with emacs
 function temacs() {
     touch $@
@@ -691,3 +701,10 @@ function fast-node() {
     echo "fast-node: touch ./node_modules/.metadata_never_index"
     touch ./node_modules/.metadata_never_index
 }
+
+
+function matrix() {
+    LC_ALL=C tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"
+}
+alias parrot="curl parrot.live"
+alias starwars="telnet towel.blinkenlights.nl"
