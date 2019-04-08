@@ -74,7 +74,13 @@ $YELLOW yellow $LIGHT_GRAY light_gray $WHITE white $NO_COLOUR"
 
         # example: amiller@yaal.local:~/github/onetribeyoyo/mtm/src (git:master) [502]>
         #export PS1="\n$DARK_GRAY$USER@$HOSTNAME:\w $CYAN\$(parse_vc_branch)$DARK_GRAY[\!]>$NO_COLOUR "
-        export PS1="\n$LIGHT_BLUE$USER$CYAN@$LIGHT_BLUE$HOSTNAME$CYAN:$LIGHT_BLUE\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
+
+        # good colours...
+        #export PS1="\n$LIGHT_BLUE$USER$CYAN@$LIGHT_BLUE$HOSTNAME$CYAN:$LIGHT_BLUE\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
+
+        # better colours...
+        #export PS1="\n$LIGHT_PURPLE$USER$CYAN@$LIGHT_PURPLE$HOSTNAME$CYAN: $BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
+        export PS1="\n$BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
 
         #export PS3="Please select one of the options: "
         #export PS4="+ $0:$LINENO "
