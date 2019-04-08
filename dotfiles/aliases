@@ -234,14 +234,18 @@ function g() {
     #elif [ -d "./grails-app" ] ; then
     if [ -d "./grails-app" ] ; then
         if [ -e "./grailsw" ] ; then
-            grailsw $@
+            echo "  [ using local grailsw ]"
+            ./grailsw $@
         else
+            echo "  [ using installed grails ]"
             grails $@
         fi
     elif [ -e "./build.gradle" ] ; then
         if [ -e "./gradlew" ] ; then
+            echo "  [ using local gradlew ]"
             ./gradlew $@
         else
+            echo "  [ using installed gradle ]"
             gradle $@
         fi
     else
