@@ -293,3 +293,12 @@
   (setq fill-column 102)
   )
 (add-hook 'markdown-mode-hook 'amiller-markdown-mode-hook)
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; rust development...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(add-to-list 'load-path (expand-file-name "~/devtools/rust/rust-mode"))
+(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
