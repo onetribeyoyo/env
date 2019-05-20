@@ -15,20 +15,18 @@
 
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
 
-(setq
+(setq normal-font "-apple-Inconsolata-medium-r-normal-*-14-*-*-*-m-0-iso10646-1"
+      bigger-font "-apple-Inconsolata-medium-r-normal-*-15-*-*-*-m-0-iso10646-1"
+      medium-font "-apple-Inconsolata-medium-r-normal-*-18-*-*-*-m-0-iso10646-1"
+      big-font    "-apple-Inconsolata-medium-r-normal-*-26-*-*-*-m-0-iso10646-1"
 
- normal-font "-apple-Inconsolata-medium-r-normal-*-14-*-*-*-m-0-iso10646-1"
- bigger-font "-apple-Inconsolata-medium-r-normal-*-15-*-*-*-m-0-iso10646-1"
- medium-font "-apple-Inconsolata-medium-r-normal-*-18-*-*-*-m-0-iso10646-1"
- big-font    "-apple-Inconsolata-medium-r-normal-*-26-*-*-*-m-0-iso10646-1"
+      inconsolata-font "inconsolata"
 
- inconsolata-font "inconsolata"
-
- ;; NOTE: fira is (subjectively) a heavier font than inconsolata
- fira-code-font "Fira Code"
- ;;normal-font "-*-Fira Code-normal-normal-normal-*-12-*-*-*-m-0-fontset-auto1"
- ;;normal-font "-*-Fira Code-normal-normal-normal--13-*-*-*-*-*-iso10646-1"
- )
+      ;; NOTE: fira is (subjectively) a heavier font than inconsolata
+      fira-code-font "Fira Code"
+      ;;normal-font "-*-Fira Code-normal-normal-normal-*-12-*-*-*-m-0-fontset-auto1"
+      ;;normal-font "-*-Fira Code-normal-normal-normal--13-*-*-*-*-*-iso10646-1"
+      )
 
 (when (window-system)
   (set-default-font normal-font)
@@ -81,20 +79,44 @@
     )
   )
 
-(setq amiller-frame-top           0 ;; 22 ;; pixels
-      amiller-frame-left       1097 ;; pixels
-      amiller-frame-right        -1 ;; pixels
-      amiller-frame-width       204 ;; characters
-      amiller-frame-height       92 ;; rows
+(setq amiller-frame-top               0 ;; 22 ;; pixels
+      amiller-frame-right            -1 ;; pixels
+
+      amiller-external-frame-height  92 ;; rows
+      amiller-external-frame-left  1097 ;; pixels
+      amiller-external-frame-width  204 ;; characters
+
+      amiller-macbook-frame-height   49 ;; rows
+      amiller-macbook-frame-left    455 ;; pixels
+      amiller-macbook-frame-width   132 ;; characters
       )
 
-(set-frame-width    (selected-frame) amiller-frame-width)
-(set-frame-height   (selected-frame) amiller-frame-height)
-(set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
+;;(set-frame-width    (selected-frame) amiller-external-frame-width)
+;;(set-frame-height   (selected-frame) amiller-frame-height)
+;;(set-frame-position (selected-frame) amiller-frame-left amiller-frame-top)
 ;;(set-frame-position (selected-frame) (- (display-pixel-width) 100) amiller-frame-top)
 
 ;; (set-frame-parameter nil 'alpha '(<active> [<inactive>]))
 ;;(add-to-list 'default-frame-alist '(alpha . (100 95))) ;; 89
+
+(defun frame-size-for-external-display ()
+  (interactive)
+  (set-default-font normal-font)
+  (set-frame-width    (selected-frame) amiller-external-frame-width)
+  (set-frame-height   (selected-frame) amiller-external-frame-height)
+  (set-frame-position (selected-frame) amiller-external-frame-left amiller-frame-top)
+  )
+
+(defun frame-size-for-macbook-display ()
+  (interactive)
+  (set-default-font medium-font)
+  (set-frame-width    (selected-frame) amiller-macbook-frame-width)
+  (set-frame-height   (selected-frame) amiller-macbook-frame-height)
+  (set-frame-position (selected-frame) amiller-macbook-frame-left amiller-frame-top)
+  )
+
+(frame-size-for-macbook-display)
+
 
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
 
