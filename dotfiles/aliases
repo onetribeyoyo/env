@@ -343,13 +343,20 @@ function ggi18n() {
         | grep $@
 }
 
-alias findyml="find . \( -name \*.yml \) -o \( -name \*.yaml \) -print"
+alias findyml="find . \( -name \*.yml -o -name \*.yaml \) -print"
 function ggyml() {
     # the final grep in the pipeline is to get the match highlighting!
     findyml | xargs grep $@ \
         | grep -v \/target\/plugins\/ \
         | grep -v \/target\/work\/plugins\/
 }
+
+alias findrs="find . \( -name \*.rs -o -name \*.toml \) -print"
+function ggrs() {
+    # the final grep in the pipeline is to get the match highlighting!
+    findrs | xargs grep $@
+}
+
 
 #
 # for looking into and purging caches maintained by maven, ivy, and grails, gradle, ...

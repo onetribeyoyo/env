@@ -1,4 +1,3 @@
-
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 # Prompts and titles...
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -286,13 +285,16 @@ export SDKMAN_DIR="/Users/z001v67/.sdkman"
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
+export DOCKER_IP="127.0.0.1"
+
+export PATH="$HOME/.cargo/bin:$PATH"
+
+
 #use-jdk 1.8
 
 . .aliases
 . .target.aliases
 . .projects
-
-export DOCKER_IP="127.0.0.1"
 
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
