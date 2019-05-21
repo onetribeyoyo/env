@@ -115,7 +115,16 @@
   (set-frame-position (selected-frame) amiller-macbook-frame-left amiller-frame-top)
   )
 
-(frame-size-for-macbook-display)
+(defun auto-detect-frame-size ()
+  (interactive)
+  (if (<= (x-display-pixel-width) 1680)
+      (frame-size-for-macbook-display)
+    (frame-size-for-external-display)
+    )
+  )
+
+;;(frame-size-for-macbook-display)
+(auto-detect-frame-size)
 
 
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
