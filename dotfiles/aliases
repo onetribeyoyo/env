@@ -719,3 +719,14 @@ function matrix() {
 }
 alias parrot="curl parrot.live"
 alias starwars="telnet towel.blinkenlights.nl"
+
+
+function encrypt() {
+    FILE=$1
+    openssl des -in $FILE -out $FILE.des
+}
+
+function decrypt() {
+    FILE=$1
+    openssl des -d -in $FILE.des -out $FILE
+}
