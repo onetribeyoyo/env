@@ -132,6 +132,7 @@ function findsrc() {
          -name \*.properties -o \
          -name \*.py -o \
          -name \*.sql -o -name \*.ddl -o \
+         -name \*.tsx -o \
          -name \*.txt -o \
          -name \*.vm -o \
          -name \*.xml -o \
@@ -160,8 +161,8 @@ alias ggjsp="findjsp | xargs grep"
 alias findpom="find . -name pom.xml -print"
 alias ggpom="findpom | xargs grep"
 
-alias gjs="find . -maxdepth 1 -type f -a \( -name \*.js -o -name \*.jsx \) | xargs grep"
-alias findjs="find . -type f -a \( -name \*.js -o -name \*.jsx \) | node_modules_filter"
+alias gjs="find . -maxdepth 1 -type f -a \( -name \*.js -o -name \*.jsx -o -name \*.tsx \) | xargs grep"
+alias findjs="find . -type f -a \( -name \*.js -o -name \*.jsx -o -name \*.tsx \) | node_modules_filter"
 alias ggjs="findjs | xargs grep"
 
 alias gjson="find . -maxdepth 1 -name \*.json | xargs grep"
@@ -176,8 +177,8 @@ alias gcss="find . -maxdepth 1 -name \*.css -print | xargs grep"
 alias ggcss="find . -name \*.css -print | quotespaces | xargs grep"
 
 # web ui files
-alias gw="find . -maxdepth 1 \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js -o -name \*.jsx \) -print | xargs grep"
-alias ggw="find . \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js -o -name \*.jsx \) -print | quotespaces | xargs grep"
+alias gw="find . -maxdepth 1 \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js -o -name \*.jsx -o -name \*.tsx \) -print | xargs grep"
+alias ggw="find . \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js -o -name \*.jsx -o -name \*.tsx \) -print | quotespaces | xargs grep"
 
 # xml files
 alias gxml="find . -maxdepth 1 -name xml -print | xargs grep"
