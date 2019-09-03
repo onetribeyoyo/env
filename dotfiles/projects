@@ -11,3 +11,5 @@ alias leatherman="cd ~/github/amiller__z001v67/ole/leatherman"
 
 alias sango="cd ~/github/amiller__z001v67/sango/sangoui"
 alias opc=sango
+
+alias mtm-api="cd ~/github/onetribeyoyo/mtm-api"
