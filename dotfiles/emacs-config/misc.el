@@ -127,6 +127,7 @@
   (simplify-string-in-buffer "" ":(")
   (simplify-string-in-buffer "" "phone") ;; mystery charater; maybe a very small space?
   (simplify-string-in-buffer " " " ") ;; phone icon
+  (simplify-string-in-buffer "·" "-")
   )
 
 
