@@ -19,7 +19,7 @@
 (set-face-background vvb-face "tomato4")
 ;;(set-face-background vvb-face "firebrick4")
 
-(set-face-background 'show-paren-match-face "IndianRed")
+(set-face-background 'show-paren-match "IndianRed")
 
 (custom-set-faces
 
