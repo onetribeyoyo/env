@@ -86,8 +86,11 @@ alias packages="awk -F: '{print \$1}'        \
                 | uniq -c"
 
 
-alias emacs='open -a $EMACS_APP'
-alias edit='xargs open -a $EMACS_APP'
+alias emacs-start='open -a $EMACS_APP'
+function emacs() {
+    emacsclient -nt $@ && osascript -e 'tell application "Emacs.app" to activate'
+}
+alias edit='xargs emacs'
 alias fedit='files | edit'
 alias fe='fedit'
 
@@ -99,7 +102,7 @@ alias browse=chrome
 alias slack='open -a Slack'
 
 alias grab='open -a Grab'
-alias gk='open -a GraphicConverter'
+alias gk='open -a GraphicConverter\ 11'
 alias sgit='open -a SmartGit'
 
 
@@ -132,6 +135,7 @@ function findsrc() {
          -name \*.properties -o \
          -name \*.py -o \
          -name \*.sql -o -name \*.ddl -o \
+         -name \*.ts -o \
          -name \*.tsx -o \
          -name \*.txt -o \
          -name \*.vm -o \
@@ -161,8 +165,8 @@ alias ggjsp="findjsp | xargs grep"
 alias findpom="find . -name pom.xml -print"
 alias ggpom="findpom | xargs grep"
 
-alias gjs="find . -maxdepth 1 -type f -a \( -name \*.js -o -name \*.jsx -o -name \*.tsx \) | xargs grep"
-alias findjs="find . -type f -a \( -name \*.js -o -name \*.jsx -o -name \*.tsx \) | node_modules_filter"
+alias gjs="find . -maxdepth 1 -type f -a \( -name \*.js -o -name \*.jsx -o -name \*.ts -o -name \*.tsx \) | xargs grep"
+alias findjs="find . -type f -a \( -name \*.js -o -name \*.jsx -o -name \*.ts -o -name \*.tsx \) | node_modules_filter"
 alias ggjs="findjs | xargs grep"
 
 alias gjson="find . -maxdepth 1 -name \*.json | xargs grep"
@@ -691,8 +695,7 @@ alias og="hg outgoing -v -S | lf"
 alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 
 
-#alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/smartsynchronize.sh"
-alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/Smartsynchronize"
+alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/SmartSynchronize"
 
 alias squirrel="open -a SquirrelSQL"
 alias robo="open -a Robo\ 3T"
