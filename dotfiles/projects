@@ -2,14 +2,8 @@
 # dev projects...
 #
 
-#alias mtm="cd ~/github/onetribeyoyo/mtm/src ; . ./init.sh"
-alias mtm="cd ~/dev/mtm ; . ./init.sh"
-
-alias ole="cd ~/github/amiller__z001v67/ole/warehouse-management"
-alias bartel="cd ~/github/amiller__z001v67/ole/bartel-app"
-alias leatherman="cd ~/github/amiller__z001v67/ole/leatherman"
-
-alias sango="cd ~/github/amiller__z001v67/sango/sangoui"
-alias opc=sango
+alias mtm="cd ~/github/onetribeyoyo/mtm/src ; . ./init.sh"
 
 alias mtm-api="cd ~/github/onetribeyoyo/mtm-api"
+
+alias resume="cd ~/github/onetribeyoyo/resume"
