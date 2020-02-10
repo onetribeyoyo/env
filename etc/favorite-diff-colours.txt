@@ -1,0 +1,14 @@
+Some nice colours for visual diff tools...
+  additions: bb ff bb (187,255,187) greenish
+  changes:   ff ff bb (255,255,187) yellowish
+  removals:  ff bb bb (255,187,187) redish
+
+Tortoise SVN defaults...
+  additions: (255, 255,   0) yellow
+  changes:   (255,   0,   0) red
+  removals:  (255, 200, 100) orangish
+
+lighter (luminence = 224)
+  additions: (238,255,221) greenish
+  changes:   (255,255,221) yellowish
+  removals:  (255,221,221) redish
