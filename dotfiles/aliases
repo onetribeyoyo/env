@@ -738,3 +738,198 @@ function decrypt() {
     FILE=$1
     openssl des -d -in $FILE.des -out $FILE
 }
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+
+#
+# browse to github
+#
+function github() {
+    GITHUB=https://git.XXXX.com
+    git branch > /dev/null 2> /dev/null
+    if [ $? -eq 0 ] ; then # we're in a cloned git repo
+        REPO=`git remote show origin | grep Fetch | awk '{ print $3 }' | awk -F : '{ print $2 }' | awk -F . '{ print $1 }'`
+        URL=$GITHUB/$REPO
+        BRANCH=`git branch 2> /dev/null | grep \* | awk '{ printf "%s", $2 }'`
+        if [ $# -ne 0 ] ; then # maybe we have a PR number?
+            re='^[0-9]+$'
+            if [[ $1 =~ $re ]] ; then
+                URL=$GITHUB/$REPO/pull/$1
+            else
+                echo "error: Not a PR number"
+            fi
+        elif [ "$BRANCH" != "master" ] ; then # browse to the interesting branch
+            URL=$GITHUB/$REPO/tree/$BRANCH
+        fi
+    else
+        URL=$GITHUB/AndyMiller
+    fi
+
+    echo $URL
+    browse $URL
+}
+
+#
+# browse to a jira ticket
+#
+function jira() {
+    JIRA_BASE=https://jira.XXXX.com
+
+    FAVORITE_PROJECT+891
+    DEFAULT_BOARD=$FAVORITE_PROJECT
+    ticket=$1
+    if [ -n "$ticket" ]; then
+        URL=$JIRA_BASE/browse/$ticket
+    else
+        URL=$JIRA_BASE/secure/RapidBoard.jspa?rapidView=$DEFAULT_BOARD
+    fi
+
+    echo $URL
+    browse $URL
+}
+
+#
+# browse a service now ticket
+#
+function service-now() {
+    TICKET=$1
+    URL="https://XXXX.service-now.com/text_search_exact_match.do?sysparm_search=$TICKET"
+    echo $URL
+    browse $URL
+}
+
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+function archive() {
+    # tar up important dirs and copy to onedrive
+    (
+        cd ~
+
+        \cp -fv .profile ./archives/dot.profile
+        \cp -fv index.html ./archives
+
+        (
+            \mv -fv BrewFile BrewFile.old
+            brew bundle dump
+        )
+        \cp -fv BrewFile.old ./archives
+        \cp -fv BrewFile ./archives
+
+        #tardir .password-store   ./archives
+        #tardir .squirrel-sql     ./archives
+        tardir .ssh              ./archives
+        tardir bin               ./archives
+        tardir Desktop           ./archives
+        tardir dev               ./archives
+        tardir devtools          ./archives
+        tardir Documents         ./archives
+        tardir Downloads         ./archives
+        tardir etc               ./archives
+        tardir github            ./archives
+        tardir images            ./archives
+        tardir install           ./archives
+        tardir stacks            ./archives
+        tardir tmp               ./archives
+    )
+}
+
+function archive_dotfiles() {
+    (
+        cd ~
+        TARFILE=`date +"%Y.%m.%d_%H.%M_dotfiles_tardir.tar.gz"`
+
+        echo $TARFILE
+
+        tar \
+            --exclude='./.3T' \
+            --exclude='./.CFUserTextEncoding' \
+            --exclude='./.DS_Store' \
+            --exclude='./.Trash' \
+            --exclude='./.android' \
+            --exclude='./.anyconnect' \
+            --exclude='./.bash_history' \
+            --exclude='./.bash_sessions' \
+            --exclude='./.cassandra' \
+            --exclude='./.cisco' \
+            --exclude='./.composer' \
+            --exclude='./.cups' \
+            --exclude='./.docker' \
+            --exclude='./.emacs.d' \
+            --exclude='./.flow-typed' \
+            --exclude='./.gem' \
+            --exclude='./.gnupg' \
+            --exclude='./.gradle' \
+            --exclude='./.gradle_tabcompletion' \
+            --exclude='./.grails' \
+            --exclude='./.grails_history' \
+            --exclude='./.groovy' \
+            --exclude='./.jenv' \
+            --exclude='./.kube' \
+            --exclude='./.lesshst' \
+            --exclude='./.m2' \
+            --exclude='./.npm' \
+            --exclude='./.nvm' \
+            --exclude='./.oracle_jre_usage' \
+            --exclude='./.sdkman' \
+            --exclude='./.subversion' \
+            -zcvf $TARFILE \
+            .???*
+    )
+}
+
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+function atp() {
+    (
+        cd ~/github/onetribeyoyo/bin
+        groovy atp.groovy $@
+    )
+}
+
+function atp-admin() {
+    (
+        cd ~/github/onetribeyoyo/bin
+        groovy atp-admin.groovy $@
+    )
+}
+
+function fiats() {
+    (
+        cd ~/github/onetribeyoyo/bin
+        groovy fiats.groovy $@
+    )
+}
+
+function locations() {
+    (
+        cd ~/github/onetribeyoyo/bin
+        groovy locations.groovy $@
+    )
+}
+
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+function set-docket-ip() {
+    DOCKER_IP=`docker-machine env warehousing | grep DOCKER_HOST | awk -F\/ '{ print $3 }' | awk -F: '{ print $1 }'`
+    echo "DOCKER_IP=$DOCKER_IP"
+    export DOCKER_IP=$DOCKER_IP
+}
+
+# kill all running docker containers
+function docker-stop-all () {
+    docker stop $(docker ps -a -q)
+}
+
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+function ffortune() {
+    fortune $@ | \
+        cowsay -f $(ls /usr/local/Cellar/cowsay/3.04/share/cows/*.cow | gshuf -n1) | \
+        lolcat
+}
+
+function overheard-at-target() {
+    ffortune overheard-at-target
+}
+
+#overheard-at-target
