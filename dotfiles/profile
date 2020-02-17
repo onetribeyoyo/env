@@ -189,8 +189,7 @@ export MONGO_HOME=~/devtools/mongo/current
 #export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
 #alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
-#export SMARTSYNC_HOME=~/devtools/smartsync-3.4.10
-export SMARTSYNC_HOME=~/devtools/smartsync-3.5.0
+export SMARTSYNC_HOME=~/devtools/smartsync/smartsync-4.0.3
 
 #export TOMCAT_HOME=~/devtools/tomcat/current
 
@@ -198,20 +197,14 @@ export SMARTSYNC_HOME=~/devtools/smartsync-3.5.0
 #alias ly=lilypond
 
 # emacs...
-#export EMACS_HOME=~/devtools/emacs/carbon-emacs-22.3.1_2009.07.25.app
-#export EMACS_APP='carbon-emacs-22.3.1_2009.07.25.app'
-
-#export EMACS_VERSION=24.3
-export EMACS_VERSION=25.2
-export EMACS_HOME=~/devtools/emacs/emacs-${EMACS_VERSION}.app
-export EMACS_APP=emacs-${EMACS_VERSION}.app
+export EMACS_APP=emacs-25.2.app
+#export EMACS_APP=Emacs.app
 
 
 # path...
 export PATH=\
 .:\
 $HOME/bin:\
-$EMACS_HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 /usr/local/bin:\
@@ -274,16 +267,14 @@ export GREP_OPTIONS='--color=auto'
 #eval "$(jenv init -)"
 
 
+#export SDKMAN_DIR="/Users/z001v67/.sdkman"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/z001v67/.sdkman"
-[[ -s "/Users/z001v67/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/z001v67/.sdkman/bin/sdkman-init.sh"
+[[ -s "/Users/amiller/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/amiller/.sdkman/bin/sdkman-init.sh"
 
 
-#export NVM_DIR="/Users/z001v67/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
 
 export DOCKER_IP="127.0.0.1"
 
