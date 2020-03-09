@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/groovy/!svn/ver/19770/trunk/groovy/ide/emacs
+END
+gpl.txt
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/groovy/!svn/ver/3937/trunk/groovy/ide/emacs/gpl.txt
+END
+grails-mode.el
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/groovy/!svn/ver/18663/trunk/groovy/ide/emacs/grails-mode.el
+END
+groovy-mode.el
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/groovy/!svn/ver/19193/trunk/groovy/ide/emacs/groovy-mode.el
+END
+groovy-electric.el
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/groovy/!svn/ver/18624/trunk/groovy/ide/emacs/groovy-electric.el
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/groovy/!svn/ver/18664/trunk/groovy/ide/emacs/README
+END
+inf-groovy.el
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/groovy/!svn/ver/19770/trunk/groovy/ide/emacs/inf-groovy.el
+END
