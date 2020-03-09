@@ -24,6 +24,8 @@ th {
 
 ul {
    /* font-size: small; */
+   /* list-style: none; */
+   padding-left: 1em;
 }
 
 .whitebox {
@@ -41,6 +43,20 @@ section {
    float: left;
    margin: 0.25em;
    padding: 1em;
+}
+
+.subsection {
+    margin: 0;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
+hr {
+   height: 1px;
+   background-color: #777;
+   border: none;
 }
 
 .left   { text-align: left; }
