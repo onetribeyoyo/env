@@ -89,7 +89,8 @@ alias packages="awk -F: '{print \$1}'        \
 function emacs() {
     processCount=$(ps aux | grep -v grep | grep -ci $EMACS_APP)
     if [ $processCount -gt 0 ]; then
-        emacsclient -nt $@ && osascript -e 'tell application "Emacs.app" to activate'
+        emacsclient -nt $@ 
+        #emacsclient -nt $@ && osascript -e 'tell application "Emacs.app" to activate'
     else
         open -a $EMACS_APP $@
     fi
@@ -674,8 +675,20 @@ alias clearrecents="defaults delete -g AppleRecentFolders"
 #defaults write com.apple.finder _FXShowPosixPathInTitle -bool NO ; killall Finder
 
 
+# e.g. `sort-pictures .`
+alias sort-pictures="exiftool '-Directory<DateTimeOriginal' -d %Y/%Y.%m/%Y.%m.%d"
+
+
 alias jenkins-start="sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.plist"
 alias jenkins-stop="sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist"
+
+
+function ly () {
+    FILE=$1
+    docker run --rm -v $(pwd):/app -w /app gpit2286/lilypond lilypond $FILE
+}
+
+
 
 #alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.plist"
 #alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql.plist"

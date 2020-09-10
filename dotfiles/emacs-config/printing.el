@@ -30,7 +30,7 @@
   "Output a postscript file using the defaults."
   (interactive)
   (ps-print-buffer "~/temp.ps")
-  (shell-command "open /Applications/Preview.app ~/temp.ps")
+  (shell-command "open -a Preview.app ~/temp.ps")
   )
 
 ;; Simple print region command
@@ -39,7 +39,7 @@
   "Output a postscript file using the defaults."
   (interactive)
   (ps-print-region (mark) (point) "~/temp.ps")
-  (shell-command "open /Applications/Preview.app ~/temp.ps"))
+  (shell-command "open -a Preview.app ~/temp.ps"))
 
 ;; Setup the postscript settings
 ;;
