@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Echo some config info at shell startup time
+# (useful when debugging the shell environment.)
+#
+
+echo
+echo "                PATH = "
+printenv PATH | sed 's/:/\
+/g' | while read path_element ; do
+    printf "                      %s\n" "$path_element"
+done

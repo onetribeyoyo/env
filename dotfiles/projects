@@ -1,0 +1,9 @@
+#
+# dev projects...
+#
+
+alias mtm="cd ~/github/onetribeyoyo/mtm/src ; . ./init.sh"
+
+alias mtm-api="cd ~/github/onetribeyoyo/mtm-api"
+
+alias resume="cd ~/github/onetribeyoyo/resume"

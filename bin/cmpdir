@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# Looks for duplicate files (same content, different names.)
+#
+
+DUPLICATES=0
+
+find . -type f -maxdepth 1 | while read file1
+do
+    find . -type f -maxdepth 1 | while read file2
+    do
+        if [ "$file1" != "$file2" ] ; then
+	    if cmp -s $file1 $file2 ; then
+                echo $file1 is duplicated by $file2
+                DUPLICATES=1
+            fi
+        fi
+    done # end for
+done # end for
+
+exit $DUPLICATES

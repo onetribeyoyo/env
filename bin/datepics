@@ -1,0 +1,16 @@
+#!/bin/sh
+
+ls ????/??-*/??/*.JPG | while read pic ; do
+    filename=`echo $pic | awk -F/ '{ print $4 }'`
+
+    filename=`basename $pic`
+    dir=`dirname $pic`
+
+    newname=`echo $filename | sed 's/PICT/pict/' | sed 's/JPG/jpg/'`
+
+    year=`echo $pic | awk -F/ '{ print $1 }'`
+    month=`echo $pic | awk -F/ '{ print $2 }' | awk -F- '{ print $1 }'`
+    day=`echo $pic | awk -F/ '{ print $3 }'`
+
+    echo "mv $pic	${dir}/${year}-${month}-${day}_${newname}"
+done

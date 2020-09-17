@@ -1,0 +1,154 @@
+#!/bin/sh
+#
+#  Copyright (c) Andrew R. Miller. 2010-2012.  All Rights Reserved.
+#
+#  $Id$
+#
+# sets a symlink by convention...
+#
+# For example,
+#   in a directory names ~/devtools/grails with
+#     ~/devtools/grails/grails-1.1.2 and
+#     ~/devtools/grails/grails-1.2,
+#   executing `use 1.2`
+#   will create a symlink ~/devtools/grails/current -> ~/devtools/grails/grails-1.2
+#
+# You can pass in more than one component/version pair...
+#   `use grails [-a] 2.0.0 tomcat [-a] 6.0.29 maven [-a] 2.2.1`
+#
+# Set your path to include ~/devtools/grails/current/bin and so on.  And
+# if it's not on your path, the script will add it (of course only in
+# the current shell!)  If you don't want the current version, use the
+# "-a" option instead.  It will use the alternate path.  For example,
+#   ~/devtools/grails/alternate/bin.
+#
+DEFAULT_TOOL_DIR=~/devtools
+
+
+#~ functions ----------------------------------------------------------------------------------
+
+setLink()
+{
+    COMPONENT=$1
+    REQUESTED=$2
+    LINK_NAME=$3
+    #echo "    --> setLink( $COMPONENT, $REQUESTED, $LINK_NAME )..."
+
+    rm -f $LINK_NAME
+    ln -s $REQUESTED $LINK_NAME
+    # this will echo the link to the console...
+    #ls -l $LINK_NAME | awk '{ printf "%s %s %s", $9, $10, $11 }'
+
+    PATH_ENTRY=`pwd`/$LINK_NAME/bin
+    if [ ! `echo $PATH | grep $PATH_ENTRY` ] ; then
+        echo "WARNING: $COMPONENT/$LINK_NAME/bin is not on your path.  Add it with 'rehome $COMPONENT $LINK_NAME'"
+    fi
+}
+
+useComponentVersion()
+{
+    COMPONENT=$1
+    if [ "$2" = "-a" ] ; then
+        ALTERNATE=$2
+        VERSION=$3
+    else
+        ALTERNATE=
+        VERSION=$2
+    fi
+    #echo "    --> useComponentVersion( $COMPONENT, $ALTERNATE, $VERSION )..."
+
+    #echo "default_tool_dir = $DEFAULT_TOOL_DIR"
+    cd $DEFAULT_TOOL_DIR/$COMPONENT
+
+    REQUESTED=$COMPONENT-$VERSION
+    if [ ! -d $REQUESTED ]; then
+        # maybe there is a missing .0 ?
+        REQUESTED=$COMPONENT-$VERSION.0
+    fi
+
+    if [ "$ALTERNATE" = "-a" ] ; then
+        LINK_NAME=alternate
+    else
+        LINK_NAME=current
+    fi
+
+    if [ -d $REQUESTED ]; then
+        if [ -h $LINK_NAME ]; then
+            CURRENT=`ls -l $LINK_NAME | awk '{ print $11 }'`
+            if [ "$CURRENT" = "$REQUESTED" ]; then
+                echo "using $LINK_NAME $CURRENT"
+            else
+                echo "switching $LINK_NAME from $CURRENT to $REQUESTED"
+            fi
+        else
+            echo "using $LINK_NAME $REQUESTED"
+        fi
+        setLink $COMPONENT $REQUESTED $LINK_NAME
+    else
+        echo "ERROR: missing directory for $@"
+        echo "ERROR: available version are..."
+        sedcmd="s/.\/$COMPONENT-//g"
+        find . -name $COMPONENT-\* -depth 1 | sed $sedcmd
+
+        if [ -h $LINK_NAME ]; then
+            CURRENT=`ls -l $LINK_NAME | awk '{ print $11 }'`
+            echo "WARNING: keeping $LINK_NAME $CURRENT"
+        else
+            echo "WARNING: $LINK_NAME not set."
+        fi
+        exit -1
+    fi
+}
+
+echoHomeVars() {
+    for var in `printenv | grep _HOME | sort`; do
+        var_name=`echo $var | awk -F= '{ print $1 }'`
+        var_value=`echo $var | awk -F= '{ print $2 }'`
+        var_target=`basename $var_value`
+        if [ -h $var_value ]; then
+            var_target=`ls -l $var_value | awk '{ printf "%s", $11 }'`
+        fi
+        printf "%20s  %-28s  %s\n" "$var_name" "$var_target" "$var_value"
+    done
+}
+
+echoOptsVars() {
+    for var in `printenv | grep _OPTS | awk -F= '{ print $1 }'`; do
+        var_value=`printenv $var`
+        printf "%20s  %-20s  %s\n" "$var" "$var_value"
+    done
+}
+
+
+#~ main body of the script --------------------------------------------------------------------
+
+#echo
+
+if [ $# -eq 0 ]; then
+    echo
+    printf "%20s  %-20s  %s\n" "HOME" $HOME
+    echo
+    echoHomeVars
+    echo
+    echoOptsVars
+    exit -1
+elif [ $# -eq 1 ]; then
+    echo "WARNING: Assuming you are making a link in the current directory."
+    useComponentVersion `basename $PWD` $1 $2
+else
+    # use each component/version[/alternate] tuple
+    while [ $# -gt 0 ]; do
+        if [ "$2" = "-a" ] ; then
+            useComponentVersion $1 $2 $3
+            shift
+            shift
+            shift
+        else
+            useComponentVersion $1 $2
+            shift
+            shift
+        fi
+    done
+fi
+
+#~ END OF FILE --------------------------------------------------------------------------------

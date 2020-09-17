@@ -1,0 +1,42 @@
+[user]
+        name = Andy Miller
+        email = onetribeyoyo@gmail.com
+
+[core]
+#	editor = /usr/bin/emacs -a=\\\"\\\"
+        editor = emacs
+        excludesfile = /Users/amiller/.gitignore_global
+
+[color]
+        ui = true
+
+[alias]
+        co = checkout
+        lg = log --graph --pretty=format:'%C(red)%h %C(yellow)-%d <%an - %cr>%C(reset) %s' --abbrev-commit --date=relative
+        mod = status -s
+        pb = fetch --progress --prune origin
+
+        sync  = pull --rebase upstream master
+        ssync = pull --rebase upstream master
+        ss    = pull --rebase upstream master
+
+        ic = fetch --all --dry-run -- verbose
+        og = log origin/master..HEAD
+        peek = fetch --all --dry-run -- verbose
+
+        hard = reset --hard
+
+[credential]
+        helper = osxkeychain
+
+[branch]
+        autosetuprebase = never
+
+[gc]
+        autoDetach = false
+
+[push]
+        default = simple
+
+[pull]
+        rebase = true

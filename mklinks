@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# Establishes symlinks from the environment to dot files and bin in this directory.
+#
+[ $# -eq 0 ] && set "."
+
+
+#~ functions ----------------------------------------------------------------------------------
+
+# $1 is a user message
+# $2 is a source path prefix
+# $3 is a target path prefix
+links() {
+    echo "$1..."
+    find ./github/onetribeyoyo/env/$1 -type f ! -name \*~ -maxdepth 1 | while read source ; do
+        basename=`basename $source`
+        source="$2$source"
+        target="$3$basename"
+        echo "    ln -s $source $target"
+        rm -f $target
+        ln -s $source $target
+    done # end for
+}
+
+
+#~ main body of the script --------------------------------------------------------------------
+
+#echo
+
+( cd ~ ; links "dotfiles" ""  "." )
+( cd ~ ; links "bin"      "." "bin/" )
+
+#~ END OF FILE --------------------------------------------------------------------------------

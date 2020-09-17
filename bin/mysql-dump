@@ -1,0 +1,25 @@
+#!/bin/sh
+
+DB_HOST=$1
+DB_SCHEMA=$2
+DB_USER=$3
+DB_PASSWORD=$4
+DB_FILE=$5
+
+DB_PORT=3306
+
+if [ -z $DB_FILE ]; then
+    echo "Error: no dump file specified!"
+    exit -1
+fi
+
+if [ "$DB_HOST" = "localhost" ]; then
+    # there's a problem with port forwarding and 'localhost' !
+    DB_HOST=127.0.0.1
+fi
+
+echo "Dumping $DB_HOST:$DB_PORT.$DB_SCHEMA to $DB_FILE"
+echo "    for user $DB_USER"
+echo "        pwd  $DB_PASSWORD"
+echo "mysqldump -u $DB_USER -p$DB_PASSWORD -h $DB_HOST -P $DB_PORT $DB_SCHEMA > $DB_FILE"
+mysqldump -u $DB_USER -p$DB_PASSWORD -h $DB_HOST -P $DB_PORT $DB_SCHEMA > $DB_FILE

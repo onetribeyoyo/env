@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Renames a file, replacing all spaces in the name with "-"
+#
+
+find . -type f | grep \  | while read file ; do
+    quoted_name=`echo $file | sed 's/ /\\ /g'`
+    new_name=`echo $file | sed 's/ /-/g'`
+    echo "$quoted_name	--> $new_name"
+    mv "$quoted_name" $new_name
+done # end for
+
+exit

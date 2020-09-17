@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+#  Uses sdiff and doc2txt to compare the HEAD version of an SVN file
+#  with another revision.
+#
+#  usage: docdiffdoc2txt revision file.doc
+#
+
+#  Valid revision are same as those used by svn to retrieve revisions.
+#  A revision argument can be one of:
+#    NUMBER       revision number
+#    '{' DATE '}' revision at start of the date
+#    'HEAD'       latest in repository
+#    'BASE'       base rev of item's working copy
+#    'COMMITTED'  last commit at or before BASE
+#    'PREV'       revision just before COMMITTED
+#
+#  Examples:
+#    docdiff {2008-01-01} JoeCool.doc
+#    docdiff HEAD JoeCool.doc
+#
+#  Set SDIFF_OPTS if you want to modify the sdiff output.
+#  For example:
+#    SDIFF_OPTS="-l $SDIFF_OPTS"
+#    SDIFF_OPTS="-w 190 $SDIFF_OPTS"
+#
+#  Expect some strange behaviour when the revision is incorrect or the
+#  file is not really a .doc file.
+#
+revision=$1
+docfile=$2
+
+docfileonly=$(echo ${docfile%.*})
+
+revisionfile=`echo $docfileonly.$revision.doc | sed 's/{//' | sed 's/}//'`
+revisionfileonly=`echo $docfileonly.$revision | sed 's/{//' | sed 's/}//'`
+
+txtfile=$docfileonly.doc2.txt
+revisiontxtfile=$revisionfileonly.doc2.txt
+
+echo "revision         = $revision"
+echo "docfile          = $docfile"
+echo "docfileonly      = $docfileonly"
+echo "revisionfile     = $revisionfile"
+echo "revisionfileonly = $revisionfileonly"
+echo "txtfile          = $txtfile"
+echo "revisiontxtfile  = $revisiontxtfile"
+
+svn cat -r $revision $docfile > $revisionfile
+
+if [ ! -s $revisionfile ] ; then
+    echo "Unable to find $docfile in revision $revision"
+    rm $revisionfile
+    exit
+fi
+
+doc2txt $docfile
+doc2txt $revisionfile
+
+sdiff $SDIFF_OPTS $docfileonly.doc2.txt $revisiontxtfile

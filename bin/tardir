@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Makes a tarball of the first arg, placing it in either the current dir, or the dir specified by the second arg.
+#
+
+SRC=`echo $1 | sed 's/\/*$//g' | sed 's/.\///'`
+
+ARCHIVE_DIR=.
+if [ $# -eq 2 ] ; then
+    ARCHIVE_DIR=`echo $2 | sed 's/\/*$//g'`
+fi
+if [ ! -d $ARCHIVE_DIR ] ; then
+    echo "WARNING: creating new archive dir: $ARCHIVE_DIR"
+    mkdir -p $ARCHIVE_DIR
+fi
+
+TAR_ARGS=cvfz
+#TAR_FILE=`date +"%Y.%m.%d_%H.%M_tardir.tar.gz"`
+TAR_FILE=$ARCHIVE_DIR/tardir-$SRC.tar.gz
+
+echo "archivng $SRC to $TAR_FILE"
+tar cvfz $TAR_FILE $SRC

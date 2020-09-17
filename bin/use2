@@ -1,0 +1,85 @@
+#!/bin/sh
+#
+# sets a symlink by convention...
+#
+# For example,
+#   in a directory names ~/devtools/grails with
+#     ~/devtools/grails/grails-1.1.2 and
+#     ~/devtools/grails/grails-1.2,
+#   executing `use 1.2`
+#   will create a symlink ~/devtools/grails/current -> ~/devtools/grails/grails-1.2
+#
+# Set your path to include ~/devtools/grails/current/bin.  Got it?
+#
+# Note: You can pass in more than one component/version pair!
+#
+USAGE="\
+USAGE: `basename $0`: must specify version (and optional component name.)\n\
+USAGE: For example: `basename $0` [component] version\
+"
+
+#echo
+
+DEFAULT_TOOL_DIR=~/devtools
+
+if [ $# -eq 0 ]; then
+    echo $USAGE
+    exit -1
+elif [ $# -eq 1 ]; then
+    use_version `basename $PWD` $1
+else
+    # use each component/version pair
+    while [ $# -gt 0 ]; do
+        use_version $1 $2
+        shift
+        shift
+    done
+fi
+
+
+use_version()
+{
+    COMPONENT=$1
+    VERSION=$2
+
+    #echo "default_tool_dir = $DEFAULT_TOOL_DIR"
+    cd $DEFAULT_TOOL_DIR/$COMPONENT
+
+    USE=$COMPONENT-$VERSION
+    if [ ! -d $USE ]; then
+        # maybe there is a missing .0 ?
+        USE=$COMPONENT-$VERSION.0
+    fi
+
+    if [ -d $USE ]; then
+        if [ -h current ]; then
+            CURRENT=`ls -l current | awk '{ print $11 }'`
+            if [ "$CURRENT" = "$USE" ]; then
+                echo "keeping $CURRENT"
+            else
+                echo "switching from $CURRENT to $USE"
+                rm current
+                ln -s $USE current
+                ls -l current | awk '{ printf "%s %s %s", $9, $10, $11 }'
+                echo
+            fi
+        else
+            echo "using $USE"
+            ln -s $USE current
+            ls -l current | awk '{ printf "%s %s %s", $9, $10, $11 }'
+            echo
+        fi
+    else
+        echo "ERROR: missing directory for $@"
+        echo "ERROR: available version are..."
+        find . -name $COMPONENT-\* -depth 1
+
+        if [ -h current ]; then
+            CURRENT=`ls -l current | awk '{ print $11 }'`
+            echo "WARNING: keeping $CURRENT"
+        else
+            echo "WARNING: current not set."
+        fi
+        exit -1
+    fi
+}

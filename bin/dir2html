@@ -1,0 +1,7 @@
+#!/bin/sh
+
+DIST_DIR=~/dev/imageindex/distribution
+JAR=dir2html-0.3.jar
+MAIN=amiller.imageindex.Main
+
+java -Xmx3072m -XX:MaxPermSize=3072m -cp $DIST_DIR/$JAR:$DIST_DIR/lib/log4j-1.2.12.jar $MAIN $@

@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# lists file extensions for files in the directory (and its subdirs.)
+#
+
+#find . -type f                            |
+find . \( ! -regex '.*/\..*' \) -type f   |
+    xargs basename                        |
+    awk -F. '{ if (NF > 1) print $(NF) }' |
+    sort                                  |
+    uniq

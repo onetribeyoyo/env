@@ -1,0 +1,87 @@
+#!/bin/sh
+
+#for each file
+#  if same as previous file
+#    delete
+#  else
+#    put in list of previous files
+
+cygwin=false;
+darwin=false;
+case "`uname`" in
+    CYGWIN*)
+        cygwin=true
+        ;;
+
+    Darwin*)
+        darwin=true
+        ;;
+esac
+
+
+if $cygwin ; then
+    CHECKSUM_CMD=md5sum
+elif $darwin ; then
+    CHECKSUM_CMD=md5
+fi
+
+
+base=`basename $0`-
+#base=`basename $0`-${$}-
+checksums=../${base}checksums.txt
+duplicates=../${base}duplicates.txt
+keepers=../${base}keepers.txt
+move=../${base}move.sh
+
+#echo $checksums
+#echo $duplicates
+#echo $keepers
+#echo $move
+
+# Deleting the checksum file means they all have to be recomputed.
+#rm -f $checksums
+rm -f $duplicates
+rm -f $keepers
+
+touch $checksums
+touch $duplicates
+touch $keepers
+
+for file in `find . -type f`
+do
+
+    echo -n .
+    #echo $file
+
+    checksum=`grep $file $checksums | awk '{ print $1 '}`
+    if [ -z $checksum ] ; then
+	checksum=`$CHECKSUM_CMD $file`
+	#echo "computed checksum " $checksum
+    else
+	#echo "using recoverd checksum " $checksum
+    fi
+
+    if $cygwin ; then
+	digest=`echo $checksum | awk '{ print $1 }'`
+    elif $darwin ; then
+	digest=`echo $checksum | awk -F= '{ print $2 }' | awk '{ print $1 }'`
+	#echo $digest
+    fi
+
+    if ( grep $digest $checksums > /dev/null ) ; then
+	#echo "    remove $file"
+        echo "rm $file `grep $digest $checksums`" >> $duplicates
+    else
+	#echo keep $file
+        echo $checksum >> $checksums
+        echo $file >> $keepers
+    fi
+done
+
+echo
+
+#rm -f $checksums
+
+cat $duplicates | awk '{ printf "mv %s duplicate-files\n", $2 }' > $move
+
+# End of file

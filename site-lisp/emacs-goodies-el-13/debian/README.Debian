@@ -1,0 +1,213 @@
+emacs-goodies-el for Debian
+---------------------------
+
+About this package
+------------------
+This package contains a few Emacs-Lisp files, mainly obtained from the
+gnu.emacs.sources newsgroup, that provide various functions to Emacs.
+
+  Numbering scheme: major will change when adding or removing files to
+this package; minor will change when these files have a new upstream
+release; Debian revision is for packaging only.
+
+  The file you're currently reading is mostly meant as an introductory
+starter for the various goodies included in this package.  It does not
+intend to replace reading the documentation that is made available in
+the files themselves (or not available at all, except insofar as code
+is self-documenting).
+
+History of this package
+-----------------------
+  See the Debian changelog file.
+
+Included files
+--------------
+,----[ nice title ]
+| boxquote.el allows the easy creation of boxes that look like this,
+| with a nice title and all.  Look for the M-x boxquote-* commands.
+`----
+
+thinks.el provides cartoon-like think bubbles . o O ( like this ).
+Look for M-x thinks* commands.
+
+bar-cursor.el allows you to change your cursor from a block to a
+vertical bar in insert mode, and back to a block in overwrite mode.
+Try M-x bar-cursor-mode.
+
+tld.el provides M-x tld, for easy access to all those top-level
+domains you just can't remember, and to the corresponding countries.
+
+services.el provides M-x services-lookup, to search for info in your
+/etc/services.
+
+protocols.el provides M-x protocols-lookup, to search for info in your
+/etc/protocols.
+
+browse-kill-ring.el provides M-x browse-kill-ring.el, to, well, browse
+through your kill ring, perform searches on it, and insert items into
+a buffer.
+
+coffee.el provides an Emacs interface to RFC2324-compliant coffee
+devices
+
+twiddle.el provides mode-line hacks.  There are two user commands of
+interest: twiddle-start and twiddle-compile.
+
+whitespace.el provides M-x nuke-trailing-whitespace, a command that
+deletes trailing whitespaces in buffers.  Note: whitespace.el is
+disabled for Emacs 21, since it conflicts with the built-in
+whitespace.el.
+
+silly-mail.el provides M-x add-sm-* commands to add various headers to
+your email messages.
+
+obfusurl.el provides M-x obfuscate-url, a command that will obfuscate
+an URL under the cursor.
+
+toggle-buffer.el provides M-x joc-toggle-buffer, a command that can be
+bound to a key in order to speed up the switching between two buffers.
+
+mutt-alias.el provides M-x mutt-alias-insert and M-x
+mutt-alias-lookup, two commands to lookup and insert the expansion of
+mutt mail aliases.
+
+protbuf.el provides M-x protect-buffer-from-kill-mode and M-x
+protect-process-buffer-from-kill-mode, two commands to protect buffers
+from being accidentally killed.
+
+filladapt.el enhances the behavior of Emacs's fill functions by
+guessing the proper fill prefix in many contexts.  Emacs has a
+built-in adaptive fill mode but Filladapt is said to be much better.
+Since this module replaces existing functions, it cannot be
+autoloaded.  To use it, type 'M-x load-library filladapt' or insert
+'(require 'filladapt)' in your .emacs file.
+
+setnu.el provides M-x setnu-mode, a vi-style line number mode.
+
+wdired.el provides M-x wdired-change-to-wdired-mode (when in a dired
+buffer) and allows you to edit the filenames and permission bits
+easily.
+
+floatbg.el provides M-x floatbg-mode, to slowly modify the background
+color of your Emacs.
+
+clipper.el provides the M-x clipper-* commands to save strings of data
+and insert them afterwards.  Each string is labeled with a name, and
+can involve some basic template replacement.
+
+projects.el provides M-x add-project, remove-project and
+list-projects, and introduces the concept of PROJECT ROOTS that allow
+the user to define logical project names and get abbreviated yet
+meaningful buffer names in the modeline.
+
+auto-fill-inhibit.el provides a finer grained control over
+auto-fill-mode activation.  Tu use it, simply load the file.  For
+instance, adding (load-library "auto-fill-inhibit") to your .emacs
+should do the trick.  You'll need to set the auto-fill-inhibit-list
+variable to an appropriate value.
+
+highlight-beyond-fill-column.el provides a way to highlight (with a
+face you choose) text that is beyond the fill-column, therefore
+providing a visual indication of where the fill-* functions would wrap
+the lines.  To use it, customise highlight-beyond-fill-column-in-modes
+and highlight-beyond-fill-column-face, and add the following in your
+.emacs: (require 'highlight-beyond-fill-column).
+
+toggle-case.el provides a sophisticated (over-engineered?) set of
+functions to toggle the case of the character under point, with which
+you can emulate vi's ~ function.  Look for the M-x joc-toggle-case and
+M-x joc-toggle-case-* commands.
+
+tail.el provides the commands M-x tail-file and M-x tail-command, to
+follow the output of a command (or to follow a log file) without using
+any terminals.
+
+df.el provides M-x df, to display in the mode line space left on
+devices.
+
+egocentric.el provides M-x egocentric-mode, a mode to highlight your
+name (or other keywords) in buffers.  If you use Gnus, you might want
+to add (add-hook 'gnus-article-prepare-hook 'egocentric-mode) to your
+Gnus init file.
+
+initsplit.el allows you to split Emacs customizations (set via M-x
+customize) into different files, based on the names of the variables.
+To use it, just load the file in your .emacs: (load "initsplit").
+Note that that you *must* load each file that contains your various
+customizations from your .emacs.
+
+under.el provides M-x underline-region, to underline a bit of text
+with ^ characters like this.
+                  ^^^^^^^^^
+highlight-current-line.el highlights the line the cursor is in.  Look
+for M-x highlight-current-line-on.  Customisation happens when you
+call h-c-l-whole-line-on, h-c-l-set-fg-color, and h-c-l-set-bg-color
+("h-c-l" is "highlight-current-line").
+
+align-string.el provides M-x align-string and M-x align-all-strings,
+to align vertically the first occurences of a regexp over several
+lines.
+
+diminish.el provides M-x diminish, M-x diminish-undo and M-x
+diminished-modes.  Diminished modes are minor modes with a shorter or
+no modeline display.
+
+htmlize.el provides many M-x htmlize-* commands that turn files,
+buffers, or region of font-lock colorised text into an HTML
+representation.
+
+keydef.el provides the `keydef' macro for use in .emacs files (or
+similar).  It is an alternative (simpler) way to define keys, with kbd
+syntax.  You should read the doc in keydef.el, as it is not intended
+for interactive use.
+
+ff-paths.el allows you to use C-x C-f normally most of the time,
+except that if the requested file doesn't exist, it is checked against
+a list of patterns for special paths to search for a file of the same
+name.  Use (require 'ff-paths) in your .emacs to activate it.
+
+dirvars.el provides a functionality similar to the local variables
+defined in a file, but for an entire directory tree.  Use (require
+'dirvars) in your .emacs to activate it.
+
+perldoc.el provides an interface to the "perldoc" command in your
+Perl-mode or CPerl-mode buffers.  Use (require 'perldoc) in your
+.emacs to activate it, then place point over a word and press F1.
+
+all.el provides M-x all, a way to see all lines matching a regexp
+pattern in a special buffer.  Editing these lines in that buffer
+propagates the changes back to the original buffer.
+
+toggle-option.el provides M-x toggle-option, a command to rapidly
+toggle an option.  You should set the toggle-option-list variable to
+an appropriate value.
+
+todoo.el provides M-x todoo and M-x todoo-mode, to conveniently edit
+TODO lists.
+
+cyclebuffer.el provides M-x cyclebuffer-forward, to switch to other
+buffers in the most-recently-visited-first order.  If you accidentally
+overshoot, calling cyclebuffer-backward goes back.  You might want to
+bind these commands to your favourite keys.
+
+keywiz.el drills you about Emacs key-bindings.  You're presented with
+the name of a command and the docstring, and then prompted for the
+correct key sequence.  You'll earn one point for each correct answer
+during the time limit.  Invoke with `M-x keywiz'.
+
+table.el provides a text based table creation and editing feature.
+With this package Emacs is capable of editing tables that are embedded
+inside a text document, the feature similar to the ones seen in modern
+WYSIWYG word processors.  Invoke it with M-x table-insert.  You might
+also want to add (add-hook 'text-mode-hook 'table-recognize) to yout
+.emacs, please read the table.el file for more documentation on this.
+
+tc.el provides a nice way to quote cited texts, with proper filling
+and attribution.  You can use it for instance by setting the cite
+function to 'trivial-cite: (setq message-cite-function 'trivial-cite).
+
+ -- Roland Mas <lolando@debian.org>
+
+# Local Variables:
+# mode: text
+# End:

@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+#  Converts files from doc to txt format.
+#
+#  usage: doc2txt [file ...]
+#
+#  Creates a txt version of each file in the arg (e.g. foo.doc -->
+#  foo.txt) and all .doc files in each directory in the arg list are
+#  converted.
+#
+#  Assuming the original file's extension is ".doc", the extension of
+#  the converted file will be ".doc2.txt".
+#
+#  NOTE: This script does not do well with filenames that include things
+#  like spaces!
+#
+[ $# -eq 0 ] && set "."
+
+txtExtension=doc2.txt
+
+for source in "$@"; do
+    if [ -d $source ] ; then
+        #echo DIR: $source
+        find . -name *.doc -exec textutil -convert txt '{}' \;
+        find "$source" -maxdepth 1 -type f -name \*.doc  -exec textutil -convert txt '{}' \;
+    else
+        #echo FILE: $source
+        textutil -convert txt -extension $txtExtension $source
+    fi
+done # end for

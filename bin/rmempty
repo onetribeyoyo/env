@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Removes empty directories.
+#
+#[ $# -eq 0 ] && set "$PWD"
+[ $# -eq 0 ] && set "."
+
+for directory in "$@"; do
+    find "$directory" -depth -type d | while read d ; do
+        if [ "$d" != "." -a "$d" != "./" -a `ls "$d" | wc -l` -eq 0 ] ; then
+            echo "  removing $d"
+	    rmdir "$d"
+	fi
+    done # end while
+done # end for

@@ -1,0 +1,138 @@
+<html>
+
+<head>
+<title>JDE Key Bindings</title>
+<link rel="stylesheet" type="text/css" media="screen" href="amiller.css">
+</head>
+
+<body>
+
+<h3>JDE Key Bindings <small>(Note: <code>ESC</code> and <code>ALT</code> are equivalent.)</small></h3>
+
+<p><p><strong>Code Completion/Insertion</strong>
+<table border="1" cellpadding="2">
+	<tr>
+		<th bgcolor="eeeeee">key</th>
+		<th bgcolor="eeeeee">binding</th>
+		<th bgcolor="eeeeee">generates</th>
+	</tr>
+	<tr>
+		<td></td>
+		<td>jde-checkstyle</td>
+		<td>runs checkstyle on the current buffer</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-v C-.</code></td>
+		<td>jde-complete</td>
+		<td>displays menu of completions for symbol at point</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-v .</code></td>
+		<td>jde-complete-in-line</td>
+		<td>completes symbol at point. repeating cycles through potential completions</td>
+	</tr>
+	<tr>
+	<tr>
+    <td><code>C-c C-v t</code></td>
+		<td>jde-gen-try-catch-wrapper</td>
+		<td>wrap the region into a try/catch block</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-v f</code></td>
+		<td>jde-gen-try-finally-wrapper</td>
+		<td>wrap the region into a try/finally block</td>
+	</tr>
+	<tr>
+	</tr>
+	<tr>
+    <td><code>C-c C-v C-l</code></td>
+		<td>jde-gen-println</td>
+		<td>insert println statement</td>
+	</tr>
+	<tr>
+    <td><code>C-c&nbsp;C-v&nbsp;C-z</code></td>
+		<td>jde-import-find-and-import</td>
+		<td>an import statement for the class at point</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-v j</code></td>
+		<td>jde-javadoc-autodoc-at-line</td>
+		<td>update javadoc comment block for declaration at current line</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>jde-wiz-delegate</code></td>
+		<td>methods that delegate tasks to a specified class</td>
+	</tr>
+	<tr>
+    <td><code>C-c&nbsp;C-v&nbsp;e</code></td>
+		<td>jde-wiz-extend-abstract-class</td>
+		<td>implementations of abstract methods inherited by class containing point</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>jde-wiz-get-set-methods</td>
+		<td>Get and set methods for the private fields of the class containing point</td>
+	</tr>
+	<tr>
+		<td><code>C-c&nbsp;C-v&nbsp;i</code></td>
+		<td>jde-wiz-implement-interface</td>
+		<td>implementation of an interface in the class containing point</td>
+	</tr>
+	<tr>
+		<td><code>C-c&nbsp;C-v&nbsp;o</code></td>
+		<td>jde-wiz-override-method</td>
+		<td>a method that overrides a method inherited by the class containing point</td>
+	</tr>
+	<tr>
+		<td colspan="3"><strong><br>Accessing Source and Javadoc</strong></td>
+	</tr>
+	<tr>
+		<th bgcolor="eeeeee">key</th>
+		<th bgcolor="eeeeee">binding</th>
+	</tr>
+	<tr>
+    <td><code>C-c C-v C-y</code></td><td>jde-open-class-at-point</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-v C-x</code></td><td>jde-show-superclass-source</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-v C-w</code></td><td>jde-help-symbol</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-v C-n</code></td><td>jde-help-browse-jdk-doc</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-v C-s</code></td><td>speedbar-frame-mode</td>
+	</tr>
+	<tr>
+		<td colspan="3"><strong><br>Editing, Indention, Marking, ...</strong></td>
+	</tr>
+	<tr>
+		<th bgcolor="eeeeee">key</th>
+		<th bgcolor="eeeeee">binding</th>
+	</tr>
+	<tr>
+    <td><code>C-c C-c</code></td><td>comment-region</td>
+	</tr>
+	<tr>
+    <td><code>C-c C-q</code></td><td>c-indent-defun</td>
+	</tr>
+	<tr>
+    <td><code>ESC q</code></td><td>c-fill-paragraph</td>
+	</tr>
+	<tr>
+    <td><code>ESC j</code></td><td>c-indent-new-comment-line</td>
+	</tr>
+	<tr>
+    <td><code>ESC C-q</code></td><td>c-indent-exp</td>
+	</tr>
+	<tr>
+    <td><code>ESC C-h</code></td><td>c-mark-function</td>
+	</tr>
+</table>
+
+</body>
+
+</html>

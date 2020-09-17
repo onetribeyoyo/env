@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Summarizes differences between two dirs.
+#
+
+DIFF_OUT=$TMP/$$.diff.out
+IGNORE_WHITESPACE=-w
+
+diff -rq $IGNORE_WHITESPACE $@ \
+    | grep -v CVS \
+    | grep -v .cvsignore \
+    > $DIFF_OUT
+#
+# adding additional filters like
+#    | sed 's/com\/client\/project/.../g' \
+# can remove a lot of redundant text from the output
+#
+
+cat $DIFF_OUT | grep differ | awk '{print     "Changed in " $4}'
+cat $DIFF_OUT | grep Only\ in | sed 's/Only in/   Only in/' | sort
+
+rm $DIFF_OUT

@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Converts line termination from DOS to unix
+#
+
+find . -name '[!.]*' -type f | grep -v \/CVS | grep -v \/.svn | quotespaces | while read filename ; do
+    tmpfile=$filename.tmp
+    #echo "$filename	$tmpfile"
+    tr -d '\r' < $filename > $tmpfile
+    mv $tmpfile $filename
+done # end for
