@@ -19,6 +19,21 @@ alias t='less'
 alias c='clear'
 
 
+function coffee () {
+    HOURS=$1
+    if ! [[ "$HOURS" =~ ^[0-9]+$ ]]; then
+        echo "ERROR: Specify number of hours as an integer"
+    else
+        SECONDS=`expr $HOURS \* 3600`
+        echo "Caffeinated for $HOURS hours ($SECONDS seconds.)"
+        echo "  - prevents the display from sleeping."
+        echo "  - prevents the system from idle sleeping."
+        echo "  - prevents the system from sleeping when system on AC power."
+        caffeinate -d -i -s -t $SECONDS
+    fi
+}
+
+
 # colour defs for printf...
 export NO_COLOUR="\033[0m"
 
@@ -89,9 +104,11 @@ alias packages="awk -F: '{print \$1}'        \
 function emacs() {
     processCount=$(ps aux | grep -v grep | grep -ci $EMACS_APP)
     if [ $processCount -gt 0 ]; then
-        emacsclient -nt $@ 
-        #emacsclient -nt $@ && osascript -e 'tell application "Emacs.app" to activate'
+        echo "resuse emacs"
+        /Users/amille20/local/local-apps/Emacs-25.2.app/Contents/MacOS/bin/emacsclient -nt $@
+        #/Users/amille20/local/local-apps/Emacs-25.2.app/Contents/MacOS/bin/emacsclient -nt $@ && osascript -e 'tell application "Emacs.app" to activate'
     else
+        echo "new emacs"
         open -a $EMACS_APP $@
     fi
 }
@@ -483,6 +500,17 @@ function gitupstream () {
     #git push
 }
 
+export GIT_PROXY=http://proxyuser.ampf.com:10326
+#alias set-git-proxy='git config --global http.proxy http://proxyuser.ampf.com:10326'
+function git-set-proxy() {
+    echo "set http.proxy $GIT_PROXY"
+    git config --global http.proxy $GIT_PROXY
+}
+#alias unset-git-proxy='git config --global --unset http.proxy'
+function git-unset-proxy() {
+    echo "unset http.proxy"
+    git config --global --unset http.proxy
+}
 
 #
 # for running the same command in many directories...
@@ -492,7 +520,7 @@ function gitupstream () {
 function forall() {
     command=$1 ; shift # the command to execute
     #time ( \
-        find . -type d -depth 1 | while read directory ; do
+        find . -type d -depth 1 | sort | while read directory ; do
             cd $directory
             local PWD=`pwd`
             local VC_INFO=`parse_vc_branch`
@@ -518,7 +546,7 @@ function forallwhere() {
             printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
             $command $@
         else
-            find . -type d -depth 1 | while read directory ; do
+            find . -type d -depth 1 | sort | while read directory ; do
                 if [ -e "$directory/$flag" ] ; then
                     (
                         cd $directory
@@ -578,6 +606,17 @@ function gitall() { # run git in the directories that have .git
     else
         forallwhere .git git $@
     fi
+}
+
+function deep-gitall() { # run gitall in all subdirs
+    find . -depth 1 -type d | sort | while read directory ; do
+        (
+            echo "----------------------------------------------------------------------------------"
+            #echo $directory
+            cd $directory
+            gitall $@
+        )
+    done # end while
 }
 
 function hgall() { # run hg in the directories that have .hg
@@ -712,7 +751,7 @@ alias og="hg outgoing -v -S | lf"
 alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 
 
-alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/SmartSynchronize"
+alias ssync="$SMARTSYNC_HOME/Contents/MacOS/SmartSynchronize"
 
 alias squirrel="open -a SquirrelSQL"
 alias robo="open -a Robo\ 3T"
@@ -754,6 +793,10 @@ function decrypt() {
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 
+isadmin() {
+    id -Gn $USER | grep -q -w admin
+}
+
 #
 # browse to github
 #
@@ -782,67 +825,59 @@ function github() {
     browse $URL
 }
 
-#
-# browse to a jira ticket
-#
-function jira() {
-    JIRA_BASE=https://jira.XXXX.com
-
-    FAVORITE_PROJECT+891
-    DEFAULT_BOARD=$FAVORITE_PROJECT
-    ticket=$1
-    if [ -n "$ticket" ]; then
-        URL=$JIRA_BASE/browse/$ticket
-    else
-        URL=$JIRA_BASE/secure/RapidBoard.jspa?rapidView=$DEFAULT_BOARD
-    fi
-
-    echo $URL
-    browse $URL
-}
-
-#
-# browse a service now ticket
-#
-function service-now() {
-    TICKET=$1
-    URL="https://XXXX.service-now.com/text_search_exact_match.do?sysparm_search=$TICKET"
-    echo $URL
-    browse $URL
-}
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
 function archive() {
-    # tar up important dirs and copy to onedrive
+    # tar up important dirs
+
+    ARCHIVE_DIR=./_archive
     (
         cd ~
 
-        \cp -fv .profile ./archives/dot.profile
-        \cp -fv index.html ./archives
+        if [ ! -d $ARCHIVE_DIR ] ; then
+            mkdir $ARCHIVE_DIR
+        fi
 
+        \cp -fv .profile $ARCHIVE_DIR/dot.profile
+
+        \cp -fv *.html $ARCHIVE_DIR
+        \cp -fv *.md $ARCHIVE_DIR
+
+        BREWFILE=BrewFile
         (
-            \mv -fv BrewFile BrewFile.old
+            \mv -fv $BREWFILE $BREWFILE.old
             brew bundle dump
         )
-        \cp -fv BrewFile.old ./archives
-        \cp -fv BrewFile ./archives
+        \cp -fv $BREWFILE.old $ARCHIVE_DIR
+        \cp -fv $BREWFILE     $ARCHIVE_DIR
 
-        #tardir .password-store   ./archives
-        #tardir .squirrel-sql     ./archives
-        tardir .ssh              ./archives
-        tardir bin               ./archives
-        tardir Desktop           ./archives
-        tardir dev               ./archives
-        tardir devtools          ./archives
-        tardir Documents         ./archives
-        tardir Downloads         ./archives
-        tardir etc               ./archives
-        tardir github            ./archives
-        tardir images            ./archives
-        tardir install           ./archives
-        tardir stacks            ./archives
-        tardir tmp               ./archives
+        SDKFILE=sdk-current.txt
+        (
+            \mv -fv $SDKFILE $SDKFILE.old
+             sdk current > $SDKFILE
+        )
+        \cp -fv $SDKFILE.old $ARCHIVE_DIR
+        \cp -fv $SDKFILE     $ARCHIVE_DIR
+
+        #tardir .password-store   $ARCHIVE_DIR
+        #tardir .squirrel-sql     $ARCHIVE_DIR
+        tardir .ssh              $ARCHIVE_DIR
+        tardir ameriprise        $ARCHIVE_DIR
+        tardir architecture      $ARCHIVE_DIR
+        tardir bin               $ARCHIVE_DIR
+        tardir bitbucket         $ARCHIVE_DIR
+        #tardir blueprinting      $ARCHIVE_DIR
+        tardir Desktop           $ARCHIVE_DIR
+        tardir dev               $ARCHIVE_DIR
+        tardir Documents         $ARCHIVE_DIR
+        tardir Downloads         $ARCHIVE_DIR
+        tardir etc               $ARCHIVE_DIR
+        tardir github            $ARCHIVE_DIR
+        tardir local             $ARCHIVE_DIR
+        tardir products          $ARCHIVE_DIR
+        tardir stacks            $ARCHIVE_DIR
+        tardir tmp               $ARCHIVE_DIR
     )
 }
 
@@ -946,3 +981,16 @@ function overheard-at-target() {
 }
 
 #overheard-at-target
+
+
+
+function parseCurl() {
+    FILE=$1
+
+    grep cis.svc  $FILE | awk '{ print $2 }'
+    grep cmms.svc $FILE | awk '{ print $2 }'
+    grep ods.svc  $FILE | awk '{ print $2 }'
+    grep scs.svc  $FILE | awk '{ print $2 }'
+    grep smc.svc  $FILE | awk '{ print $2 }'
+    grep snd.svc  $FILE | awk '{ print $2 }'
+}

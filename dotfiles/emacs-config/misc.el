@@ -97,7 +97,7 @@
 ;;; But I really like lower ascii...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(defun simplify-string-in-buffer (oldString newString)
+(defun replace-string-in-buffer (oldString newString)
   "replace string across the entire buffer"
   ;;(push-mark)
   (goto-char (point-min))
@@ -110,24 +110,35 @@
 (defun simplify-characters-in-buffer ()
   "swaps extended characters for lower ascii alternatives."
   (interactive)
-  (simplify-string-in-buffer "‘" "'")
-  (simplify-string-in-buffer "’" "'")
-  (simplify-string-in-buffer "“" "\"")
-  (simplify-string-in-buffer "”" "\"")
-  (simplify-string-in-buffer "…" "...")
-  (simplify-string-in-buffer "–" "-")
-  (simplify-string-in-buffer "—" "--")
-  (simplify-string-in-buffer "•" "-")
-  (simplify-string-in-buffer "" "(o)")
-  (simplify-string-in-buffer "" "(o)")
-  (simplify-string-in-buffer "¤" "(o)")
-  (simplify-string-in-buffer " " " ")
-  (simplify-string-in-buffer "​" " ")
-  (simplify-string-in-buffer " " " ")
-  (simplify-string-in-buffer "" ":(")
-  (simplify-string-in-buffer "" "phone") ;; mystery charater; maybe a very small space?
-  (simplify-string-in-buffer " " " ") ;; phone icon
-  (simplify-string-in-buffer "·" "-")
+  (replace-string-in-buffer "‘" "'")
+  (replace-string-in-buffer "’" "'")
+  (replace-string-in-buffer "“" "\"")
+  (replace-string-in-buffer "”" "\"")
+  (replace-string-in-buffer "…" "...")
+  (replace-string-in-buffer "–" "-")
+  (replace-string-in-buffer "—" "--")
+  (replace-string-in-buffer "•" "-")
+  (replace-string-in-buffer "" "(o)")
+  (replace-string-in-buffer "" "(o)")
+  (replace-string-in-buffer "¤" "(o)")
+  (replace-string-in-buffer " " " ")
+  (replace-string-in-buffer "​" " ")
+  (replace-string-in-buffer " " " ")
+  (replace-string-in-buffer "" ":(")
+  (replace-string-in-buffer "" "phone") ;; mystery charater; maybe a very small space?
+  (replace-string-in-buffer " " " ") ;; phone icon
+  (replace-string-in-buffer "·" "-")
+  (replace-string-in-buffer "" "<")
+  (replace-string-in-buffer "☺" ":^)")
+  )
+
+(defun format-email-lists-in-buffer ()
+  "wraps long email addr lists."
+  (interactive)
+  (replace-string-in-buffer ">, " ">,
+    ")
+  (replace-string-in-buffer ">; " ">;
+    ")
   )
 
 
@@ -162,6 +173,6 @@
 ;;; editorconfig...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/editorconfig-emacs-master"))
+;(add-to-list 'load-path (expand-file-name "~/local/site-lisp/editorconfig-emacs-master"))
 ;(require 'editorconfig)
 ;(editorconfig-mode 1)

@@ -1,11 +1,11 @@
 [user]
-        name = Andy Miller
-        email = onetribeyoyo@gmail.com
+	name = Andy Miller
+	email = andrew.1.miller@ampf.com
 
 [core]
 #	editor = /usr/bin/emacs -a=\\\"\\\"
         editor = emacs
-        excludesfile = /Users/amiller/.gitignore_global
+	excludesfile = /Users/amille20/.gitignore_global
 
 [color]
         ui = true

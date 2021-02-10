@@ -95,7 +95,7 @@
 (add-to-list 'auto-mode-alist '("\\.shlib" . shell-script-mode))
 
 ;; YAML mode
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/yaml-mode"))
+(add-to-list 'load-path (expand-file-name "~/local/site-lisp/yaml-mode"))
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
@@ -133,6 +133,8 @@
 ;; Better imenu
 ;;(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
+
+(add-to-list 'load-path (expand-file-name "~/local/prettier/prettier-emacs"))
 (require 'prettier-js)
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 
@@ -154,7 +156,7 @@
 ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/wolfmanjm-grails-mode-eee23a6"))
 
 ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/groovy-mode-by-russel-winder"))
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/emacs-groovy-mode_201311291207"))
+(add-to-list 'load-path (expand-file-name "~/local/site-lisp/groovy/emacs-groovy-mode_201311291207"))
 
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
@@ -193,6 +195,11 @@
    (t                                          (insert-file "~/etc/class-template.java"))
    )
   )
+
+(defun amiller-java-mode-hook ()
+  (setq tab-width 4)
+  )
+(add-hook 'java-mode-hook 'amiller-java-mode-hook)
 
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -272,7 +279,7 @@
 ;;; lilypond...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/lilypond"))
+(add-to-list 'load-path (expand-file-name "~/local/site-lisp/lilypond"))
 
 (autoload 'LilyPond-mode "lilypond-mode")
 (setq auto-mode-alist
@@ -292,6 +299,7 @@
 
 (defun amiller-markdown-mode-hook ()
   (setq fill-column 102)
+  ;;(setq fill-column 162)
   )
 (add-hook 'markdown-mode-hook 'amiller-markdown-mode-hook)
 
@@ -300,7 +308,7 @@
 ;;; rust development...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(add-to-list 'load-path (expand-file-name "~/devtools/rust/rust-mode"))
+(add-to-list 'load-path (expand-file-name "~/local/rust/rust-mode"))
 (autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 

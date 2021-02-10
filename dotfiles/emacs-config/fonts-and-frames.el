@@ -82,9 +82,9 @@
 (setq amiller-frame-top               0 ;; 22 ;; pixels
       amiller-frame-right            -1 ;; pixels
 
-      amiller-external-frame-height  92 ;; rows
-      amiller-external-frame-left  1097 ;; pixels
-      amiller-external-frame-width  204 ;; characters
+      amiller-external-frame-height  75 ;; rows
+      amiller-external-frame-left   623 ;; pixels
+      amiller-external-frame-width  180 ;; characters
 
       amiller-macbook-frame-height   49 ;; rows
       amiller-macbook-frame-left    455 ;; pixels
@@ -124,7 +124,7 @@
   )
 
 ;;(frame-size-for-macbook-display)
-(auto-detect-frame-size)
+;;(auto-detect-frame-size)
 
 
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
