@@ -29,7 +29,7 @@
       )
 
 (when (window-system)
-  (set-default-font normal-font)
+  (set-frame-font normal-font nil t)
   )
 ;;(set-default-font "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
 ;;(set-default-font "-*-Fira Code-medium-r-normal--15-*-*-*-*-*-iso10646-1")
@@ -101,7 +101,7 @@
 
 (defun frame-size-for-external-display ()
   (interactive)
-  (set-default-font normal-font)
+  (set-frame-font normal-font nil t)
   (set-frame-width    (selected-frame) amiller-external-frame-width)
   (set-frame-height   (selected-frame) amiller-external-frame-height)
   (set-frame-position (selected-frame) amiller-external-frame-left amiller-frame-top)
@@ -109,7 +109,7 @@
 
 (defun frame-size-for-macbook-display ()
   (interactive)
-  (set-default-font medium-font)
+  (set-frame-font medium-font nil t)
   (set-frame-width    (selected-frame) amiller-macbook-frame-width)
   (set-frame-height   (selected-frame) amiller-macbook-frame-height)
   (set-frame-position (selected-frame) amiller-macbook-frame-left amiller-frame-top)
@@ -132,29 +132,29 @@
 
 (defun font-normal ()
   (interactive)
-  (set-default-font normal-font)
+  (set-frame-font normal-font nil t)
   )
 (defun font-bigger ()
   (interactive)
-  (set-default-font bigger-font)
+  (set-frame-font bigger-font nil t)
   )
 (defun font-medium ()
   (interactive)
-  (set-default-font medium-font)
+  (set-frame-font medium-font nil t)
   )
 (defun font-big ()
   (interactive)
-  (set-default-font big-font)
+  (set-frame-font big-font nil t)
   )
 
 (defun font-fira ()
   (interactive)
-  (set-default-font fira-code-font)
+  (set-frame-font fira-code-font nil t)
   )
 
 (defun font-inconsolata ()
   (interactive)
-  (set-default-font inconsolata-font)
+  (set-frame-font inconsolata-font nil t)
   )
 
 
