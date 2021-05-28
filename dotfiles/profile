@@ -189,16 +189,14 @@ export MONGO_HOME=~/devtools/mongo/current
 #export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
 #alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
-export SMARTSYNC_HOME=~/devtools/smartsync/smartsync-4.0.3
+#export SMARTSYNC_HOME=~/devtools/smartsync/smartsync-4.0.3
+export SMARTSYNC_HOME=/Applications
 
 #export TOMCAT_HOME=~/devtools/tomcat/current
 
-#export LILYPOND_HOME=/Applications/LilyPond.app
-#alias ly=lilypond
-
 # emacs...
-export EMACS_APP=emacs-25.2.app
-#export EMACS_APP=Emacs.app
+#export EMACS_APP=emacs-25.2.app
+export EMACS_APP=Emacs.app
 
 
 # path...
@@ -208,6 +206,7 @@ $HOME/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 /usr/local/bin:\
+/usr/local/sbin:\
 /Applications/Xcode.app/Contents/Developer/usr/bin:\
 $HOME/.config/composer/vendor/couscous/couscous/bin:\
 $PATH
