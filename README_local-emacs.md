@@ -31,3 +31,10 @@ Then, replace the brew version.
 
     $ brew cask remove emacs
     $ mv nextstep/Emacs.app/ /Applications/
+
+------
+
+Note: might need to...
+
+    brew install texinfo
+    brew install gnutls
