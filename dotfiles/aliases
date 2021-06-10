@@ -85,17 +85,8 @@ alias packages="awk -F: '{print \$1}'        \
                 | sed 's/\;//g'              \
                 | uniq -c"
 
-
-function emacs() {
-    processCount=$(ps aux | grep -v grep | grep -ci $EMACS_APP)
-    if [ $processCount -gt 0 ]; then
-        emacsclient -nt $@ 
-        #emacsclient -nt $@ && osascript -e 'tell application "Emacs.app" to activate'
-    else
-        open -a $EMACS_APP $@
-    fi
-}
-alias edit='xargs emacs'
+alias emacs='open -a $EMACS_APP'
+alias edit='xargs open -a $EMACS_APP'
 alias fedit='files | edit'
 alias fe='fedit'
 
@@ -233,6 +224,16 @@ alias ggmd="findmd | xargs grep"
 alias gpy="find . -maxdepth 1 \( -name \*.py \) -print | xargs grep"
 alias findpy="find . \( -name \*.py \) -print"
 alias ggpy="findpy | quotespaces | xargs grep"
+
+# clojure files
+alias gclj="find . -maxdepth 1 \( -name \*.clj \) -print | xargs grep"
+alias findclj="find . \( -name \*.clj \) -print"
+alias ggclj="findclj | quotespaces | xargs grep"
+
+# clojure script files
+alias gcljs="find . -maxdepth 1 \( -name \*.cljs \) -print | xargs grep"
+alias findcljs="find . \( -name \*.cljs \) -print"
+alias ggcljs="findcljs | quotespaces | xargs grep"
 
 
 #
@@ -692,10 +693,10 @@ function ly () {
 
 #alias mysql-start="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.plist"
 #alias mysql-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql.plist"
-alias mysql-start="mysql.server start"
-alias mysql-status="mysql.server status"
-alias mysql-stop="mysql.server stop"
-alias mysql-bounce="mysql-stop ; mysql-start"
+#alias mysql-start="mysql.server start"
+#alias mysql-status="mysql.server status"
+#alias mysql-stop="mysql.server stop"
+#alias mysql-bounce="mysql-stop ; mysql-start"
 
 alias rabbit-start="rabbitmq-server"
 alias rabbit-stop="rabbitmqctl stop"
@@ -712,7 +713,7 @@ alias og="hg outgoing -v -S | lf"
 alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 
 
-alias ssync="$SMARTSYNC_HOME/SmartSynchronize.app/Contents/MacOS/SmartSynchronize"
+alias ssync="$LOCAL_APPS/SmartSynchronize.app/Contents/MacOS/SmartSynchronize"
 
 alias squirrel="open -a SquirrelSQL"
 alias robo="open -a Robo\ 3T"

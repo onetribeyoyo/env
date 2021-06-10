@@ -26,8 +26,8 @@
 
         hard = reset --hard
 
-[credential]
-        helper = osxkeychain
+#[credential]
+#        helper = osxkeychain
 
 [branch]
         autosetuprebase = never

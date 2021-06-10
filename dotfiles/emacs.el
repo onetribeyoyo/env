@@ -28,9 +28,12 @@
 ;;; Initial configuration...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp"))
+(add-to-list 'load-path (expand-file-name "~/github/onetribeyoyo/env/site-lisp"))
 
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/emacs-goodies-el-13"))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/emacs-goodies-el-13"))
+(add-to-list 'load-path (expand-file-name "~/github/onetribeyoyo/env/site-lisp/emacs-goodies-el-13"))
+
 ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/html-helper-mode-2.19.1.1"))
 
 ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/psgml-1.3.1/"))

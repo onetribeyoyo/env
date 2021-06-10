@@ -95,7 +95,7 @@
 (add-to-list 'auto-mode-alist '("\\.shlib" . shell-script-mode))
 
 ;; YAML mode
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/yaml-mode"))
+(add-to-list 'load-path (expand-file-name "~/github/onetribeyoyo/env/site-lisp/yaml-mode"))
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
@@ -154,7 +154,7 @@
 ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/wolfmanjm-grails-mode-eee23a6"))
 
 ;;(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/groovy-mode-by-russel-winder"))
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/emacs.groovy/emacs-groovy-mode_201311291207"))
+(add-to-list 'load-path (expand-file-name "~/github/onetribeyoyo/env/site-lisp/emacs/emacs.groovy/emacs-groovy-mode_201311291207"))
 
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
@@ -272,7 +272,7 @@
 ;;; lilypond...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(add-to-list 'load-path (expand-file-name "~/devtools/emacs/site-lisp/lilypond"))
+(add-to-list 'load-path (expand-file-name "~/github/onetribeyoyo/env/site-lisp/lilypond"))
 
 (autoload 'LilyPond-mode "lilypond-mode")
 (setq auto-mode-alist
@@ -300,9 +300,9 @@
 ;;; rust development...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-(add-to-list 'load-path (expand-file-name "~/devtools/rust/rust-mode"))
-(autoload 'rust-mode "rust-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+;;(add-to-list 'load-path (expand-file-name "~/devtools/rust/rust-mode"))
+;;(autoload 'rust-mode "rust-mode" nil t)
+;;(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 
 
