@@ -7,8 +7,8 @@
 ;; etc. to the end of the buffer names (all but one of them).  The forward naming method
 ;; includes part of the file's directory name at the beginning of the buffer name
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Uniquify.html
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+;;(require 'uniquify)
+;;(setq uniquify-buffer-name-style 'forward)
 
 ;; Turn on recent file mode so that you can more easily switch to recently edited files
 ;; when you first start emacs
@@ -23,7 +23,7 @@
 ;; start to type a buffer's name, ido will narrow down the list of buffers to match the
 ;; text you've typed in
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
-(ido-mode t)
+;;(ido-mode t)
 
 ;; This allows partial matches, e.g. "tl" will match "Tyrion Lannister"
 (setq ido-enable-flex-matching t)
@@ -37,12 +37,12 @@
 
 ;; Includes buffer names of recently open files, even if they're not
 ;; open now
-(setq ido-use-virtual-buffers t)
+;;(setq ido-use-virtual-buffers t)
 
 ;; This enables ido in all contexts where it could be useful, not just
 ;; for selecting buffer and file names
-(ido-ubiquitous-mode t)
-(ido-everywhere t)
+;;(ido-ubiquitous-mode t)
+;;(ido-everywhere t)
 
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -51,9 +51,9 @@
 ;; Enhances M-x to allow easier execution of commands. Provides
 ;; a filterable list of possible commands in the minibuffer
 ;; http://www.emacswiki.org/emacs/Smex
-(setq smex-save-file (concat user-emacs-directory ".smex-items"))
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
+;;(setq smex-save-file (concat user-emacs-directory ".smex-items"))
+;;(smex-initialize)
+;;(global-set-key (kbd "M-x") 'smex)
 
 ;; projectile everywhere!
 (projectile-global-mode)
