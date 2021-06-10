@@ -3,10 +3,10 @@
 ;;; Column width...
 ;;; ----10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130--
 
-(setq-default fill-column 72)
+;;(setq-default fill-column 72)
 ;;(setq-default fill-column 77)
 ;;(setq-default fill-column 80)
-;;(setq-default fill-column 90)
+(setq-default fill-column 90)
 ;;(setq-default fill-column 132)
 
 ;; Wide column mode changes the cursor colour when it gets past the fill-column.
