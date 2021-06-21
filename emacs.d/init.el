@@ -99,7 +99,7 @@
 (load "modes.el")
 (load "theme.el")
 (load "fonts-and-frames.el")
-(load "misc.el")
+(load "decades-of-cruft.el")
 (load "printing.el")
 
 
