@@ -176,6 +176,10 @@ alias gghtml="find . \( -name \*.html -o -name \*.htm -o -name \*.css \) -print 
 alias gcss="find . -maxdepth 1 -name \*.css -print | xargs grep"
 alias ggcss="find . -name \*.css -print | quotespaces | xargs grep"
 
+# SASS (scss) files
+alias gscss="find . -maxdepth 1 -name \*.scss -print | xargs grep"
+alias ggscss="find . -name \*.scss -print | quotespaces | xargs grep"
+
 # web ui files
 alias gw="find . -maxdepth 1 \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js -o -name \*.jsx -o -name \*.tsx \) -print | xargs grep"
 alias ggw="find . \( -name \*.html -o -name \*.jsp -o -name \*.vm -o -name \*.xml -o -name \*.js -o -name \*.jsx -o -name \*.tsx \) -print | quotespaces | xargs grep"
