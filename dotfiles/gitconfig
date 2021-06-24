@@ -3,8 +3,7 @@
         email = onetribeyoyo@gmail.com
 
 [core]
-#	editor = /usr/bin/emacs -a=\\\"\\\"
-        editor = emacs
+        editor = /usr/local/bin/emacs
         excludesfile = /Users/amiller/.gitignore_global
 
 [color]
