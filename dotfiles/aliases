@@ -85,6 +85,28 @@ alias packages="awk -F: '{print \$1}'        \
                 | sed 's/\;//g'              \
                 | uniq -c"
 
+
+# emacs...
+function emacs-use-27 () {
+  (
+    cd ~/local/local-apps
+    if [ -L Emacs.app ] ; then
+       rm -f Emacs.app
+    fi
+    ln -s ./Emacs-27.2-2.app Emacs.app
+  )
+}
+function emacs-use-28 () {
+  (
+    cd ~/local/local-apps
+    if [ -L Emacs.app ] ; then
+       rm -f Emacs.app
+    fi
+    ln -s ./Emacs-28.latest.app Emacs.app
+  )
+}
+export EMACS_APP=Emacs.app
+
 alias emacs='open -a $EMACS_APP'
 alias edit='xargs open -a $EMACS_APP'
 alias fedit='files | edit'
