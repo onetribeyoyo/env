@@ -16,8 +16,8 @@
 ;;   (tool-bar-mode -1))
 
 ;; Don't show native OS scroll bars for buffers because they're redundant
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+;;(when (fboundp 'scroll-bar-mode)
+;;  (scroll-bar-mode -1))
 
 ;; Color Themes
 ;; Read http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/
@@ -67,4 +67,3 @@
 
 ;; no bell
 ;;(setq ring-bell-function 'ignore)
-
