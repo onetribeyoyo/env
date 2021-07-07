@@ -19,6 +19,21 @@ alias t='less'
 alias c='clear'
 
 
+function coffee () {
+    HOURS=$1
+    if ! [[ "$HOURS" =~ ^[0-9]+$ ]]; then
+        echo "ERROR: Specify number of hours as an integer"
+    else
+        SECONDS=`expr $HOURS \* 3600`
+        echo "Caffeinated for $HOURS hours ($SECONDS seconds.)"
+        echo "  - prevents the display from sleeping."
+        echo "  - prevents the system from idle sleeping."
+        echo "  - prevents the system from sleeping when system on AC power."
+        caffeinate -d -i -s -t $SECONDS
+    fi
+}
+
+
 # colour defs for printf...
 export NO_COLOUR="\033[0m"
 
@@ -519,7 +534,7 @@ function gitupstream () {
 function forall() {
     command=$1 ; shift # the command to execute
     #time ( \
-        find . -type d -depth 1 | while read directory ; do
+        find . -type d -depth 1 | sort | while read directory ; do
             cd $directory
             local PWD=`pwd`
             local VC_INFO=`parse_vc_branch`
@@ -545,7 +560,7 @@ function forallwhere() {
             printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
             $command $@
         else
-            find . -type d -depth 1 | while read directory ; do
+            find . -type d -depth 1 | sort | while read directory ; do
                 if [ -e "$directory/$flag" ] ; then
                     (
                         cd $directory
@@ -605,6 +620,17 @@ function gitall() { # run git in the directories that have .git
     else
         forallwhere .git git $@
     fi
+}
+
+function deep-gitall() { # run gitall in all subdirs
+    find . -depth 1 -type d | sort | while read directory ; do
+        (
+            echo "----------------------------------------------------------------------------------"
+            #echo $directory
+            cd $directory
+            gitall $@
+        )
+    done # end while
 }
 
 function hgall() { # run hg in the directories that have .hg
