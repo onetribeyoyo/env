@@ -25,6 +25,7 @@ th {
 ul {
    /* font-size: small; */
    /* list-style: none; */
+   margin: 0;
    padding-left: 1em;
 }
 
@@ -46,7 +47,9 @@ section {
 }
 
 .subsection {
-    margin: 0;
+   margin: 1em 0em;
+   padding-top: 0.5em;
+   border-top: 1px solid #777; /* looks like an hr element */
 }
 
 h1, h2, h3, h4 {
