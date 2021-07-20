@@ -83,8 +83,8 @@
       amiller-frame-right            -1 ;; pixels
 
       amiller-external-frame-height  92 ;; rows
-      amiller-external-frame-left  1097 ;; pixels
-      amiller-external-frame-width  204 ;; characters
+      amiller-external-frame-left  1250 ;; pixels
+      amiller-external-frame-width  182 ;; characters
 
       amiller-macbook-frame-height   49 ;; rows
       amiller-macbook-frame-left    455 ;; pixels
