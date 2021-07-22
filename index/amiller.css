@@ -46,12 +46,6 @@ section {
    padding: 1em;
 }
 
-.subsection {
-   margin: 1em 0em;
-   padding-top: 0.5em;
-   border-top: 1px solid #777; /* looks like an hr element */
-}
-
 h1, h2, h3, h4 {
     margin: 0;
 }

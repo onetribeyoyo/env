@@ -29,11 +29,11 @@ td.vbar2 {
 
 section {
    background: #222;
-   border: 1px solid DarkRed;
+   border: 1px solid #660002;
 }
 
-.subsection {
-   border-top-color: DarkRed;
+hr {
+   background-color: #660002;
 }
 
 .whitebox {
