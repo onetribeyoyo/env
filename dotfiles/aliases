@@ -108,16 +108,16 @@ function emacs-use-27 () {
     if [ -L Emacs.app ] ; then
        rm -f Emacs.app
     fi
-    ln -s ./Emacs-27.2-2.app Emacs.app
+    ln -s ./Emacs-27.app Emacs.app
   )
 }
-function emacs-use-28 () {
+function emacs-use-nightly () {
   (
     cd ~/local/local-apps
     if [ -L Emacs.app ] ; then
        rm -f Emacs.app
     fi
-    ln -s ./Emacs-28.latest.app Emacs.app
+    ln -s ./Emacs.nightly.app Emacs.app
   )
 }
 export EMACS_APP=Emacs.app
@@ -337,6 +337,15 @@ alias GQA="g clean ; grails package ; grails -Dgrails.env=qa war"
 
 alias gtr='open target/test-reports/html/index.html'
 
+function gtested() {
+  grails test-app $@
+  if [ -z "$(ls -A target/test-reports/plain)" ]; then
+    echo "NOTHING TESTED"
+  else
+    open target/test-reports/html/index.html
+  fi
+}
+
 alias gs="g -Dgrails.env=server"
 alias gprimed="g -Dgrails.env=primeForDesktop"
 alias gprimem="g -Dgrails.env=primeForMySql"
@@ -517,6 +526,21 @@ function gitmod() {
     git status -s | grep \ M\   | awk '{ print $2 }'
     git status -s | grep \?\?\  | awk '{ print $2 }'
 }
+
+# similar to gitmod, but only included thigs from here on down the directory tree
+function gitmod_() {
+    gitmod | grep -v "\.\./"
+}
+
+function gitmedit() {
+    gitmod | files | edit
+}
+
+
+function gitmedit_() {
+    gitmod_ | files | edit
+}
+
 
 function gitupstream () {
     git fetch upstream
@@ -804,4 +828,12 @@ function decrypt() {
     FILE=$1
     openssl des -d -in $FILE.des -out $FILE
 }
+
+function beep() {
+    count=5
+    for i in $(seq $count); do
+        tput bel
+    done
+}
+
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
