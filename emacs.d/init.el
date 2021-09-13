@@ -102,6 +102,9 @@
 (load "decades-of-cruft.el")
 (load "printing.el")
 
+(load "neotree.el")
+;;(load "speedbar.el")
+;;(load "treemacs.el")
 
 ;; ...and the config from clojure brave&true
 ;; Sets up exec-path-from-shell so that Emacs will use the correct environment variables
@@ -137,32 +140,30 @@
 ;;(setq default-directory "~/")
 ;;(server-start) ;; for emacsclient
 
+;;(frame-size-for-macbook-display)
+(auto-detect-frame-size)
+;;(neotree-show) ;; should run only after custom-set-variables
 
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=--=
-
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(coffee-tab-width 2)
- '(package-selected-packages
-   (quote
-    (magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell)))
-
  '(auto-revert-verbose nil)
  '(case-fold-search t)
+ '(coffee-tab-width 2)
  '(current-language-environment "Latin-1")
  '(default-input-method "latin-1-prefix")
- '(font-lock-support-mode (quote jit-lock-mode))
+ '(font-lock-support-mode 'jit-lock-mode)
  '(ido-enable-flex-matching t)
  '(indent-tabs-mode nil)
  '(initial-scratch-message nil)
  '(ispell-program-name "aspell" t)
- '(package-selected-packages (quote (json-mode js2-mode)))
- '(paren-match-face (quote paren-face-match-light))
+ '(neo-window-width 50)
+ '(package-selected-packages '(json-mode js2-mode))
+ '(paren-match-face 'paren-face-match-light)
  '(paren-sexp-mode t)
  '(printer-name nil)
  '(ps-bottom-margin 25)
@@ -178,12 +179,11 @@
  '(ps-zebra-stripe-height 3)
  '(ps-zebra-stripes t)
  '(read-buffer-completion-ignore-case t)
- '(safe-local-variable-values (quote ((nxml-child-indent . 2))))
+ '(safe-local-variable-values '((nxml-child-indent . 2)))
  '(search-whitespace-regexp nil)
  '(show-paren-mode t nil (paren))
- '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
- '(truncate-partial-width-windows nil)
- )
+ '(text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
+ '(truncate-partial-width-windows nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -214,5 +214,4 @@
  '(jde-java-font-lock-pre-face ((t (:foreground "PaleGreen4" :bold t :italic nil :underline nil))))
  '(jde-java-font-lock-private-face ((t (:foreground "khaki" :bold nil :italic nil))))
  '(jde-java-font-lock-protected-face ((t (:foreground "khaki" :bold nil :italic nil))))
- '(jde-java-font-lock-public-face ((t (:foreground "khaki" :bold nil :italic nil))))
- )
+ '(jde-java-font-lock-public-face ((t (:foreground "khaki" :bold nil :italic nil)))))
