@@ -266,8 +266,13 @@ alias gpy="find . -maxdepth 1 \( -name \*.py \) -print | xargs grep"
 alias findpy="find . \( -name \*.py \) -print"
 alias ggpy="findpy | quotespaces | xargs grep"
 
-# clojure files
-alias gclj="find . -maxdepth 1 \( -name \*.clj \) -print | xargs grep"
+# just clojure (no clojure script) files
+alias gclj_="find . -maxdepth 1 \( -name \*.clj \) -print | xargs grep"
+alias findclj_="find . \( -name \*.clj \) -print"
+alias ggclj_="findclj_ | quotespaces | xargs grep"
+
+# clojure script files# clojure (& clojure script) files
+alias gclj="find . -maxdepth 1 \( -name \*.clj -o -name \*.cljs \) -print | xargs grep"
 alias findclj="find . \( -name \*.clj \) -print"
 alias ggclj="findclj | quotespaces | xargs grep"
 
@@ -364,11 +369,12 @@ alias gg="find . -maxdepth 1 -name \*.goovy -print | xargs grep"
 alias findg="find . -name \*.groovy -print"
 
 function ggg() {
-    # the final grep in the pipeline is to get the match highlighting!
-    findg | xargs grep $@ \
-        | grep -v \/target\/plugins\/ \
-        | grep -v \/target\/work\/plugins\/ \
-        | grep $@
+  # the final grep in the pipeline is to get the match highlighting!
+  #findg | xargs grep $@ \
+  #  | grep -v \/target\/plugins\/ \
+  #  | grep -v \/target\/work\/plugins\/ \
+  #  | grep $@
+  findg | xargs grep $@
 }
 alias ggg-all="findg | xargs grep" # like ggg, but does not filter out target dir.
 function ggg-nt() { # like ggg, but filters out test classes
