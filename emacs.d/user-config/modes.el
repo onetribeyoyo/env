@@ -43,23 +43,6 @@
 ;;; Modes...
 ;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 
-;;(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-;;(autoload 'csv-mode "csv-mode" "Major mode for editing comma-separated value files." t)
-
-;;(require 'vc-hooks)
-(require 'vc-git)
-(defun vc-git-annotate-command (file buf &optional rev)
-  (let ((name (file-relative-name file)))
-    (vc-git-command buf 'async nil "blame"
-                    ;; default args were "--date=iso" "-C" "-C" rev "--" name
-                    "--date=iso" "-C" "-C" rev "--" name
-                    ;;"--date=iso" rev "--" name
-                    ;;"--date=iso" rev "-c" "--" name
-                    )
-    )
-  )
-
-
 ;; Text mode
 (setq initial-major-mode 'text-mode)    ; start out in text mode
 (setq default-major-mode 'text-mode)    ; default to text mode
