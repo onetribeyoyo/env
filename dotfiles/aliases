@@ -273,7 +273,7 @@ alias ggclj_="findclj_ | quotespaces | xargs grep"
 
 # clojure script files# clojure (& clojure script) files
 alias gclj="find . -maxdepth 1 \( -name \*.clj -o -name \*.cljs \) -print | xargs grep"
-alias findclj="find . \( -name \*.clj \) -print"
+alias findclj="find . \( -name \*.clj -o -name \*.cljs \) -print"
 alias ggclj="findclj | quotespaces | xargs grep"
 
 # clojure script files
