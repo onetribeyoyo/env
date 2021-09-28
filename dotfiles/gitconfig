@@ -11,13 +11,13 @@
 
 [alias]
         co = checkout
-        lg = log --graph --pretty=format:'%C(red)%h %C(yellow)-%d <%an - %cr>%C(reset) %s' --abbrev-commit --date=relative
+        lg = log --graph --pretty=format:'%C(red)%h %C(yellow)-%d <%an - %cr>%C(reset) %s' --abbrev-commit
         mod = status -s
         pb = fetch --progress --prune origin
 
-        sync  = pull --rebase upstream master
+        sync = pull --rebase upstream master
         ssync = pull --rebase upstream master
-        ss    = pull --rebase upstream master
+        ss = pull --rebase upstream master
 
         ic = fetch --all --dry-run -- verbose
         og = log origin/master..HEAD
@@ -36,6 +36,24 @@
 
 [push]
         default = simple
+        recurseSubmodules = check
 
 [pull]
         rebase = true
+
+[filter "lfs"]
+        process = git-lfs filter-process
+        required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+
+[commit]
+        gpgSign = false
+
+[gui]
+        pruneduringfetch = true
+
+[smartgit "submodule"]
+        fetchalways = false
+        update = true
+        initializenew = true
