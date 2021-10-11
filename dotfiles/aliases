@@ -19,6 +19,11 @@ alias t='less'
 alias c='clear'
 
 
+#
+# don't want your computer to sleep?
+# and can't use https://intelliscapesolutions.com/apps/caffeine?
+# try this instead
+#
 function coffee () {
     HOURS=$1
     if ! [[ "$HOURS" =~ ^[0-9]+$ ]]; then
@@ -254,12 +259,12 @@ alias ggkt="findkt | xargs grep"
 # text files (.txt) files
 alias gtxt="find . -maxdepth 1 -name \*.txt -print | xargs grep"
 alias findtxt="find . -name \*.txt -print"
-alias ggtxt="findtxt | xargs grep"
+alias ggtxt="findtxt | quotespaces | xargs grep"
 
 # markdown files (.md) files
 alias gmd="find . -maxdepth 1 -name \*.md -print | xargs grep"
 alias findmd="find . -name \*.md -print"
-alias ggmd="findmd | xargs grep"
+alias ggmd="findmd | quotespaces | xargs grep"
 
 # python files
 alias gpy="find . -maxdepth 1 \( -name \*.py \) -print | xargs grep"
@@ -675,6 +680,63 @@ function branches() { # show what branches we're on
     # this depends on the format of the prompt as emitted by the *all commands
     gitall mod | grep git: | awk '{ print $3 $4 }'
     #hgall st | grep hg:
+}
+
+
+#
+# browse to git web server
+#
+function gitweb() {
+    GITSERVER=https://github.com
+    git branch > /dev/null 2> /dev/null
+    if [ $? -eq 0 ] ; then # we're in a cloned git repo
+        URL=`git remote show origin | grep Fetch | awk '{ print $3 }' | sed 's/.git$//'`
+        BRANCH=`git branch 2> /dev/null | grep \* | awk '{ printf "%s", $2 }'`
+        if [ $# -ne 0 ] ; then # maybe we have a PR number?
+            re='^[0-9]+$'
+            if [[ $1 =~ $re ]] ; then
+                URL=$URL/pull/$1
+            else
+                echo "error: Not a PR number"
+            fi
+        elif [ "$BRANCH" != "master" ] ; then # browse to the interesting branch
+            URL=$URL/tree/$BRANCH
+        fi
+    else
+        URL=$GITSERVER
+    fi
+
+    echo $URL
+    browse $URL
+}
+
+#
+# browse to a jira ticket
+#
+function jira() {
+    JIRA_BASE=https://????/jira
+
+    FAVORITE_PROJECT=26769 # accounts
+    DEFAULT_BOARD=$FAVORITE_PROJECT
+    ticket=$1
+    if [ -n "$ticket" ]; then
+        URL=$JIRA_BASE/browse/$ticket
+    else
+        URL=$JIRA_BASE/secure/RapidBoard.jspa?rapidView=$DEFAULT_BOARD
+    fi
+
+    echo $URL
+    browse $URL
+}
+
+#
+# browse a service now ticket
+#
+function service-now() {
+    TICKET=$1
+    URL="https://????.service-now.com/text_search_exact_match.do?sysparm_search=$TICKET"
+    echo $URL
+    browse $URL
 }
 
 
