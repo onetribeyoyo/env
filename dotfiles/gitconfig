@@ -1,6 +1,6 @@
 [user]
         name = Andy Miller
-        email = onetribeyoyo@gmail.com
+        email = andy.miller@gravie.com
 
 [core]
         editor = /usr/local/bin/emacs
@@ -14,6 +14,9 @@
         lg = log --graph --pretty=format:'%C(red)%h %C(yellow)-%d <%an - %cr>%C(reset) %s' --abbrev-commit
         mod = status -s
         pb = fetch --progress --prune origin
+
+        stale = remote prune origin --dry-run
+        trim = remote prune origin
 
         sync = pull --rebase upstream master
         ssync = pull --rebase upstream master
