@@ -730,6 +730,24 @@ function jira() {
 }
 
 #
+# browse to a shortcut ticket
+#
+function shortcut() {
+    BASE=https://app.shortcut.com/gravie
+    DEFAULT=stories/space/43599
+
+    ticket=$1
+    if [ -n "$ticket" ]; then
+        URL=$BASE/story/$ticket
+    else
+        URL=$BASE/$DEFAULT
+    fi
+
+    echo $URL
+    browse $URL
+}
+
+#
 # browse a service now ticket
 #
 function service-now() {
