@@ -690,7 +690,17 @@ function gitweb() {
     GITSERVER=https://github.com
     git branch > /dev/null 2> /dev/null
     if [ $? -eq 0 ] ; then # we're in a cloned git repo
-        URL=`git remote show origin | grep Fetch | awk '{ print $3 }' | sed 's/.git$//'`
+        FETCH_URL=`git remote show origin | grep Fetch | awk '{ print $3 }'`
+        if    [[ "$FETCH_URL" == https* ]] ; then
+          # already https
+          URL=`echo $FETCH_URL | sed 's/.git$//'`
+        elif  [[ "$FETCH_URL" == git@* ]] ; then
+          # translate from "git@..." to "https://..."
+          URL=`echo $FETCH_URL | sed 's/:/\\//g' | sed 's/^git@/https:\/\//' | sed 's/.git$//'`
+        else
+          URL=$FETCH_URL
+        fi
+
         BRANCH=`git branch 2> /dev/null | grep \* | awk '{ printf "%s", $2 }'`
         if [ $# -ne 0 ] ; then # maybe we have a PR number?
             re='^[0-9]+$'
