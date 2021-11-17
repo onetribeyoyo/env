@@ -1,3 +1,7 @@
+
+# SUPRESS MESSAGES about the default shell!!!!
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
 # Prompts and titles...
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -65,7 +69,6 @@ function prompt() {
 $CYAN cyan $LIGHT_CYAN light_cyan $RED red $LIGHT_RED light_red $PURPLE purple $LIGHT_PURPLE light_purple $BROWN brown \
 $YELLOW yellow $LIGHT_GRAY light_gray $WHITE white $NO_COLOUR"
     else
-
         #export PS1="\n$HOSTNAME:\w[\!]> "
         #export PS1="\n\w\n$USERNAME:$HOSTNAME:[\!]> "
         #export PS1="\n$USER:\w\n$HOSTNAME[\!]> "
@@ -79,7 +82,12 @@ $YELLOW yellow $LIGHT_GRAY light_gray $WHITE white $NO_COLOUR"
 
         # better colours...
         #export PS1="\n$LIGHT_PURPLE$USER$CYAN@$LIGHT_PURPLE$HOSTNAME$CYAN: $BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
-        export PS1="\n$BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
+        #export PS1="\n$BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
+
+        # example:
+        #(git:develop)
+        #~/path/to/git/repo[503]>
+        export PS1="\n$CYAN\$(parse_vc_branch)\n$BROWN\w$BROWN[\!]>$NO_COLOUR "
 
         #export PS3="Please select one of the options: "
         #export PS4="+ $0:$LINENO "
@@ -182,27 +190,23 @@ export M3=$M3_HOME/bin
 
 #export MAVEN_OPTS="-Xmx2100m -Xms512m"
 
-export MONGO_HOME=~/devtools/mongo/current
+#export MONGO_HOME=~/devtools/mongo/current
+export MONGO_HOME=~/local/local-apps/mongodb-3.6.23/
 
 #export RABBITMQ_HOME=~/devtools/rabbitmq/current
 
 #export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
 #alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
-#export SMARTSYNC_HOME=~/devtools/smartsync/smartsync-4.0.3
-export SMARTSYNC_HOME=/Applications
+export LOCAL_APPS=~/local/local-apps
 
 #export TOMCAT_HOME=~/devtools/tomcat/current
-
-# emacs...
-#export EMACS_APP=emacs-25.2.app
-export EMACS_APP=Emacs.app
-
 
 # path...
 export PATH=\
 .:\
 $HOME/bin:\
+$HOME/gravie/bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 /usr/local/bin:\
@@ -259,26 +263,31 @@ export GREP_OPTIONS='--color=auto'
 
 #export PATH="$HOME/.jenv/bin:$PATH"
 #eval "$(jenv init -)"
+#export DOCKER_IP="127.0.0.1"
 
-
-#export SDKMAN_DIR="/Users/z001v67/.sdkman"
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-[[ -s "/Users/amiller/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/amiller/.sdkman/bin/sdkman-init.sh"
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-
-export DOCKER_IP="127.0.0.1"
-
-export PATH="$HOME/.cargo/bin:$PATH"
+#export PATH="$HOME/.cargo/bin:$PATH"
 
 
 #use-jdk 1.8
 
 . .aliases
 . .projects
+. .gravie
+
+
+# -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+# ASDF START
+. $(brew --prefix asdf)/asdf.sh
+. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+# ASDF END
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/andy.miller/.sdkman"
+[[ -s "/Users/andy.miller/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/andy.miller/.sdkman/bin/sdkman-init.sh"
+
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
