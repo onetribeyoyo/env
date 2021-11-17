@@ -373,14 +373,14 @@ alias greports="time ( g clean && g compile && gcoverage && gmetrics && gcn )"
 alias gg="find . -maxdepth 1 -name \*.goovy -print | xargs grep"
 alias findg="find . -name \*.groovy -print"
 
-function ggg() {
-  # the final grep in the pipeline is to get the match highlighting!
-  #findg | xargs grep $@ \
-  #  | grep -v \/target\/plugins\/ \
-  #  | grep -v \/target\/work\/plugins\/ \
-  #  | grep $@
-  findg | xargs grep $@
-}
+#function ggg() {
+#  # the final grep in the pipeline is to get the match highlighting!
+#  findg | xargs grep $@ \
+#    | grep -v \/target\/plugins\/ \
+#    | grep -v \/target\/work\/plugins\/ \
+#    | grep $@
+#}
+alias ggg="findg | quotespaces | xargs grep"
 alias ggg-all="findg | xargs grep" # like ggg, but does not filter out target dir.
 function ggg-nt() { # like ggg, but filters out test classes
     # the final grep in the pipeline is to get the match highlighting!
@@ -560,6 +560,15 @@ function gitupstream () {
     #git push
 }
 
+function gitlistlocalbranches () {
+  git branch -r \
+    | awk '{print $1}' \
+    | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) \
+    | awk '{print $1}'
+}
+function gitprunelocalbranches () {
+  gitlistlocalbranches | xargs git branch -d
+}
 
 #
 # for running the same command in many directories...
@@ -749,6 +758,24 @@ function shortcut() {
     ticket=$1
     if [ -n "$ticket" ]; then
         URL=$BASE/story/$ticket
+    else
+        URL=$BASE/$DEFAULT
+    fi
+
+    echo $URL
+    browse $URL
+}
+
+#
+# browse to a freshservice ticket
+#
+function freshservice() {
+    BASE=https://gravie.freshservice.com/
+    DEFAULT=helpdesk/tickets/view/103256
+
+    ticket=$1
+    if [ -n "$ticket" ]; then
+        URL=$BASE/helpdesk/tickets/$ticket
     else
         URL=$BASE/$DEFAULT
     fi
