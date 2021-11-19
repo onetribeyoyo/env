@@ -755,7 +755,7 @@ function shortcut() {
     BASE=https://app.shortcut.com/gravie
     DEFAULT=stories/space/43599
 
-    ticket=$1
+    ticket=`echo $1 | sed 's/sc//' | sed 's/-//'`
     if [ -n "$ticket" ]; then
         URL=$BASE/story/$ticket
     else
