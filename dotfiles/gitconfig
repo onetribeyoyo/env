@@ -28,6 +28,8 @@
 
         hard = reset --hard
 
+        who = log --graph --pretty=format:'%an' --abbrev-commit -1
+
 #[credential]
 #        helper = osxkeychain
 
