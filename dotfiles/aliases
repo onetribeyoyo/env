@@ -584,7 +584,7 @@ function forall() {
             local VC_INFO=`parse_vc_branch`
             printf "\nforall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
             $command $@
-        done # end while \
+        done # end while
     #)
 }
 
@@ -614,7 +614,7 @@ function forallwhere() {
                         $command $@
                     )
                 fi
-            done # end while \
+            done # end while
         fi
     #)
 }
@@ -640,7 +640,7 @@ function forallwhere2() {
                         $command $@
                     )
                 fi
-            done # end while \
+            done # end while
         fi
     #)
 }
