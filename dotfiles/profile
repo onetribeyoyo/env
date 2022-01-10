@@ -8,90 +8,90 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 function parse_vc_branch() {
 
-    # cat CVS/tag 2> /dev/null | awk '{ printf "(cvs:%s)", $1 }'
-    # git branch  2> /dev/null | grep \* | awk '{ printf "(git:%s)", $2 }'
-    # hg branch   2> /dev/null | awk '{ printf "(hg:%s)", $1 }'
-    # svn info    2> /dev/null | grep Relative\ URL | awk '{ print $3 }' | awk -F/ '{ printf "(svn:%s/%s)", $2, $3 }'
+  # cat CVS/tag 2> /dev/null | awk '{ printf "(cvs:%s)", $1 }'
+  # git branch  2> /dev/null | grep \* | awk '{ printf "(git:%s)", $2 }'
+  # hg branch   2> /dev/null | awk '{ printf "(hg:%s)", $1 }'
+  # svn info    2> /dev/null | grep Relative\ URL | awk '{ print $3 }' | awk -F/ '{ printf "(svn:%s/%s)", $2, $3 }'
 
-    git branch > /dev/null 2> /dev/null
-    if [ $? -eq 0 ]; then
-        git branch 2> /dev/null | grep \* | awk '{ printf "(git:%s) ", $2 }'
-        exit 1
-    fi
+  git branch > /dev/null 2> /dev/null
+  if [ $? -eq 0 ]; then
+    git branch 2> /dev/null | grep \* | awk '{ printf "(git:%s) ", $2 }'
+    exit 1
+  fi
 
-    #hg branch > /dev/null 2> /dev/null
-    #if [ $? -eq 0 ]; then
-    #    hg branch  2> /dev/null | awk '{ printf "(hg:%s) ", $1 }'
-    #    exit 1
-    #fi
+  #hg branch > /dev/null 2> /dev/null
+  #if [ $? -eq 0 ]; then
+  #    hg branch  2> /dev/null | awk '{ printf "(hg:%s) ", $1 }'
+  #    exit 1
+  #fi
 
-    #svn info > /dev/null 2> /dev/null
-    #if [ $? -eq 0 ]; then
-    #    svn info   2> /dev/null | grep Relative\ URL | awk '{ print $3 }' | awk -F/ '{ printf "(svn:%s/%s) ", $2, $3 }'
-    #    exit 1
-    #fi
+  #svn info > /dev/null 2> /dev/null
+  #if [ $? -eq 0 ]; then
+  #    svn info   2> /dev/null | grep Relative\ URL | awk '{ print $3 }' | awk -F/ '{ printf "(svn:%s/%s) ", $2, $3 }'
+  #    exit 1
+  #fi
 
-    #if [ -f CVS/Root ] ; then
-    #    if [ -f CVS/tag ] ; then
-    #        cat CVS/tag 2> /dev/null | awk '{ printf "(cvs:%s) ", $1 }'
-    #    else
-    #        echo -n "(cvs:--)"
-    #    fi
-    #    exit 1
-    #fi
+  #if [ -f CVS/Root ] ; then
+  #    if [ -f CVS/tag ] ; then
+  #        cat CVS/tag 2> /dev/null | awk '{ printf "(cvs:%s) ", $1 }'
+  #    else
+  #        echo -n "(cvs:--)"
+  #    fi
+  #    exit 1
+  #fi
 
-    # else no vc info will be displayed in the prompt
+  # else no vc info will be displayed in the prompt
 }
 
 function prompt() {
-    local NO_COLOUR="\[\033[0m\]"
+  local NO_COLOUR="\[\033[0m\]"
 
-    local BLACK="\[\033[0;30m\]"
-    local BLUE="\[\033[0;34m\]"
-    local BROWN="\[\033[0;33m\]"
-    local CYAN="\[\033[0;36m\]"
-    local DARK_GRAY="\[\033[1;30m\]"
-    local GREEN="\[\033[0;32m\]"
-    local LIGHT_BLUE="\[\033[1;34m\]"
-    local LIGHT_CYAN="\[\033[1;36m\]"
-    local LIGHT_GRAY="\[\033[0;37m\]"
-    local LIGHT_GREEN="\[\033[1;32m\]"
-    local LIGHT_PURPLE="\[\033[1;35m\]"
-    local LIGHT_RED="\[\033[1;31m\]"
-    local PURPLE="\[\033[0;35m\]"
-    local RED="\[\033[0;31m\]"
-    local WHITE="\[\033[1;37m\]"
-    local YELLOW="\[\033[1;33m\]"
+  local BLACK="\[\033[0;30m\]"
+  local BLUE="\[\033[0;34m\]"
+  local BROWN="\[\033[0;33m\]"
+  local CYAN="\[\033[0;36m\]"
+  local DARK_GRAY="\[\033[1;30m\]"
+  local GREEN="\[\033[0;32m\]"
+  local LIGHT_BLUE="\[\033[1;34m\]"
+  local LIGHT_CYAN="\[\033[1;36m\]"
+  local LIGHT_GRAY="\[\033[0;37m\]"
+  local LIGHT_GREEN="\[\033[1;32m\]"
+  local LIGHT_PURPLE="\[\033[1;35m\]"
+  local LIGHT_RED="\[\033[1;31m\]"
+  local PURPLE="\[\033[0;35m\]"
+  local RED="\[\033[0;31m\]"
+  local WHITE="\[\033[1;37m\]"
+  local YELLOW="\[\033[1;33m\]"
 
-    if [ -n "$1" ] ; then
-        # show all the colours...
-        export PS1="$BLACK black $DARK_GRAY dark_gray $BLUE blue $LIGHT_BLUE light_blue $GREEN green $LIGHT_GREEN light_green \
+  if [ -n "$1" ] ; then
+    # show all the colours...
+    export PS1="$BLACK black $DARK_GRAY dark_gray $BLUE blue $LIGHT_BLUE light_blue $GREEN green $LIGHT_GREEN light_green \
 $CYAN cyan $LIGHT_CYAN light_cyan $RED red $LIGHT_RED light_red $PURPLE purple $LIGHT_PURPLE light_purple $BROWN brown \
 $YELLOW yellow $LIGHT_GRAY light_gray $WHITE white $NO_COLOUR"
-    else
-        #export PS1="\n$HOSTNAME:\w[\!]> "
-        #export PS1="\n\w\n$USERNAME:$HOSTNAME:[\!]> "
-        #export PS1="\n$USER:\w\n$HOSTNAME[\!]> "
-        #export PS1="\n\w \$(parse_vc_branch)\n$USER@$HOSTNAME[\!]> "
+  else
+    #export PS1="\n$HOSTNAME:\w[\!]> "
+    #export PS1="\n\w\n$USERNAME:$HOSTNAME:[\!]> "
+    #export PS1="\n$USER:\w\n$HOSTNAME[\!]> "
+    #export PS1="\n\w \$(parse_vc_branch)\n$USER@$HOSTNAME[\!]> "
 
-        # example: amiller@yaal.local:~/github/onetribeyoyo/mtm/src (git:master) [502]>
-        #export PS1="\n$DARK_GRAY$USER@$HOSTNAME:\w $CYAN\$(parse_vc_branch)$DARK_GRAY[\!]>$NO_COLOUR "
+    # example: amiller@yaal.local:~/github/onetribeyoyo/mtm/src (git:master) [502]>
+    #export PS1="\n$DARK_GRAY$USER@$HOSTNAME:\w $CYAN\$(parse_vc_branch)$DARK_GRAY[\!]>$NO_COLOUR "
 
-        # good colours...
-        #export PS1="\n$LIGHT_BLUE$USER$CYAN@$LIGHT_BLUE$HOSTNAME$CYAN:$LIGHT_BLUE\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
+    # good colours...
+    #export PS1="\n$LIGHT_BLUE$USER$CYAN@$LIGHT_BLUE$HOSTNAME$CYAN:$LIGHT_BLUE\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
 
-        # better colours...
-        #export PS1="\n$LIGHT_PURPLE$USER$CYAN@$LIGHT_PURPLE$HOSTNAME$CYAN: $BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
-        #export PS1="\n$BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
+    # better colours...
+    #export PS1="\n$LIGHT_PURPLE$USER$CYAN@$LIGHT_PURPLE$HOSTNAME$CYAN: $BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
+    #export PS1="\n$BROWN\w $CYAN\$(parse_vc_branch)$BROWN[\!]>$NO_COLOUR "
 
-        # example:
-        #(git:develop)
-        #~/path/to/git/repo[503]>
-        export PS1="\n$CYAN\$(parse_vc_branch)\n$BROWN\w$BROWN[\!]>$NO_COLOUR "
+    # example:
+    #(git:develop)
+    #~/path/to/git/repo[503]>
+    export PS1="\n$CYAN\$(parse_vc_branch)\n$BROWN\w$BROWN[\!]>$NO_COLOUR "
 
-        #export PS3="Please select one of the options: "
-        #export PS4="+ $0:$LINENO "
-    fi
+    #export PS3="Please select one of the options: "
+    #export PS4="+ $0:$LINENO "
+  fi
 }
 prompt
 
@@ -161,16 +161,16 @@ export GROOVY_HOME=~/devtools/groovy/current
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
 function use-jdk() {
-    VERSION=$1
-    jenv shell $VERSION
-    if [ $VERSION = "1.6" ] ; then
-        export JAVA_HOME=/Library/Java/Home
-    else
-        export JAVA_HOME=`/usr/libexec/java_home -v $VERSION`
-    fi
-    echo -n "using java version "
-    jenv version
-    echo "JAVA_HOME == $JAVA_HOME"
+  VERSION=$1
+  jenv shell $VERSION
+  if [ $VERSION = "1.6" ] ; then
+    export JAVA_HOME=/Library/Java/Home
+  else
+    export JAVA_HOME=`/usr/libexec/java_home -v $VERSION`
+  fi
+  echo -n "using java version "
+  jenv version
+  echo "JAVA_HOME == $JAVA_HOME"
 }
 
 # NOTE: Don't know if this will work for OS X 10.8+ but... use the `use` script and add this into the path to switch to older jdk versions
@@ -216,18 +216,18 @@ $HOME/.config/composer/vendor/couscous/couscous/bin:\
 $PATH
 
 function rehome() {
-    COMPONENT=$1
-    COMPONENT_HOME=`echo ${1}_HOME | tr '[:lower:]' '[:upper:]'`
-    LINK_NAME=$2
-    NEW_HOME=~/devtools/$COMPONENT/$LINK_NAME
+  COMPONENT=$1
+  COMPONENT_HOME=`echo ${1}_HOME | tr '[:lower:]' '[:upper:]'`
+  LINK_NAME=$2
+  NEW_HOME=~/devtools/$COMPONENT/$LINK_NAME
 
-    echo "rehome..."
+  echo "rehome..."
 
-    echo "   exporting ${COMPONENT_HOME} as $NEW_HOME."
-    export $COMPONENT_HOME=$NEW_HOME
+  echo "   exporting ${COMPONENT_HOME} as $NEW_HOME."
+  export $COMPONENT_HOME=$NEW_HOME
 
-    echo "   prepending ${NEW_HOME}/bin to path."
-    export PATH=$NEW_HOME/bin:$PATH
+  echo "   prepending ${NEW_HOME}/bin to path."
+  export PATH=$NEW_HOME/bin:$PATH
 }
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
@@ -253,7 +253,7 @@ set show-all-if-ambiguous
 #export LSCOLORS=`ls-colours`
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
-#xport LSCOLORS=dxfxcxdxbxegedabagacad
+#export LSCOLORS=dxfxcxdxbxegedabagacad
 
 # grep colors...
 export GREP_COLOR='1;31'
