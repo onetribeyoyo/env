@@ -262,7 +262,7 @@ alias findtxt="find . -name \*.txt -print"
 alias ggtxt="findtxt | quotespaces | xargs grep"
 
 # markdown files (.md) files
-alias gmd="find . -maxdepth 1 -name \*.md -print | xargs grep"
+alias gmd="find . -maxdepth 1 -name \*.md -print | quotespaces | xargs grep"
 alias findmd="find . -name \*.md -print"
 alias ggmd="findmd | quotespaces | xargs grep"
 
@@ -272,18 +272,18 @@ alias findpy="find . \( -name \*.py \) -print"
 alias ggpy="findpy | quotespaces | xargs grep"
 
 # just clojure (no clojure script) files
-alias gclj_="find . -maxdepth 1 \( -name \*.clj \) -print | xargs grep"
-alias findclj_="find . \( -name \*.clj \) -print"
+alias gclj_="find . -maxdepth 1 \( -name \*.clj -o -name \*.cljc \) -print | xargs grep"
+alias findclj_="find . \( -name \*.clj -o -name \*.cljc \) -print"
 alias ggclj_="findclj_ | quotespaces | xargs grep"
 
 # clojure script files# clojure (& clojure script) files
-alias gclj="find . -maxdepth 1 \( -name \*.clj -o -name \*.cljs \) -print | xargs grep"
-alias findclj="find . \( -name \*.clj -o -name \*.cljs \) -print"
+alias gclj="find . -maxdepth 1 \( -name \*.clj -o -name \*.cljs -o -name \*.cljc \) -print | xargs grep"
+alias findclj="find . \( -name \*.clj -o -name \*.cljs -o -name \*.cljc \) -print"
 alias ggclj="findclj | quotespaces | xargs grep"
 
 # clojure script files
-alias gcljs="find . -maxdepth 1 \( -name \*.cljs \) -print | xargs grep"
-alias findcljs="find . \( -name \*.cljs \) -print"
+alias gcljs="find . -maxdepth 1 \( -name \*.cljs -o -name \*.cljc \) -print | xargs grep"
+alias findcljs="find . \( -name \*.cljs -o -name \*.cljc \) -print"
 alias ggcljs="findcljs | quotespaces | xargs grep"
 
 
