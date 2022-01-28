@@ -107,6 +107,29 @@ alias packages="awk -F: '{print \$1}'        \
 
 
 # emacs...
+function emacs-use () {
+  VERSION=$1
+  FILE=Emacs-$VERSION.app
+  LINK=Emacs.app
+  (
+    cd ~/local/local-apps
+
+    # first check that that's a valid version...
+    if [ -f $FILE ] ; then
+      # then ensure it's ok to link...
+      if  [ -L $LINK ] ; then
+        rm -f $LINK
+      elif  [ -f $LINK ] ; then
+        echo "  ERROR: I doubt you want to replace the link file: $LINK with a symlink to $FILE"
+      else
+        ln -s $FILE $LINK
+        echo "  linked $FILE as $LINK"
+      fi
+    else
+      echo "  ERROR: unknown version $VERSION."
+    fi
+  )
+}
 function emacs-use-27 () {
   (
     cd ~/local/local-apps
@@ -594,57 +617,19 @@ function forall() {
 # example:  forallwhere build.gradle gradle build
 #
 function forallwhere() {
-    flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
-    command=$1 ; shift # the command to execute
-    #time ( \
-        if [ -e "$flag" ] ; then
-            # just run the comman once in the current dir
-            local PWD=`pwd`
-            local VC_INFO=`parse_vc_branch`
-            printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
-            $command $@
-        else
-            find . -type d -depth 1 | sort | while read directory ; do
-                if [ -e "$directory/$flag" ] ; then
-                    (
-                        cd $directory
-                        local PWD=`pwd`
-                        local VC_INFO=`parse_vc_branch`
-                        printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
-                        $command $@
-                    )
-                fi
-            done # end while
-        fi
-    #)
-}
+  flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
+  command=$1 ; shift # the command to execute
 
-function forallwhere2() {
-    flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
-    command=$1 ; shift # the command to execute
-    #time ( \
-        if [ -e "$flag" ] ; then
-            # just run the comman once in the current dir
-            local PWD=`pwd`
-            local VC_INFO=`parse_vc_branch`
-            printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
-            $command $@
-        else
-            find . -type d | while read directory ; do
-                if [ -e "$directory/$flag" ] ; then
-                    (
-                        cd $directory
-                        local PWD=`pwd`
-                        local VC_INFO=`parse_vc_branch`
-                        printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
-                        $command $@
-                    )
-                fi
-            done # end while
-        fi
-    #)
+  find . -name $flag | sort | while read directory ; do
+    (
+      cd $directory
+      local PWD=`pwd`
+      local VC_INFO=`parse_vc_branch`
+      printf "\nforallwhere $flag: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+      $command $@
+    )
+  done
 }
-
 
 function gradleall() { # run gradle in the directories that have build.gradle
     forallwhere build.gradle g $@
@@ -664,17 +649,6 @@ function gitall() { # run git in the directories that have .git
     else
         forallwhere .git git $@
     fi
-}
-
-function deep-gitall() { # run gitall in all subdirs
-    find . -depth 1 -type d | sort | while read directory ; do
-        (
-            echo "----------------------------------------------------------------------------------"
-            #echo $directory
-            cd $directory
-            gitall $@
-        )
-    done # end while
 }
 
 function hgall() { # run hg in the directories that have .hg
