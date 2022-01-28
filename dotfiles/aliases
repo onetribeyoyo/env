@@ -25,17 +25,17 @@ alias c='clear'
 # try this instead
 #
 function coffee () {
-    HOURS=$1
-    if ! [[ "$HOURS" =~ ^[0-9]+$ ]]; then
-        echo "ERROR: Specify number of hours as an integer"
-    else
-        SECONDS=`expr $HOURS \* 3600`
-        echo "Caffeinated for $HOURS hours ($SECONDS seconds.)"
-        echo "  - prevents the display from sleeping."
-        echo "  - prevents the system from idle sleeping."
-        echo "  - prevents the system from sleeping when system on AC power."
-        caffeinate -d -i -s -t $SECONDS
-    fi
+  HOURS=$1
+  if ! [[ "$HOURS" =~ ^[0-9]+$ ]]; then
+    echo "ERROR: Specify number of hours as an integer"
+  else
+    SECONDS=`expr $HOURS \* 3600`
+    echo "Caffeinated for $HOURS hours ($SECONDS seconds.)"
+    echo "  - prevents the display from sleeping."
+    echo "  - prevents the system from idle sleeping."
+    echo "  - prevents the system from sleeping when system on AC power."
+    caffeinate -d -i -s -t $SECONDS
+  fi
 }
 
 
@@ -130,11 +130,12 @@ function emacs-use () {
     fi
   )
 }
+
 function emacs-use-27 () {
   (
     cd ~/local/local-apps
     if [ -L Emacs.app ] ; then
-       rm -f Emacs.app
+      rm -f Emacs.app
     fi
     ln -s ./Emacs-27.app Emacs.app
   )
@@ -143,7 +144,7 @@ function emacs-use-nightly () {
   (
     cd ~/local/local-apps
     if [ -L Emacs.app ] ; then
-       rm -f Emacs.app
+      rm -f Emacs.app
     fi
     ln -s ./Emacs.nightly.app Emacs.app
   )
@@ -173,37 +174,37 @@ alias slack='open -a Slack'
 alias gf="find . -maxdepth 1 -type f | grep"
 alias ggf="find . -type f ! -name \*class ! -name \*~ | grep"
 function ggfe() {
-    ggf $@ | fe
+  ggf $@ | fe
 }
 
 function findsrc() {
-    find . \( \
-         -name \*.\[Cch\] -o -name \*.cc -o -name \*.cpp -o \
-         -name \*.css -o \
-         -name \*.el -o \
-         -name \*.groovy -o \
-         -name \*.gsp -o \
-         -name \*.html -o -name \*.htm -o \
-         -name \*.java -o \
-         -name \*.js -o \
-         -name \*.jsx -o \
-         -name \*.json -o \
-         -name \*.jsp -o \
-         -name \*.kt -o \
-         -name \*.lisp -o \
-         -name \*.md -o \
-         -name \*.pl -o \
-         -name \*.properties -o \
-         -name \*.py -o \
-         -name \*.sql -o -name \*.ddl -o \
-         -name \*.ts -o \
-         -name \*.tsx -o \
-         -name \*.txt -o \
-         -name \*.vm -o \
-         -name \*.xml -o \
-         -name \*.yml -o -name \*.yaml \
-         \) \
-         -print
+  find . \( \
+       -name \*.\[Cch\] -o -name \*.cc -o -name \*.cpp -o \
+       -name \*.css -o \
+       -name \*.el -o \
+       -name \*.groovy -o \
+       -name \*.gsp -o \
+       -name \*.html -o -name \*.htm -o \
+       -name \*.java -o \
+       -name \*.js -o \
+       -name \*.jsx -o \
+       -name \*.json -o \
+       -name \*.jsp -o \
+       -name \*.kt -o \
+       -name \*.lisp -o \
+       -name \*.md -o \
+       -name \*.pl -o \
+       -name \*.properties -o \
+       -name \*.py -o \
+       -name \*.sql -o -name \*.ddl -o \
+       -name \*.ts -o \
+       -name \*.tsx -o \
+       -name \*.txt -o \
+       -name \*.vm -o \
+       -name \*.xml -o \
+       -name \*.yml -o -name \*.yaml \
+       \) \
+       -print
 }
 alias ggsrc="findsrc | quotespaces | xargs grep"
 
@@ -314,28 +315,28 @@ alias ggcljs="findcljs | quotespaces | xargs grep"
 # gr* development...
 #
 function g() {
-    #if [ -e "./grailsw" ] ; then
-    #    ./grailsw $@
-    #elif [ -d "./grails-app" ] ; then
-    if [ -d "./grails-app" ] ; then
-        if [ -e "./grailsw" ] ; then
-            echo "  [ using local grailsw ]"
-            ./grailsw $@
-        else
-            echo "  [ using installed grails ]"
-            grails $@
-        fi
-    elif [ -e "./build.gradle" ] ; then
-        if [ -e "./gradlew" ] ; then
-            echo "  [ using local gradlew ]"
-            ./gradlew $@
-        else
-            echo "  [ using installed gradle ]"
-            gradle $@
-        fi
+  #if [ -e "./grailsw" ] ; then
+  #    ./grailsw $@
+  #elif [ -d "./grails-app" ] ; then
+  if [ -d "./grails-app" ] ; then
+    if [ -e "./grailsw" ] ; then
+      echo "  [ using local grailsw ]"
+      ./grailsw $@
     else
-        echo "WARNING: directory does not appear to be a grails nor gradle app."
+      echo "  [ using installed grails ]"
+      grails $@
     fi
+  elif [ -e "./build.gradle" ] ; then
+    if [ -e "./gradlew" ] ; then
+      echo "  [ using local gradlew ]"
+      ./gradlew $@
+    else
+      echo "  [ using installed gradle ]"
+      gradle $@
+    fi
+  else
+    echo "WARNING: directory does not appear to be a grails nor gradle app."
+  fi
 }
 
 alias gra="g run-app"
@@ -406,16 +407,16 @@ alias findg="find . -name \*.groovy -print"
 alias ggg="findg | quotespaces | xargs grep"
 alias ggg-all="findg | xargs grep" # like ggg, but does not filter out target dir.
 function ggg-nt() { # like ggg, but filters out test classes
-    # the final grep in the pipeline is to get the match highlighting!
-    ggg $@ \
-        | grep -v \/test\/unit\/ \
-        | grep -v \/test\/integration\/ \
-        | grep -v \/test\/functional\/ \
-        | grep -v \/test\/slow\/ \
-        | grep -v \/grails-app\/fitnesse\/ \
-        | grep $@
-        #| grep -v \/target\/plugins\/ \
-        #| grep -v \/target\/work\/plugins\/
+  # the final grep in the pipeline is to get the match highlighting!
+  ggg $@ \
+    | grep -v \/test\/unit\/ \
+    | grep -v \/test\/integration\/ \
+    | grep -v \/test\/functional\/ \
+    | grep -v \/test\/slow\/ \
+    | grep -v \/grails-app\/fitnesse\/ \
+    | grep $@
+    #| grep -v \/target\/plugins\/ \
+    #| grep -v \/target\/work\/plugins\/
 }
 
 alias findgsp="find . -name \*.gsp -print"
@@ -424,32 +425,32 @@ alias gggsp="findgsp | xargs grep"
 
 alias findprop="find . -name \*.properties -print"
 function ggprop() {
-    # the final grep in the pipeline is to get the match highlighting!
-    findprop | xargs grep $@ \
-        | grep -v \/target\/plugins\/ \
-        | grep -v \/target\/work\/plugins\/
+  # the final grep in the pipeline is to get the match highlighting!
+  findprop | xargs grep $@ \
+    | grep -v \/target\/plugins\/ \
+    | grep -v \/target\/work\/plugins\/
 }
 
 alias findi18n="find . -name messages.properties -print"
 function ggi18n() {
-    findi18n | xargs grep $@ \
-        | grep -v \/target\/plugins\/ \
-        | grep -v \/target\/work\/plugins\/ \
-        | grep $@
+  findi18n | xargs grep $@ \
+    | grep -v \/target\/plugins\/ \
+    | grep -v \/target\/work\/plugins\/ \
+    | grep $@
 }
 
 alias findyml="find . \( -name \*.yml -o -name \*.yaml \) -print"
 function ggyml() {
-    # the final grep in the pipeline is to get the match highlighting!
-    findyml | xargs grep $@ \
-        | grep -v \/target\/plugins\/ \
-        | grep -v \/target\/work\/plugins\/
+  # the final grep in the pipeline is to get the match highlighting!
+  findyml | xargs grep $@ \
+    | grep -v \/target\/plugins\/ \
+    | grep -v \/target\/work\/plugins\/
 }
 
 alias findrs="find . \( -name \*.rs -o -name \*.toml \) -print"
 function ggrs() {
-    # the final grep in the pipeline is to get the match highlighting!
-    findrs | xargs grep $@
+  # the final grep in the pipeline is to get the match highlighting!
+  findrs | xargs grep $@
 }
 
 
@@ -459,88 +460,86 @@ function ggrs() {
 
 # makes tarballs of cache dirs so they can be recovered later
 function cache-caches() {
-    cacheDir=~/cached-caches
-    timestamp=`date '+%Y.%m.%d_%I.%M.%S'`
+  cacheDir=~/cached-caches
+  timestamp=`date '+%Y.%m.%d_%I.%M.%S'`
 
-    mkdir -p $cacheDir/dot-gradle
-    ( cd ~/.gradle ; tar cvfz $cacheDir/dot-gradle/gradle-caches_$timestamp.tar.gz ./caches )
+  mkdir -p $cacheDir/dot-gradle
+  ( cd ~/.gradle ; tar cvfz $cacheDir/dot-gradle/gradle-caches_$timestamp.tar.gz ./caches )
 
-    mkdir -p $cacheDir/dot-grails
-    ( cd ~/.grails ; tar cvfz $cacheDir/dot-grails/ivy-cache_$timestamp.tar.gz ./ivy-cache )
+  mkdir -p $cacheDir/dot-grails
+  ( cd ~/.grails ; tar cvfz $cacheDir/dot-grails/ivy-cache_$timestamp.tar.gz ./ivy-cache )
 
-    mkdir -p $cacheDir/dot-ivy2
-    ( cd ~/.ivy2 ; tar cvfz $cacheDir/dot-ivy2/cache_$timestamp.tar.gz ./cache )
+  mkdir -p $cacheDir/dot-ivy2
+  ( cd ~/.ivy2 ; tar cvfz $cacheDir/dot-ivy2/cache_$timestamp.tar.gz ./cache )
 
-    mkdir -p $cacheDir/dot-m2
-    ( cd ~/.m2 ; tar cvfz $cacheDir/dot-m2/repository_$timestamp.tar.gz ./repository )
+  mkdir -p $cacheDir/dot-m2
+  ( cd ~/.m2 ; tar cvfz $cacheDir/dot-m2/repository_$timestamp.tar.gz ./repository )
 }
-
-
 
 function inspect-grails-cache() {
-    ( cd ~ ; find .grails/ivy-cache -type d | grep -i $1 )
+  ( cd ~ ; find .grails/ivy-cache -type d | grep -i $1 )
 }
 function inspect-gradle-cache() {
-    ( cd ~ ; find .gradle/caches -type d | grep -i $1 )
+  ( cd ~ ; find .gradle/caches -type d | grep -i $1 )
 }
 function inspect-ivy-cache() {
-    ( cd ~ ; find .ivy2 -type d | grep -i $1 )
+  ( cd ~ ; find .ivy2 -type d | grep -i $1 )
 }
 function inspect-m2-cache() {
-    ( cd ~ ; find .m2 -type d | grep -i $1 )
+  ( cd ~ ; find .m2 -type d | grep -i $1 )
 }
 function inspect-caches() {
-    echo
-    echo gradle caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    inspect-gradle-cache $1
+  echo
+  echo gradle caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  inspect-gradle-cache $1
 
-    echo
-    echo grails caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    inspect-grails-cache $1
+  echo
+  echo grails caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  inspect-grails-cache $1
 
-    echo
-    echo ivy cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    inspect-ivy-cache $1
+  echo
+  echo ivy cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  inspect-ivy-cache $1
 
-    echo
-    echo mvn cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    inspect-m2-cache $1
+  echo
+  echo mvn cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  inspect-m2-cache $1
 }
 
 function purge-gradle-cache() {
-    ( cd ~ ; find .gradle -name \*$1\* | xargs rm -rvf )
+  ( cd ~ ; find .gradle -name \*$1\* | xargs rm -rvf )
 }
 function purge-grails-cache() {
-    ( cd ~ ; find .grails/ivy-cache -name \*$1\* | xargs rm -rvf )
-    if [ -d ./target/plugin-classes ] ; then
-        ( find ./target/plugin-classes -type d -name \*$1\* | xargs rm -rvf )
-    fi
-    if [ -d ./target/plugins ] ; then
-        ( find ./target/plugins -type d -name \*$1\* | xargs rm -rvf )
-    fi
+  ( cd ~ ; find .grails/ivy-cache -name \*$1\* | xargs rm -rvf )
+  if [ -d ./target/plugin-classes ] ; then
+    ( find ./target/plugin-classes -type d -name \*$1\* | xargs rm -rvf )
+  fi
+  if [ -d ./target/plugins ] ; then
+    ( find ./target/plugins -type d -name \*$1\* | xargs rm -rvf )
+  fi
 }
 function purge-ivy-cache() {
-    ( cd ~ ; find .ivy2 -name \*$1\* | xargs rm -rvf )
+  ( cd ~ ; find .ivy2 -name \*$1\* | xargs rm -rvf )
 }
 function purge-m2-cache() {
-    ( cd ~ ; find .m2 -name \*$1\* | xargs rm -rvf )
+  ( cd ~ ; find .m2 -name \*$1\* | xargs rm -rvf )
 }
 function purge-caches() {
-    echo
-    echo purging gradle caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    purge-gradle-cache $1
+  echo
+  echo purging gradle caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  purge-gradle-cache $1
 
-    echo
-    echo purging grails caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    purge-grails-cache $1
+  echo
+  echo purging grails caches ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  purge-grails-cache $1
 
-    echo
-    echo purging ivy cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    purge-ivy-cache $1
+  echo
+  echo purging ivy cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  purge-ivy-cache $1
 
-    echo
-    echo purging mvn cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    purge-m2-cache $1
+  echo
+  echo purging mvn cache ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  purge-m2-cache $1
 }
 
 
@@ -548,39 +547,37 @@ function purge-caches() {
 # to checkout a PR into a local branch...
 #
 function gitcopr() {
-    echo "PR $1 is in local branch"
-    git fetch upstream pull/$1/head:pr-$1
-    git co pr-$1
- }
+  echo "PR $1 is in local branch"
+  git fetch upstream pull/$1/head:pr-$1
+  git co pr-$1
+}
 
 #
 # for finding all modified files in a local git clone...
 #
 function gitmod() {
-    git status -s | grep \ M\   | awk '{ print $2 }'
-    git status -s | grep \?\?\  | awk '{ print $2 }'
+  git status -s | grep \ M\   | awk '{ print $2 }'
+  git status -s | grep \?\?\  | awk '{ print $2 }'
 }
 
 # similar to gitmod, but only included thigs from here on down the directory tree
 function gitmod_() {
-    gitmod | grep -v "\.\./"
+  gitmod | grep -v "\.\./"
 }
 
 function gitmedit() {
-    gitmod | files | edit
+  gitmod | files | edit
 }
-
 
 function gitmedit_() {
-    gitmod_ | files | edit
+  gitmod_ | files | edit
 }
 
-
 function gitupstream () {
-    git fetch upstream
-    git checkout master
-    git merge upstream/master
-    #git push
+  git fetch upstream
+  git checkout master
+  git merge upstream/master
+  #git push
 }
 
 function gitlistlocalbranches () {
@@ -599,16 +596,14 @@ function gitprunelocalbranches () {
 # example:  forall gradle build
 #
 function forall() {
-    command=$1 ; shift # the command to execute
-    #time ( \
-        find . -type d -depth 1 | sort | while read directory ; do
-            cd $directory
-            local PWD=`pwd`
-            local VC_INFO=`parse_vc_branch`
-            printf "\nforall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
-            $command $@
-        done # end while
-    #)
+  command=$1 ; shift # the command to execute
+  find . -type d -depth 1 | sort | while read directory ; do
+    cd $directory
+    local PWD=`pwd`
+    local VC_INFO=`parse_vc_branch`
+    printf "\nforall: $LIGHT_BLUE${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+    $command $@
+  done # end while
 }
 
 #
@@ -620,7 +615,9 @@ function forallwhere() {
   flag=$1    ; shift # executed in each immediate subdir that contains a file of this name
   command=$1 ; shift # the command to execute
 
-  find . -name $flag | sort | while read directory ; do
+  depth=6 # arbitrary depth: shallower makes the find faster, but will miss things deeper down
+  find . -name $flag -maxdepth $depth | sort | while read flagfile ; do
+    directory=`dirname $flagfile`
     (
       cd $directory
       local PWD=`pwd`
@@ -632,37 +629,37 @@ function forallwhere() {
 }
 
 function gradleall() { # run gradle in the directories that have build.gradle
-    forallwhere build.gradle g $@
+  forallwhere build.gradle g $@
 }
 
 function grailsall() { # run grails in the directories that have grails-app
-    forallwhere grails-app grails $@
+  forallwhere grails-app grails $@
 }
 
 function mvnall() { # run maven in the directories that have pom.xml
-    forallwhere pom.xml mvn $@
+  forallwhere pom.xml mvn $@
 }
 
 function gitall() { # run git in the directories that have .git
-    if [ $# -eq 0 ]; then
-        echo "WARNING: No arguments supplied"
-    else
-        forallwhere .git git $@
-    fi
+  if [ $# -eq 0 ]; then
+    echo "WARNING: No arguments supplied"
+  else
+    forallwhere .git git $@
+  fi
 }
 
 function hgall() { # run hg in the directories that have .hg
-    if [ $# -eq 0 ]; then
-        echo "WARNING: No arguments supplied"
-    else
-        forallwhere .hg hg $@
-    fi
+  if [ $# -eq 0 ]; then
+    echo "WARNING: No arguments supplied"
+  else
+    forallwhere .hg hg $@
+  fi
 }
 
 function branches() { # show what branches we're on
-    # this depends on the format of the prompt as emitted by the *all commands
-    gitall mod | grep git: | awk '{ print $3 $4 }'
-    #hgall st | grep hg:
+  # this depends on the format of the prompt as emitted by the *all commands
+  gitall mod | grep git: | awk '{ print $3 $4 }'
+  #hgall st | grep hg:
 }
 
 
@@ -670,102 +667,102 @@ function branches() { # show what branches we're on
 # browse to git web server
 #
 function gitweb() {
-    GITSERVER=https://github.com
-    git branch > /dev/null 2> /dev/null
-    if [ $? -eq 0 ] ; then # we're in a cloned git repo
-        FETCH_URL=`git remote show origin | grep Fetch | awk '{ print $3 }'`
-        if    [[ "$FETCH_URL" == https* ]] ; then
-          # already https
-          URL=`echo $FETCH_URL | sed 's/.git$//'`
-        elif  [[ "$FETCH_URL" == git@* ]] ; then
-          # translate from "git@..." to "https://..."
-          URL=`echo $FETCH_URL | sed 's/:/\\//g' | sed 's/^git@/https:\/\//' | sed 's/.git$//'`
-        else
-          URL=$FETCH_URL
-        fi
-
-        BRANCH=`git branch 2> /dev/null | grep \* | awk '{ printf "%s", $2 }'`
-        if [ $# -ne 0 ] ; then # maybe we have a PR number?
-            re='^[0-9]+$'
-            if [[ $1 =~ $re ]] ; then
-                URL=$URL/pull/$1
-            else
-                echo "error: Not a PR number"
-            fi
-        elif [ "$BRANCH" != "master" ] ; then # browse to the interesting branch
-            URL=$URL/tree/$BRANCH
-        fi
+  GITSERVER=https://github.com
+  git branch > /dev/null 2> /dev/null
+  if [ $? -eq 0 ] ; then # we're in a cloned git repo
+    FETCH_URL=`git remote show origin | grep Fetch | awk '{ print $3 }'`
+    if [[ "$FETCH_URL" == https* ]] ; then
+      # already https
+      URL=`echo $FETCH_URL | sed 's/.git$//'`
+    elif [[ "$FETCH_URL" == git@* ]] ; then
+      # translate from "git@..." to "https://..."
+      URL=`echo $FETCH_URL | sed 's/:/\\//g' | sed 's/^git@/https:\/\//' | sed 's/.git$//'`
     else
-        URL=$GITSERVER
+      URL=$FETCH_URL
     fi
 
-    echo $URL
-    browse $URL
+    BRANCH=`git branch 2> /dev/null | grep \* | awk '{ printf "%s", $2 }'`
+    if [ $# -ne 0 ] ; then # maybe we have a PR number?
+      re='^[0-9]+$'
+      if [[ $1 =~ $re ]] ; then
+        URL=$URL/pull/$1
+      else
+        echo "error: Not a PR number"
+      fi
+    elif [ "$BRANCH" != "master" ] ; then # browse to the interesting branch
+      URL=$URL/tree/$BRANCH
+    fi
+  else
+    URL=$GITSERVER
+  fi
+
+  echo $URL
+  browse $URL
 }
 
 #
 # browse to a jira ticket
 #
 function jira() {
-    JIRA_BASE=https://????/jira
+  JIRA_BASE=https://????/jira
 
-    FAVORITE_PROJECT=26769 # accounts
-    DEFAULT_BOARD=$FAVORITE_PROJECT
-    ticket=$1
-    if [ -n "$ticket" ]; then
-        URL=$JIRA_BASE/browse/$ticket
-    else
-        URL=$JIRA_BASE/secure/RapidBoard.jspa?rapidView=$DEFAULT_BOARD
-    fi
+  FAVORITE_PROJECT=26769 # accounts
+  DEFAULT_BOARD=$FAVORITE_PROJECT
+  ticket=$1
+  if [ -n "$ticket" ]; then
+    URL=$JIRA_BASE/browse/$ticket
+  else
+    URL=$JIRA_BASE/secure/RapidBoard.jspa?rapidView=$DEFAULT_BOARD
+  fi
 
-    echo $URL
-    browse $URL
+  echo $URL
+  browse $URL
 }
 
 #
 # browse to a shortcut ticket
 #
 function shortcut() {
-    BASE=https://app.shortcut.com/gravie
-    DEFAULT=stories/space/43599
+  BASE=https://app.shortcut.com/gravie
+  DEFAULT=stories/space/43599
 
-    ticket=`echo $1 | sed 's/sc//' | sed 's/-//'`
-    if [ -n "$ticket" ]; then
-        URL=$BASE/story/$ticket
-    else
-        URL=$BASE/$DEFAULT
-    fi
+  ticket=`echo $1 | sed 's/sc//' | sed 's/-//'`
+  if [ -n "$ticket" ]; then
+    URL=$BASE/story/$ticket
+  else
+    URL=$BASE/$DEFAULT
+  fi
 
-    echo $URL
-    browse $URL
+  echo $URL
+  browse $URL
 }
 
 #
 # browse to a freshservice ticket
 #
 function freshservice() {
-    BASE=https://gravie.freshservice.com/
-    DEFAULT=helpdesk/tickets/view/103256
+  BASE=https://gravie.freshservice.com/
+  DEFAULT=helpdesk/tickets/view/103256
 
-    ticket=$1
-    if [ -n "$ticket" ]; then
-        URL=$BASE/helpdesk/tickets/$ticket
-    else
-        URL=$BASE/$DEFAULT
-    fi
+  ticket=$1
+  if [ -n "$ticket" ]; then
+    URL=$BASE/helpdesk/tickets/$ticket
+  else
+    URL=$BASE/$DEFAULT
+  fi
 
-    echo $URL
-    browse $URL
+  echo $URL
+  browse $URL
 }
 
 #
 # browse a service now ticket
 #
 function service-now() {
-    TICKET=$1
-    URL="https://????.service-now.com/text_search_exact_match.do?sysparm_search=$TICKET"
-    echo $URL
-    browse $URL
+  TICKET=$1
+  URL="https://????.service-now.com/text_search_exact_match.do?sysparm_search=$TICKET"
+  echo $URL
+  browse $URL
 }
 
 
@@ -773,11 +770,11 @@ function service-now() {
 # for bulk processing markdown files into html
 #
 function md2htmlall() {
-    find . -type f -name \*.md -maxdepth 1 | while read mdfile ; do
-        target=$mdfile.html
-        echo "$mdfile --> $target"
-        md2html $mdfile > $target
-    done # end while
+  find . -type f -name \*.md -maxdepth 1 | while read mdfile ; do
+    target=$mdfile.html
+    echo "$mdfile --> $target"
+    md2html $mdfile > $target
+  done # end while
 }
 
 
@@ -785,28 +782,28 @@ function md2htmlall() {
 # gource...
 #
 function gource_default() {
-    gource \
-        -s 2 \
-        -a 1 \
-        $@ \
-        ./
-    # -WIDTHxHIEGHT
-    # --loop
-    # --fullscreen
+  gource \
+    -s 2 \
+    -a 1 \
+    $@ \
+    ./
+  # -WIDTHxHIEGHT
+  # --loop
+  # --fullscreen
 }
 
 function gource2movie() {
-    size=$1
-    if [ -z $size ] ; then
-        # use the default size
-        size=1920x1080
-    fi
-    gource \
-        -s 2 \
-        -a 1 \
-        ./ \
-        -o - \
-        -$size \
+  size=$1
+  if [ -z $size ] ; then
+    # use the default size
+    size=1920x1080
+  fi
+  gource \
+    -s 2 \
+    -a 1 \
+    ./ \
+    -o - \
+    -$size \
     | ffmpeg \
         -y \
         -r 60 \
@@ -823,7 +820,7 @@ function gource2movie() {
 }
 
 function gource2movie_small() {
-    gource2movie 800x600
+  gource2movie 800x600
 }
 
 
@@ -858,8 +855,8 @@ alias jenkins-stop="sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.
 
 
 function ly () {
-    FILE=$1
-    docker run --rm -v $(pwd):/app -w /app gpit2286/lilypond lilypond $FILE
+  FILE=$1
+  docker run --rm -v $(pwd):/app -w /app gpit2286/lilypond lilypond $FILE
 }
 
 
@@ -879,7 +876,7 @@ alias rabbit-stop="rabbitmqctl stop"
 alias hs="hg status"
 alias hgh="hg heads -t"
 function lf() {
-   grep files | awk '{for (i=2; i<=NF; i++)  print $i }' | sort | uniq
+  grep files | awk '{for (i=2; i<=NF; i++)  print $i }' | sort | uniq
 }
 alias ic="hg incoming -v -S | lf"
 alias og="hg outgoing -v -S | lf"
@@ -893,44 +890,44 @@ alias robo="open -a Robo\ 3T"
 
 # touch and edit a new file with emacs
 function temacs() {
-    touch $@
-    emacs $@
+  touch $@
+  emacs $@
 }
 
 
 function fast-node() {
-    if [ ! -d "./node_modules" ] ; then
-        echo "fast-node: mkdir ./node_modules"
-        mkdir ./node_modules
-    fi
-    # this will keep spotlight from indexing node_modules
-    echo "fast-node: touch ./node_modules/.metadata_never_index"
-    touch ./node_modules/.metadata_never_index
+  if [ ! -d "./node_modules" ] ; then
+    echo "fast-node: mkdir ./node_modules"
+    mkdir ./node_modules
+  fi
+  # this will keep spotlight from indexing node_modules
+  echo "fast-node: touch ./node_modules/.metadata_never_index"
+  touch ./node_modules/.metadata_never_index
 }
 
 
 function matrix() {
-    LC_ALL=C tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"
+  LC_ALL=C tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"
 }
 alias parrot="curl parrot.live"
 alias starwars="telnet towel.blinkenlights.nl"
 
 
 function encrypt() {
-    FILE=$1
-    openssl des -in $FILE -out $FILE.des
+  FILE=$1
+  openssl des -in $FILE -out $FILE.des
 }
 
 function decrypt() {
-    FILE=$1
-    openssl des -d -in $FILE.des -out $FILE
+  FILE=$1
+  openssl des -d -in $FILE.des -out $FILE
 }
 
 function beep() {
-    count=5
-    for i in $(seq $count); do
-        tput bel
-    done
+  count=5
+  for i in $(seq $count); do
+    tput bel
+  done
 }
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
