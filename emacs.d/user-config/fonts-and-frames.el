@@ -86,8 +86,9 @@
       amiller-external-frame-left  1040 ;; pixels
       amiller-external-frame-width  212 ;; characters
 
-      amiller-macbook-frame-height   49 ;; rows
-      amiller-macbook-frame-left    455 ;; pixels
+      amiller-macbook-screen-width 1792 ;; pixels
+      amiller-macbook-frame-height   52 ;; rows
+      amiller-macbook-frame-left    568 ;; pixels
       amiller-macbook-frame-width   132 ;; characters
       )
 
@@ -115,9 +116,10 @@
   (set-frame-position (selected-frame) amiller-macbook-frame-left amiller-frame-top)
   )
 
+
 (defun auto-detect-frame-size ()
   (interactive)
-  (if (<= (x-display-pixel-width) 1680)
+  (if (<= (x-display-pixel-width) amiller-macbook-screen-width)
       (frame-size-for-macbook-display)
     (frame-size-for-external-display)
     )
