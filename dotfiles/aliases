@@ -295,6 +295,11 @@ alias gpy="find . -maxdepth 1 \( -name \*.py \) -print | xargs grep"
 alias findpy="find . \( -name \*.py \) -print"
 alias ggpy="findpy | quotespaces | xargs grep"
 
+# terraform files
+alias gctf_="find . -maxdepth 1 \( -name \*.tf \) -print | xargs grep"
+alias findtf="find . \( -name \*.tf \) -print"
+alias ggtf="findtf | quotespaces | xargs grep"
+
 # just clojure (no clojure script) files
 alias gclj_="find . -maxdepth 1 \( -name \*.clj -o -name \*.cljc \) -print | xargs grep"
 alias findclj_="find . \( -name \*.clj -o -name \*.cljc \) -print"
@@ -821,6 +826,21 @@ function gource2movie() {
 
 function gource2movie_small() {
   gource2movie 800x600
+}
+
+function gourceThese() {
+  COMBINED_LOG=gource-combined.log
+  while [ $# -gt 0 ] ; do
+    REPO=`basename $1`
+    #echo "gource $REPO"
+    echo "gource --output-custom-log $REPO.log $REPO"
+    echo "sed 's/|\//|\/$REPO\//' $REPO.log > $REPO.sorted.log"
+    echo
+    shift
+  done
+
+  echo "cat *.sorted.log | sort -n > $COMBINED_LOG"
+  echo "gource $COMBINED_LOG"
 }
 
 
