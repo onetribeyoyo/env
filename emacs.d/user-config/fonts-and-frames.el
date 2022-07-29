@@ -15,8 +15,8 @@
 
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
 
-(setq normal-font "-apple-Inconsolata-medium-r-normal-*-14-*-*-*-m-0-iso10646-1"
-      bigger-font "-apple-Inconsolata-medium-r-normal-*-15-*-*-*-m-0-iso10646-1"
+(setq normal-font "-apple-Inconsolata-medium-r-normal-*-15-*-*-*-m-0-iso10646-1"
+      bigger-font "-apple-Inconsolata-medium-r-normal-*-16-*-*-*-m-0-iso10646-1"
       medium-font "-apple-Inconsolata-medium-r-normal-*-18-*-*-*-m-0-iso10646-1"
       big-font    "-apple-Inconsolata-medium-r-normal-*-26-*-*-*-m-0-iso10646-1"
 
@@ -83,14 +83,17 @@
       amiller-frame-right            -1 ;; pixels
 
       amiller-external-frame-height  92 ;; rows
-      amiller-external-frame-left  1040 ;; pixels
-      amiller-external-frame-width  212 ;; characters
+      amiller-external-frame-left  1044 ;; pixels
+      amiller-external-frame-width  185 ;; characters
 
       amiller-macbook-screen-width 1792 ;; pixels
       amiller-macbook-frame-height   52 ;; rows
       amiller-macbook-frame-left    568 ;; pixels
       amiller-macbook-frame-width   132 ;; characters
       )
+
+;;(set-frame-width (selected-frame) 185)
+;;(set-frame-position (selected-frame) 1044 0)
 
 ;;(set-frame-width    (selected-frame) amiller-external-frame-width)
 ;;(set-frame-height   (selected-frame) amiller-frame-height)
