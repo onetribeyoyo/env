@@ -317,6 +317,28 @@ alias ggcljs="findcljs | quotespaces | xargs grep"
 
 
 #
+# JDK version mgmt
+#
+# good info about installing versions: https://medium.com/@manvendrapsingh/installing-many-jdk-versions-on-macos-dfc177bc8c2b
+#
+function usejdk() {
+  version=$1
+
+  if [ -n "$version" ] ; then
+    echo "to use JDK version $version,"
+    echo "running the following commands"
+    echo
+    echo "    export JAVA_HOME=\`/usr/libexec/java_home -v $version\`"
+    echo "    java -version"
+    export JAVA_HOME=`/usr/libexec/java_home -v $version`
+    java -version
+  else
+    # list available versions
+    /usr/libexec/java_home -V
+  fi
+}
+
+#
 # gr* development...
 #
 function g() {
