@@ -330,6 +330,7 @@ function usejdk() {
     echo
     echo "    export JAVA_HOME=\`/usr/libexec/java_home -v $version\`"
     echo "    java -version"
+    echo
     export JAVA_HOME=`/usr/libexec/java_home -v $version`
     java -version
   else
