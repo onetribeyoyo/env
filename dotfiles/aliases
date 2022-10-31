@@ -336,6 +336,7 @@ function usejdk() {
   else
     # list available versions
     /usr/libexec/java_home -V
+    java -version
   fi
 }
 
