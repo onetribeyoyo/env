@@ -12,6 +12,7 @@
 [alias]
         co = checkout
         lg = log --graph --pretty=format:'%C(red)%h %C(yellow)-%d <%an - %cr>%C(reset) %s' --abbrev-commit
+        lgg = log --graph --pretty=format:'%s' --abbrev-commit
         mod = status -s
         pb = fetch --progress --prune origin
 
