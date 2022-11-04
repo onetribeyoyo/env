@@ -908,7 +908,7 @@ alias ssync="$LOCAL_APPS/SmartSynchronize.app/Contents/MacOS/SmartSynchronize"
 function squirrel() {
   # local simplicication of squirrel's MacOS/squirrel-sql.sh script
   (
-    cd ~/local/local-apps/SQuirreLSQL__.app/Contents/Resources/Java
+    cd ~/local/local-apps/SQuirreLSQL.app/Contents/Resources/Java
 
     java -jar squirrel-sql.jar
 
