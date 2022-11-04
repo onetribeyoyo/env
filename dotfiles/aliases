@@ -317,30 +317,6 @@ alias ggcljs="findcljs | quotespaces | xargs grep"
 
 
 #
-# JDK version mgmt
-#
-# good info about installing versions: https://medium.com/@manvendrapsingh/installing-many-jdk-versions-on-macos-dfc177bc8c2b
-#
-function usejdk() {
-  version=$1
-
-  if [ -n "$version" ] ; then
-    echo "to use JDK version $version,"
-    echo "running the following commands"
-    echo
-    echo "    export JAVA_HOME=\`/usr/libexec/java_home -v $version\`"
-    echo "    java -version"
-    echo
-    export JAVA_HOME=`/usr/libexec/java_home -v $version`
-    java -version
-  else
-    # list available versions
-    /usr/libexec/java_home -V
-    java -version
-  fi
-}
-
-#
 # gr* development...
 #
 function g() {
@@ -929,7 +905,18 @@ alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 
 alias ssync="$LOCAL_APPS/SmartSynchronize.app/Contents/MacOS/SmartSynchronize"
 
-alias squirrel="open -a SquirrelSQL"
+function squirrel() {
+  # local simplicication of squirrel's MacOS/squirrel-sql.sh script
+  (
+    cd ~/local/local-apps/SQuirreLSQL__.app/Contents/Resources/Java
+
+    java -jar squirrel-sql.jar
+
+    #CLASSPATH="squirrel-sql.jar:lib/*"
+    #java -cp "$CLASSPATH"  net.sourceforge.squirrel_sql.client.Main --log-config-file log4j.properties --squirrel-home .
+  )
+}
+
 alias robo="open -a Robo\ 3T"
 
 # touch and edit a new file with emacs

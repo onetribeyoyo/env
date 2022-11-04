@@ -156,26 +156,36 @@ export TMP=~/tmp
 export GRADLE_HOME=~/devtools/gradle/current
 export GRAILS_HOME=~/devtools/grails/current
 export GROOVY_HOME=~/devtools/groovy/current
+#export GROOVY_HOME=/usr/local/opt/groovy/libexec
+
 
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
-function use-jdk() {
-  VERSION=$1
-  jenv shell $VERSION
-  if [ $VERSION = "1.6" ] ; then
-    export JAVA_HOME=/Library/Java/Home
+#
+# JDK version mgmt
+#
+# good info about installing versions: https://medium.com/@manvendrapsingh/installing-many-jdk-versions-on-macos-dfc177bc8c2b
+#
+function usejdk() {
+  version=$1
+
+  if [ -n "$version" ] ; then
+    echo "to use JDK version $version,"
+    echo "running the following commands"
+    echo
+    echo "    export JAVA_HOME=\`/usr/libexec/java_home -v $version\`"
+    echo "    java -version"
+    echo
+    export JAVA_HOME=`/usr/libexec/java_home -v $version`
+    java -version
   else
-    export JAVA_HOME=`/usr/libexec/java_home -v $VERSION`
+    # list available versions
+    /usr/libexec/java_home -V
+    java -version
   fi
-  echo -n "using java version "
-  jenv version
-  echo "JAVA_HOME == $JAVA_HOME"
 }
 
-# NOTE: Don't know if this will work for OS X 10.8+ but... use the `use` script and add this into the path to switch to older jdk versions
-#export JAVA_HOME=~/devtools/jdk/current
-#$JAVA_HOME/bin:\
 
 # here are some JAVA_OPTS that optimize gc, but it is preferable to set
 # these on a project by project basis.
@@ -194,9 +204,6 @@ export M3=$M3_HOME/bin
 export MONGO_HOME=~/local/local-apps/mongodb-3.6.23/
 
 #export RABBITMQ_HOME=~/devtools/rabbitmq/current
-
-#export SQUIRREL_HOME=~/devtools/squirrel-sql/SQuirreLSQL-3.2.1.app/
-#alias squirrel=$SQUIRREL_HOME/Contents/MacOS/squirrel-sql.sh
 
 export LOCAL_APPS=~/local/local-apps
 
@@ -286,8 +293,8 @@ export GREP_OPTIONS='--color=auto'
 export SDKMAN_DIR="/Users/andy.miller/.sdkman"
 [[ -s "/Users/andy.miller/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/andy.miller/.sdkman/bin/sdkman-init.sh"
 
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
