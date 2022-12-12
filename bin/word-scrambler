@@ -1,7 +1,7 @@
 #!/bin/sh
 
-DEV_DIR=~/dev
-PROJECT_DIR=$DEV_DIR/word-scrambler_java
+DEV_DIR=~/github/onetribeyoyo
+PROJECT_DIR=$DEV_DIR/word-scrambler/word-scrambler_java
 LIB_DIR=$PROJECT_DIR/distribution/lib
 JAR=$LIB_DIR/scrambler-DEV.jar
 MAIN=amiller.Main
