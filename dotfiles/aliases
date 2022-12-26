@@ -355,8 +355,8 @@ alias gra-prod="g -Duser.timezone=UTC prod run-app"
 alias gta="g test-app"
 alias gta-utc="g -Duser.timezone=UTC test-app"
 alias gtf="gta-utc fitnesse:"
-alias gti="gta-utc integration:"
-alias gtu="gta-utc unit:"
+alias gti="gta-utc -integration"
+alias gtu="gta-utc -unit"
 alias rgta="gta-utc -rerun"
 alias rgti="gta-utc -rerun integration:"
 alias rgtu="gta-utc -rerun unit:"
@@ -910,10 +910,10 @@ function squirrel() {
   (
     cd ~/local/local-apps/SQuirreLSQL.app/Contents/Resources/Java
 
-    java -jar squirrel-sql.jar
+    #java -jar squirrel-sql.jar
 
-    #CLASSPATH="squirrel-sql.jar:lib/*"
-    #java -cp "$CLASSPATH"  net.sourceforge.squirrel_sql.client.Main --log-config-file log4j.properties --squirrel-home .
+    CLASSPATH="squirrel-sql.jar:lib/*"
+    java -cp "$CLASSPATH" net.sourceforge.squirrel_sql.client.Main --log-config-file log4j.properties --squirrel-home .
   )
 }
 
