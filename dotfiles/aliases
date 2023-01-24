@@ -340,7 +340,7 @@ function g() {
       gradle $@
     fi
   else
-    echo "WARNING: directory does not appear to be a grails nor gradle app."
+    echo "ERROR: directory does not appear to be a grails nor gradle app."
   fi
 }
 
@@ -647,7 +647,7 @@ function mvnall() { # run maven in the directories that have pom.xml
 
 function gitall() { # run git in the directories that have .git
   if [ $# -eq 0 ]; then
-    echo "WARNING: No arguments supplied"
+    echo "ERROR: No arguments supplied"
   else
     forallwhere .git git $@
   fi
@@ -655,7 +655,7 @@ function gitall() { # run git in the directories that have .git
 
 function hgall() { # run hg in the directories that have .hg
   if [ $# -eq 0 ]; then
-    echo "WARNING: No arguments supplied"
+    echo "ERROR: No arguments supplied"
   else
     forallwhere .hg hg $@
   fi
@@ -906,14 +906,10 @@ alias kdiff3=~/devtools/kdiff3/kdiff3.app/Contents/MacOS/kdiff3
 alias ssync="$LOCAL_APPS/SmartSynchronize.app/Contents/MacOS/SmartSynchronize"
 
 function squirrel() {
-  # local simplicication of squirrel's MacOS/squirrel-sql.sh script
+  # Run from the command line to pickup whatever jvm is configured there.
   (
-    cd ~/local/local-apps/SQuirreLSQL.app/Contents/Resources/Java
-
-    #java -jar squirrel-sql.jar
-
-    CLASSPATH="squirrel-sql.jar:lib/*"
-    java -cp "$CLASSPATH" net.sourceforge.squirrel_sql.client.Main --log-config-file log4j.properties --squirrel-home .
+    cd ~/local/local-apps/SQuirreLSQL.app/Contents/MacOS
+    ./squirrel-sql.sh
   )
 }
 
