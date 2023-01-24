@@ -15,9 +15,9 @@
 
 ;;; -MAKER-FAMILY-WEIGHT-SLANT-WIDTHTYPE-STYLE-PIXELS-HEIGHT-HORIZ-VERT-SPACING-WIDTH-CHARSET
 
-(setq normal-font "-apple-Inconsolata-medium-r-normal-*-15-*-*-*-m-0-iso10646-1"
-      bigger-font "-apple-Inconsolata-medium-r-normal-*-16-*-*-*-m-0-iso10646-1"
-      medium-font "-apple-Inconsolata-medium-r-normal-*-18-*-*-*-m-0-iso10646-1"
+(setq normal-font "-apple-Inconsolata-medium-r-normal-*-16-*-*-*-m-0-iso10646-1"
+      bigger-font "-apple-Inconsolata-medium-r-normal-*-17-*-*-*-m-0-iso10646-1"
+      medium-font "-apple-Inconsolata-medium-r-normal-*-19-*-*-*-m-0-iso10646-1"
       big-font    "-apple-Inconsolata-medium-r-normal-*-26-*-*-*-m-0-iso10646-1"
 
       inconsolata-font "inconsolata"
