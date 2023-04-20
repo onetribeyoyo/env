@@ -169,6 +169,23 @@ alias slack='open -a Slack'
 
 
 #
+# brew
+#
+
+function archive-brew() {
+  if [ -e "./Brewfile" ] ; then
+    echo "ERROR: brewfile exists... rename it before $0"
+  else
+    brew bundle dump
+    # copy to timestamped file
+    timestamp=`date '+%Y-%m-%d_%I-%M-%S'`
+    stampedBrewfile=Brewfile_$timestamp
+    cp Brewfile $stampedBrewfile
+    echo $stampedBrewfile
+  fi
+}
+
+#
 # grep (and recursively grep) for <arg> in files
 #
 alias gf="find . -maxdepth 1 -type f | grep"
@@ -803,24 +820,11 @@ function gource2movie() {
     # use the default size
     size=1920x1080
   fi
-  gource \
-    -s 2 \
-    -a 1 \
-    ./ \
-    -o - \
-    -$size \
+  gource -s 2 -a 1 ./ -o - -$size \
     | ffmpeg \
-        -y \
-        -r 60 \
-        -f image2pipe \
-        -vcodec ppm \
-        -i - \
-        -vcodec libx264 \
-        -preset ultrafast \
-        -pix_fmt yuv420p \
-        -crf 1 \
-        -threads 0 \
-        -bf 0 \
+        -y -r 60 -f image2pipe -vcodec ppm \
+        -i - -vcodec libx264 -preset ultrafast \
+        -pix_fmt yuv420p -crf 1 -threads 0 -bf 0 \
         gource.mp4
 }
 
