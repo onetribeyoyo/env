@@ -179,7 +179,9 @@
  '(ps-zebra-stripe-height 3)
  '(ps-zebra-stripes t)
  '(read-buffer-completion-ignore-case t)
- '(safe-local-variable-values '((nxml-child-indent . 2)))
+ '(safe-local-variable-values
+   '((cider-clojure-cli-global-options . "-A:dev")
+     (nxml-child-indent . 2)))
  '(search-whitespace-regexp nil)
  '(show-paren-mode t nil (paren))
  '(text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
