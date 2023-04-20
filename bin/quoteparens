@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# not sure of this impl... checking in for postarity
+
+sed 's/(/\(/g' | sed 's/)/\)/g'

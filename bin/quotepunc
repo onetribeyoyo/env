@@ -1,2 +1,12 @@
 #!/bin/sh
-sed 's/ /\\ /g' | sed 's/\'/\\\'/g' | sed 's/(/\\(/g' | sed 's/)/\\)/g'
+
+# not sure of this impl... checking in for postarity
+
+sed 's/ /\\ /g'      |
+sed 's/'\''/\'\''/g' |
+sed 's/"/\\"/g'      |
+sed 's/(/\\(/g' | sed 's/)/\\)/g' |
+sed 's/:/\\:/g'
+
+
+# echo "one's thing" | sed 's/\x27/\\'"'"'/g'
