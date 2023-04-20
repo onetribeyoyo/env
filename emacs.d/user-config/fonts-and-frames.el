@@ -6,7 +6,7 @@
 
 ;;(set-frame-width    (selected-frame) 146)
 ;;(set-frame-height   (selected-frame) 92)
-;;(set-frame-position (selected-frame) 1497 22)
+;;(set-frame-position (selected-frame) 438 22)
 
 ;;(modify-frame-parameters (selected-frame) '((font . "-*-courier-medium-r-*--*-140-*-*-*-*-*-*")))
 ;;(modify-frame-parameters (selected-frame) '((font . "-apple-monaco-medium-r-normal--12-0-72-72-m-0-iso10646-1")))
@@ -88,7 +88,7 @@
 
       amiller-macbook-screen-width 1792 ;; pixels
       amiller-macbook-frame-height   52 ;; rows
-      amiller-macbook-frame-left    568 ;; pixels
+      amiller-macbook-frame-left    438 ;; pixels
       amiller-macbook-frame-width   132 ;; characters
       )
 
