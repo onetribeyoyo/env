@@ -746,10 +746,13 @@ function jira() {
 #
 function shortcut() {
   BASE=https://app.shortcut.com/gravie
-  DEFAULT=stories/space/43599
+  DEFAULT=stories/space/83357
 
   ticket=`echo $1 | sed 's/sc//' | sed 's/-//'`
   if [ -n "$ticket" ]; then
+    URL=$BASE/story/$ticket
+  elif [ `git rev-parse --abbrev-ref HEAD | awk -F- '{ print $1 }'` = "sc" ] ; then # we're in a git dir with an sc branch
+    ticket=`git rev-parse --abbrev-ref HEAD | awk -F- '{ print $2 }'`
     URL=$BASE/story/$ticket
   else
     URL=$BASE/$DEFAULT
@@ -768,6 +771,9 @@ function freshservice() {
 
   ticket=$1
   if [ -n "$ticket" ]; then
+    URL=$BASE/helpdesk/tickets/$ticket
+  elif [ `git rev-parse --abbrev-ref HEAD | awk -F- '{ print $1 }'` = "inc" ] ; then # we're in a git dir with an fs branch
+    ticket=`git rev-parse --abbrev-ref HEAD | awk -F- '{ print $2 }'`
     URL=$BASE/helpdesk/tickets/$ticket
   else
     URL=$BASE/$DEFAULT
