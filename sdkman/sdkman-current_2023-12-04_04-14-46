@@ -1,0 +1,39 @@
+
+Using:
+
+ant: 1.10.13
+asciidoctorj: 2.5.10
+doctoolchain: 3.1.2
+flink: 1.18.0
+gradle: 8.5
+gradleprofiler: 0.20.0
+grails: 6.1.0
+groovy: 4.0.16
+groovyserv: 1.2.0
+hadoop: 3.3.5
+http4k: 5.0.0.0
+jarviz: 0.3.0
+java: 8.0.372-amzn
+jbake: 2.6.7
+jbang: 0.113.0
+jmc: 8.1.1.51-zulu
+joern: 1.1.997
+ki: 0.5.2
+kobweb: 0.9.13
+kotlin: 1.9.21
+kscript: 4.2.3
+ktx: 0.1.2
+leiningen: 2.10.0-1
+maven: 3.9.6
+mcs: 0.5.3
+micronaut: 4.2.1
+mybatis: 3.3.11
+neo4jmigrations: 2.8.0
+pierrot: 1.0.0
+pomchecker: 1.10.0
+schemacrawler: 16.20.6
+springboot: 3.2.0
+taxi: 1.44.3
+tomcat: 10.1.14
+visualvm: 2.1.7
+webtau: 2.1.7
