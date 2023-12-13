@@ -312,3 +312,16 @@
 (setq org-capture-templates
       '(("t" "todo" entry (file+headline "/Users/amiller/todo.org" "Tasks")
          "* TODO [#A] %?")))
+
+
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+;;; terraform mode...
+;;; -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
+
+(require 'hcl-mode)
+(require 'terraform-mode)
+
+(autoload 'terraform-mode "terraform-mode" "Major mode for editing Terraform files" t)
+(add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode))
+
+;;(add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
