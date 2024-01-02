@@ -32,6 +32,13 @@ section {
    border: 1px solid #660002;
 }
 
+section.priority-high {
+   border: 2px solid #aa0002;
+}
+section.priority-mid {
+   border: 2px solid #667702;
+}
+
 hr {
    background-color: #660002;
 }
