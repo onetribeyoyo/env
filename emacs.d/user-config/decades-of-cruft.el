@@ -110,26 +110,33 @@
 (defun simplify-characters-in-buffer ()
   "swaps extended characters for lower ascii alternatives."
   (interactive)
+
+  ;; punctuation...
+  (simplify-string-in-buffer "–" "-")
+  (simplify-string-in-buffer "—" "--")
   (simplify-string-in-buffer "‘" "'")
   (simplify-string-in-buffer "’" "'")
   (simplify-string-in-buffer "“" "\"")
   (simplify-string-in-buffer "”" "\"")
   (simplify-string-in-buffer "…" "...")
-  (simplify-string-in-buffer "–" "-")
-  (simplify-string-in-buffer "—" "--")
+
+  ;; bullets...
+  (simplify-string-in-buffer "·" "-")
   (simplify-string-in-buffer "•" "-")
-  (simplify-string-in-buffer "" "(o)")
-  (simplify-string-in-buffer "" "(o)")
+  (simplify-string-in-buffer "⋅" "-")
+  (simplify-string-in-buffer "●" "-")
+
+  ;; special characters...
   (simplify-string-in-buffer "¤" "(o)")
+  (simplify-string-in-buffer "" "(o)")
+  (simplify-string-in-buffer " " " ") ;; phone icon
+  (simplify-string-in-buffer "" "phone") ;; mystery charater; maybe a very small space?
+  (simplify-string-in-buffer "" ":(")
+
+  ;; spaces...
   (simplify-string-in-buffer " " " ")
   (simplify-string-in-buffer "​" " ")
   (simplify-string-in-buffer " " " ")
-  (simplify-string-in-buffer "" ":(")
-  (simplify-string-in-buffer "" "phone") ;; mystery charater; maybe a very small space?
-  (simplify-string-in-buffer " " " ") ;; phone icon
-  (simplify-string-in-buffer "·" "-")
-  (simplify-string-in-buffer "●" "-")
-  (simplify-string-in-buffer "⋅" "-")
   (simplify-string-in-buffer "﻿" " ")
   )
 
