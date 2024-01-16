@@ -171,6 +171,7 @@ alias slack='open -a Slack'
 #
 # brew
 #
+BREW_ARCHIVE_DIR=~/github/onetribeyoyo/gravie-env
 function archive-brew() {
   ARCHIVE_FILE=Brewfile
   if [ -e "./$ARCHIVE_FILE" ] ; then
@@ -182,6 +183,7 @@ function archive-brew() {
     timestamp=`date '+%Y-%m-%d_%I-%M-%S'`
     STAMPED_ARCHIVE_FILE=${ARCHIVE_FILE}_${timestamp}
     cp $ARCHIVE_FILE $STAMPED_ARCHIVE_FILE
+    cp $STAMPED_ARCHIVE_FILE $BREW_ARCHIVE_DIR
     echo $STAMPED_ARCHIVE_FILE
   fi
 }
@@ -189,12 +191,14 @@ function archive-brew() {
 #
 # sdkman
 #
+SDKMAN_ARCHIVE_DIR=~/github/onetribeyoyo/gravie-env
 function archive-sdkman() {
   ARCHIVE_FILE=sdkman-current
   timestamp=`date '+%Y-%m-%d_%I-%M-%S'`
   STAMPED_ARCHIVE_FILE=${ARCHIVE_FILE}_${timestamp}
 
   sdk current > $STAMPED_ARCHIVE_FILE
+  cp $STAMPED_ARCHIVE_FILE $SDKMAN_ARCHIVE_DIR
   echo $STAMPED_ARCHIVE_FILE
 }
 
