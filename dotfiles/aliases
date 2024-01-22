@@ -640,7 +640,7 @@ function forall() {
     cd $directory
     local PWD=`pwd`
     local VC_INFO=`parse_vc_branch`
-    printf "\nforall: $LIGHT_GRAY${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+    printf "\n${DARK_GRAY}forall: $LIGHT_GRAY${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
     $command $@
   done # end while
 }
@@ -661,7 +661,7 @@ function forallwhere() {
       cd $directory
       local PWD=`pwd`
       local VC_INFO=`parse_vc_branch`
-      printf "\nforallwhere $flag: $LIGHT_GRAY${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
+      printf "\n${DARK_GRAY}forallwhere $flag: $LIGHT_GRAY${PWD} ${CYAN}${VC_INFO}$NO_COLOUR> $command $@ \n"
       $command $@
     )
   done
