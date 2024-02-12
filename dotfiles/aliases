@@ -901,7 +901,7 @@ alias jenkins-start="sudo launchctl load /Library/LaunchDaemons/org.jenkins-ci.p
 alias jenkins-stop="sudo launchctl unload /Library/LaunchDaemons/org.jenkins-ci.plist"
 
 
-function ly () {
+function ly_docker () {
   FILE=$1
   docker run --rm -v $(pwd):/app -w /app gpit2286/lilypond lilypond $FILE
 }

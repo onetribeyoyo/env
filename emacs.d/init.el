@@ -102,7 +102,7 @@
 (load "decades-of-cruft.el")
 (load "printing.el")
 
-(load "neotree.el")
+;;(load "neotree.el")
 ;;(load "speedbar.el")
 ;;(load "treemacs.el")
 
