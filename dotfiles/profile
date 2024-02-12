@@ -213,7 +213,7 @@ export LOCAL_APPS=~/local/local-apps
 export PATH=\
 .:\
 $HOME/bin:\
-$HOME/gravie/bin:\
+$HOME/gravie-bin:\
 $MAVEN_HOME/bin:\
 $MONGO_HOME/bin:\
 /usr/local/bin:\
@@ -279,7 +279,7 @@ export GREP_OPTIONS='--color=auto'
 
 . .aliases
 . .projects
-. .gravie
+. .gravie-config
 
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
