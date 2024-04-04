@@ -43,6 +43,10 @@ hr {
    background-color: #660002;
 }
 
+hr.priority-high {
+   background-color: #da70d6;
+}
+
 .whitebox {
    background-color: #ccc;
 }
