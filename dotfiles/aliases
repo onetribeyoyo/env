@@ -810,6 +810,19 @@ function service-now() {
   browse $URL
 }
 
+#
+# search with livegrep
+#
+function livegrep() {
+  URL=https://livegrep.internal.gravie.com/search
+  ARGS=$@
+  if [ ! -z $ARGS ]; then
+    # nope, does not handle spaces and special chars in the args!
+    URL="$URL/?fold_case=auto&regex=false&context=true&q=$ARGS"
+  fi
+  echo $URL
+  browse $URL
+}
 
 #
 # for bulk processing markdown files into html
