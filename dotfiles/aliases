@@ -765,7 +765,7 @@ function shortcut() {
   BASE=https://app.shortcut.com/gravie
   DEFAULT=stories/space/83357
 
-  ticket=`echo $1 | sed 's/sc//' | sed 's/-//'`
+  ticket=`echo $1 | sed 's/sc//' | sed 's/SC//' | sed 's/-//'`
   if [ -n "$ticket" ]; then
     URL=$BASE/story/$ticket
   elif [ `git rev-parse --abbrev-ref HEAD | awk -F- '{ print $1 }'` = "sc" ] ; then # we're in a git dir with an sc branch
@@ -786,7 +786,7 @@ function freshservice() {
   BASE=https://gravie.freshservice.com/
   DEFAULT=helpdesk/tickets/view/103256
 
-  ticket=$1
+  ticket=`echo $1 | sed 's/inc//' | sed 's/INC//' | sed 's/-//'`
   if [ -n "$ticket" ]; then
     URL=$BASE/helpdesk/tickets/$ticket
   elif [ `git rev-parse --abbrev-ref HEAD | awk -F- '{ print $1 }'` = "inc" ] ; then # we're in a git dir with an fs branch
