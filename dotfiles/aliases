@@ -997,4 +997,27 @@ function beep() {
   done
 }
 
+#
+# terraform
+#
+# https://gravie.gitlab.io/docs/engineering-handbook/platform-engineering/services-and-tools/terraform/terraform-operations/
+#
+#alias terraform=~/local/local-apps/terraform_1.8.3_darwin_amd64/terraform
+# no terraform alias will use the brew version (it's already on the path)
+alias tf=terraform
+
+export GITLAB_TOKEN=glpat-si3zciaAXXWzWQr_DLV7
+
+# terraform init -backend-config="password=$GITLAB_TOKEN"
+
+#
+#   tf login
+#     to get token
+#     https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-login
+#
+#   tf init
+#
+#   export TF_LOG=DEGUG
+#
+
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
