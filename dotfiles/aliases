@@ -743,7 +743,7 @@ function gitweb() {
 # browse to a jira ticket
 #
 function jira() {
-  JIRA_BASE=https://????/jira
+  JIRA_BASE=https://gravie.atlassian.net/jira
 
   FAVORITE_PROJECT=26769 # accounts
   DEFAULT_BOARD=$FAVORITE_PROJECT
@@ -1002,22 +1002,19 @@ function beep() {
 #
 # https://gravie.gitlab.io/docs/engineering-handbook/platform-engineering/services-and-tools/terraform/terraform-operations/
 #
+
 #alias terraform=~/local/local-apps/terraform_1.8.3_darwin_amd64/terraform
-# no terraform alias will use the brew version (it's already on the path)
+# without a terraform alias, shell will use the brew version of terraform (it's already on the path)
 alias tf=terraform
 
+# tf init
 export GITLAB_TOKEN=glpat-si3zciaAXXWzWQr_DLV7
 
 # terraform init -backend-config="password=$GITLAB_TOKEN"
+alias tf-init="terraform init -backend-config=\"password=$GITLAB_TOKEN\""
 
-#
-#   tf login
-#     to get token
-#     https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-login
-#
-#   tf init
-#
-#   export TF_LOG=DEGUG
-#
+# export TF_LOG=DEGUG
+alias tf-debug="export TF_LOG=DEGUG"
+alias tf-debug-cancel="export TF_LOG="
 
 # -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=- -=-=-
