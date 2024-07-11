@@ -761,6 +761,7 @@ function jira() {
 #
 # browse to a shortcut ticket
 #
+alias sc='shortcut'
 function shortcut() {
   BASE=https://app.shortcut.com/gravie
   DEFAULT=stories/space/83357
@@ -783,7 +784,7 @@ function shortcut() {
 # browse to a freshservice ticket
 #
 function freshservice() {
-  BASE=https://gravie.freshservice.com/
+  BASE=https://gravie.freshservice.com
   DEFAULT=helpdesk/tickets/view/103256
 
   ticket=`echo $1 | sed 's/inc//' | sed 's/INC//' | sed 's/-//'`
@@ -997,6 +998,9 @@ function beep() {
   done
 }
 
+alias mkdocs-browse="browse http://127.0.0.1:8000"
+
+
 #
 # terraform
 #
@@ -1011,7 +1015,8 @@ alias tf=terraform
 export GITLAB_TOKEN=glpat-si3zciaAXXWzWQr_DLV7
 
 # terraform init -backend-config="password=$GITLAB_TOKEN"
-alias tf-init="terraform init -backend-config=\"password=$GITLAB_TOKEN\""
+alias tf-init="tf init -backend-config=\"password=$GITLAB_TOKEN\""
+alias tf-validate="tf validate"
 
 # export TF_LOG=DEGUG
 alias tf-debug="export TF_LOG=DEGUG"
