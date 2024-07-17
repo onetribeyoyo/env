@@ -743,15 +743,14 @@ function gitweb() {
 # browse to a jira ticket
 #
 function jira() {
-  JIRA_BASE=https://gravie.atlassian.net/jira
-
-  FAVORITE_PROJECT=26769 # accounts
-  DEFAULT_BOARD=$FAVORITE_PROJECT
+  JIRA_BASE=https://gravie.atlassian.net
+  FAVORITE_PROJECT="SAM"
+  DEFAULT_BOARD=16
   ticket=$1
   if [ -n "$ticket" ]; then
     URL=$JIRA_BASE/browse/$ticket
   else
-    URL=$JIRA_BASE/secure/RapidBoard.jspa?rapidView=$DEFAULT_BOARD
+    URL=$JIRA_BASE/jira/software/c/projects/$FAVORITE_PROJECT/boards/$DEFAULT_BOARD
   fi
 
   echo $URL
@@ -1016,7 +1015,7 @@ export GITLAB_TOKEN=glpat-si3zciaAXXWzWQr_DLV7
 
 # terraform init -backend-config="password=$GITLAB_TOKEN"
 alias tf-init="tf init -backend-config=\"password=$GITLAB_TOKEN\""
-alias tf-validate="tf validate"
+alias tf-validate="tf-init ; tf validate"
 
 # export TF_LOG=DEGUG
 alias tf-debug="export TF_LOG=DEGUG"
